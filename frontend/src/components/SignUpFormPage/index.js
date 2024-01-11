@@ -95,7 +95,7 @@ function SignupFormPage() {
             <option value='Phoenix'>Phoenix</option>
             <option value='Tucson'>Tucson</option>
             <option value='Austin'>Austin</option>
-            <optoin value='Dallas'>Dallas</optoin>
+            <option value='Dallas'>Dallas</option>
             <option value='New York'>New York</option>
             <option value='Miami'>Miami</option>
           </select>
