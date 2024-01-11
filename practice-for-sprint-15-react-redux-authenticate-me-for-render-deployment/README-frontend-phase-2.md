@@ -94,10 +94,10 @@ console:
 ```js
 window.store.dispatch(
   window.sessionActions.signup({
-    username: "NewUser",
-    firstName: "New",
-    lastName: "User",
-    email: "new@user.io",
+    username: "NewUser2",
+    name: "New User",
+    location: "San Francisco",
+    email: "new2@user.io",
     password: "password",
   })
 );
