@@ -17,6 +17,11 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey: 'showId',
         onDelete: 'CASCADE',
         hooks: true
+      }),
+      Show.hasMany(models.Comment, {
+        foreignKey: 'showId',
+        onDelete: 'CASCASE',
+        hooks: true
       })
 
     }
