@@ -27,14 +27,14 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       allowNull: false,
       validate: {
-        len: [3, 300],
-        validImage(url) {
-          const splitUrl = url.split('.')
-          const validEndings = ['png', 'jpg']
-          if (!validEndings.includes(splitUrl[splitUrl.length - 1])) {
-            throw new error ('Image must be png or jpg')
-          } 
-        }
+        len: [3, 300]
+        // validImage(url) {
+        //   const splitUrl = url.split('.')
+        //   const validEndings = ['png', 'jpg', '.jpeg']
+        //   if (!validEndings.includes(splitUrl[splitUrl.length - 1])) {
+        //     throw new error ('Image must be png or jpg or .jpeg')
+        //   } 
+        // }
       }
     },
     description: {
