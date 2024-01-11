@@ -12,7 +12,13 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       Show.belongsTo(models.User, {
         foreignKey: 'userId'
+      }),
+      Show.hasMany(models.ShowImage, {
+        foreignKey: 'showId',
+        onDelete: 'CASCADE',
+        hooks: true
       })
+
     }
   }
   Show.init({
@@ -67,7 +73,10 @@ module.exports = (sequelize, DataTypes) => {
         max: 100000
       }
     },
-    userId: DataTypes.INTEGER
+    userId: {
+      type: DataTypes.INTEGER,
+      allowNull: false
+    },
   }, {
     sequelize,
     modelName: 'Show',
