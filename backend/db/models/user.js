@@ -22,6 +22,13 @@ module.exports = (sequelize, DataTypes) => {
           onDelete: 'CASCADE',
           hooks: true
         }
+      ),
+      User.hasMany(
+        models.Rsvp, {
+          foreignKey: 'userId',
+          onDelete: 'CASCADE',
+          hooks: true
+        }
       )
     }
   }
