@@ -10,6 +10,7 @@ function AllShows () {
     const dispatch = useDispatch()
     const userData = useSelector((state) => state.session)
     const shows = useSelector((state) => state.shows)
+    const [ locationFilter, setLocationFilter ] = useState('')
     const { user } = userData;
 
     useEffect(() => {
@@ -28,14 +29,47 @@ function AllShows () {
         )
     })
 
-    // console.log(shows)
-    // console.log(showCards)
+    const locations = shows.map((show) => show.location)
+
+    
+    const locationButtons = locations.map((location) => {
+        return (
+            <button className='show-location-button' id={locationFilter === location ? 'location-active' : 'location-inactive'} onClick={(() => setLocationFilter(location))}>{location}</button>
+        )
+    })
+
+    const createCards = (location) => {
+        if (!location) {
+            return shows?.map((show) => {
+                return (
+                <li key={show.id}>
+                    <ShowCard show={show}/>
+                </li>
+                )
+            })
+        } else {
+            return shows.map((show) => {
+                if (show.location === location) {
+                    return (
+                        <li key={show.id}>
+                            <ShowCard show={show}/>
+                        </li>
+                        )
+                }
+            })
+        }
+    }
+
 
     return (
         <div>
             <h1>All Shows</h1>
+            <div>
+                {locationButtons}
+                <button id={locationFilter === '' ? 'location-active' : 'location-inactive'} onClick={() => setLocationFilter('')}>All</button>
+            </div>
             <ul>
-                {showCards}
+                {createCards(locationFilter)}
             </ul>
         </div>
     )
