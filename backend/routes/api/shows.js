@@ -25,7 +25,6 @@ router.get('/', async (req, res) => {
             ['createdAt', 'ASC']
         ]
     })
-    console.log(allShows, '=====allShows')
     const upcomingShows = allShows.filter((show) => new Date(show.date) > today)
     return res.status(200).json(upcomingShows)
 })

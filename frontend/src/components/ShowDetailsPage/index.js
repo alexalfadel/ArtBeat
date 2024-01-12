@@ -3,6 +3,7 @@ import './ShowDetails.css';
 import { useDispatch, useSelector } from 'react-redux'
 import { Link, Redirect, useParams } from 'react-router-dom'
 import { getAllShowsThunk } from '../../store/shows';
+import RsvpButton from '../RsvpButton';
 
 const formatTime = (time) => {
     const splitTime = time.split(':')
@@ -41,7 +42,7 @@ function ShowDetails() {
     
 
     
-
+    // console.log(show)
     // const isRsvpd = Rsvps.filter((rsvp) => `${rsvp.userId}` === user.id) ? true : false
     
     // console.log(rsvpDisable)
@@ -57,11 +58,11 @@ function ShowDetails() {
                         <p>Hosted By: {User.name}</p>
                         <p>{description}</p>
                         <div>
-                            <p>Location: {location}</p>
+                            <p>Location: {address}</p>
                             <p>Time: {formatTime(time)}</p>
                             <p>Price: ${price}.00 at the door</p>
                         </div>
-                        <button>RSVP</button>
+                        <RsvpButton show={show} />
                     </div>
                 </div>
                 <div>
