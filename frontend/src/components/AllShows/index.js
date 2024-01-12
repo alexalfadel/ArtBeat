@@ -14,7 +14,7 @@ function AllShows () {
 
     useEffect(() => {
         dispatch(getAllShowsThunk())
-    }, [])
+    }, [dispatch])
 
     if (!user) return <Redirect to="/" />
 
