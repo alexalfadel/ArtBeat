@@ -4,6 +4,7 @@ import { Switch, Route } from "react-router-dom";
 import * as sessionActions from "./store/session";
 import Navigation from "./components/Navigation";
 import AllShows from "./components/AllShows";
+import ShowDetails from "./components/ShowDetailsPage";
 
 function App() {
   const dispatch = useDispatch();
@@ -19,6 +20,9 @@ function App() {
       <Switch>
         <Route exact path='/shows'>
           <AllShows />
+        </Route>
+        <Route path='/shows/:showId'>
+          <ShowDetails />
         </Route>
         </Switch>}
     </>
