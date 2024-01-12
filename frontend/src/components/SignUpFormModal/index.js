@@ -100,6 +100,7 @@ function SignupFormModal() {
             <option value='Dallas'>Dallas</option>
             <option value='New York'>New York</option>
             <option value='Miami'>Miami</option>
+            <option value='Other'>Other</option>
           </select>
         </label>
         {errors.location && <p>{errors.location}</p>}
