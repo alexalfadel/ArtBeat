@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { Link, Redirect } from 'react-router-dom'
 import { addRsvpThunk, removeRsvpThunk } from '../../store/rsvp';
 import { getAllShowsThunk } from '../../store/shows';
+import { getAllArtistsThunk } from '../../store/artists';
 
 function RsvpButton({show}) {
     const dispatch = useDispatch()
@@ -17,6 +18,7 @@ function RsvpButton({show}) {
     useEffect(() => {
         console.log('in use effect to dispatch getAllShows')
         dispatch(getAllShowsThunk())
+        dispatch(getAllArtistsThunk())
     }, [dispatch, allShows.Rsvps])
 
     const rsvp = () => {

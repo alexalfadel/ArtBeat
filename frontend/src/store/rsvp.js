@@ -1,5 +1,6 @@
 import { csrfFetch } from "./csrf";
 import { getAllShowsThunk } from "./shows";
+import { getAllArtistsThunk } from "./artists";
 
 const ADD_RSVP = 'rsvp/add'
 const REMOVE_RSVP = 'rsvp/remove'
@@ -13,7 +14,6 @@ const setError = (error) => {
 }
 
 export const addRsvpThunk = (data) => async (dispatch) => {
-    console.log('-------in addRsvpThunk-----')
     const { userId, showId } = data;
     
     const response = await csrfFetch('/api/rsvp', {
@@ -27,16 +27,13 @@ export const addRsvpThunk = (data) => async (dispatch) => {
     const res = await response.json()
 
     if (response.ok) {
-        console.log(data, '----response.ok in addRSVPThunk----')
         dispatch(getAllShowsThunk())
     } else {
-        console.log(res, '----error in addRSVPThunk----')
         dispatch(setError(res))
     }
 }
 
 export const removeRsvpThunk = (rsvpId) => async (dispatch) => {
-    console.log(rsvpId, '------in removeRsvpThunk')
     const response = await csrfFetch(`/api/rsvp/${rsvpId}`, { method: 'DELETE'} )
 
     if (response.ok) {

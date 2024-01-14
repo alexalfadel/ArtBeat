@@ -5,6 +5,7 @@ import { Link, Redirect, useParams } from 'react-router-dom'
 import { getAllShowsThunk } from '../../store/shows';
 import RsvpButton from '../RsvpButton';
 import Comment from '../Comment';
+import { getAllArtistsThunk } from '../../store/artists';
 
 const formatTime = (time) => {
     const splitTime = time.split(':')
@@ -32,6 +33,7 @@ function ShowDetails() {
 
     useEffect(() => {
         dispatch(getAllShowsThunk())
+        dispatch(getAllArtistsThunk())
     }, [dispatch])
 
     if (!user) return <Redirect to="/" />
@@ -50,6 +52,8 @@ function ShowDetails() {
     // const isRsvpd = Rsvps.filter((rsvp) => `${rsvp.userId}` === user.id) ? true : false
     
     // console.log(rsvpDisable)
+
+    const firstName = User.name.split(' ')[0]
 
     return (
         <div className='show-details-main-box'>
@@ -70,7 +74,7 @@ function ShowDetails() {
                     </div>
                 </div>
                 <div>
-                    <h2>Thoughts or Questions? Let {User.name} know!</h2>
+                    <h2>Thoughts or questions? Let {firstName} know!</h2>
                     <div>
                         {comments}
                     </div>

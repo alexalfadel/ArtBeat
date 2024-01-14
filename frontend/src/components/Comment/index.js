@@ -8,8 +8,13 @@ import { getAllArtistsThunk } from '../../store/artists';
 
 function Comment({comment}) {
     const dispatch = useDispatch()
-    const artists = useSelector((state) => state.artists)[0]
-    const artist = artists.filter((artist) => artist.id === comment.userId)[0]
+    const artistsObj = useSelector((state) => state.artists)
+    const shows = useSelector((state) => state.shows)
+    const show = shows.filter((show) => show.id === comment.showId)
+    const artists = artistsObj[0]
+    console.log(shows)
+    // if (!artists) return <h1>Loading...</h1>
+    // const artist = artists.filter((artist) => artist.id === comment.userId)[0]
     // console.log(artists[0])
     // const { username, id } = artist
     // console.log(artist, 'artist')
@@ -17,7 +22,10 @@ function Comment({comment}) {
 
     useEffect(() => {
         dispatch(getAllArtistsThunk())
-    }, [dispatch])
+        }, [dispatch, show.Rsvps])
+
+    if (!artists) return <h1>Loading...</h1>
+    const artist = artists.filter((artist) => artist.id === comment.userId)[0]
 
     return (
         <div>
