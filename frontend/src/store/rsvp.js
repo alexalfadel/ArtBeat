@@ -26,15 +26,25 @@ export const addRsvpThunk = (data) => async (dispatch) => {
 
     const res = await response.json()
 
-    if (res.message === "User is already RSVP'd to this showId.") {
-        console.log('we made it into res.message')
-        return res.message
-    } else if (res.ok) {
+    if (response.ok) {
         console.log(data, '----response.ok in addRSVPThunk----')
         dispatch(getAllShowsThunk())
     } else {
         console.log(res, '----error in addRSVPThunk----')
-
         dispatch(setError(res))
+    }
+}
+
+export const removeRsvpThunk = (rsvpId) => async (dispatch) => {
+    console.log(rsvpId, '------in removeRsvpThunk')
+    const response = await csrfFetch(`/api/rsvp/${rsvpId}`, { method: 'DELETE'} )
+
+    if (response.ok) {
+        const res = response.json()
+        dispatch(getAllShowsThunk())
+    } else {
+        const error = response.json()
+        dispatch(setError(error))
+        return error
     }
 }
