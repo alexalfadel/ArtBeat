@@ -24,13 +24,17 @@ export const addRsvpThunk = (data) => async (dispatch) => {
         body: JSON.stringify({ userId, showId})
     })
 
-    if (response.ok) {
-        console.log('----response.ok in addRSVPThunk----')
-        const data = await response.json()
+    const res = await response.json()
+
+    if (res.message === "User is already RSVP'd to this showId.") {
+        console.log('we made it into res.message')
+        return res.message
+    } else if (res.ok) {
+        console.log(data, '----response.ok in addRSVPThunk----')
         dispatch(getAllShowsThunk())
     } else {
-        console.log('----error in addRSVPThunk----')
-        const error = await response.json()
-        dispatch(setError(error))
+        console.log(res, '----error in addRSVPThunk----')
+
+        dispatch(setError(res))
     }
 }
