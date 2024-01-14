@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { Link, Redirect, useParams } from 'react-router-dom'
 import { getAllShowsThunk } from '../../store/shows';
 import RsvpButton from '../RsvpButton';
+import Comment from '../Comment';
 
 const formatTime = (time) => {
     const splitTime = time.split(':')
@@ -38,9 +39,12 @@ function ShowDetails() {
     if (!shows.length) return <h1>Loading...</h1>
 
     const show = shows.filter((show) => `${show.id}` === showId)[0]
-    const { address, date, description, id, location, name, price, time, userId, ShowImages, User, Rsvps } = show
+    const { address, date, description, id, location, name, price, time, userId, ShowImages, User, Rsvps, Comments } = show
     
 
+    const comments = Comments.map((comment) => {
+        return <Comment comment={comment}/>
+    })
     
     // console.log(show)
     // const isRsvpd = Rsvps.filter((rsvp) => `${rsvp.userId}` === user.id) ? true : false
@@ -66,7 +70,13 @@ function ShowDetails() {
                     </div>
                 </div>
                 <div>
-                    Comments box
+                    <h2>Thoughts or Questions? Let {User.name} know!</h2>
+                    <div>
+                        {comments}
+                    </div>
+                    <div>
+                        Add a comment button
+                    </div>  
                 </div>
             </div>
 
