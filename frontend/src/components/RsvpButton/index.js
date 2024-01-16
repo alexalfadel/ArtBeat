@@ -13,12 +13,10 @@ function RsvpButton({show}) {
     const { user } = userData;
     const { address, date, description, id, location, name, price, time, userId, ShowImages, User, Rsvps } = show
     const userRsvp = Rsvps.filter((rsvp) => rsvp.userId === user.id)
-    console.log(userRsvp, '----userRsvp out of unRsvp function')
 
     useEffect(() => {
-        console.log('in use effect to dispatch getAllShows')
         dispatch(getAllShowsThunk())
-        dispatch(getAllArtistsThunk())
+        // dispatch(getAllArtistsThunk())
     }, [dispatch, allShows.Rsvps])
 
     const rsvp = () => {
@@ -29,8 +27,6 @@ function RsvpButton({show}) {
     }
 
     const unRsvp = () => {
-        console.log(userRsvp, '----userRsvp in unRsvp function')
-        console.log(userRsvp.id, '------in unRsvp function')
         dispatch(removeRsvpThunk(userRsvp[0].id))
     }
     

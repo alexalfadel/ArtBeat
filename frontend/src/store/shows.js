@@ -4,7 +4,7 @@ import { getAllArtistsThunk } from "./artists";
 const GET_ALL_SHOWS = 'shows/getAllShows'
 const SET_ERROR = 'shows/setError'
 
-const setError = (error) => {
+export const setError = (error) => {
     return {
         type: SET_ERROR,
         payload: error
