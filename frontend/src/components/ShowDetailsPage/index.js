@@ -4,6 +4,9 @@ import { useDispatch, useSelector } from 'react-redux'
 import { Link, Redirect, useParams } from 'react-router-dom'
 import { getAllShowsThunk } from '../../store/shows';
 import RsvpButton from '../RsvpButton';
+import Comment from '../Comment';
+import { getAllArtistsThunk } from '../../store/artists';
+import AddCommentButton from '../AddCommentButton';
 
 const formatTime = (time) => {
     const splitTime = time.split(':')
@@ -31,6 +34,7 @@ function ShowDetails() {
 
     useEffect(() => {
         dispatch(getAllShowsThunk())
+        // dispatch(getAllArtistsThunk())
     }, [dispatch])
 
     if (!user) return <Redirect to="/" />
@@ -38,14 +42,25 @@ function ShowDetails() {
     if (!shows.length) return <h1>Loading...</h1>
 
     const show = shows.filter((show) => `${show.id}` === showId)[0]
-    const { address, date, description, id, location, name, price, time, userId, ShowImages, User, Rsvps } = show
+    const { address, date, description, id, location, name, price, time, userId, ShowImages, User, Rsvps, Comments } = show
+
+    const commentProps = {
+        showId: id,
+        userId: user.id
+    }
+
+    console.log(commentProps, '---commentProps')
+    
+    const orderedComments = Comments.sort((a1, a2) => 
+        (a1.updatedAt < a2.updatedAt) ? -1 : (a1.price > a2.price) ? 1 : 0)
     
 
+    const comments = orderedComments.map((comment) => {
+        return <Comment comment={comment}/>
+    })
     
-    // console.log(show)
-    // const isRsvpd = Rsvps.filter((rsvp) => `${rsvp.userId}` === user.id) ? true : false
-    
-    // console.log(rsvpDisable)
+
+    const firstName = User.name.split(' ')[0]
 
     return (
         <div className='show-details-main-box'>
@@ -66,7 +81,13 @@ function ShowDetails() {
                     </div>
                 </div>
                 <div>
-                    Comments box
+                    <h2>Thoughts or questions? Let {firstName} know!</h2>
+                    <div>
+                        {comments}
+                    </div>
+                    <div>
+                        <AddCommentButton commentProps={commentProps}/>
+                    </div>  
                 </div>
             </div>
 

@@ -1,6 +1,6 @@
 const express = require('express')
 const Sequelize = require('sequelize');
-const { Show, ShowImage, User, Rsvp } = require('../../db/models')
+const { Show, ShowImage, User, Rsvp, Comment } = require('../../db/models')
 const { requireAuth } = require('../../utils/auth')
 const Op = Sequelize;
 
@@ -19,6 +19,9 @@ router.get('/', async (req, res) => {
             },
             {
                 model: Rsvp
+            },
+            {
+                model: Comment
             }
         ],
         order: [

@@ -62,4 +62,16 @@ router.post(
     }
   );
 
+  router.get('/', async (req, res) => {
+    const users = await User.findAll();
+    return res.status(200).json({ artists: users })
+  })
+
+  router.get('/:userId', async (req, res) => {
+    const user = await User.findByPk(req.params.userId)
+    if (!user) return res.status(404).json({message: 'User does not exist'})
+
+    return res.status(200).json({user: user})
+  })
+
 module.exports = router;
