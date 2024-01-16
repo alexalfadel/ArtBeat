@@ -27,6 +27,8 @@ function ShowDetails() {
     const userData = useSelector((state) => state.session)
     const shows = useSelector((state) => state.shows)
     const { user } = userData;
+    const [ currentImage, setCurrentImage ] = useState('')
+    const [ currentImageId, setCurrentImageId ] = useState(0)
     // const show = shows.filter((show) => `${show.id}` === showId)[0]
     // const { address, date, description, id, location, name, price, time, userId, ShowImages, User, Rsvps } = show
     // const { user } = userData;
@@ -43,6 +45,7 @@ function ShowDetails() {
 
     const show = shows.filter((show) => `${show.id}` === showId)[0]
     const { address, date, description, id, location, name, price, time, userId, ShowImages, User, Rsvps, Comments } = show
+
 
     const commentProps = {
         showId: id,
@@ -62,11 +65,32 @@ function ShowDetails() {
 
     const firstName = User.name.split(' ')[0]
 
+    const imageButtonsHolder = []
+
+    const changeImage = ({ imageUrl, imageId }) => {
+        setCurrentImage(imageUrl)
+        setCurrentImageId(imageId)
+    }
+
+    for (let i = 0; i < ShowImages.length; i++) {
+        const imageButton = <button onClick={(() => changeImage({ imageUrl: ShowImages[i].imageUrl, imageId: ShowImages[i].id}))} ><i class="fa-solid fa-circle"></i></button>
+        imageButtonsHolder.push(imageButton)
+    }
+
+    const imageButtons = imageButtonsHolder.map((button) => button)
+
+
     return (
         <div className='show-details-main-box'>
             <div className='show-details-top-box'>
                 <div className='show-details-image-box'>
-                    <img id='show-details-image' src={ShowImages[0].imageUrl}></img>
+                    {!currentImage && <Link to={`/images/${ShowImages[0].id}`}>
+                        <img id='show-details-image' src={ShowImages[0].imageUrl}></img>
+                    </Link>}
+                    <Link to={`/images/${currentImageId}`}>
+                        <img id='show-details-image' src={currentImage}></img>
+                    </Link>
+                    {imageButtons}
                 </div>
                 <div className='show-details-info-box'>
                     <div className='show-details-info-text'>
