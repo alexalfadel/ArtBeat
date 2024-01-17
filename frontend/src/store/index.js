@@ -3,12 +3,14 @@ import thunk from "redux-thunk";
 import sessionReducer from "./session";
 import showsReducer from "./shows";
 import artistsReducer from "./artists";
+import PreviewImageReducer from "./ShowImages";
 
 
 const rootReducer = combineReducers({
   session: sessionReducer,
   shows: showsReducer,
-  artists: artistsReducer
+  artists: artistsReducer,
+  previewImage: PreviewImageReducer
 });
 
 let enhancer;

@@ -7,6 +7,19 @@ const Op = Sequelize;
 
 const router = express.Router()
 
+router.get('/:showId/preview', requireAuth, async (req, res) => {
+    const previewImage = await ShowImage.findAll({
+        where: {
+            showId: req.params.showId,
+            preview: true
+        }
+    })
+
+    if (!previewImage) return res.status(404).json('No preview image')
+
+    return res.status(200).json({ previewImage: previewImage })
+} )
+
 router.get('/', async (req, res) => {
     const today = new Date()
     const allShows = await Show.findAll({
