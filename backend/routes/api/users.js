@@ -74,4 +74,23 @@ router.post(
     return res.status(200).json({user: user})
   })
 
+  router.put('/:userId', requireAuth, async (req, res) => {
+    const user = await User.findByPk(req.params.userId)
+    if (!user) return res.status(404).json({message: 'User does not exist'})
+
+    const updatedUser = req.body
+    console.log(updatedUser, '---updatedUser in backend')
+
+    await user.set(updatedUser)
+
+    await user.save()
+
+    const savedUser = await User.findByPk(req.params.userId)
+
+    return res.status(200).json(savedUser)
+
+    
+
+  })
+
 module.exports = router;
