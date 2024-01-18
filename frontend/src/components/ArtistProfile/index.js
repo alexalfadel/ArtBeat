@@ -111,6 +111,8 @@ function ArtistProfile() {
                 <ShowCard id={`upcoming-show-${show.id}`} show={show}/>
                 <div>
                     <OpenModalButton buttonText='RSVPs' modalComponent={<Rsvps rsvpProps={rsvpProps}/>}/>
+                    <Link to={`/show/${show.id}/update`}>Update</Link>
+                    <OpenModalButton buttonText='Delete'/>
                 </div>
             </div>
             
