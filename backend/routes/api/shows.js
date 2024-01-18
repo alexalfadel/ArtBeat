@@ -45,4 +45,16 @@ router.get('/', async (req, res) => {
     return res.status(200).json(upcomingShows)
 })
 
+router.delete('/:showId', requireAuth, async (req, res) => {
+    const show = await Show.findByPk(req.params.showId)
+    const user = req.user
+
+    if (!show) return res.status(404).json({message: 'Show does not exist'})
+    if (show.userId !== req.user.id) return res.status(403).json({ message: 'You must own the show to delete it'})
+
+    await show.destroy()
+
+    return res.status(200).json({ message: 'Successfuly deleted.'})
+})
+
 module.exports = router

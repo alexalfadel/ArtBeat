@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux'
 import './ArtistProfile.css'
-import { useParams } from 'react-router-dom/cjs/react-router-dom.min'
+import { useParams, Link } from 'react-router-dom'
 import { useEffect } from 'react'
 import { getAllArtistsThunk, updateArtistThunk } from '../../store/artists'
 import { getAllShowsThunk } from '../../store/shows'
@@ -10,6 +10,8 @@ import ShowCard from '../ShowCard'
 import Rsvps from '../Rsvps'
 import OpenModalButton from '../OpenModalButton'
 import { getAllRsvpsThunk } from '../../store/rsvp'
+import DeleteShowModal from '../DeleteShowModal'
+
 
 function ArtistProfile() {
     const dispatch = useDispatch()
@@ -112,7 +114,7 @@ function ArtistProfile() {
                 <div>
                     <OpenModalButton buttonText='RSVPs' modalComponent={<Rsvps rsvpProps={rsvpProps}/>}/>
                     <Link to={`/show/${show.id}/update`}>Update</Link>
-                    <OpenModalButton buttonText='Delete'/>
+                    <OpenModalButton buttonText='Delete' modalComponent={<DeleteShowModal showId={show.id} />}/>
                 </div>
             </div>
             
