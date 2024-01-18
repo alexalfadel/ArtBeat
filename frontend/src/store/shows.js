@@ -30,6 +30,20 @@ export const getAllShowsThunk = () => async (dispatch) => {
     }
 }
 
+export const deleteShowThunk = (showId) => async (dispatch) => {
+    const response = await csrfFetch(`/api/shows/${showId}`, {
+        method: 'DELETE'
+    })
+
+    if (response.ok) {
+        const message = await response.json()
+        dispatch(getAllShowsThunk())
+    } else {
+        const error = await response.json()
+        dispatch(setError(error))
+    }
+}
+
 const initialState = {}
 
 function showsReducer(state = initialState, action) {
