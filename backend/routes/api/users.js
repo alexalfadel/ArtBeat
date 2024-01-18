@@ -2,9 +2,10 @@ const express = require('express')
 const bcrypt = require('bcryptjs');
 
 const { setTokenCookie, requireAuth } = require('../../utils/auth');
-const { User } = require('../../db/models');
+const { User, Rsvp } = require('../../db/models');
 const { check } = require('express-validator');
 const { handleValidationErrors } = require('../../utils/validation');
+
 
 const router = express.Router();
 
@@ -62,9 +63,16 @@ router.post(
     }
   );
 
-  router.get('/', async (req, res) => {
-    const users = await User.findAll();
-    return res.status(200).json({ artists: users })
+  router.get('/:userId/rsvps', requireAuth, async (req, res) => {
+    const userRsvps = await Rsvp.findAll({
+      where: {
+        userId: req.params.userId
+      }
+    })
+
+    if (!userRsvps.length) return res.status(200).json({message: "No Rsvps"})
+
+    return res.status(200).json(userRsvps)
   })
 
   router.get('/:userId', async (req, res) => {
@@ -72,6 +80,32 @@ router.post(
     if (!user) return res.status(404).json({message: 'User does not exist'})
 
     return res.status(200).json({user: user})
+  })
+
+  router.get('/', async (req, res) => {
+    const users = await User.findAll();
+    return res.status(200).json({ artists: users })
+  })
+
+  
+
+  router.put('/:userId', requireAuth, async (req, res) => {
+    const user = await User.findByPk(req.params.userId)
+    if (!user) return res.status(404).json({message: 'User does not exist'})
+
+    const updatedUser = req.body
+    console.log(updatedUser, '---updatedUser in backend')
+
+    await user.set(updatedUser)
+
+    await user.save()
+
+    const savedUser = await User.findByPk(req.params.userId)
+
+    return res.status(200).json(savedUser)
+
+    
+
   })
 
 module.exports = router;

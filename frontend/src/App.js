@@ -5,6 +5,7 @@ import * as sessionActions from "./store/session";
 import Navigation from "./components/Navigation";
 import AllShows from "./components/AllShows";
 import ShowDetails from "./components/ShowDetailsPage";
+import ArtistProfile from "./components/ArtistProfile";
 
 function App() {
   const dispatch = useDispatch();
@@ -23,6 +24,9 @@ function App() {
         </Route>
         <Route path='/shows/:showId'>
           <ShowDetails />
+        </Route>
+        <Route path='/artists/:artistId'>
+          <ArtistProfile />
         </Route>
         </Switch>}
     </>

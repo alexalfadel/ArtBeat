@@ -1,4 +1,5 @@
 import { csrfFetch } from "./csrf"
+import { restoreUser } from "./session"
 
 const GET_ARTIST = 'artists/get'
 const GET_ALL_ARTISTS = 'artists/get_all'
@@ -46,6 +47,25 @@ export const getAllArtistsThunk = () => async (dispatch) => {
     } else {
         const error = await response.json()
         dispatch(set_error(error))
+    }
+}
+
+export const updateArtistThunk = (artist) => async (dispatch) => {
+    const response = await csrfFetch(`/api/users/${artist.id}`, {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(artist)
+    })
+
+    if (response.ok) {
+        const res = await response.json()
+        dispatch(restoreUser())
+        dispatch(getAllArtistsThunk())
+    } else {
+        const errors = await response.json()
+        dispatch(set_error(errors))
     }
 }
 
