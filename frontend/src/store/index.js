@@ -4,13 +4,15 @@ import sessionReducer from "./session";
 import showsReducer from "./shows";
 import artistsReducer from "./artists";
 import PreviewImageReducer from "./ShowImages";
+import rsvpReducer from "./rsvp";
 
 
 const rootReducer = combineReducers({
   session: sessionReducer,
   shows: showsReducer,
   artists: artistsReducer,
-  previewImage: PreviewImageReducer
+  previewImage: PreviewImageReducer,
+  rsvps: rsvpReducer
 });
 
 let enhancer;

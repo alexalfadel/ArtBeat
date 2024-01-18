@@ -6,6 +6,10 @@ import { getAllArtistsThunk, updateArtistThunk } from '../../store/artists'
 import { getAllShowsThunk } from '../../store/shows'
 import { useState } from 'react'
 import { validProfilePic } from '../SignUpFormModal'
+import ShowCard from '../ShowCard'
+import Rsvps from '../Rsvps'
+import OpenModalButton from '../OpenModalButton'
+import { getAllRsvpsThunk } from '../../store/rsvp'
 
 function ArtistProfile() {
     const dispatch = useDispatch()
@@ -13,6 +17,7 @@ function ArtistProfile() {
     const user = useSelector((state) => state.session).user
     const allShows = useSelector((state) => state.shows)
     const allArtists = useSelector((state) => state.artists)[0]
+    const attendingRsvps = useSelector((state) => state.rsvps)
     const [ updating, setUpdating ] =  useState(false)
     const [ profilePic, setProfilePic ] = useState('')
     const [ newProfilePic, setNewProfilePic ] = useState(false)
@@ -24,6 +29,7 @@ function ArtistProfile() {
     const [ bio, setBio ] = useState('')
     const [ errors, setErrors ] = useState({})
     const [ showErrors, setShowErrors ] = useState(false)
+    const [ upcomingOrAttending, setUpcomingOrAttending ] = useState('upcoming')
     const allArtistUsernames = allArtists?.map((currArtist) => {
         if (`${currArtist.id}` !== artistId) return currArtist.username
     })
@@ -31,6 +37,7 @@ function ArtistProfile() {
     useEffect(() => {
         dispatch(getAllArtistsThunk())
         dispatch(getAllShowsThunk())
+        dispatch(getAllRsvpsThunk(artistId))
     }, [dispatch])
 
     useEffect(() => {
@@ -42,7 +49,7 @@ function ArtistProfile() {
         setErrors(errors)
     }, [username, newProfilePicUrl])
 
-    if (!user || !allShows.length || !allArtists) return <h1>loading...</h1>
+    if (!user || !allShows.length || !allArtists || !attendingRsvps.length ) return <h1>loading...</h1>
 
     const artist = allArtists.filter((artist) => `${artist.id}` === artistId)[0]
 
@@ -53,7 +60,7 @@ function ArtistProfile() {
         setUsername(artist.username)
         setBio(artist.bio)
     }
-    // if (!username) setUsername(artist.username)
+
 
     let ownProfile = false;
     if (artist.id === user.id) ownProfile = true
@@ -86,16 +93,54 @@ function ArtistProfile() {
             dispatch(updateArtistThunk(updatedArtist))
             setUpdating(false)
             setErrors({})
-            setProfilePic(newProfilePicUrl)
+            setProfilePic('')
         }
 
     }
+
+    const upcomingShows = allShows.filter((show) => show.userId === artist.id)
+    const upcomingShowCards = upcomingShows?.map((show) => {
+
+    const rsvpProps = {
+        upcomingOrAttending: 'upcoming',
+        rsvps: show.Rsvps,
+        artists: allArtists
+    }
+        return (
+            <div>
+                <ShowCard id={`upcoming-show-${show.id}`} show={show}/>
+                <div>
+                    <OpenModalButton buttonText='RSVPs' modalComponent={<Rsvps rsvpProps={rsvpProps}/>}/>
+                </div>
+            </div>
+            
+        )
+    })
+
+    let attendingRsvpProps;
+
+    if (attendingRsvps[0].message && attendingRsvps[0].message === 'No Rsvps') {
+        attendingRsvpProps = {
+            upcomingOrAttending: 'attending',
+            message: "You're not RSVP'd to any upcoming shows."
+        }
+    } else {
+        const attendingRsvpShowIds = attendingRsvps[0].map((rsvp) => rsvp.showId )
+        const attendingRsvpShows = allShows.filter((show) => attendingRsvpShowIds.includes(show.id))
+    
+        attendingRsvpProps = {
+            upcomingOrAttending: 'attending',
+            shows: attendingRsvpShows
+        }
+    }
+    
+    // console.log(attendingRsvpProps)
 
     return (
         <div>
             {!updating && <div className='top-profile-box'>
                 <div className='left-top-profile-box'>
-                    <img src={previewProfileUrl} alt={`${artist.name}`}></img>
+                    <img src={artist.profilePic} alt={`${artist.name}`}></img>
                     <p>Located in {artist.location}</p>
                 </div>
                 <div>
@@ -110,7 +155,8 @@ function ArtistProfile() {
                     <img src={previewProfileUrl} alt={`${artist.name}`}></img>
                     <div>
                         <input value={holdProfilePicUrl} placeholder='Add a new profile picture url here.' onChange={(e) => setHoldProfilePicUrl(e.target.value)}></input>
-                        <button onClick={(() => {
+                        <button onClick={((e) => {
+                            e.preventDefault()
                             setNewProfilePicUrl(holdProfilePicUrl)
                             setNewProfilePic(true)
                             setPreviewProfileUrl(holdProfilePicUrl)
@@ -139,6 +185,21 @@ function ArtistProfile() {
                     <button onClick={cancel}>X</button>
                 </div>
                 </form>}
+                {ownProfile && <div>
+                            <div>
+                                <p>Upcoming Shows</p>
+                                <OpenModalButton buttonText="Show's I'm Attending" modalComponent={<Rsvps rsvpProps={attendingRsvpProps}/>}/>
+                            </div>
+                            <div>
+                                <button>Add a Show+</button>
+                            </div>
+                </div>}
+                {upcomingOrAttending === 'upcoming' && <div>
+                    {upcomingShowCards}
+                    </div>}
+                {upcomingOrAttending === 'attending' && <div>
+
+                    </div>}
                
             
         </div>
