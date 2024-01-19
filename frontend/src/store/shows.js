@@ -44,6 +44,30 @@ export const deleteShowThunk = (showId) => async (dispatch) => {
     }
 }
 
+export const addShowThunk = (show) => async (dispatch) => {
+    console.log(show, '---in addShowThunk')
+
+    console.log(show, '---show that will be added in the thunk')
+    const response = await csrfFetch('/api/shows/', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(show)
+    })
+
+    if (response.ok) {
+        const show = await response.json()
+        console.log(show, '----show, in res.ok')
+        return show
+    } else {
+        const error = await response.json()
+        console.log(error, '----error, in thunk')
+        dispatch(setError(error))
+        return error
+    }
+}
+
 const initialState = {}
 
 function showsReducer(state = initialState, action) {

@@ -57,4 +57,13 @@ router.delete('/:showId', requireAuth, async (req, res) => {
     return res.status(200).json({ message: 'Successfuly deleted.'})
 })
 
+router.post('/', requireAuth, async (req, res) => {
+    const show = req.body
+    console.log(show, '---show in route')
+    const newShow = await Show.create(show)
+    console.log(newShow, '----newShow in the backend')
+    return res.status(201).json(newShow)
+
+})
+
 module.exports = router

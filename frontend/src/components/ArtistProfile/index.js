@@ -176,6 +176,16 @@ function ArtistProfile() {
                                 <option value='Dallas'>Dallas</option>
                                 <option value='New York'>New York</option>
                                 <option value='Miami'>Miami</option>
+                                <option value='Seattle'>Seattle</option>
+                                <option value='Portland'>Portland</option>
+                                <option value='Santa Fe'>Santa Fe</option>
+                                <option value='New Orleans'>New Orleans</option>
+                                <option value='Chicago'>Chicago</option>
+                                <option value='Cincinnati'>Cincinnati</option>
+                                <option value='Atlanta'>Atlanta</option>
+                                <option value='Philadelphia'>Philadelphia</option>
+                                <option value='Boston'>Boston</option>
+                                <option value='Baltimore'>Baltimore</option>
                                 <option value='Other'>Other</option>
                             </select></span></p>
                     </div>
