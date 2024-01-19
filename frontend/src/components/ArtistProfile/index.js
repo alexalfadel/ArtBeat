@@ -195,7 +195,7 @@ function ArtistProfile() {
                                 <OpenModalButton buttonText="Show's I'm Attending" modalComponent={<Rsvps rsvpProps={attendingRsvpProps}/>}/>
                             </div>
                             <div>
-                                <button>Add a Show+</button>
+                                <Link to='/shows/new'><button>Add a Show+</button></Link>
                             </div>
                 </div>}
                 {upcomingOrAttending === 'upcoming' && <div>

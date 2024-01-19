@@ -8,7 +8,7 @@ import "./SignupForm.css";
 
 export const validProfilePic = (url) => {
     const splitUrl = url.split('.')
-    const validEndings = ['.png', '.jpeg', '.jpg']
+    const validEndings = ['png', 'jpeg', 'jpg']
     if (validEndings.includes(splitUrl[splitUrl.length - 1])) return true
     return false
 }
