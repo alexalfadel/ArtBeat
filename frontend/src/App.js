@@ -20,6 +20,9 @@ function App() {
       <Navigation isLoaded={isLoaded} />
       {isLoaded && 
       <Switch>
+        <Route exact path='/'>
+          <AllShows />
+        </Route>
         <Route exact path='/shows'>
           <AllShows />
         </Route>
