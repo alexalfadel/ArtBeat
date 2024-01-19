@@ -5,6 +5,7 @@ import { validProfilePic } from "../SignUpFormModal";
 import { Redirect } from "react-router-dom";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import { addShowThunk } from "../../store/shows";
+import { addShowImage } from "../../store/ShowImages";
 
 const isValidAddress = (address) => {
   const splitAddress = address.split(" ");
@@ -14,23 +15,23 @@ const isValidAddress = (address) => {
 };
 
 const formatTime = (time, amPm) => {
-    if (amPm === 'am') return time
-    else if (time.split(':')[1] === '30') {
-        const numTime = Number(time.split(':')[0]) + 12
-        return `${Number(time.split(':')[0]) + 12}:30`
-    } else return `${Number(time.split(':')[0]) + 12}:00`
-}
+  if (amPm === "am") return time;
+  else if (time.split(":")[1] === "30") {
+    const numTime = Number(time.split(":")[0]) + 12;
+    return `${Number(time.split(":")[0]) + 12}:30`;
+  } else return `${Number(time.split(":")[0]) + 12}:00`;
+};
 
 function AddShowForm() {
   const history = useHistory();
   const dispatch = useDispatch();
-  const user = useSelector((state) => state.session).user
+  const user = useSelector((state) => state.session).user;
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [address, setAddress] = useState("");
   const [location, setLocation] = useState("");
   const [time, setTime] = useState("");
-  const [date, setDate] = useState('')
+  const [date, setDate] = useState("");
   const [amPm, setAmPm] = useState("am");
   const [price, setPrice] = useState("");
   const [errors, setErrors] = useState({});
@@ -78,13 +79,14 @@ function AddShowForm() {
   const [image4Description, setImage4Description] = useState("");
   const [image5Description, setImage5Description] = useState("");
 
-
   useEffect(() => {
     const errors = {};
 
     if (name.length < 10) errors.name = "Name must be at least 10 characters";
     if (address.length < 5)
       errors.address = "Address must be at least 5 characters";
+    if (description.length < 24)
+      errors.description = "Description must be at least 24 characters long";
     if (!isValidAddress(address))
       errors.address = "Please enter a valid address";
     if (!validProfilePic(previewImageUrl))
@@ -129,7 +131,8 @@ function AddShowForm() {
     if (!price) errors.price = "Price is required";
     if (price < 1) errors.price = "Price must be at least $1.00";
     if (price > 100000) errors.price = "Price must be less than $100,000.00";
-    if (new Date(date) < new Date()) errors.date = 'Date must be set in the future';
+    if (new Date(date) < new Date())
+      errors.date = "Date must be set in the future";
 
     setErrors(errors);
   }, [
@@ -150,11 +153,12 @@ function AddShowForm() {
     location,
     time,
     price,
-    date
+    date,
+    description,
   ]);
 
-  const reset = (e) => {
-    e.preventDefault();
+  const reset = () => {
+    // e.preventDefault();
 
     setName("");
     setDescription("");
@@ -206,7 +210,7 @@ function AddShowForm() {
     setShowImage4(false);
     setShowImage5(false);
     setImageCounter(0);
-    setDate('')
+    setDate("");
     setShowErrors(false);
 
     history.push("/shows");
@@ -215,14 +219,9 @@ function AddShowForm() {
   const onSubmit = async (e) => {
     e.preventDefault();
 
-    console.log('in on submit')
-
     if (Object.keys(errors).length) {
       setShowErrors(true);
-      console.log(errors, 'in errors in on submit')
     } else {
-      console.log("no errors, in submit thunk");
-
       const show = {
         name: name,
         description: description,
@@ -231,20 +230,78 @@ function AddShowForm() {
         time: formatTime(time, amPm),
         date: new Date(date),
         price: Number(price),
-        userId: user.id 
+        userId: user.id,
+      };
+
+      const newShow = await dispatch(addShowThunk(show));
+
+      const newShowId = newShow.id;
+
+      const images = [
+        {
+          title: previewImageTitle,
+          imageUrl: previewImageUrl,
+          description: previewImageDescription,
+          preview: true,
+          showId: newShowId,
+        },
+      ];
+
+      if (image1Title && image1Description && image1Url) {
+        images.push({
+          title: image1Title,
+          imageUrl: image1Url,
+          description: image1Description,
+          preview: false,
+          showId: newShowId,
+        });
       }
 
-      console.log(show, '----show that will be added')
+      if (image2Title && image2Description && image2Url) {
+        images.push({
+          title: image2Title,
+          imageUrl: image2Url,
+          description: image2Description,
+          preview: false,
+          showId: newShowId,
+        });
+      }
 
-      const newShow = await dispatch(addShowThunk(show))
-      console.log(newShow, '---newly created show')
+      if (image3Title && image3Description && image3Url) {
+        images.push({
+          title: image3Title,
+          imageUrl: image3Url,
+          description: image3Description,
+          preview: false,
+          showId: newShowId,
+        });
+      }
 
-    //   const previewImage = {
-    //     imageUrl: previewImageUrl,
-    //     description: previewImageDescription,
-    //     preview: true,
-    //     showId: 0
-    //   }
+      if (image4Title && image4Description && image4Url) {
+        images.push({
+          title: image4Title,
+          imageUrl: image4Url,
+          description: image4Description,
+          preview: false,
+          showId: newShowId,
+        });
+      }
+
+      if (image5Title && image5Description && image5Url) {
+        images.push({
+          title: image5Title,
+          imageUrl: image5Url,
+          description: image5Description,
+          preview: false,
+          showId: newShowId,
+        });
+      }
+
+      for (let i = 0; i < images.length; i++) {
+        dispatch(addShowImage(images[i]));
+      }
+
+      reset();
     }
   };
 
@@ -269,6 +326,7 @@ function AddShowForm() {
               placeholder="Description goes here"
               onChange={(e) => setDescription(e.target.value)}
             ></textarea>
+            {showErrors && errors.description && <p>{errors.description}</p>}
             <input
               type="text"
               required
@@ -311,8 +369,11 @@ function AddShowForm() {
                 <option value="am">A.M.</option>
                 <option value="pm">P.M</option>
               </select>
-              <input type="date" min={`${new Date()}`} onChange={((e) => setDate(e.target.value))}>
-              </input>
+              <input
+                type="date"
+                min={`${new Date()}`}
+                onChange={(e) => setDate(e.target.value)}
+              ></input>
             </div>
             <div>
               $
