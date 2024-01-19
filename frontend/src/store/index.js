@@ -1,10 +1,18 @@
 import { createStore, combineReducers, applyMiddleware, compose } from "redux";
 import thunk from "redux-thunk";
 import sessionReducer from "./session";
+import showsReducer from "./shows";
+import artistsReducer from "./artists";
+import PreviewImageReducer from "./ShowImages";
+import rsvpReducer from "./rsvp";
 
 
 const rootReducer = combineReducers({
-  session: sessionReducer
+  session: sessionReducer,
+  shows: showsReducer,
+  artists: artistsReducer,
+  previewImage: PreviewImageReducer,
+  rsvps: rsvpReducer
 });
 
 let enhancer;
