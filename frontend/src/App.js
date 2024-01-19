@@ -6,6 +6,7 @@ import Navigation from "./components/Navigation";
 import AllShows from "./components/AllShows";
 import ShowDetails from "./components/ShowDetailsPage";
 import ArtistProfile from "./components/ArtistProfile";
+import AddShowForm from "./components/AddShowForm";
 
 function App() {
   const dispatch = useDispatch();
@@ -21,6 +22,9 @@ function App() {
       <Switch>
         <Route exact path='/shows'>
           <AllShows />
+        </Route>
+        <Route exact path ='/shows/new'>
+        <AddShowForm />
         </Route>
         <Route path='/shows/:showId'>
           <ShowDetails />

@@ -4,14 +4,13 @@ import { useModal } from "../../context/Modal";
 import * as sessionActions from "../../store/session";
 import "./SignupForm.css";
 import "./SignupForm.css";
-// import { profile } from "console";
 
 export const validProfilePic = (url) => {
-    const splitUrl = url.split('.')
-    const validEndings = ['.png', '.jpeg', '.jpg']
-    if (validEndings.includes(splitUrl[splitUrl.length - 1])) return true
-    return false
-}
+  const splitUrl = url.split(".");
+  const validEndings = ["png", "jpeg", "jpg"];
+  if (validEndings.includes(splitUrl[splitUrl.length - 1])) return true;
+  return false;
+};
 
 function SignupFormModal() {
   const dispatch = useDispatch();
@@ -21,12 +20,11 @@ function SignupFormModal() {
   const [name, setName] = useState("");
   const [bio, setBio] = useState("");
   const [location, setLocation] = useState("");
-  const [profilePic, setProfilePic] = useState("")
+  const [profilePic, setProfilePic] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [errors, setErrors] = useState({});
   const { closeModal } = useModal();
-
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -42,16 +40,18 @@ function SignupFormModal() {
           profilePic: validProfilePic(profilePic) ? profilePic : null,
           password,
         })
-      ).then(closeModal)
-      .catch(async (res) => {
-        const data = await res.json();
-        if (data && data.errors) {
-          setErrors(data.errors);
-        }
-      });
+      )
+        .then(closeModal)
+        .catch(async (res) => {
+          const data = await res.json();
+          if (data && data.errors) {
+            setErrors(data.errors);
+          }
+        });
     }
     return setErrors({
-      confirmPassword: "Confirm Password field must be the same as the Password field"
+      confirmPassword:
+        "Confirm Password field must be the same as the Password field",
     });
   };
 
@@ -90,23 +90,40 @@ function SignupFormModal() {
         </label>
         {errors.name && <p>{errors.name}</p>}
         <label>
-            Location
-          <select value={location} onChange={(e) => setLocation(e.target.value)} required>
-            <option value='San Francisco'>San Francisco</option>
-            <option value='Los Angeles'>Los Angeles</option>
-            <option value='Phoenix'>Phoenix</option>
-            <option value='Tucson'>Tucson</option>
-            <option value='Austin'>Austin</option>
-            <option value='Dallas'>Dallas</option>
-            <option value='New York'>New York</option>
-            <option value='Miami'>Miami</option>
-            <option value='Other'>Other</option>
+          Location
+          <select
+            value={location}
+            onChange={(e) => setLocation(e.target.value)}
+            required
+          >
+            <option value="San Francisco">San Francisco</option>
+            <option value="Los Angeles">Los Angeles</option>
+            <option value="Phoenix">Phoenix</option>
+            <option value="Tucson">Tucson</option>
+            <option value="Austin">Austin</option>
+            <option value="Dallas">Dallas</option>
+            <option value="New York">New York</option>
+            <option value="Miami">Miami</option>
+            <option value="Seattle">Seattle</option>
+            <option value="Portland">Portland</option>
+            <option value="Santa Fe">Santa Fe</option>
+            <option value="New Orleans">New Orleans</option>
+            <option value="Chicago">Chicago</option>
+            <option value="Cincinnati">Cincinnati</option>
+            <option value="Atlanta">Atlanta</option>
+            <option value="Philadelphia">Philadelphia</option>
+            <option value="Boston">Boston</option>
+            <option value="Baltimore">Baltimore</option>
+            <option value="Other">Other</option>
           </select>
         </label>
         {errors.location && <p>{errors.location}</p>}
         <label>
-            Bio 
-            <textarea value={bio} onChange={(e) => setBio(e.target.value)}></textarea>
+          Bio
+          <textarea
+            value={bio}
+            onChange={(e) => setBio(e.target.value)}
+          ></textarea>
         </label>
         <label>
           Password
@@ -118,8 +135,12 @@ function SignupFormModal() {
           />
         </label>
         <label>
-            Profiel Picture
-            <input type='text' value={profilePic} onChange={(e) => setProfilePic(e.target.value)}></input>
+          Profiel Picture
+          <input
+            type="text"
+            value={profilePic}
+            onChange={(e) => setProfilePic(e.target.value)}
+          ></input>
         </label>
         {errors.password && <p>{errors.password}</p>}
         <label>
