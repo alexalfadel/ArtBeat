@@ -7,14 +7,14 @@ import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import { addShowThunk } from "../../store/shows";
 import { addShowImage } from "../../store/ShowImages";
 
-const isValidAddress = (address) => {
+export const isValidAddress = (address) => {
   const splitAddress = address.split(" ");
   if (typeof Number(splitAddress[0]) !== "number" || splitAddress.length < 2) {
     return false;
   } else return true;
 };
 
-const formatTime = (time, amPm) => {
+export const formatTime = (time, amPm) => {
   if (amPm === "am") return time;
   else if (time.split(":")[1] === "30") {
     const numTime = Number(time.split(":")[0]) + 12;

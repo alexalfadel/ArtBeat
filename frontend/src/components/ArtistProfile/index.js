@@ -35,11 +35,22 @@ function ArtistProfile() {
     if (`${currArtist.id}` !== artistId) return currArtist.username;
   });
 
+  console.log(updating, '----updating')
+
   useEffect(() => {
+    console.log('---in the use effect')
     dispatch(getAllArtistsThunk());
     dispatch(getAllShowsThunk());
     dispatch(getAllRsvpsThunk(artistId));
   }, [dispatch]);
+
+  // useEffect(() => {
+  //   dispatch(getAllShowsThunk())
+  // }, [dispatch])
+
+  // useEffect(() => {
+  //   dispatch(getAllRsvpsThunk(artistId))
+  // }, [dispatch])
 
   useEffect(() => {
     let errors = {};
@@ -118,7 +129,7 @@ function ArtistProfile() {
             buttonText="RSVPs"
             modalComponent={<Rsvps rsvpProps={rsvpProps} />}
           />
-          <Link to={`/show/${show.id}/update`}>Update</Link>
+          <Link to={`/shows/${show.id}/update`}>Update</Link>
           <OpenModalButton
             buttonText="Delete"
             modalComponent={<DeleteShowModal showId={show.id} />}
