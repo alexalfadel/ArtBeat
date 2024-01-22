@@ -118,7 +118,6 @@ function UpdateShowForm() {
             }
             if (showImages[1]) {
                 setImage2Title(showImages[1].title)
-                setImage2Description
             }
         }
     }, [allShows])
