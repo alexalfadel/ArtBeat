@@ -63,4 +63,18 @@ router.post("/", requireAuth, async (req, res) => {
   return res.status(201).json(newShow);
 });
 
+router.put('/:showId', requireAuth, async (req, res) => {
+  const show = req.body
+  const originalShow = await Show.findByPk(req.params.showId)
+  if (!originalShow) return res.status(404).json({ message: 'Show does not exist'})
+
+  await originalShow.set(show)
+
+  await originalShow.save()
+
+  const updatedShow = Show.findByPk(req.params.showId)
+
+  return res.status(200).json(updatedShow)
+})
+
 module.exports = router;
