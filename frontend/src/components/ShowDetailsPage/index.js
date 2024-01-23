@@ -42,6 +42,7 @@ function ShowDetails() {
         // dispatch(getAllArtistsThunk())
     }, [dispatch])
 
+
     if (!user) return <Redirect to="/" />
     if (!shows.length) return <h1>Loading...</h1>
     if (!previewImage) return <h1>Loading...</h1>

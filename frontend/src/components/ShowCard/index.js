@@ -3,7 +3,7 @@ import './ShowCard.css';
 import { useDispatch, useSelector } from 'react-redux'
 import { Link, Redirect } from 'react-router-dom'
 
-const formatDate = (date) => {
+export const formatDate = (date) => {
     const months = {
         '01': 'January',
         '02': 'February',
@@ -30,6 +30,8 @@ function ShowCard ({show}) {
     const { address, date, description, id, location, name, price, time, userId, ShowImages, User, Rsvps } = show
     const previewImage = ShowImages.filter((image) => image.preview === true)[0]
     const rsvpCount = Rsvps.length
+
+    if (!ShowImages) return <h1>Loading...</h1>
 
     return (
         <Link className='show-card-link' id={`show-${id}-link`} to={`/shows/${id}`}>
