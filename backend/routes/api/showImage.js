@@ -11,4 +11,17 @@ router.post("/", requireAuth, async (req, res) => {
   return res.status(201).json(newImage);
 });
 
+router.put('/:imageId', requireAuth, async (req, res) => {
+  const image = await ShowImage.findByPk(req.params.imageId)
+  if (!image) return res.status(404).json({message: 'Image does not exist'})
+
+  await image.set(req.body)
+
+  await image.save()
+
+  const updatedImage = ShowImage.findByPk(req.params.imageId)
+
+  return res.status(200).json(updatedImage)
+ })
+
 module.exports = router;

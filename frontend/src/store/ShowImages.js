@@ -40,6 +40,32 @@ export const addShowImage = (showImage) => async (dispatch) => {
   }
 };
 
+export const updateShowImageThunk = (image) => async (dispatch) => {
+
+  const { title, imageUrl, description, preview, showId, id} = image
+  const response = await csrfFetch(`/api/images/${id}`, {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      title: title, 
+      imageUrl: imageUrl,
+      description: description,
+      preview: preview,
+      showId: showId
+    })
+  })
+
+  if (response.ok) {
+    const updatedImage = await response.json()
+    return updatedImage
+  } else {
+    const error = await response.json()
+    dispatch(setError(error))
+  }
+}
+
 const initialState = {};
 
 function PreviewImageReducer(state = initialState, action) {

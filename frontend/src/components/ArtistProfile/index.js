@@ -35,22 +35,15 @@ function ArtistProfile() {
     if (`${currArtist.id}` !== artistId) return currArtist.username;
   });
 
-  console.log(updating, '----updating')
+
 
   useEffect(() => {
-    console.log('---in the use effect')
+
     dispatch(getAllArtistsThunk());
     dispatch(getAllShowsThunk());
     dispatch(getAllRsvpsThunk(artistId));
   }, [dispatch]);
 
-  // useEffect(() => {
-  //   dispatch(getAllShowsThunk())
-  // }, [dispatch])
-
-  // useEffect(() => {
-  //   dispatch(getAllRsvpsThunk(artistId))
-  // }, [dispatch])
 
   useEffect(() => {
     let errors = {};

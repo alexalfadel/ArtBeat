@@ -63,6 +63,25 @@ export const addShowThunk = (show) => async (dispatch) => {
   }
 };
 
+export const updateShowThunk =({ show, showId }) => async (dispatch) => {
+  const response = await csrfFetch(`/api/shows/${showId}`, {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(show)
+  })
+
+  if (response.ok) {
+    const updatedShow = await response.json()
+    return updatedShow
+  } else {
+    const error = await response.json()
+    dispatch(setError(error))
+    return error
+  }
+}
+
 const initialState = {};
 
 function showsReducer(state = initialState, action) {
