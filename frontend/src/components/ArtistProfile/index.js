@@ -11,9 +11,11 @@ import Rsvps from "../Rsvps";
 import OpenModalButton from "../OpenModalButton";
 import { getAllRsvpsThunk } from "../../store/rsvp";
 import DeleteShowModal from "../DeleteShowModal";
+import { useHistory } from "react-router-dom";
 
 function ArtistProfile() {
   const dispatch = useDispatch();
+  const history = useHistory()
   const { artistId } = useParams();
   const user = useSelector((state) => state.session).user;
   const allShows = useSelector((state) => state.shows);
@@ -56,6 +58,7 @@ function ArtistProfile() {
 
     setErrors(errors);
   }, [username, newProfilePicUrl]);
+
 
   if (!user || !allShows.length || !allArtists || !attendingRsvps.length)
     return <h1>loading...</h1>;

@@ -8,10 +8,13 @@ import ShowDetails from "./components/ShowDetailsPage";
 import ArtistProfile from "./components/ArtistProfile";
 import AddShowForm from "./components/AddShowForm";
 import UpdateShowForm from "./components/UpdateShowForm";
+import DoesNotExist from "./components/404";
+import HomePage from "./components/HomePage";
 
 function App() {
   const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState(false);
+  const user = useSelector((state) => state.session.user)
 
   useEffect(() => {
     dispatch(sessionActions.restoreUser()).then(() => setIsLoaded(true));
@@ -26,16 +29,26 @@ function App() {
           <AllShows />
         </Route>
         <Route exact path ='/shows/new'>
-        <AddShowForm />
+          {user && <AddShowForm />}
+          {!user && <HomePage />}
         </Route>
         <Route path='/shows/:showId/update'>
-          <UpdateShowForm />
+          {user && <UpdateShowForm />}
+          {!user && <HomePage />}
         </Route>
         <Route path='/shows/:showId'>
-          <ShowDetails />
+          {user && <ShowDetails />}
+          {!user && <HomePage />}
         </Route>
         <Route path='/artists/:artistId'>
-          <ArtistProfile />
+        {user && <ArtistProfile />}
+          {!user && <HomePage />}
+        </Route>
+        <Route exact path='/'>
+          <HomePage />
+        </Route>
+        <Route>
+          <DoesNotExist />
         </Route>
         </Switch>}
     </>
