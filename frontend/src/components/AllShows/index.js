@@ -62,13 +62,12 @@ function AllShows () {
 
 
     return (
-        <div>
-            <h1>All Shows</h1>
-            <div>
+        <div id='all-shows-page'>
+            <div id='show-location-buttons-box'>
                 {locationButtons}
-                <button id={locationFilter === '' ? 'location-active' : 'location-inactive'} onClick={() => setLocationFilter('')}>All</button>
+                <button className='all-location-button' id={locationFilter === '' ? 'location-active' : 'location-inactive'} onClick={() => setLocationFilter('')}>All</button>
             </div>
-            <ul>
+            <ul id='all-cards-box'>
                 {createCards(locationFilter)}
             </ul>
         </div>

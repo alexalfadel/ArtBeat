@@ -8,7 +8,7 @@
 
 .show-card-box {
     box-sizing: border-box;
-    /* background-color: blue; */
+    background-color: white;
     width: 350px;
     height: 170px;
     display: flex;
