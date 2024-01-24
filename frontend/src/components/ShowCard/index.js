@@ -39,14 +39,14 @@ function ShowCard ({show}) {
             <div>
                 <img className='show-card-image' src={previewImage.imageUrl} alt={previewImage.title}></img>
             </div>
-            <div>
-                <div>
-                    <p>{name}</p>
-                    <p>{location}</p>
-                    <p>{formatDate(date)}</p>
+            <div id='show-card-text-box'>
+                <div className='show-card-upper-text-box'>
+                    <p className='show-card-text'>{name}</p>
+                    <p className='show-card-text'>{location}</p>
+                    <p className='show-card-text'>{formatDate(date)}</p>
                 </div>
                 <div>
-                    <p>{rsvpCount} RSVP's</p>
+                    <p className='show-card-text'>{rsvpCount} RSVP's</p>
                 </div>
             </div>
         </div>
