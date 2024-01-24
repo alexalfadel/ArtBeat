@@ -1,5 +1,5 @@
 import React from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import ProfileButton from "./ProfileButton";
 import OpenModalButton from "../OpenModalButton";
@@ -35,10 +35,23 @@ function Navigation({ isLoaded }) {
   return (
     <ul>
       <li>
-        <NavLink exact to="/">
-          Home
+        <NavLink exact to="/shows">
+          ARTBEAT
         </NavLink>
       </li>
+      {sessionUser && <div><li>
+        <NavLink exact to='/shows'>
+            <i className="fa-solid fa-calendar-days"></i>
+          </NavLink>
+      </li>
+      <li>
+        <NavLink exact to={`/artists/${sessionUser.id}`}>
+          <i class="fa-solid fa-id-badge"></i>
+        </NavLink>
+      </li></div>}
+      {sessionUser && <div>
+        <Link to='/shows/new'>New Show+</Link>
+        </div>}
       {isLoaded && sessionLinks}
     </ul>
   );

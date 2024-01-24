@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import './ShowDetails.css';
 import { useDispatch, useSelector } from 'react-redux'
-import { Link, Redirect, useParams } from 'react-router-dom'
+import { Link, Redirect, useParams, useHistory } from 'react-router-dom'
 import { getAllShowsThunk } from '../../store/shows';
 import RsvpButton from '../RsvpButton';
 import Comment from '../Comment';
@@ -11,6 +11,7 @@ import { useModal } from '../../context/Modal';
 import OpenModalButton from '../OpenModalButton';
 import ImageModal from '../ImageModal';
 import { getPreviewImageThunk } from '../../store/ShowImages';
+import { formatDate } from '../ShowCard';
 
 const formatTime = (time) => {
     const splitTime = time.split(':')
@@ -27,7 +28,9 @@ const formatTime = (time) => {
 
 function ShowDetails() {
     const dispatch = useDispatch()
+    const history = useHistory()
     const { showId } = useParams()
+    const currentUser = useSelector((state) => state.session.user)
     const userData = useSelector((state) => state.session)
     const shows = useSelector((state) => state.shows)
     const previewImage = useSelector((state) => state.previewImage)[0]
@@ -45,12 +48,17 @@ function ShowDetails() {
 
     if (!user) return <Redirect to="/" />
     if (!shows.length) return <h1>Loading...</h1>
+    const show = shows.filter((show) => `${show.id}` === showId)[0]
+    if (!show) history.push('/')
     if (!previewImage) return <h1>Loading...</h1>
 
 
 
-    const show = shows.filter((show) => `${show.id}` === showId)[0]
+    // const show = shows.filter((show) => `${show.id}` === showId)[0]
+    // if (!show) history.push('/')
     const { address, date, description, id, location, name, price, time, userId, ShowImages, User, Rsvps, Comments } = show
+
+    const isOwnShow = User.id === currentUser.id ? true : false;
 
     const commentProps = {
         showId: id,
@@ -71,7 +79,7 @@ function ShowDetails() {
     const imageButtonsHolder = [<button onClick={(() => changeImage({ imageUrl: previewImage.imageUrl, imageId: previewImage.id}))} ><i class="fa-solid fa-circle"></i></button>]
 
 
-    if (currentImageId === null) {
+    if (currentImageId !== previewImage.id) {
         setCurrentImageId(previewImage.id)
         setCurrentImage(previewImage.imageUrl)
     }
@@ -117,9 +125,10 @@ function ShowDetails() {
                         <div>
                             <p>Location: {address}</p>
                             <p>Time: {formatTime(time)}</p>
+                            <p>Date: {formatDate(date)}</p>
                             <p>Price: ${price}.00 at the door</p>
                         </div>
-                        <RsvpButton show={show} />
+                        {!isOwnShow && <RsvpButton show={show} />}
                     </div>
                 </div>
                 <div>
