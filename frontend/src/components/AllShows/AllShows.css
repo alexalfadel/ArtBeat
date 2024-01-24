@@ -1,9 +1,79 @@
 
 
 #location-active {
-    color: blue
+    /* color: blue; */
+    background-color: grey;
+    box-shadow: 0px 0px 5px 2px lightgray;
 }
 
 #location-inactive {
     color: grey
+}
+
+#location-active:hover {
+    color: black;
+    cursor: default;
+  
+}
+
+#location-inactive:hover {
+    color: white
+}
+
+.show-location-button {
+    background-color: white;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-left: 10px;
+    padding-right: 10px;
+    border-radius: 25px;
+    width: 150px;
+}
+
+#all-shows-page {
+    background-color: black;
+    box-sizing: border-box;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 30px;
+}
+
+
+#all-cards-box {
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: row;
+    /* background-color: blue; */
+    gap: 50px;
+}
+
+#show-location-buttons-box {
+    /* background-color: blue; */
+    width: 76vw;
+    display: flex;
+    justify-content: space-between;
+    padding-top: 10px;
+    padding-right: 5px;
+    padding-left: 5px;
+    padding-bottom: 10px;
+    flex-wrap: wrap;
+}
+
+.all-location-button {
+    background-color: white;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-left: 10px;
+    padding-right: 10px;
+    border-radius: 25px;
+    width: 150px;
+}
+
+.all-location-button:hover, .show-location-button:hover {
+    cursor: pointer;
+    background-color: grey;
+    color: white;
 }
