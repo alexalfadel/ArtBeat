@@ -1,3 +1,152 @@
+@import url('https://fonts.googleapis.com/css2?family=Rubik+Doodle+Shadow&display=swap');
+
+
+* {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    outline: 0;
+    font-size: 100%;
+    vertical-align: baseline;
+    background: transparent;
+    overflow-y: hidden;
+    overflow-x: hidden;
+}
+
 .hidden {
     display: none;
+}
+
+.nav-div {
+    background-color: black;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-left: 2vw;
+    padding-right: 2vw;
+    /* padding-right: 2vw; */
+    padding-top: 1.5vh;
+    width: 100vw;
+}
+
+#nav-logo {
+    text-decoration: none;
+    font-family: "Rubik Doodle Shadow", system-ui;
+    font-size: 30px;
+    color: white;
+}
+
+.middle-nav-buttons-box {
+    display: flex;
+    /* background-color: yellow; */
+    width: 30vw;
+    height: 100px;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.middle-nav-buttons {
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    color: white;
+    font-size: 30px;
+    width: 100px;
+    height: 50px;
+    align-items: center;
+}
+
+.middle-nav-buttons-area {
+    width: 100px
+}
+
+/* #calendar-button:hover, #badge-button:hover {
+    color: black;
+} */
+
+.middle-nav-buttons-area:hover {
+    background-color: grey;
+    border-radius: 25px;
+    color: black;
+    box-shadow: 0px 0px 5px 2px lightgray;
+
+}
+
+.middle-nav-buttons:hover {
+    background-color: grey;
+    width: 100px;
+}
+
+.right-nav {
+    display: flex;
+    /* background-color: yellow; */
+    width: 300px;
+    justify-content: space-between;
+}
+
+#nav-new-show-button {
+   text-decoration: none;
+   color: white;
+   /* background-color: black; */
+   width: 250px;
+   height: 100px;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+}
+
+#nav-new-show-p {
+    background-color: black;
+    text-align: center;
+    width: 170px;
+    height: 33px;
+    padding-top: 9px;
+    text-decoration: none;
+    font-family: "Rubik Doodle Shadow", system-ui;
+    font-size: 20px;
+    border-radius: 25px;
+    box-shadow: 3px grey;
+}
+
+#profile-dots {
+    color: white;
+    font-size: 35px;
+    /* background-color: green; */
+    width: 20px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    margin-right: 25px;
+    height: 33px;
+}
+
+#profile-dots:hover {
+    cursor: pointer;
+    background-color: grey;
+    /* color: black; */
+    border-radius: 25px;
+    box-shadow: 0px 0px 3px 2px lightgray;
+}
+
+#nav-new-show-p:hover {
+    cursor: pointer;
+    background-color: grey;
+    /* color: black; */
+    box-shadow: 0px 0px 5px 2px lightgray;
+}
+
+#profile-button-holder {
+    width: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 25px;
+}
+
+#profile-dots-box {
+    display: flex;
+    width: 100px;
+    justify-content: center;
+    align-items: center;
+    /* padding-top: 10px; */
+    height: 50px;
 }
