@@ -32,18 +32,18 @@ function ProfileButton({ user }) {
     dispatch(sessionActions.logout());
   };
 
-  const ulClassName = "profile-dropdown" + (showMenu ? "" : " hidden");
+  const ulClassName = "profile-dropdown" + (showMenu ? "" : "-hidden");
 
   return (
     <>
       <button id='profile-dots-box' onClick={openMenu}>
         <i id='profile-dots' class="fa-solid fa-ellipsis-vertical"></i>
       </button>
-      <ul className={ulClassName} ref={ulRef}>
+      <ul id='profile-open-box' className={ulClassName} ref={ulRef}>
         <li>{user.username}</li>
         <li>{user.email}</li>
         <li>
-          <button onClick={logout}>Log Out</button>
+          <button id='logout-button' onClick={logout}>Log Out</button>
         </li>
       </ul>
     </>
