@@ -7,18 +7,26 @@ function Rsvps({ rsvpProps }) {
   const { closeModal } = useModal();
   const { upcomingOrAttending, rsvps, artists, shows, message } = rsvpProps;
 
-  const rsvpList = rsvps?.map((rsvp) => {
-    const name = artists.filter((artist) => artist.id === rsvp.userId)[0].name;
-    return (
-      <Link
-        onClick={closeModal}
-        key={`rsvp-${rsvp.id}`}
-        to={`/artists/${rsvp.userId}`}
-      >
-        {name}
-      </Link>
-    );
-  });
+  console.log(rsvps, '---rsvps')
+
+  let rsvpList;
+
+  if ( rsvps && !rsvps.length) {
+    rsvpList = <p>No RSVPs yet, check back soon.</p>
+  } else {
+    rsvpList = rsvps?.map((rsvp) => {
+      const name = artists.filter((artist) => artist.id === rsvp.userId)[0].name;
+      return (
+        <Link
+          onClick={closeModal}
+          key={`rsvp-${rsvp.id}`}
+          to={`/artists/${rsvp.userId}`}
+        >
+          {name}
+        </Link>
+      );
+    });
+  }
 
   const showList = shows?.map((show) => {
     return (
