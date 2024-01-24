@@ -44,7 +44,7 @@ function ArtistProfile() {
     dispatch(getAllArtistsThunk());
     dispatch(getAllShowsThunk());
     dispatch(getAllRsvpsThunk(artistId));
-  }, [dispatch]);
+  }, [dispatch, updating]);
 
 
   useEffect(() => {
@@ -60,13 +60,21 @@ function ArtistProfile() {
   }, [username, newProfilePicUrl]);
 
 
-  if (!user || !allShows.length || !allArtists || !attendingRsvps.length)
+  if (!user || !allShows.length || !allArtists)
     return <h1>loading...</h1>;
+  const artist = allArtists?.filter((artist) => `${artist.id}` === artistId)[0];
+  if (!artist) {
+    history.push('/')
+    return <h1>Loading</h1>
+  }
+  if (!attendingRsvps.length) return <h1>loading...</h1>
+  
 
-  const artist = allArtists.filter((artist) => `${artist.id}` === artistId)[0];
-
-  if (!profilePic) setProfilePic(artist.profilePic);
-  if (!previewProfileUrl) setPreviewProfileUrl(artist.profilePic);
+  if (!profilePic || !holdProfilePicUrl) {
+    setProfilePic(artist.profilePic);
+    setHoldProfilePicUrl(artist.profilePic)
+  }
+  // if (!previewProfileUrl) setPreviewProfileUrl(artist.profilePic);
   if (!location) {
     setLocation(artist.location);
     setUsername(artist.username);
@@ -175,14 +183,29 @@ function ArtistProfile() {
       {updating && ownProfile && (
         <form>
           <div>
-            <img src={previewProfileUrl} alt={`${artist.name}`}></img>
+            <img src={holdProfilePicUrl} alt={`${artist.name}`}></img>
             <div>
               <input
-                value={holdProfilePicUrl}
+                value={previewProfileUrl}
                 placeholder="Add a new profile picture url here."
-                onChange={(e) => setHoldProfilePicUrl(e.target.value)}
+                onChange={(e) => {
+                  if (validProfilePic(e.target.value)) {
+                    setNewProfilePicUrl(e.target.value);
+                    setHoldProfilePicUrl(e.target.value)
+                    setPreviewProfileUrl(e.target.value)
+                    setProfilePic(e.target.value)
+                    setNewProfilePic(true)
+                    // setPreviewImagePlaceholder(e.target.value);
+                  } else {
+                    // setPreviewImageUrl(e.target.value);
+                    setPreviewProfileUrl(e.target.value)
+                    setHoldProfilePicUrl(
+                      "https://www.wildseedfarms.com/wp-content/plugins/shopwp-pro/public/imgs/placeholder.png"
+                    );
+                  }
+                  }}
               ></input>
-              <button
+              {/* <button
                 onClick={(e) => {
                   e.preventDefault();
                   setNewProfilePicUrl(holdProfilePicUrl);
@@ -191,7 +214,7 @@ function ArtistProfile() {
                 }}
               >
                 Change
-              </button>
+              </button> */}
             </div>
             <div>
               <p>

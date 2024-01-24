@@ -1,5 +1,5 @@
 import React from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import ProfileButton from "./ProfileButton";
 import OpenModalButton from "../OpenModalButton";
@@ -49,6 +49,9 @@ function Navigation({ isLoaded }) {
           <i class="fa-solid fa-id-badge"></i>
         </NavLink>
       </li></div>}
+      {sessionUser && <div>
+        <Link to='/shows/new'>New Show+</Link>
+        </div>}
       {isLoaded && sessionLinks}
     </ul>
   );
