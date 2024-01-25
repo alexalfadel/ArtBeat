@@ -1,3 +1,139 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Tai+Le&family=Rubik+Doodle+Shadow&display=swap');
+
+
 #show-details-image {
     width: 500px;
+    height: 500px;
 }
+
+.show-details-main-box {
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    width: 100vw;
+    min-height: 100vh;
+    align-items: center;
+    padding-top: 50px;
+    overflow-y: scroll !important;
+    background-color: black;
+    gap: 30px;
+    padding-bottom: 30px;
+}
+
+.show-details-image-box {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.show-details-top-box {
+    box-sizing: border-box;
+    display: flex;
+    width: 80vw;
+    gap: 50px;
+
+}
+
+.show-details-info-box {
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+}
+
+.show-details-info-text {
+    box-sizing: border-box;
+    background-color: white;
+    width: 43vw;
+    height: 500px;
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    padding-left: 20px;
+    padding-top: 30px;
+    padding-right: 20px;
+    border-radius: 25px;
+}
+
+.show-details-info-p {
+    font-family: 'Noto Sans Tai Le', sans-serif;
+    /* background-color: antiquewhite; */
+    width: 40vw;
+
+}
+
+.show-details-bottom-box {
+    box-sizing: border-box;
+    /* background-color: antiquewhite; */
+    height: auto;
+    width: 80vw;
+    background-color: lightgray;
+    border-radius: 25px;
+    padding-top: 20px;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    /* justify-content: center; */
+    align-items: center;
+    gap: 30px;
+}
+
+div.show-details-bottom-box > h2 {
+    font-family: 'Noto Sans Tai Le', sans-serif;
+    /* background-color: lightblue; */
+    text-align: center;
+    font-size: 25px;
+    font-weight: bold;
+}
+
+#all-comments-box {
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.image-carousel-button {
+    color: lightgrey;
+    font-size: 10px;
+}
+
+.image-carousel-button:hover {
+    cursor: pointer;
+}
+
+.image-buttons-holder {
+    /* background-color: antiquewhite; */
+    box-sizing: border-box;
+    display: flex;
+    gap: 7px;
+    /* background-color: aliceblue; */
+}
+
+#image-button-carousel-holder {
+    box-sizing: border-box;
+    display: flex;
+    gap: 5px;
+    justify-content: center;
+    /* background-color: aliceblue; */
+    width: 320px;
+}
+
+
+#see-more-button {
+    font-family: 'Noto Sans Tai Le', sans-serif;
+    background-color: lightgray;
+    padding-top: 2px;
+    padding-bottom: 2px;
+    padding-left: 7px;
+    padding-right: 7px;
+    border-radius: 15px;
+    font-size: 12px;
+}
+
+#see-more-button:hover {
+    cursor: pointer;
+    font-weight: bold;
+}
+

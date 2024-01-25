@@ -45,6 +45,8 @@ function ShowDetails() {
         // dispatch(getAllArtistsThunk())
     }, [dispatch])
 
+    // useEffect(() => {}, [currentImage])
+
 
     if (!user) return <Redirect to="/" />
     if (!shows.length) return <h1>Loading...</h1>
@@ -53,13 +55,14 @@ function ShowDetails() {
     if (!previewImage) return <h1>Loading...</h1>
 
 
-
+    
     // const show = shows.filter((show) => `${show.id}` === showId)[0]
     // if (!show) history.push('/')
     const { address, date, description, id, location, name, price, time, userId, ShowImages, User, Rsvps, Comments } = show
 
     const isOwnShow = User.id === currentUser.id ? true : false;
 
+    console.log(ShowImages)
     const commentProps = {
         showId: id,
         userId: user.id
@@ -76,12 +79,12 @@ function ShowDetails() {
 
     const firstName = User.name.split(' ')[0]
 
-    const imageButtonsHolder = [<button onClick={(() => changeImage({ imageUrl: previewImage.imageUrl, imageId: previewImage.id}))} ><i class="fa-solid fa-circle"></i></button>]
+    const imageButtonsHolder = [<button className='image-carousel-button' onClick={(() => changeImage({ imageUrl: previewImage.imageUrl, imageId: previewImage.id}))} ><i class="fa-solid fa-circle"></i></button>]
 
 
-    if (currentImageId !== previewImage.id) {
+    if (!currentImageId) {
         setCurrentImageId(previewImage.id)
-        setCurrentImage(previewImage.imageUrl)
+     
     }
 
 
@@ -92,9 +95,14 @@ function ShowDetails() {
 
     for (let i = 0; i < ShowImages.length; i++) {
         if (ShowImages[i].id !== previewImage.id) {
-            const imageButton = <button onClick={(() => changeImage({ imageUrl: ShowImages[i].imageUrl, imageId: ShowImages[i].id}))} ><i class="fa-solid fa-circle"></i></button>
+            // console.log(ShowImages[i])
+            const imageButton = <button className='image-carousel-button' onClick={(() => {
+                changeImage({ imageUrl: ShowImages[i].imageUrl, imageId: ShowImages[i].id})
+                console.log('button clicked')
+                console.log(currentImage, '---currentImage')
+            })} ><i class="fa-solid fa-circle"></i></button>
             imageButtonsHolder.push(imageButton)
-        }
+        } 
     }
 
     const imageButtons = imageButtonsHolder.map((button) => button)
@@ -111,37 +119,40 @@ function ShowDetails() {
         <div className='show-details-main-box'>
             <div className='show-details-top-box'>
                 <div className='show-details-image-box'>
-                    <img id='show-details-image' src={currentImage}></img>
-                    <div>
-                        <OpenModalButton buttonText='See more' modalComponent={<ImageModal imageAndArtist={imageModalProps}/>}/>
-                        {imageButtons}
+                    <img id='show-details-image' src={currentImage ? currentImage : previewImage.imageUrl}></img>
+                    <div className='image-buttons-holder'>
+                        <OpenModalButton id='see-more-button' buttonText='See more' modalComponent={<ImageModal imageAndArtist={imageModalProps}/>}/>
+                        <div id='image-button-carousel-holder'>
+                             {imageButtons}
+                        </div>
+                        
                     </div>
                     
                 </div>
                 <div className='show-details-info-box'>
                     <div className='show-details-info-text'>
-                        <p>Hosted By: {User.name}</p>
-                        <p>{description}</p>
+                        <p className='show-details-info-p'>Hosted By: {User.name}</p>
+                        <p className='show-details-info-p'>{description}</p>
                         <div>
-                            <p>Location: {address}</p>
-                            <p>Time: {formatTime(time)}</p>
-                            <p>Date: {formatDate(date)}</p>
-                            <p>Price: ${price}.00 at the door</p>
+                            <p className='show-details-info-p'>Location: {address}</p>
+                            <p className='show-details-info-p'>Time: {formatTime(time)}</p>
+                            <p className='show-details-info-p'>Date: {formatDate(date)}</p>
+                            <p className='show-details-info-p'>Price: ${price}.00 at the door</p>
                         </div>
                         {!isOwnShow && <RsvpButton show={show} />}
                     </div>
                 </div>
-                <div>
+                
+            </div>
+            <div className='show-details-bottom-box'>
                     <h2>Thoughts or questions? Let {firstName} know!</h2>
-                    <div>
+                    <div id='all-comments-box'>
                         {comments}
                     </div>
                     <div>
                         <AddCommentButton commentProps={commentProps}/>
                     </div>  
                 </div>
-            </div>
-
         </div>
         
     )

@@ -1,0 +1,74 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Tai+Le&family=Rubik+Doodle+Shadow&display=swap');
+
+
+#add-comment-button {
+    width: 400px;
+    background-color: black;
+    color: white;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    padding-left: 30px;
+    padding-right: 30px;
+    border-radius: 25px;
+    font-family: 'Noto Sans Tai Le', sans-serif;
+    font-size: 20px;
+
+}
+
+#add-comment-button:hover {
+    cursor: pointer;
+    font-weight: bold;
+}
+
+#add-comment-form {
+    box-sizing: border-box;
+    background-color: white;
+    width: 65vw;
+    border-radius: 25px;
+    font-family: 'Noto Sans Tai Le', sans-serif;
+    padding-top: 10px;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-bottom: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+#comment-form-text-area {
+    /* background-color: aqua; */
+    box-sizing: border-box;
+    resize: none;
+    width: 60vw;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-left: 10px;
+    padding-right: 10px;
+    font-family: 'Noto Sans Tai Le', sans-serif;
+    font-size: 14px;
+}
+
+#comment-form-buttons-box {
+    box-sizing: border-box;
+    display: flex;
+    gap: 20px;
+
+}
+
+#comment-submit, #comment-cancel {
+    background-color: black;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 20px; 
+    padding-right: 20px;
+    border-radius: 25px;
+    font-family: 'Noto Sans Tai Le', sans-serif;
+    color: white;
+}
+
+#comment-submit:hover, #comment-cancel:hover {
+    cursor: pointer;
+    font-weight: bold;
+}
+

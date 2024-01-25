@@ -21,7 +21,7 @@ function AddCommentButton({ commentProps }) {
     }, [commentText])
 
 
-    const addCommentButton = <button onClick={() => setShowForm(true)}>Add a Comment+</button>
+    const addCommentButton = <button id='add-comment-button' onClick={() => setShowForm(true)}>Add a Comment+</button>
 
     const onSubmit = async (e) => {
         e.preventDefault()
@@ -46,11 +46,11 @@ function AddCommentButton({ commentProps }) {
     return (
         <div>
             {!showForm && addCommentButton}
-            {showForm && <form> 
-                <textarea maxLength='256' minLength='5' type='text' value={commentText} placeholder='Add a comment!' onChange={((e) => setCommentText(e.target.value))}></textarea>
-                <div>
-                    <button disabled={disabled} onClick={onSubmit}>Add</button>
-                    <button>X</button>
+            {showForm && <form id='add-comment-form'> 
+                <textarea id='comment-form-text-area' maxLength='256' minLength='5' type='text' value={commentText} placeholder='Add a comment!' onChange={((e) => setCommentText(e.target.value))}></textarea>
+                <div id='comment-form-buttons-box'>
+                    <button id='comment-submit' disabled={disabled} onClick={onSubmit}>Add Comment+</button>
+                    <button id='comment-cancel'>X</button>
                 </div>
                 </form>}
         </div>
