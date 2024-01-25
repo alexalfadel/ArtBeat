@@ -115,6 +115,8 @@ function ShowDetails() {
         show: show
     }
 
+    console.log(imageModalProps, '----imageModalProps')
+
     return (
         <div className='show-details-main-box'>
             <div className='show-details-top-box'>
