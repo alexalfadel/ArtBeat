@@ -58,34 +58,38 @@ function Comment({ comment }) {
   return (
     <div>
       {!update && !deleteComment && (
-        <div>
-          <p>{comment.text}</p>
+        <div className='individual-comment-box'>
+          <div className='comment-text-and-buttons'>
+          <p className='comment-text' >{comment.text}</p>
           {commentOwner && (
-            <div>
-              <i
+            <div id='comment-update-delete-buttons'>
+              <i id='update-comment-button'
                 onClick={() => setUpdate(true)}
                 class="fa-regular fa-pen-to-square"
               ></i>
-              <i
+              <i id='delete-comment-button'
                 onClick={() => setDeleteComment(true)}
                 class="fa-solid fa-trash-can"
               ></i>
             </div>
           )}
-          <Link to={`/artists/${artist.id}`}>--{artist.username}</Link>
+          </div>
+          <Link id='comment-box-artist-link' to={`/artists/${artist.id}`}>--{artist.username}</Link>
         </div>
       )}
       {deleteComment && (
-        <div>
-          <p>Are you sure you want to delete this comment?</p>
-          <button onClick={deleteCommentButton}>Yes</button>
-          <button onClick={() => setDeleteComment(false)}>No</button>
+        <div className='individual-comment-box'>
+          <p id='delete-comment-text'>Are you sure you want to delete this comment?</p>
+          <div id='delete-comment-buttons-box'>
+            <button id='confirm-delete-comment' onClick={deleteCommentButton}>Yes</button>
+            <button id='cancel-delete-comment' onClick={() => setDeleteComment(false)}>No</button>
+          </div>
         </div>
       )}
       {update && (
-        <div>
-          <form>
-            <textarea
+        <div className='individual-comment-box'>
+          <form className='update-comment-form'>
+            <textarea id='update-comment-textarea'
               maxLength="256"
               minLength="5"
               type="text"
@@ -93,8 +97,11 @@ function Comment({ comment }) {
               placeholder="Update your comment..."
               onChange={(e) => setUpdatedCommentText(e.target.value)}
             ></textarea>
-            <button onClick={saveUpdatedComment}>Save</button>
-            <button onClick={closeUpdateForm}>X</button>
+            <div id='update-comment-form-buttons'>
+              <button id='save-updated-comment' onClick={saveUpdatedComment}>Save</button>
+              <button id='cancel-updated-comment' onClick={closeUpdateForm}>X</button>
+            </div>
+            
           </form>
         </div>
       )}

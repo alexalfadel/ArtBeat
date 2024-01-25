@@ -32,17 +32,17 @@ function RsvpButton({show}) {
     
     if (userRsvp.length === 0) {
         return (
-            <div>
-                <button onClick={rsvp}>RSVP</button>
+            <div className='rsvp-button-box'>
+                <button className='rsvp-button' id='rsvp-button' onClick={rsvp}>RSVP</button>
             </div>
         )
     } 
 
 
     return (
-        <div>
-            <p>See you there!</p>
-            <p>Can't make it? Click <span onClick={unRsvp}>here</span> to un-RSVP.</p>
+        <div className='rsvp-button-box'>
+            <p className='rsvp-button'>See you there!</p>
+            <p id='unrsvp-p'>Can't make it? Click <span onClick={unRsvp}>here</span> to un-RSVP.</p>
         </div>
     )
 }
