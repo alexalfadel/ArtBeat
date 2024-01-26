@@ -15,7 +15,7 @@ import { useHistory } from "react-router-dom";
 
 function ArtistProfile() {
   const dispatch = useDispatch();
-  const history = useHistory()
+  const history = useHistory();
   const { artistId } = useParams();
   const user = useSelector((state) => state.session).user;
   const allShows = useSelector((state) => state.shows);
@@ -37,15 +37,11 @@ function ArtistProfile() {
     if (`${currArtist.id}` !== artistId) return currArtist.username;
   });
 
-
-
   useEffect(() => {
-
     dispatch(getAllArtistsThunk());
     dispatch(getAllShowsThunk());
     dispatch(getAllRsvpsThunk(artistId));
   }, [dispatch, updating]);
-
 
   useEffect(() => {
     let errors = {};
@@ -59,20 +55,17 @@ function ArtistProfile() {
     setErrors(errors);
   }, [username, newProfilePicUrl]);
 
-
-  if (!user || !allShows.length || !allArtists)
-    return <h1>loading...</h1>;
+  if (!user || !allShows.length || !allArtists) return <h1>loading...</h1>;
   const artist = allArtists?.filter((artist) => `${artist.id}` === artistId)[0];
   if (!artist) {
-    history.push('/')
-    return <h1>Loading</h1>
+    history.push("/");
+    return <h1>Loading</h1>;
   }
-  if (!attendingRsvps.length) return <h1>loading...</h1>
-  
+  if (!attendingRsvps.length) return <h1>loading...</h1>;
 
   if (!profilePic || !holdProfilePicUrl) {
     setProfilePic(artist.profilePic);
-    setHoldProfilePicUrl(artist.profilePic)
+    setHoldProfilePicUrl(artist.profilePic);
   }
   // if (!previewProfileUrl) setPreviewProfileUrl(artist.profilePic);
   if (!location) {
@@ -126,19 +119,21 @@ function ArtistProfile() {
       artists: allArtists,
     };
     return (
-      <div>
+      <div className='artist-profile-show-card-box'>
         <ShowCard id={`upcoming-show-${show.id}`} show={show} />
-        <div>
+        {ownProfile && <div className='artist-profile-show-card-links'>
           <OpenModalButton
+            id='artist-profile-show-card-rsvps'
             buttonText="RSVPs"
             modalComponent={<Rsvps rsvpProps={rsvpProps} />}
           />
-          <Link to={`/shows/${show.id}/update`}>Update</Link>
+          <Link id='artist-profile-show-card-update' to={`/shows/${show.id}/update`}>Update</Link>
           <OpenModalButton
+            id='artist-profile-show-card-delete'
             buttonText="Delete"
             modalComponent={<DeleteShowModal showId={show.id} />}
           />
-        </div>
+        </div>}
       </div>
     );
   });
@@ -163,136 +158,157 @@ function ArtistProfile() {
   }
 
   return (
-    <div>
-      {!updating && (
-        <div className="top-profile-box">
-          <div className="left-top-profile-box">
-            <img src={artist.profilePic} alt={`${artist.name}`}></img>
-            <p>Located in {artist.location}</p>
-          </div>
-          <div>
-            {ownProfile && <h2>Hi, {artist.username}!</h2>}
-            {!ownProfile && <h2>{artist.username}</h2>}
-            <p>{artist.bio}</p>
-          </div>
-          {ownProfile && (
-            <button onClick={() => setUpdating(true)}>Update Profile</button>
-          )}
-        </div>
-      )}
-      {updating && ownProfile && (
-        <form>
-          <div>
-            <img src={holdProfilePicUrl} alt={`${artist.name}`}></img>
-            <div>
-              <input
-                value={previewProfileUrl}
-                placeholder="Add a new profile picture url here."
-                onChange={(e) => {
-                  if (validProfilePic(e.target.value)) {
-                    setNewProfilePicUrl(e.target.value);
-                    setHoldProfilePicUrl(e.target.value)
-                    setPreviewProfileUrl(e.target.value)
-                    setProfilePic(e.target.value)
-                    setNewProfilePic(true)
-                    // setPreviewImagePlaceholder(e.target.value);
-                  } else {
-                    // setPreviewImageUrl(e.target.value);
-                    setPreviewProfileUrl(e.target.value)
-                    setHoldProfilePicUrl(
-                      "https://www.wildseedfarms.com/wp-content/plugins/shopwp-pro/public/imgs/placeholder.png"
-                    );
-                  }
-                  }}
-              ></input>
-              {/* <button
-                onClick={(e) => {
-                  e.preventDefault();
-                  setNewProfilePicUrl(holdProfilePicUrl);
-                  setNewProfilePic(true);
-                  setPreviewProfileUrl(holdProfilePicUrl);
-                }}
+    <div id="artist-profile-full-page">
+      <div id="artist-profile-container">
+        {!updating && (
+          <div className="top-profile-box">
+            <div id="top-top-profile-box">
+              <div className="left-top-profile-box">
+                <img
+                  className="artist-profile-profile-pic"
+                  src={artist.profilePic}
+                  alt={`${artist.name}`}
+                ></img>
+                <p>Located in {artist.location}</p>
+              </div>
+              <div id="right-top-profile-box">
+                {ownProfile && <h2>Hi, {artist.username}!</h2>}
+                {!ownProfile && <h2>{artist.username}</h2>}
+                <p>{artist.bio}</p>
+              </div>
+            </div>
+            {ownProfile && (
+              <button
+                id="update-profile-button"
+                onClick={() => setUpdating(true)}
               >
-                Change
-              </button> */}
+                Update Profile
+              </button>
+            )}
+          </div>
+        )}
+        {updating && ownProfile && (
+          <form className="form-profile-box">
+            <div className="form-top-container-holder">
+              <div>
+                {/* <img className='artist-profile-profile-pic' src={holdProfilePicUrl} alt={`${artist.name}`}></img> */}
+                <div id="profile-picture-input-box">
+                  <img
+                    className="artist-profile-profile-pic"
+                    src={holdProfilePicUrl}
+                    alt={`${artist.name}`}
+                  ></img>
+                  <input
+                    id="profile-picture-input"
+                    value={previewProfileUrl}
+                    placeholder="Add a new profile picture url here."
+                    onChange={(e) => {
+                      if (validProfilePic(e.target.value)) {
+                        setNewProfilePicUrl(e.target.value);
+                        setHoldProfilePicUrl(e.target.value);
+                        setPreviewProfileUrl(e.target.value);
+                        setProfilePic(e.target.value);
+                        setNewProfilePic(true);
+                        // setPreviewImagePlaceholder(e.target.value);
+                      } else {
+                        // setPreviewImageUrl(e.target.value);
+                        setPreviewProfileUrl(e.target.value);
+                        setHoldProfilePicUrl(
+                          "https://www.wildseedfarms.com/wp-content/plugins/shopwp-pro/public/imgs/placeholder.png"
+                        );
+                      }
+                    }}
+                  ></input>
+                  <div>
+                    <p id="update-profile-located-in">
+                      Located in{" "}
+                      <span>
+                        <select
+                          id="update-profile-change-location"
+                          value={location}
+                          onChange={(e) => setLocation(e.target.value)}
+                        >
+                          <option value="San Francisco">San Francisco</option>
+                          <option value="Los Angeles">Los Angeles</option>
+                          <option value="Phoenix">Phoenix</option>
+                          <option value="Tucson">Tucson</option>
+                          <option value="Austin">Austin</option>
+                          <option value="Dallas">Dallas</option>
+                          <option value="New York">New York</option>
+                          <option value="Miami">Miami</option>
+                          <option value="Seattle">Seattle</option>
+                          <option value="Portland">Portland</option>
+                          <option value="Santa Fe">Santa Fe</option>
+                          <option value="New Orleans">New Orleans</option>
+                          <option value="Chicago">Chicago</option>
+                          <option value="Cincinnati">Cincinnati</option>
+                          <option value="Atlanta">Atlanta</option>
+                          <option value="Philadelphia">Philadelphia</option>
+                          <option value="Boston">Boston</option>
+                          <option value="Baltimore">Baltimore</option>
+                          <option value="Other">Other</option>
+                        </select>
+                      </span>
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div className='updating-top-right-profile-box'>
+                <h2>
+                  Hi,{" "}
+                  <span>
+                    <input
+                      id='updating-username-input'
+                      value={username}
+                      type="text"
+                      minLength="4"
+                      maxLength="30"
+                      placeholder={artist.username}
+                      onChange={(e) => setUsername(e.target.value)}
+                    ></input>
+                  </span> !
+                </h2>
+                <textarea
+                  id='updating-description-text-area'
+                  maxLength="256"
+                  value={bio}
+                  placeholder={bio}
+                  onChange={(e) => setBio(e.target.value)}
+                ></textarea>
+              </div>
             </div>
-            <div>
-              <p>
-                Located in{" "}
-                <span>
-                  <select
-                    value={location}
-                    onChange={(e) => setLocation(e.target.value)}
-                  >
-                    <option value="San Francisco">San Francisco</option>
-                    <option value="Los Angeles">Los Angeles</option>
-                    <option value="Phoenix">Phoenix</option>
-                    <option value="Tucson">Tucson</option>
-                    <option value="Austin">Austin</option>
-                    <option value="Dallas">Dallas</option>
-                    <option value="New York">New York</option>
-                    <option value="Miami">Miami</option>
-                    <option value="Seattle">Seattle</option>
-                    <option value="Portland">Portland</option>
-                    <option value="Santa Fe">Santa Fe</option>
-                    <option value="New Orleans">New Orleans</option>
-                    <option value="Chicago">Chicago</option>
-                    <option value="Cincinnati">Cincinnati</option>
-                    <option value="Atlanta">Atlanta</option>
-                    <option value="Philadelphia">Philadelphia</option>
-                    <option value="Boston">Boston</option>
-                    <option value="Baltimore">Baltimore</option>
-                    <option value="Other">Other</option>
-                  </select>
-                </span>
-              </p>
+            <div className='updating-profile-buttons'>
+              <button className='update-cancel-profile' onClick={onSubmit}>Update</button>
+              <button className='update-cancel-profile' onClick={cancel}>X</button>
             </div>
-          </div>
-          <div>
-            <h2>
-              Hi,{" "}
-              <span>
-                <input
-                  value={username}
-                  type="text"
-                  minLength="4"
-                  maxLength="30"
-                  placeholder={artist.username}
-                  onChange={(e) => setUsername(e.target.value)}
-                ></input>
-              </span>
-            </h2>
-            <textarea
-              maxLength="256"
-              value={bio}
-              placeholder={bio}
-              onChange={(e) => setBio(e.target.value)}
-            ></textarea>
-          </div>
-          <div>
-            <button onClick={onSubmit}>Update</button>
-            <button onClick={cancel}>X</button>
-          </div>
-        </form>
-      )}
-      {ownProfile && (
-        <div>
-          <div>
-            <p>Upcoming Shows</p>
+          </form>
+        )}
+        {!ownProfile && <div id='not-profile-upcoming-shows-box'><p id='not-profile-upcoming-shows-p'>Upcoming Shows</p></div>}
+        {ownProfile && (
+          <div className='artist-profile-show-links'>
+            <div className='artist-profile-show-links-left'>
+              <p id='artist-profile-upcoming-shows'>Upcoming Shows</p>
+              {/* <OpenModalButton
+                id='shows-attending-modal'
+                buttonText="Show's I'm Attending"
+                modalComponent={<Rsvps rsvpProps={attendingRsvpProps} />}
+              /> */}
+            </div>
+            <div className='artist-profile-show-links-right'>
             <OpenModalButton
-              buttonText="Show's I'm Attending"
-              modalComponent={<Rsvps rsvpProps={attendingRsvpProps} />}
-            />
+                id='shows-attending-modal'
+                buttonText="Show's I'm Attending"
+                modalComponent={<Rsvps rsvpProps={attendingRsvpProps} />}
+              />
+              <Link to="/shows/new">
+                <button id='artist-profile-add-show-button'>Add a Show+</button>
+              </Link>
+            </div>
           </div>
-          <div>
-            <Link to="/shows/new">
-              <button>Add a Show+</button>
-            </Link>
-          </div>
-        </div>
-      )}
-      {upcomingOrAttending === "upcoming" && <div>{upcomingShowCards}</div>}
-      {upcomingOrAttending === "attending" && <div></div>}
+        )}
+        {upcomingOrAttending === "upcoming" && <div className='artist-profile-upcoming-show-container'>{upcomingShowCards}</div>}
+        {upcomingOrAttending === "attending" && <div></div>}
+      </div>
     </div>
   );
 }
