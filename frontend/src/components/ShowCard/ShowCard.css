@@ -1,4 +1,50 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Tai+Le&family=Rubik+Doodle+Shadow&display=swap');
+
 .show-card-image {
     width: 150px;
     height: 150px;
+    border-radius: 25px;
+}
+
+.show-card-box {
+    box-sizing: border-box;
+    background-color: white;
+    width: 350px;
+    height: 170px;
+    display: flex;
+    /* justify-content: space-between; */
+    gap: 10px;
+    align-items: center;
+    padding-left: 10px;
+    border-radius: 25px;
+}
+
+#show-card-text-box {
+    width: 150px;
+    /* background-color: antiquewhite; */
+    height: 150px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding-bottom: 5px;
+    padding-top: 5px;
+}
+
+.show-card-text {
+    color: black;
+    text-decoration: none;
+    font-family: 'Noto Sans Tai Le', sans-serif;
+}
+
+.show-card-link {
+    text-decoration: none;
+    font-size: 15px;
+}
+
+.show-card-upper-text-box {
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
 }

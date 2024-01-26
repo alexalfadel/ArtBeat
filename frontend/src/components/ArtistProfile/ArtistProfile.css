@@ -1,0 +1,329 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Tai+Le&family=Rubik+Doodle+Shadow&display=swap');
+
+
+#artist-profile-full-page {
+    box-sizing: border-box;
+    background-color: black;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+
+}
+
+#artist-profile-container {
+    box-sizing: border-box;
+    width: 90vw;
+    background-color: lightgrey;
+    padding-top: 30px;
+    border-radius: 25px;
+    margin-top: 30px;
+    margin-bottom: 50px;
+}
+
+.top-profile-box {
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-left: 40px;
+    padding-right: 40px;
+    gap: 5px;
+    margin-bottom: 50px;
+}
+
+#top-top-profile-box {
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: row;
+    gap: 50px;
+    
+}
+
+#left-top-profile-box {
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: left;
+}
+
+#right-top-profile-box {
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 30px;
+}
+
+.artist-profile-profile-pic {
+    width: 300px;
+    height: 300px;
+    border-radius: 25px;
+}
+
+div#right-top-profile-box > h2 {
+    font-family: 'Noto Sans Tai Le', sans-serif;
+    font-size: 50px;
+    font-weight: bold;
+}
+
+div#right-top-profile-box > p {
+    font-family: 'Noto Sans Tai Le', sans-serif;
+    font-size: 17px;
+    text-align: center;
+    background-color: white;
+    border-radius: 25px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+div.left-top-profile-box > p {
+    font-family: 'Noto Sans Tai Le', sans-serif;
+    font-size: 14px;
+    text-align: center;
+}
+
+#update-profile-button {
+    background-color: black;
+    color: white;
+    width: 200px;
+    height: 50px;
+    border-radius: 25px;
+    font-size: 18.5px;
+
+}
+
+#update-profile-button:hover {
+    cursor: pointer;
+    font-weight: bold;
+    background-color: grey;
+    box-shadow: 0px 0px 5px 2px black;
+}
+
+.form-profile-box {
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+#profile-picture-input-box {
+    /* background-color: aliceblue; */
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+#profile-picture-input {
+    background-color: whitesmoke;
+    width: 290px;
+    border: 2px solid black;
+    border-radius: 10px;
+    color: black;
+    padding-left: 5px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-right: 5px;
+}
+
+#update-profile-located-in {
+    font-family: 'Noto Sans Tai Le', sans-serif;
+
+}
+
+#update-profile-change-location {
+    font-family: 'Noto Sans Tai Le', sans-serif;
+    background-color: whitesmoke;
+    border: 2px solid black;
+    border-radius: 10px;
+    width: 220px;
+}
+
+.form-top-container-holder {
+    /* background-color: aqua; */
+    box-sizing: border-box;
+    display: flex;
+    justify-content: space-around;
+    
+}
+
+.updating-top-right-profile-box {
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* background-color: pink; */
+    gap: 30px;
+}
+
+.updating-top-right-profile-box > h2 {
+    font-family: 'Noto Sans Tai Le', sans-serif;
+    font-size: 50px;
+}
+
+#updating-username-input {
+    background-color: whitesmoke;
+    border: 2px solid black;
+    border-radius: 25px;
+    padding-left: 10px; 
+    width: 600px;
+}
+
+#updating-description-text-area {
+    background-color: whitesmoke;
+    box-sizing: border-box;
+    resize: none;
+    width: 925px;
+    height: 90px;
+    border: 2px solid black;
+    border-radius: 25px;
+    padding-top: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
+    font-family: 'Noto Sans Tai Le', sans-serif;
+    text-align: center;
+
+}
+
+.updating-profile-buttons {
+    /* background-color: lightgreen; */
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+}
+
+.update-cancel-profile {
+    color: white;
+    background-color: black;
+    width: 250px;
+    height: 50px;
+    border-radius: 25px;
+    font-size: 20px;
+    margin-bottom: 30px;
+}
+
+.update-cancel-profile:hover {
+    cursor: pointer;
+    font-weight: bold;
+    background-color: grey;
+    box-shadow: 0px 0px 5px 2px black;
+}
+
+.artist-profile-show-links {
+    box-sizing: border-box;
+    /* background-color: pink; */
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 30px;
+    /* background-color: aliceblue; */
+}
+
+.artist-profile-show-links-left {
+    box-sizing: border-box;
+    display: flex;
+    gap: 10px;
+    /* background-color: lightblue; */
+}
+
+#artist-profile-upcoming-shows {
+    font-family: 'Noto Sans Tai Le', sans-serif;
+    font-size: 25px;
+    text-decoration: underline;
+    padding-left: 30px;
+    /* background-color: pink; */
+    width: 750px;
+    text-align: right;
+}
+
+#shows-attending-modal, #artist-profile-add-show-button {
+    font-family: 'Noto Sans Tai Le', sans-serif;
+    font-size: 18px;
+    color: white;
+    background-color: black;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    border-radius: 20px;
+}
+
+#shows-attending-modal:hover, #artist-profile-add-show-button:hover {
+    cursor: pointer;
+    font-weight: bold;
+    background-color: grey;
+    box-shadow: 0px 0px 5px 2px black;
+}
+
+.artist-profile-show-links-right {
+    box-sizing: border-box;
+    display: flex;
+    gap: 20px;
+    padding-right: 30px;
+}
+
+/* #artist-profile-add-show-button */
+
+.artist-profile-upcoming-show-container {
+    /* background-color: pink; */
+    box-sizing: border-box;
+    padding-left: 30px;
+    padding-right: 30px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 30px;
+}
+
+.artist-profile-show-card-box {
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.artist-profile-show-card-links {
+    box-sizing: border-box;
+    display: flex;
+    justify-content: space-evenly;
+    padding-bottom: 10px;
+}
+
+#artist-profile-show-card-update, #artist-profile-show-card-rsvps, #artist-profile-show-card-delete {
+    color: white;
+    text-decoration: none;
+    font-family: 'Noto Sans Tai Le', sans-serif;
+    background-color: black;
+    padding-top: 3px;
+    padding-left: 3px;
+    padding-right: 3px;
+    padding-bottom:3px;
+    font-size: 14px;
+    border-radius: 25px;
+    width: 60px;
+    text-align: center;
+}
+
+#artist-profile-show-card-update:hover, #artist-profile-show-card-rsvps:hover, #artist-profile-show-card-delete:hover {
+    cursor: pointer;
+    font-weight: bold;
+    background-color: grey;
+    box-shadow: 0px 0px 5px 2px black;
+}
+
+#not-profile-upcoming-shows-box {
+    /* background-color: pink; */
+    display: flex;
+    justify-content: center;
+    margin-bottom: 30px;
+}
+
+#not-profile-upcoming-shows-p {
+    font-family: 'Noto Sans Tai Le', sans-serif;
+    font-size: 25px;
+    font-weight: bold;
+    text-decoration: underline;
+}

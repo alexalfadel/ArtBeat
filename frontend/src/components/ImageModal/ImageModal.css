@@ -1,3 +1,92 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Tai+Le&family=Rubik+Doodle+Shadow&display=swap');
+
+
 .image-modal-image {
+    width: 300px;
+}
+
+#image-modal {
+    box-sizing: border-box;
+    width: 80vw;
+    padding-top: 30px;
+    padding-left: 30px;
+    padding-right: 30px;
+    padding-bottom: 30px;
+    display: flex;
+    flex-direction: column;
+}
+
+#leave-image-modal {
+    /* background-color: aliceblue; */
+    text-align: right;
+    font-family: 'Noto Sans Tai Le', sans-serif;
+    font-size: 20px;
+}
+
+#leave-image-modal:hover {
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.image-modal-image-info-box {
+    box-sizing: border-box;
+    /* background-color: aliceblue; */
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 100px;
+}
+
+#image-modal-image-box {
+    box-sizing: border-box;
+    width: 300px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+#image-modal-image-title {
+    font-family: 'Noto Sans Tai Le', sans-serif;
+    font-size: 12px;
+    /* background-color: pink; */
+    text-align: center;
+}
+
+#image-modal-artist-box {
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    width: 500px;
+    background-color: lightgrey;
+    border-radius: 25px;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+#image-modal-artist-pic {
     width: 200px;
+    box-sizing: border-box;
+}
+
+div#image-modal-artist-box > p {
+    font-family: 'Noto Sans Tai Le', sans-serif;
+    font-size: 14px;
+    text-align: center;
+}
+
+#image-modal-image-description-box {
+    box-sizing: border-box;
+    padding-top: 50px;
+    /* background-color: aqua; */
+}
+
+#image-modal-image-description-box > p {
+    text-align: center;
+    font-family: 'Noto Sans Tai Le', sans-serif;
+    font-size: 15px;
 }

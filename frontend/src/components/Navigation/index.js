@@ -13,7 +13,7 @@ function Navigation({ isLoaded }) {
   let sessionLinks;
   if (sessionUser) {
     sessionLinks = (
-      <li>
+      <li id='profile-button-holder'>
         <ProfileButton user={sessionUser} />
       </li>
     );
@@ -33,27 +33,33 @@ function Navigation({ isLoaded }) {
   }
 
   return (
+    <div className='nav-div'>
     <ul>
       <li>
-        <NavLink exact to="/shows">
-          ARTBEAT
+        <NavLink id='nav-logo' exact to="/shows">
+          <p id='nav-logo'>ARTBEAT</p>
         </NavLink>
       </li>
-      {sessionUser && <div><li>
-        <NavLink exact to='/shows'>
-            <i className="fa-solid fa-calendar-days"></i>
+    </ul>
+    <ul className='center-nav'>
+      {sessionUser && <div className='middle-nav-buttons-box'><li className='middle-nav-buttons-area'>
+        <NavLink className='middle-nav-buttons' exact to='/shows'>
+            <i id='calendar-button' className="fa-solid fa-calendar-days"></i>
           </NavLink>
       </li>
-      <li>
-        <NavLink exact to={`/artists/${sessionUser.id}`}>
-          <i class="fa-solid fa-id-badge"></i>
+      <li className='middle-nav-buttons-area'>
+        <NavLink className='middle-nav-buttons' exact to={`/artists/${sessionUser.id}`}>
+          <i id='badge-button' class="fa-solid fa-id-badge"></i>
         </NavLink>
       </li></div>}
-      {sessionUser && <div>
-        <Link to='/shows/new'>New Show+</Link>
-        </div>}
+    </ul>
+    <ul className='right-nav'>
+      {sessionUser && 
+        <Link id='nav-new-show-button' to='/shows/new'><p id="nav-new-show-p">New Show+</p></Link>
+        }
       {isLoaded && sessionLinks}
     </ul>
+    </div>
   );
 }
 
