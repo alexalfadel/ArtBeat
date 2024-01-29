@@ -1,0 +1,295 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Tai+Le&family=Rubik+Doodle+Shadow&display=swap');
+
+
+.add-show-full-page {
+    box-sizing: border-box;
+    width: 100vw;
+    /* height: 100vh; */
+    display: flex;
+    justify-content: center;
+    background-color: black;
+}
+
+
+.add-show-component-box {
+    box-sizing: border-box;
+    width: 80vw;
+    height: auto;
+    padding-top: 30px;
+    margin-top: 30px;
+    margin-bottom: 50px;
+    background-color: lightgrey;
+    display: flex;
+    flex-direction: column;
+    border-radius: 25px;
+}
+
+.form-top-box {
+
+}
+
+.add-show-name-description-address {
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    align-items: center;
+    /* background-color: pink; */
+}
+
+.add-show-name-input {
+    box-sizing: border-box;
+    width: 850px;
+    background-color: whitesmoke;
+    height: 35px;
+    border-radius: 10px;
+    border: 2px solid black;
+    padding-top: 3px;
+    padding-left: 5px;
+    padding-right: 5px;
+    padding-bottom: 5px;
+    font-family: 'Noto Sans Tai Le', sans-serif;
+    font-size: 17px;
+}
+
+.add-show-description-input {
+    box-sizing: border-box;
+    width: 850px;
+    background-color: whitesmoke;
+    height: 100px;
+    resize: none;
+    border-radius: 10px;
+    border: 2px solid black;
+    padding-top: 3px;
+    padding-left: 5px;
+    padding-right: 5px;
+    padding-bottom: 5px;
+    font-family: 'Noto Sans Tai Le', sans-serif;
+    font-size: 17px;
+}
+
+.add-show-address-input {
+    box-sizing: border-box;
+    width: 850px;
+    background-color: whitesmoke;
+    height: 35px;
+    resize: none;
+    border-radius: 10px;
+    border: 2px solid black;
+    padding-top: 3px;
+    padding-left: 5px;
+    padding-right: 5px;
+    padding-bottom: 5px;
+    font-family: 'Noto Sans Tai Le', sans-serif;
+    font-size: 17px;
+}
+
+.add-show-date-time-box {
+    /* background-color: pink; */
+    box-sizing: border-box;
+    display: flex;
+    gap: 100px;
+    justify-content: center;
+    padding-top: 30px;
+}
+
+.add-show-time-select {
+    background-color: whitesmoke;
+    width: 100px;
+    text-align: center;
+    font-family: 'Noto Sans Tai Le', sans-serif;
+    border-radius: 10px;
+    border: 2px solid black;
+}
+
+.add-show-time-box {
+    box-sizing: border-box;
+    display: flex;
+    gap: 10px;
+}
+
+.am-pm-select {
+    background-color: whitesmoke;
+    width: 80px;
+    text-align: center;
+    font-family: 'Noto Sans Tai Le', sans-serif;
+    border-radius: 10px;
+    border: 2px solid black;
+}
+
+.add-show-date-select {
+    background-color: whitesmoke;
+    width: 150px;
+    text-align: center;
+    font-family: 'Noto Sans Tai Le', sans-serif;
+    border-radius: 10px;
+    border: 2px solid black;
+}
+
+.add-show-price-location-box {
+    box-sizing: border-box;
+    /* background-color: pink; */
+    display: flex;
+    justify-content: center;
+    gap: 100px;
+    margin-top: 30px;
+}
+
+.add-show-price-input-box {
+    /* background-color: aqua; */
+    font-family: 'Noto Sans Tai Le', sans-serif;
+    font-size: 17px;
+    text-align: bottom;
+    
+}
+
+.add-show-price-input {
+    box-sizing: border-box;
+    height: 35px;
+    background-color: whitesmoke;
+    font-family: 'Noto Sans Tai Le', sans-serif;
+    border-radius: 10px;
+    border: 2px solid black;
+    padding-top: 3px;
+    padding-left: 5px;
+    padding-right: 5px;
+    padding-bottom: 3px;
+    margin-right: 2px;
+
+}
+
+.add-show-location {
+    box-sizing: border-box;
+    display: flex;
+    /* background-color: aqua; */
+    font-family: 'Noto Sans Tai Le', sans-serif;
+    font-size: 17px;
+    align-items: center;
+    width: 200px;
+    height: 35px;
+    background-color: whitesmoke;
+    border-radius: 10px;
+    border: 2px solid black;
+}
+
+.add-show-h2 {
+    font-family: 'Noto Sans Tai Le', sans-serif;
+    font-size: 30px;
+    font-weight: bold;
+}
+
+.add-show-add-images-container {
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    /* padding-left: 100px; */
+}
+
+.add-show-preview-image-container {
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: row;
+    margin-top: 50px;
+    gap: 20px;
+    justify-content: center;
+}
+
+
+.add-show-preview-image-inputs-container {
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    justify-content: center;
+}
+
+.add-show-preview-image-inputs {
+    box-sizing: border-box;
+    padding-top: 3px;
+    padding-bottom: 3px;
+    padding-left: 5px;
+    padding-right: 5px;
+    background-color: white;
+    width: 600px;
+    height: 35px;
+    font-family: 'Noto Sans Tai Le', sans-serif;
+    border: 2px solid black;
+    border-radius: 10px;
+}
+
+.add-show-preview-image {
+    width: 300px;
+    box-sizing: border-box;
+
+}
+
+.add-show-preview-image-description-input {
+    box-sizing: border-box;
+    width: 600px;
+    height: 175px;
+    background-color: white;
+    resize: none;
+    border: 2px solid black;
+    border-radius: 10px;
+    padding-top: 3px;
+    padding-left: 5px;
+    padding-right: 5px;
+    padding-bottom: 3px;
+    font-family: 'Noto Sans Tai Le',sans-serif;
+}
+
+
+.add-image-button {
+    box-sizing: border-box;
+    margin-top: 30px;
+    background-color: black;
+    color: white;
+    width: 200px;
+    height: 50px;
+    font-family: 'Noto Sans Tai Le', sans-serif;
+    font-size: 17px;
+    border-radius: 25px;;
+    align-self: center;
+}
+
+.add-image-button:hover {
+    cursor: pointer;
+    font-weight: bold;
+    background-color: grey;
+    box-shadow: 0px 0px 5px 2px black;
+}
+
+.add-show-buttons-container {
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    gap: 50px;
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
+.add-show-submit-buttons {
+    box-sizing: border-box;
+    margin-top: 30px;
+    background-color: black;
+    color: white;
+    width: 200px;
+    height: 50px;
+    font-family: 'Noto Sans Tai Le', sans-serif;
+    font-size: 17px;
+    border-radius: 25px;
+}
+
+.add-show-submit-buttons:hover {
+    cursor: pointer;
+    font-weight: bold;
+    background-color: grey;
+    box-shadow: 0px 0px 5px 2px black;
+}
+
+.add-show-errors-p {
+    font-family: 'Noto Sans Tai Le', sans-serif;
+    font-size: 15px;
+    color: red;
+    align-self: center;
+}
