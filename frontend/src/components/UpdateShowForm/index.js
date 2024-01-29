@@ -126,7 +126,7 @@ function UpdateShowForm() {
       setPreviewImageUrl(previewImage.imageUrl);
       setPreviewImageDescription(previewImage.description);
       setPreviewImageId(previewImage.id)
-      if (showImages[0]) {
+      if (showImages[0] && !showImages[0].preview) {
         setImage1Title(showImages[0].title);
         setImage1Placeholder(showImages[0].imageUrl);
         setImage1Description(showImages[0].description);
@@ -134,7 +134,7 @@ function UpdateShowForm() {
         setShowImage1(true);
         setImage1Id(showImages[0].id)
       }
-      if (showImages[1]) {
+      if (showImages[1] && !showImages[1].preview) {
         setImage2Title(showImages[1].title);
         setImage2Placeholder(showImages[1].imageUrl);
         setImage2Description(showImages[1].description);
@@ -142,7 +142,7 @@ function UpdateShowForm() {
         setShowImage2(true);
         setImage2Id(showImages[1].id)
       }
-      if (showImages[2]) {
+      if (showImages[2] && !showImages[2].preview) {
         setImage3Title(showImages[2].title);
         setImage3Placeholder(showImages[2].imageUrl);
         setImage3Description(showImages[2].description);
@@ -150,7 +150,7 @@ function UpdateShowForm() {
         setShowImage3(true);
         setImage3Id(showImages[2].id)
       }
-      if (showImages[3]) {
+      if (showImages[3] && !showImages[3].preview) {
         setImage4Title(showImages[3].title);
         setImage4Placeholder(showImages[3].imageUrl);
         setImage4Description(showImages[3].description);
@@ -158,7 +158,7 @@ function UpdateShowForm() {
         setShowImage4(true);
         setImage4Id(showImages[3].id)
       }
-      if (showImages[4]) {
+      if (showImages[4] && !showImages[4].preview) {
         setImage5Title(showImages[4].title);
         setImage5Placeholder(showImages[4].imageUrl);
         setImage5Description(showImages[4].description);
@@ -412,12 +412,14 @@ function UpdateShowForm() {
   };
 
   return (
-    <div>
-      <h2>Add Your Upcoming Show</h2>
-      <form>
+    <div className='add-show-full-page'>
+      
+      <form className="add-show-component-box">
         <div>
-          <div>
+          <div className="add-show-name-description-address">
+          <h2 className="add-show-h2">Edit Your Upcoming Show</h2>
             <input
+              className="add-show-name-input"
               type="text"
               required
               value={name}
@@ -425,15 +427,17 @@ function UpdateShowForm() {
               placeholder="Please enter your show's name"
               onChange={(e) => setName(e.target.value)}
             ></input>
-            {showErrors && errors.name && <p>{errors.name}</p>}
+            {showErrors && errors.name && <p className="add-show-errors-p">{errors.name}</p>}
             <textarea
+              className="add-show-description-input"
               maxLength="256"
               value={description}
               placeholder="Description goes here"
               onChange={(e) => setDescription(e.target.value)}
             ></textarea>
-            {showErrors && errors.description && <p>{errors.description}</p>}
+            {showErrors && errors.description && <p lassName="add-show-errors-p">{errors.description}</p>}
             <input
+              className="add-show-address-input"
               type="text"
               required
               value={address}
@@ -441,11 +445,13 @@ function UpdateShowForm() {
               onChange={(e) => setAddress(e.target.value)}
               placeholder="What's your shows address?"
             ></input>
-            {showErrors && errors.address && <p>{errors.address}</p>}
+            {showErrors && errors.address && <p className="add-show-errors-p">{errors.address}</p>}
           </div>
           <div>
-            <div>
+            <div className="add-show-date-time-box">
+              <div className="add-show-time-box">
               <select
+                className="add-show-time-select"
                 required
                 value={time}
                 onChange={(e) => setTime(e.target.value)}
@@ -476,6 +482,7 @@ function UpdateShowForm() {
                 <option value="11:30">11:30</option>
               </select>
               <select
+                className="am-pm-select"
                 required
                 value={amPm}
                 onChange={(e) => setAmPm(e.target.value)}
@@ -483,16 +490,20 @@ function UpdateShowForm() {
                 <option value="am">A.M.</option>
                 <option value="pm">P.M</option>
               </select>
+              </div>
               <input
+                 className="add-show-date-select"
                 defaultValue={date}
                 type="date"
                 min={`${new Date()}`}
                 onChange={(e) => setDate(e.target.value)}
               ></input>
             </div>
-            <div>
+            <div className="add-show-price-location-box">
+              <div className="add-show-price-input-box">
               $
               <input
+                className="add-show-price-input"
                 type="number"
                 placeholder="1"
                 value={price}
@@ -502,6 +513,7 @@ function UpdateShowForm() {
             </div>
             <div>
               <select
+                className="add-show-location"
                 required
                 defaultValue={location}
                 onChange={(e) => setLocation(e.target.value)}
@@ -530,19 +542,21 @@ function UpdateShowForm() {
                 <option value="Other">Other</option>
               </select>
             </div>
+            </div>
           </div>
         </div>
-        {showErrors && errors.time && <p>{errors.time}</p>}
-        {showErrors && errors.location && <p>{errors.location}</p>}
-        {showErrors && errors.price && <p>{errors.price}</p>}
-        {showErrors && errors.date && <p>{errors.date}</p>}
-        <div>
-          <div>
+        {showErrors && errors.time && <p className="add-show-errors-p">{errors.time}</p>}
+        {showErrors && errors.location && <p className="add-show-errors-p">{errors.location}</p>}
+        {showErrors && errors.price && <p className="add-show-errors-p">{errors.price}</p>}
+        {showErrors && errors.date && <p className="add-show-errors-p">{errors.date}</p>}
+        <div className="add-show-add-images-container">
+          <div className="add-show-preview-image-container">
             <div>
-              <img src={previewImageUrl}></img>
+              <img className="add-show-preview-image" src={previewImageUrl}></img>
             </div>
-            <div>
+            <div className="add-show-preview-image-inputs-container">
               <input
+                className="add-show-preview-image-inputs"
                 type="text"
                 maxLength="50"
                 placeholder="Preview Image Title"
@@ -550,9 +564,10 @@ function UpdateShowForm() {
                 onChange={(e) => setPreviewImageTitle(e.target.value)}
               ></input>
               {showErrors && errors.previewImageTitle && (
-                <p>{errors.previewImageTitle}</p>
+                <p className="add-show-errors-p">{errors.previewImageTitle}</p>
               )}
               <input
+                className="add-show-preview-image-inputs"
                 type="text"
                 maxLength="300"
                 placeholder="Preview Image URL"
@@ -570,9 +585,10 @@ function UpdateShowForm() {
                 }}
               ></input>
               {showErrors && errors.previewImageUrl && (
-                <p>{errors.previewImageUrl}</p>
+                <p className="add-show-errors-p">{errors.previewImageUrl}</p>
               )}
               <textarea
+                className="add-show-preview-image-description-input"
                 placeholder="Preview Image Description"
                 maxLength="256"
                 value={previewImageDescription}
@@ -581,12 +597,13 @@ function UpdateShowForm() {
             </div>
           </div>
           {showImage1 && (
-            <div>
+            <div className="add-show-preview-image-container">
               <div>
-                <img src={image1Placeholder}></img>
+                <img className="add-show-preview-image" src={image1Placeholder}></img>
               </div>
-              <div>
+              <div className="add-show-preview-image-inputs-container">
                 <input
+                  className="add-show-preview-image-inputs"
                   type="text"
                   maxLength="50"
                   placeholder="Image Title"
@@ -594,9 +611,10 @@ function UpdateShowForm() {
                   onChange={(e) => setImage1Title(e.target.value)}
                 ></input>
                 {showErrors && errors.image1Title && (
-                  <p>{errors.image1Title}</p>
+                  <p className="add-show-errors-p">{errors.image1Title}</p>
                 )}
                 <input
+                  className="add-show-preview-image-inputs"
                   type="text"
                   maxLength="300"
                   placeholder="Image URL"
@@ -613,8 +631,9 @@ function UpdateShowForm() {
                     }
                   }}
                 ></input>
-                {showErrors && errors.image1Url && <p>{errors.image1Url}</p>}
+                {showErrors && errors.image1Url && <p className="add-show-errors-p">{errors.image1Url}</p>}
                 <textarea
+                  className="add-show-preview-image-description-input"
                   placeholder="Image Description"
                   maxLength="256"
                   value={image1Description}
@@ -625,12 +644,13 @@ function UpdateShowForm() {
           )}
 
           {showImage2 && (
-            <div>
+            <div className="add-show-preview-image-container">
               <div>
-                <img src={image2Placeholder}></img>
+                <img className="add-show-preview-image" src={image2Placeholder}></img>
               </div>
-              <div>
+              <div className="add-show-preview-image-inputs-container">
                 <input
+                  className="add-show-preview-image-inputs"
                   type="text"
                   maxLength="50"
                   placeholder="Image Title"
@@ -638,9 +658,10 @@ function UpdateShowForm() {
                   onChange={(e) => setImage2Title(e.target.value)}
                 ></input>
                 {showErrors && errors.image2Title && (
-                  <p>{errors.image2Title}</p>
+                  <p className="add-show-errors-p">{errors.image2Title}</p>
                 )}
                 <input
+                  className="add-show-preview-image-inputs"
                   type="text"
                   maxLength="300"
                   placeholder="Image URL"
@@ -657,8 +678,9 @@ function UpdateShowForm() {
                     }
                   }}
                 ></input>
-                {showErrors && errors.image2Url && <p>{errors.image2Url}</p>}
+                {showErrors && errors.image2Url && <p className="add-show-errors-p">{errors.image2Url}</p>}
                 <textarea
+                  className="add-show-preview-image-description-input"
                   placeholder="Image Description"
                   maxLength="256"
                   value={image2Description}
@@ -669,12 +691,13 @@ function UpdateShowForm() {
           )}
 
           {showImage3 && (
-            <div>
+            <div className="add-show-preview-image-container">
               <div>
-                <img src={image3Placeholder}></img>
+                <img className="add-show-preview-image" src={image3Placeholder}></img>
               </div>
-              <div>
+              <div className="add-show-preview-image-inputs-container">
                 <input
+                  className="add-show-preview-image-inputs"
                   type="text"
                   maxLength="50"
                   placeholder="Image Title"
@@ -682,9 +705,10 @@ function UpdateShowForm() {
                   onChange={(e) => setImage3Title(e.target.value)}
                 ></input>
                 {showErrors && errors.image3Title && (
-                  <p>{errors.image3Title}</p>
+                  <p className="add-show-errors-p">{errors.image3Title}</p>
                 )}
                 <input
+                  className="add-show-preview-image-inputs"
                   type="text"
                   maxLength="300"
                   placeholder="Image URL"
@@ -701,8 +725,9 @@ function UpdateShowForm() {
                     }
                   }}
                 ></input>
-                {showErrors && errors.image3Url && <p>{errors.image3Url}</p>}
+                {showErrors && errors.image3Url && <p className="add-show-errors-p">{errors.image3Url}</p>}
                 <textarea
+                  className="add-show-preview-image-description-input"
                   placeholder="Image Description"
                   maxLength="256"
                   value={image3Description}
@@ -713,12 +738,13 @@ function UpdateShowForm() {
           )}
 
           {showImage4 && (
-            <div>
+            <div className="add-show-preview-image-container">
               <div>
-                <img src={image4Placeholder}></img>
+                <img className="add-show-preview-image" src={image4Placeholder}></img>
               </div>
-              <div>
+              <div className="add-show-preview-image-inputs-container">
                 <input
+                  className="add-show-preview-image-inputs"
                   type="text"
                   maxLength="50"
                   placeholder="Image Title"
@@ -726,9 +752,10 @@ function UpdateShowForm() {
                   onChange={(e) => setImage4Title(e.target.value)}
                 ></input>
                 {showErrors && errors.image4Title && (
-                  <p>{errors.image4Title}</p>
+                  <p className="add-show-errors-p">{errors.image4Title}</p>
                 )}
                 <input
+                  className="add-show-preview-image-inputs"
                   type="text"
                   maxLength="300"
                   placeholder="Image URL"
@@ -745,9 +772,10 @@ function UpdateShowForm() {
                     }
                   }}
                 ></input>
-                {showErrors && errors.image4Url && <p>{errors.image4Url}</p>}
+                {showErrors && errors.image4Url && <p className="add-show-errors-p">{errors.image4Url}</p>}
 
                 <textarea
+                  className="add-show-preview-image-description-input"
                   placeholder="Image Description"
                   maxLength="256"
                   value={image4Description}
@@ -758,12 +786,13 @@ function UpdateShowForm() {
           )}
 
           {showImage5 && (
-            <div>
+            <div className="add-show-preview-image-container">
               <div>
-                <img src={image5Placeholder}></img>
+                <img className="add-show-preview-image" src={image5Placeholder}></img>
               </div>
-              <div>
+              <div className="add-show-preview-image-inputs-container">
                 <input
+                  className="add-show-preview-image-inputs"
                   type="text"
                   maxLength="50"
                   placeholder="Image Title"
@@ -771,9 +800,10 @@ function UpdateShowForm() {
                   onChange={(e) => setImage5Title(e.target.value)}
                 ></input>
                 {showErrors && errors.image5Title && (
-                  <p>{errors.image5Title}</p>
+                  <p className="add-show-errors-p">{errors.image5Title}</p>
                 )}
                 <input
+                  className="add-show-preview-image-inputs"
                   type="text"
                   maxLength="300"
                   placeholder="Image URL"
@@ -790,8 +820,9 @@ function UpdateShowForm() {
                     }
                   }}
                 ></input>
-                {showErrors && errors.image5Url && <p>{errors.image5Url}</p>}
+                {showErrors && errors.image5Url && <p className="add-show-errors-p">{errors.image5Url}</p>}
                 <textarea
+                  className="add-show-preview-image-description-input"
                   placeholder="Image Description"
                   maxLength="256"
                   value={image5Description}
@@ -803,6 +834,7 @@ function UpdateShowForm() {
 
           {imageCounter < 5 && (
             <button
+            className="add-image-button"
               onClick={(e) => {
                 e.preventDefault();
                 if (imageCounter === 0) {
@@ -824,9 +856,9 @@ function UpdateShowForm() {
             </button>
           )}
         </div>
-        <div>
-          <button onClick={onSubmit}>Save</button>
-          <button onClick={reset}>Cancel</button>
+        <div className="add-show-buttons-container">
+          <button className="add-show-submit-buttons" onClick={onSubmit}>Save</button>
+          <button className="add-show-submit-buttons" onClick={reset}>Cancel</button>
         </div>
       </form>
     </div>
