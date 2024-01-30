@@ -1,0 +1,60 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Tai+Le&family=Rubik+Doodle+Shadow&display=swap');
+
+
+#rsvp-modal-container {
+    box-sizing: border-box;
+    width: 600px;
+    background-color: lightgrey;
+    border-radius: 25px;
+
+}
+
+#rsvp-modal-x {
+    /* background-color: aqua; */
+    padding-top: 20px;
+    text-align: right;
+    padding-right: 15px;
+    font-size: 22.5px;
+    font-family: 'Noto Sans Tai Le', sans-serif;
+}
+
+#rsvp-modal-x:hover {
+    cursor: pointer;
+    font-weight: bold;
+    color: grey
+}
+
+div#rsvp-modal-container > h2 {
+    font-family: 'Noto Sans Tai Le', sans-serif;
+    font-size: 23px;
+    text-align: center;
+}
+
+#no-rsvps-p {
+    font-family: 'Noto Sans Tai Le', sans-serif;
+    text-align: center;
+    margin-top: 20px;
+    padding-bottom: 20px;
+}
+
+.attending-shows-rsvps {
+    text-decoration: none;
+    font-family: 'Noto Sans Tai Le', sans-serif;
+    color: black;
+    font-size: 15px;
+}
+
+.attending-shows-rsvps:hover {
+    cursor: pointer;
+    font-weight: bold;
+    color: grey
+}
+
+#show-list-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+    padding-top: 30px;
+    padding-bottom: 30px;
+}

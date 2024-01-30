@@ -13,10 +13,12 @@ function DeleteShowModal({showId}) {
     }
 
     return (
-        <div>
+        <div id='delete-show-modal'>
             <h2>Are you sure you'd like to delete your upcoming show?</h2>
-            <button onClick={deleteShow}>Yes</button>
-            <button onClick={closeModal}>No</button>
+            <div id='delete-show-buttons-holder'>
+            <button className='delete-show-modal-buttons' onClick={deleteShow}>Yes</button>
+            <button className='delete-show-modal-buttons' onClick={closeModal}>No</button>
+            </div>
         </div>
     )
 }

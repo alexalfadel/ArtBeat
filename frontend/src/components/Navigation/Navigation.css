@@ -194,3 +194,40 @@
 #logout-button {
     font-weight: bold;
 }
+
+#log-in-modal-button, #sign-up-modal-button{
+    color: white;
+    font-family: 'Noto Sans Tai Le', sans-serif;
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+#log-in-modal-button:hover, #sign-up-modal-button:hover {
+    cursor: pointer;
+}
+
+#log-in-modal-button:hover {
+    font-size: 20px;
+}
+
+#sign-up-modal-button {
+    color: white;
+    background-color: grey;
+    padding-top: 3px;
+    padding-bottom: 3px;
+    padding-left: 5px;
+    padding-right: 5px;
+    border-radius: 10px;
+}
+
+#sign-up-modal-button:hover {
+    box-shadow: 0px 0px 5px 2px lightgray;
+}
+
+.navigation-session-links {
+    /* background-color: aqua; */
+    width: 200px;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: space-between;
+}
