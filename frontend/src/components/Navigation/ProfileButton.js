@@ -38,7 +38,7 @@ function ProfileButton({ user }) {
   const ulClassName = "profile-dropdown" + (showMenu ? "" : "-hidden");
 
   return (
-    <>
+    <div id='full-profile-box'>
       <button id='profile-dots-box' onClick={openMenu}>
         <i id='profile-dots' class="fa-solid fa-ellipsis-vertical"></i>
       </button>
@@ -49,7 +49,7 @@ function ProfileButton({ user }) {
           <button id='logout-button' onClick={logout}>Log Out</button>
         </li>
       </ul>
-    </>
+    </div>
   );
 }
 

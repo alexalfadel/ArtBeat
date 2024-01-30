@@ -36,9 +36,6 @@ function SignupFormModal() {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    if (Object.values(errors).length) {
-
-    }
   
     if (password === confirmPassword) {
       setErrors({});
@@ -49,7 +46,7 @@ function SignupFormModal() {
           name,
           location,
           bio: bio ? bio : null,
-          profilePic: validProfilePic(profilePic) ? profilePic : null,
+          profilePic: validProfilePic(profilePic) ? profilePic : "https://www.wildseedfarms.com/wp-content/plugins/shopwp-pro/public/imgs/placeholder.png",
           password,
         })
       )

@@ -19,6 +19,7 @@
 }
 
 .nav-div {
+    box-sizing: border-box;
     background-color: black;
     display: flex;
     justify-content: space-between;
@@ -161,9 +162,9 @@
 
 .profile-dropdown {
     background-color: white;
-    position: absolute;
+    position: fixed;
     top: 79px;
-    right: 35px;
+    right: 100px;
     width: 170px;
     display: flex;
     flex-direction: column;
@@ -230,4 +231,8 @@
     box-sizing: border-box;
     display: flex;
     justify-content: space-between;
+}
+
+#full-profile-box {
+    position: fixed;
 }
