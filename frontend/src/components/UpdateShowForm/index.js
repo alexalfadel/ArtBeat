@@ -9,6 +9,7 @@ import { getAllShowsThunk } from "../../store/shows";
 import { formatDate } from "../ShowCard";
 import { updateShowThunk } from "../../store/shows";
 import { updateShowImageThunk } from "../../store/ShowImages";
+import { Redirect } from "react-router-dom";
 
 const deconstructTime = (time) => {
   const splitTime = time.split(":");
@@ -32,6 +33,7 @@ function UpdateShowForm() {
   const history = useHistory();
   const { showId } = useParams();
   const allShows = useSelector((state) => state.shows);
+  const user = useSelector((state) => state.session.user)
   // const show = allShows?.filter((show) => `${show.id}` === showId)[0]
   // const showImages = show?.ShowImages
   const [name, setName] = useState("");
@@ -102,6 +104,8 @@ function UpdateShowForm() {
   useEffect(() => {
     if (Object.keys(allShows).length) {
       const show = allShows?.filter((show) => `${show.id}` === showId)[0];
+      if (!show) return history.push('/')
+      if (show.userId !== user.id ) return history.push('/')
       const showImages = show?.ShowImages;
       const previewImage = showImages?.filter(
         (image) => image.preview === true
@@ -248,7 +252,11 @@ function UpdateShowForm() {
     description,
   ]);
 
+  // if (!userId) return <Redirect to="/" />
   if (!Object.keys(allShows).length) return <h1>Loading...</h1>;
+  const show = allShows.filter((show) => `${show.id}` === showId)[0]
+  // if (!show) history.push('/')
+  // if (!userId) history.push('/')
 
   const reset = () => {
     setUserId("");
