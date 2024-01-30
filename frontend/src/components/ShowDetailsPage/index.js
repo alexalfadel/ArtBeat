@@ -62,7 +62,7 @@ function ShowDetails() {
 
     const isOwnShow = User.id === currentUser.id ? true : false;
 
-    console.log(ShowImages)
+
     const commentProps = {
         showId: id,
         userId: user.id
@@ -95,11 +95,8 @@ function ShowDetails() {
 
     for (let i = 0; i < ShowImages.length; i++) {
         if (ShowImages[i].id !== previewImage.id) {
-            // console.log(ShowImages[i])
             const imageButton = <button className='image-carousel-button' onClick={(() => {
                 changeImage({ imageUrl: ShowImages[i].imageUrl, imageId: ShowImages[i].id})
-                console.log('button clicked')
-                console.log(currentImage, '---currentImage')
             })} ><i class="fa-solid fa-circle"></i></button>
             imageButtonsHolder.push(imageButton)
         } 
@@ -115,7 +112,6 @@ function ShowDetails() {
         show: show
     }
 
-    console.log(imageModalProps, '----imageModalProps')
 
     return (
         <div className='show-details-main-box'>

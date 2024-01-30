@@ -58,3 +58,25 @@ div#rsvp-modal-container > h2 {
     padding-top: 30px;
     padding-bottom: 30px;
 }
+
+#rsvp-list-div {
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    margin-top: 30px;
+    padding-bottom: 30px;
+}
+
+.rsvp-names {
+    text-decoration: none;
+    font-family: 'Noto Sans Tai Le', sans-serif;
+    color: black;
+    font-size: 14px;
+}
+
+.rsvp-names:hover {
+    cursor: pointer;
+    color: grey
+}

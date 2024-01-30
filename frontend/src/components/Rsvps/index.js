@@ -7,8 +7,6 @@ function Rsvps({ rsvpProps }) {
   const { closeModal } = useModal();
   const { upcomingOrAttending, rsvps, artists, shows, message } = rsvpProps;
 
-  console.log(rsvps, '---rsvps')
-
   let rsvpList;
 
   if ( rsvps && !rsvps.length) {
@@ -18,6 +16,7 @@ function Rsvps({ rsvpProps }) {
       const name = artists.filter((artist) => artist.id === rsvp.userId)[0].name;
       return (
         <Link
+          className="rsvp-names"
           onClick={closeModal}
           key={`rsvp-${rsvp.id}`}
           to={`/artists/${rsvp.userId}`}
@@ -52,7 +51,7 @@ function Rsvps({ rsvpProps }) {
       )}
       {message && <h2>{message}</h2>}
       <div>
-        {upcomingOrAttending === "upcoming" && rsvpList}
+        {upcomingOrAttending === "upcoming" && <div id='rsvp-list-div'>{rsvpList}</div>}
         {upcomingOrAttending === "attending" && !message && <div id='show-list-container'>{showList}</div>}
       </div>
     </div>
