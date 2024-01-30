@@ -1,0 +1,33 @@
+.no-component-box {
+    box-sizing: border-box;
+    width: 100vw;
+    height: 100vw;
+    color: white;
+    background-color: black;
+    font-family: 'Noto Sans Tai Le', sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* justify-content: center; */
+    gap: 40px;
+}
+
+.no-component-box > h1 {
+    font-size: 45px;
+    text-align: center;
+    padding-top: 150px;
+}
+
+#back-home-link {
+    color: white;
+    text-decoration: none;
+    text-align: center;
+    /* background-color: aqua; */
+    font-size: 20px;
+}
+
+#back-home-link:hover {
+    cursor: pointer;
+    font-size: 25px;
+    color: grey;
+}
