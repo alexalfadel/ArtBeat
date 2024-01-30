@@ -6,7 +6,6 @@ function HomePage() {
     const history = useHistory()
     const user = useSelector((state) => state.session.user)
 
-    console.log(user)
 
     if (user) history.push('/shows')
 
