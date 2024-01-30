@@ -46,6 +46,8 @@
     box-sizing: border-box;
     display: flex;
     flex-direction: row;
+    width: 80vw;
+    flex-wrap: wrap;
     /* background-color: blue; */
     gap: 50px;
 }
