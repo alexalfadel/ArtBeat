@@ -29,14 +29,14 @@ function AllShows () {
         )
     })
 
-    const locations = shows.map((show) => show.location)
+    const locations = new Set(shows.map((show) => show.location))
 
+    const locationButtons = []
+
+    for (const location of locations) {
+        locationButtons.push(<button className='show-location-button' id={locationFilter === location ? 'location-active' : 'location-inactive'} onClick={(() => setLocationFilter(location))}>{location}</button>)
+    }
     
-    const locationButtons = locations.map((location) => {
-        return (
-            <button className='show-location-button' id={locationFilter === location ? 'location-active' : 'location-inactive'} onClick={(() => setLocationFilter(location))}>{location}</button>
-        )
-    })
 
     const createCards = (location) => {
         if (!location) {

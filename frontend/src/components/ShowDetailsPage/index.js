@@ -67,10 +67,9 @@ function ShowDetails() {
         showId: id,
         userId: user.id
     }
+
     
-    const orderedComments = Comments.sort((a1, a2) => 
-        (a1.updatedAt < a2.updatedAt) ? -1 : (a1.price > a2.price) ? 1 : 0)
-    
+    const orderedComments = Comments.sort((a, b) => a.createdAt < b.createdAt ? -1 : 1)
 
     const comments = orderedComments.map((comment) => {
         return <Comment comment={comment}/>

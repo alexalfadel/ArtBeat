@@ -30,7 +30,7 @@ function AddShowForm() {
   const [description, setDescription] = useState("");
   const [address, setAddress] = useState("");
   const [location, setLocation] = useState("");
-  const [time, setTime] = useState("");
+  const [time, setTime] = useState("12:00");
   const [date, setDate] = useState("");
   const [amPm, setAmPm] = useState("am");
   const [price, setPrice] = useState("");
@@ -102,17 +102,17 @@ function AddShowForm() {
       errors.image4Url = "Url must end in .jpg, .jpeg, or .png";
     if (image5Url && !validProfilePic(image5Url))
       errors.image5Url = "Url must end in .jpg, .jpeg, or .png";
-    if (previewImageTitle < 5)
+    if (previewImageTitle.length < 5)
       errors.previewImageTitle = "Title must be at least 5 characters long";
-    if (image1Title && image1Title < 5)
+    if (image1Title && image1Title.length < 5)
       errors.image1Title = "Title must be at least 5 characters long";
-    if (image2Title && image2Title < 5)
+    if (image2Title && image2Title.length < 5)
       errors.image2Title = "Title must be at least 5 characters long";
-    if (image3Title && image3Title < 5)
+    if (image3Title && image3Title.length < 5)
       errors.image3Title = "Title must be at least 5 characters long";
-    if (image4Title && image4Title < 5)
+    if (image4Title && image4Title.length < 5)
       errors.image4Title = "Title must be at least 5 characters long";
-    if (image5Title && image5Title < 5)
+    if (image5Title && image5Title.length < 5)
       errors.image5Title = "Title must be at least 5 characters long";
     if (previewImageUrl.length < 3)
       errors.previewImageUrl = "Url must be at least 3 characters long";
@@ -133,6 +133,7 @@ function AddShowForm() {
     if (price > 100000) errors.price = "Price must be less than $100,000.00";
     if (new Date(date) < new Date())
       errors.date = "Date must be set in the future";
+      if (!date) errors.date = "Date is required."
 
     setErrors(errors);
   }, [
@@ -164,7 +165,7 @@ function AddShowForm() {
     setDescription("");
     setAddress("");
     setLocation("");
-    setTime("");
+    setTime("12:00");
     setPrice("");
     setAmPm("am");
     setErrors({});
