@@ -20,6 +20,7 @@ function RsvpButton({show}) {
     }, [dispatch, allShows.Rsvps])
 
     const rsvp = () => {
+        console.log('----rsvp button clicked, in rvsp function')
         dispatch(addRsvpThunk({
             userId: user.id,
             showId: id
@@ -27,6 +28,7 @@ function RsvpButton({show}) {
     }
 
     const unRsvp = () => {
+        console.log('---unRsvp Link clicked, in unRsvp function')
         dispatch(removeRsvpThunk(userRsvp[0].id))
     }
     
@@ -42,7 +44,7 @@ function RsvpButton({show}) {
     return (
         <div className='rsvp-button-box'>
             <p className='rsvp-button'>See you there!</p>
-            <p id='unrsvp-p'>Can't make it? Click <span onClick={unRsvp}>here</span> to un-RSVP.</p>
+            <p id='unrsvp-p' onClick={unRsvp}>Can't make it? Click here to un-RSVP.</p>
         </div>
     )
 }
