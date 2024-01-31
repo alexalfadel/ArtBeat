@@ -58,6 +58,7 @@
     font-family: 'Noto Sans Tai Le', sans-serif;
     /* background-color: antiquewhite; */
     width: 40vw;
+    word-wrap: break-word;
 
 }
 
