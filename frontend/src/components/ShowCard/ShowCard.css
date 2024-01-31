@@ -10,7 +10,7 @@
     box-sizing: border-box;
     background-color: white;
     width: 350px;
-    height: 170px;
+    height: 200px;
     display: flex;
     /* justify-content: space-between; */
     gap: 10px;
@@ -20,7 +20,7 @@
 }
 
 #show-card-text-box {
-    width: 150px;
+    width: 250px;
     /* background-color: antiquewhite; */
     height: 150px;
     box-sizing: border-box;

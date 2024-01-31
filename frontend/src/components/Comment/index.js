@@ -36,7 +36,7 @@ function Comment({ comment }) {
   const saveUpdatedComment = (e) => {
     e.preventDefault();
 
-    if (updatedCommentText.length > 5 && updatedCommentText.length < 256) {
+    if (updatedCommentText.length > 5 && updatedCommentText.length <= 256) {
       const updatedComment = {
         id: comment.id,
         userId: user.id,
@@ -54,6 +54,11 @@ function Comment({ comment }) {
     setUpdate(false);
     setUpdatedCommentText(comment.text);
   };
+
+  const closeDelete = (e) => {
+    e.preventDefault()
+    setDeleteComment(false)
+  }
 
   return (
     <div>
@@ -82,7 +87,7 @@ function Comment({ comment }) {
           <p id='delete-comment-text'>Are you sure you want to delete this comment?</p>
           <div id='delete-comment-buttons-box'>
             <button id='confirm-delete-comment' onClick={deleteCommentButton}>Yes</button>
-            <button id='cancel-delete-comment' onClick={() => setDeleteComment(false)}>No</button>
+            <button id='cancel-delete-comment' onClick={closeDelete}>No</button>
           </div>
         </div>
       )}
