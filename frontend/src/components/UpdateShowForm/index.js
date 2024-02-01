@@ -110,6 +110,11 @@ function UpdateShowForm() {
       const previewImage = showImages?.filter(
         (image) => image.preview === true
       )[0];
+      const remainingImages = []
+      for (let i = 0; i < showImages.length; i++) {
+        if (!showImages[i].preview) remainingImages.push(showImages[i])
+      }
+
       setUserId(show.userId);
       setName(show.name);
       setDescription(show.description);
@@ -130,47 +135,47 @@ function UpdateShowForm() {
       setPreviewImageUrl(previewImage.imageUrl);
       setPreviewImageDescription(previewImage.description);
       setPreviewImageId(previewImage.id)
-      if (showImages[0] && !showImages[0].preview) {
-        setImage1Title(showImages[0].title);
-        setImage1Placeholder(showImages[0].imageUrl);
-        setImage1Description(showImages[0].description);
-        setImage1Url(showImages[0].imageUrl);
+      if (remainingImages[0]) {
+        setImage1Title(remainingImages[0].title);
+        setImage1Placeholder(remainingImages[0].imageUrl);
+        setImage1Description(remainingImages[0].description);
+        setImage1Url(remainingImages[0].imageUrl);
         setShowImage1(true);
-        setImage1Id(showImages[0].id)
+        setImage1Id(remainingImages[0].id)
       }
-      if (showImages[1] && !showImages[1].preview) {
-        setImage2Title(showImages[1].title);
-        setImage2Placeholder(showImages[1].imageUrl);
-        setImage2Description(showImages[1].description);
-        setImage2Url(showImages[1].imageUrl);
+      if (remainingImages[1]) {
+        setImage2Title(remainingImages[1].title);
+        setImage2Placeholder(remainingImages[1].imageUrl);
+        setImage2Description(remainingImages[1].description);
+        setImage2Url(remainingImages[1].imageUrl);
         setShowImage2(true);
-        setImage2Id(showImages[1].id)
+        setImage2Id(remainingImages[1].id)
       }
-      if (showImages[2] && !showImages[2].preview) {
-        setImage3Title(showImages[2].title);
-        setImage3Placeholder(showImages[2].imageUrl);
-        setImage3Description(showImages[2].description);
-        setImage3Url(showImages[2].imageUrl);
+      if (remainingImages[2]) {
+        setImage3Title(remainingImages[2].title);
+        setImage3Placeholder(remainingImages[2].imageUrl);
+        setImage3Description(remainingImages[2].description);
+        setImage3Url(remainingImages[2].imageUrl);
         setShowImage3(true);
-        setImage3Id(showImages[2].id)
+        setImage3Id(remainingImages[2].id)
       }
-      if (showImages[3] && !showImages[3].preview) {
-        setImage4Title(showImages[3].title);
-        setImage4Placeholder(showImages[3].imageUrl);
-        setImage4Description(showImages[3].description);
-        setImage4Url(showImages[3].imageUrl);
+      if (remainingImages[3]) {
+        setImage4Title(remainingImages[3].title);
+        setImage4Placeholder(remainingImages[3].imageUrl);
+        setImage4Description(remainingImages[3].description);
+        setImage4Url(remainingImages[3].imageUrl);
         setShowImage4(true);
-        setImage4Id(showImages[3].id)
+        setImage4Id(remainingImages[3].id)
       }
-      if (showImages[4] && !showImages[4].preview) {
-        setImage5Title(showImages[4].title);
-        setImage5Placeholder(showImages[4].imageUrl);
-        setImage5Description(showImages[4].description);
-        setImage5Url(showImages[4].imageUrl);
+      if (remainingImages[4]) {
+        setImage5Title(remainingImages[4].title);
+        setImage5Placeholder(remainingImages[4].imageUrl);
+        setImage5Description(remainingImages[4].description);
+        setImage5Url(remainingImages[4].imageUrl);
         setShowImage5(true);
-        setImage5Id(showImages[4].id)
+        setImage5Id(remainingImages[4].id)
       }
-      setImageCounter(showImages.length);
+      setImageCounter(remainingImages.length);
     }
   }, [allShows]);
 
@@ -185,7 +190,7 @@ function UpdateShowForm() {
     if (!isValidAddress(address))
       errors.address = "Please enter a valid address";
     if (!validProfilePic(previewImageUrl))
-      errors.previewPic =
+      errors.previewImageUrl =
         "Please enter a valid image url ending in .png, .jpg, or .jpeg";
     if (image1Url && !validProfilePic(image1Url))
       errors.image1Url = "Url must end in .jpg, .jpeg, or .png";
@@ -197,17 +202,17 @@ function UpdateShowForm() {
       errors.image4Url = "Url must end in .jpg, .jpeg, or .png";
     if (image5Url && !validProfilePic(image5Url))
       errors.image5Url = "Url must end in .jpg, .jpeg, or .png";
-    if (previewImageTitle < 5)
+    if (previewImageTitle.length < 5)
       errors.previewImageTitle = "Title must be at least 5 characters long";
-    if (image1Title && image1Title < 5)
+    if (image1Title && image1Title.length < 5)
       errors.image1Title = "Title must be at least 5 characters long";
-    if (image2Title && image2Title < 5)
+    if (image2Title && image2Title.length < 5)
       errors.image2Title = "Title must be at least 5 characters long";
-    if (image3Title && image3Title < 5)
+    if (image3Title && image3Title.length < 5)
       errors.image3Title = "Title must be at least 5 characters long";
-    if (image4Title && image4Title < 5)
+    if (image4Title && image4Title.length < 5)
       errors.image4Title = "Title must be at least 5 characters long";
-    if (image5Title && image5Title < 5)
+    if (image5Title && image5Title.length < 5)
       errors.image5Title = "Title must be at least 5 characters long";
     if (previewImageUrl.length < 3)
       errors.previewImageUrl = "Url must be at least 3 characters long";
@@ -229,6 +234,7 @@ function UpdateShowForm() {
     if (new Date(date) < new Date())
       errors.date = "Date must be set in the future";
 
+
     setErrors(errors);
   }, [
     name,
@@ -244,7 +250,7 @@ function UpdateShowForm() {
     image2Url,
     image3Url,
     image4Url,
-    image4Url,
+    image5Url,
     location,
     time,
     price,
@@ -856,7 +862,7 @@ function UpdateShowForm() {
                 } else if (imageCounter === 4) {
                   setShowImage5(true);
                 }
-
+                
                 setImageCounter(imageCounter + 1);
               }}
             >

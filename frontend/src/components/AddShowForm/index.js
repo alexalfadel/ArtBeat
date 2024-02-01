@@ -90,7 +90,7 @@ function AddShowForm() {
     if (!isValidAddress(address))
       errors.address = "Please enter a valid address";
     if (!validProfilePic(previewImageUrl))
-      errors.previewPic =
+      errors.previewImageUrl =
         "Please enter a valid image url ending in .png, .jpg, or .jpeg";
     if (image1Url && !validProfilePic(image1Url))
       errors.image1Url = "Url must end in .jpg, .jpeg, or .png";
@@ -495,6 +495,7 @@ function AddShowForm() {
               {showErrors && errors.previewImageUrl && (
                 <p className="add-show-errors-p">{errors.previewImageUrl}</p>
               )}
+              {/* {showErrors && errors.previewImage} */}
               <textarea
                 className="add-show-preview-image-description-input"
                 placeholder="Preview Image Description"
