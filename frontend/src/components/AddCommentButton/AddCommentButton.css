@@ -20,6 +20,11 @@
     font-weight: bold;
 }
 
+#comment-error-p {
+    font-size: 13px;
+    color: red
+}
+
 #add-comment-form {
     box-sizing: border-box;
     background-color: white;

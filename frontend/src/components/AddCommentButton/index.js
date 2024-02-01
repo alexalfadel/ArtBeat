@@ -53,6 +53,9 @@ function AddCommentButton({ commentProps }) {
     const closeAddComment = (e) => {
         e.preventDefault()
         setShowForm(!showForm)
+        setCommentText('')
+        setErrors({})
+        setShowErrors(false)
     }
 
 
@@ -62,7 +65,7 @@ function AddCommentButton({ commentProps }) {
             {!showForm && addCommentButton}
             {showForm && <form id='add-comment-form'> 
                 <textarea id='comment-form-text-area' maxLength='256' minLength='5' type='text' value={commentText} placeholder='Add a comment!' onChange={((e) => setCommentText(e.target.value))}></textarea>
-                {showErrors && <p>{errors.commentText}</p>}
+                {showErrors && <p id='comment-error-p'>{errors.commentText}</p>}
                 <div id='comment-form-buttons-box'>
                     <button id='comment-submit' onClick={onSubmit}>Add Comment+</button>
                     <button id='comment-cancel' onClick={(closeAddComment)}>X</button>
