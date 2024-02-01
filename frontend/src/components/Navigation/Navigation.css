@@ -38,13 +38,49 @@
     color: white;
 }
 
+#nav-logo:hover {
+    cursor: pointer;
+    font-size: 40px;
+}
+
 .middle-nav-buttons-box {
     display: flex;
+    flex-direction: row;
     /* background-color: yellow; */
     width: 30vw;
     height: 100px;
     align-items: center;
-    justify-content: space-around;
+    justify-content: flex-end;
+}
+
+#profile-card {
+    /* background-color: blue; */
+    display: flex;
+    align-items: center;
+}
+
+/* #profile-card:hover {
+    background-color: grey;
+    border-radius: 25px;
+    color: black;
+    box-shadow: 0px 0px 5px 2px lightgray;
+} */
+
+#badge-button {
+    /* background-color: blue; */
+    width: 50px;
+    height: 70px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 25px;
+}
+
+#badge-button:hover {
+    background-color: grey;
+    border-radius: 25px;
+    /* color: black; */
+    box-shadow: 0px 0px 5px 2px lightgray;
 }
 
 .middle-nav-buttons {
