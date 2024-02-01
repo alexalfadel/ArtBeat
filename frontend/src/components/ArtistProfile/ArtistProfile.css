@@ -240,10 +240,13 @@ div.left-top-profile-box > p {
     font-family: 'Noto Sans Tai Le', sans-serif;
     font-size: 25px;
     text-decoration: underline;
-    padding-left: 30px;
+    padding-bottom: 30px;
+    /* padding-left: 30px; */
+    /* position: relative; */
+    /* left: 22em; */
     /* background-color: pink; */
-    width: 915px;
-    text-align: right;
+    /* width: 915px; */
+    text-align: center;
     /* background-color: aliceblue; */
 }
 
@@ -342,7 +345,7 @@ div.left-top-profile-box > p {
 
 .artist-profile-bio {
     box-sizing: border-box;
-    min-width: 700px;
+    min-width: 900px;
     min-height: 50px;
 }
 

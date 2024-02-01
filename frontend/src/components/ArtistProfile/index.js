@@ -290,12 +290,7 @@ function ArtistProfile() {
         {ownProfile && (
           <div className='artist-profile-show-links'>
             <div className='artist-profile-show-links-left'>
-              <p id='artist-profile-upcoming-shows'>Upcoming Shows</p>
-              {/* <OpenModalButton
-                id='shows-attending-modal'
-                buttonText="Show's I'm Attending"
-                modalComponent={<Rsvps rsvpProps={attendingRsvpProps} />}
-              /> */}
+              {/* <p id='artist-profile-upcoming-shows'>Upcoming Shows</p> */}
             </div>
             <div className='artist-profile-show-links-right'>
             <OpenModalButton
@@ -309,6 +304,7 @@ function ArtistProfile() {
             </div>
           </div>
         )}
+        <p id='artist-profile-upcoming-shows'>Upcoming Shows</p>
         {upcomingOrAttending === "upcoming" && <div className='artist-profile-upcoming-show-container'>{upcomingShowCards}</div>}
         {upcomingOrAttending === 'upcoming' && !upcomingShowCards.length && !ownProfile && <p id='no-shows-p'>No shows scheduled, check back soon!</p>}
         {upcomingOrAttending === 'upcoming' && !upcomingShowCards.length && ownProfile && <p id='no-shows-p'>No shows scheduled, add one soon!</p>}
