@@ -44,18 +44,25 @@ function Navigation({ isLoaded }) {
       </li>
     </ul>
     <ul className='center-nav'>
-      {sessionUser && <div className='middle-nav-buttons-box'><li className='middle-nav-buttons-area'>
+      {sessionUser && <div className='middle-nav-buttons-box'>
+        {/* <li className='middle-nav-buttons-area'>
         <NavLink className='middle-nav-buttons' exact to='/shows'>
             <i id='calendar-button' className="fa-solid fa-calendar-days"></i>
           </NavLink>
-      </li>
-      <li className='middle-nav-buttons-area'>
+      </li> */}
+      {/* <li className='middle-nav-buttons-area'>
         <NavLink className='middle-nav-buttons' exact to={`/artists/${sessionUser.id}`}>
           <i id='badge-button' class="fa-solid fa-id-badge"></i>
         </NavLink>
-      </li></div>}
+      </li> */}
+      </div>}
     </ul>
     <ul className='right-nav'>
+      {sessionUser &&  <li id='profile-card'>
+        <NavLink className='middle-nav-buttons' exact to={`/artists/${sessionUser.id}`}>
+          <i id='badge-button' class="fa-solid fa-id-badge"></i>
+        </NavLink>
+      </li>}
       {sessionUser && 
         <Link id='nav-new-show-button' to='/shows/new'><p id="nav-new-show-p">New Show+</p></Link>
         }
