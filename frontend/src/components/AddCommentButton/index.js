@@ -12,12 +12,19 @@ function AddCommentButton({ commentProps }) {
     const [ showForm, setShowForm ] = useState(false)
     const [ commentText, setCommentText ] = useState('')
     const [ disabled, setDisabled ] = useState(true)
+    const [ errors, setErrors ] = useState({})
+    const [ showErrors, setShowErrors ] = useState(false)
     const { showId, userId } = commentProps
 
 
     useEffect(() => {
-        if (commentText.length < 5 || commentText.length > 256) setDisabled(true)
+        let errors = {}
+        if (commentText.length < 5 || commentText.length > 256) {
+            setDisabled(true)
+            errors.commentText = 'Comments must be between 5 and 256 characters.'
+        }
         else setDisabled(false)
+        setErrors(errors)
     }, [commentText])
 
 
@@ -25,6 +32,8 @@ function AddCommentButton({ commentProps }) {
 
     const onSubmit = async (e) => {
         e.preventDefault()
+
+        if (errors.commentText) setShowErrors(true)
 
         if (commentText.length >= 5 && commentText.length <= 256 && showId && userId) {
             const newComment = {
@@ -37,7 +46,7 @@ function AddCommentButton({ commentProps }) {
 
             setShowForm(false)
             setCommentText('')
-            setDisabled(true)
+            // setDisabled(true)
         }
     }
 
@@ -53,8 +62,9 @@ function AddCommentButton({ commentProps }) {
             {!showForm && addCommentButton}
             {showForm && <form id='add-comment-form'> 
                 <textarea id='comment-form-text-area' maxLength='256' minLength='5' type='text' value={commentText} placeholder='Add a comment!' onChange={((e) => setCommentText(e.target.value))}></textarea>
+                {showErrors && <p>{errors.commentText}</p>}
                 <div id='comment-form-buttons-box'>
-                    <button id='comment-submit' disabled={disabled} onClick={onSubmit}>Add Comment+</button>
+                    <button id='comment-submit' onClick={onSubmit}>Add Comment+</button>
                     <button id='comment-cancel' onClick={(closeAddComment)}>X</button>
                 </div>
                 </form>}

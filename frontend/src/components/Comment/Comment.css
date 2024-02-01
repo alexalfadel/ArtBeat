@@ -32,6 +32,9 @@
     color: black;
     font-family: 'Noto Sans Tai Le', sans-serif;
     font-size: 15px;
+    word-wrap: break-word;
+    width: 800px;
+    /* background-color: aqua; */
 
 }
 
