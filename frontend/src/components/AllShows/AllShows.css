@@ -59,13 +59,13 @@
     /* background-color: blue; */
     width: 76vw;
     display: flex;
-    justify-content: space-evenly;
+    justify-content: center;
     padding-top: 10px;
     padding-right: 5px;
     padding-left: 5px;
     padding-bottom: 10px;
     flex-wrap: wrap;
-    gap: 10px;
+    gap: 15px;
 
 }
 
