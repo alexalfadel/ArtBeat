@@ -286,7 +286,7 @@ function ArtistProfile() {
             </div>
           </form>
         )}
-        {!ownProfile && <div id='not-profile-upcoming-shows-box'><p id='not-profile-upcoming-shows-p'>Upcoming Shows</p></div>}
+        {/* {!ownProfile && <div id='not-profile-upcoming-shows-box'><p id='not-profile-upcoming-shows-p'>Upcoming Shows</p></div>} */}
         {ownProfile && (
           <div className='artist-profile-show-links'>
             <div className='artist-profile-show-links-left'>
@@ -305,11 +305,13 @@ function ArtistProfile() {
           </div>
         )}
         <p id='artist-profile-upcoming-shows'>Upcoming Shows</p>
+        {/* {upcomingOrAttending === 'upcoming' && upcomingShowCards.length && ownProfile && <p id='no-shows-p'>Upcoming Shows</p>} */}
+
         {upcomingOrAttending === "upcoming" && <div className='artist-profile-upcoming-show-container'>{upcomingShowCards}</div>}
         {upcomingOrAttending === 'upcoming' && !upcomingShowCards.length && !ownProfile && <p id='no-shows-p'>No shows scheduled, check back soon!</p>}
         {upcomingOrAttending === 'upcoming' && !upcomingShowCards.length && ownProfile && <p id='no-shows-p'>No shows scheduled, add one soon!</p>}
 
-        {upcomingOrAttending === "attending" && <div></div>}
+        {/* {upcomingOrAttending === "attending" && <div></div>} */}
       </div>
     </div>
   );
