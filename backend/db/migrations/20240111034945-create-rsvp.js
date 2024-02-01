@@ -18,12 +18,14 @@ module.exports = {
       showId: {
         type: Sequelize.INTEGER,
         allowNull: false,
-        references: { model: 'Shows' }
+        references: { model: 'Shows', key: 'id' },
+        onDelete: 'cascade'
       },
       userId: {
         type: Sequelize.INTEGER,
         allowNull: false,
-        references: { model: 'Users'}
+        references: { model: 'Users', key: 'id'},
+        onDelete: 'cascade'
       },
       createdAt: {
         allowNull: false,

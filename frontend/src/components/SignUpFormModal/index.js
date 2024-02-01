@@ -39,6 +39,7 @@ function SignupFormModal() {
   
     if (password === confirmPassword) {
       setErrors({});
+      const profPic = validProfilePic(profilePic) ? profilePic : "https://www.wildseedfarms.com/wp-content/plugins/shopwp-pro/public/imgs/placeholder.png"
       return dispatch(
         sessionActions.signup({
           email,
@@ -46,7 +47,7 @@ function SignupFormModal() {
           name,
           location,
           bio: bio ? bio : null,
-          profilePic: validProfilePic(profilePic) ? profilePic : "https://www.wildseedfarms.com/wp-content/plugins/shopwp-pro/public/imgs/placeholder.png",
+          profilePic: profPic,
           password,
         })
       )
