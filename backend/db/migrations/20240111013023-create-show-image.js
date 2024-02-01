@@ -33,7 +33,8 @@ module.exports = {
       showId: {
         type: Sequelize.INTEGER,
         allowNull: false,
-        references: { model: 'Shows' }
+        references: { model: 'Shows', key: 'id' },
+        onDelete: 'cascade'
       },
       createdAt: {
         allowNull: false,

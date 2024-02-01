@@ -8,7 +8,8 @@
     flex-direction: column;
     align-items: center;
     width: 100vw;
-    height: fit-content;
+    min-height: 100vh;
+    height: fit-content
 
 
 }
@@ -237,8 +238,9 @@ div.left-top-profile-box > p {
     text-decoration: underline;
     padding-left: 30px;
     /* background-color: pink; */
-    width: 750px;
+    width: 915px;
     text-align: right;
+    /* background-color: aliceblue; */
 }
 
 #shows-attending-modal, #artist-profile-add-show-button {
@@ -331,4 +333,21 @@ div.left-top-profile-box > p {
     font-size: 25px;
     font-weight: bold;
     text-decoration: underline;
+    /* background-color: aqua; */
+}
+
+.artist-profile-bio {
+    box-sizing: border-box;
+    min-width: 700px;
+    min-height: 50px;
+}
+
+#no-shows-p {
+    box-sizing: border-box;
+    font-family: 'Noto Sans Tai Le', sans-serif;
+    align-self: center;
+    text-align: center;
+    font-size: 20px;
+    padding-bottom: 30px;
+    /* background-color: antiquewhite; */
 }

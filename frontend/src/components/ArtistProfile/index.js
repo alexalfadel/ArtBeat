@@ -174,7 +174,10 @@ function ArtistProfile() {
               <div id="right-top-profile-box">
                 {ownProfile && <h2>Hi, {artist.username}!</h2>}
                 {!ownProfile && <h2>{artist.username}</h2>}
-                <p>{artist.bio}</p>
+                {artist.bio && <p className='artist-profile-bio'>{artist.bio}</p>}
+                {!artist.bio && !ownProfile && <p className='artist-profile-bio'>No bio yet, check back soon!</p>}
+                {!artist.bio && ownProfile && <p className='artist-profile-bio'>Add a bio, tell the world who you are!</p>}
+
               </div>
             </div>
             {ownProfile && (
@@ -307,6 +310,9 @@ function ArtistProfile() {
           </div>
         )}
         {upcomingOrAttending === "upcoming" && <div className='artist-profile-upcoming-show-container'>{upcomingShowCards}</div>}
+        {upcomingOrAttending === 'upcoming' && !upcomingShowCards.length && !ownProfile && <p id='no-shows-p'>No shows scheduled, check back soon!</p>}
+        {upcomingOrAttending === 'upcoming' && !upcomingShowCards.length && ownProfile && <p id='no-shows-p'>No shows scheduled, add one soon!</p>}
+
         {upcomingOrAttending === "attending" && <div></div>}
       </div>
     </div>
