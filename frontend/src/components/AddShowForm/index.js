@@ -131,9 +131,9 @@ function AddShowForm() {
     if (!price) errors.price = "Price is required";
     if (price < 1) errors.price = "Price must be at least $1.00";
     if (price > 100000) errors.price = "Price must be less than $100,000.00";
-    if (new Date(date) < new Date())
+    if (new Date(`${date}T00:00-0800`) < new Date())
       errors.date = "Date must be set in the future";
-      if (!date) errors.date = "Date is required."
+    if (!date) errors.date = "Date is required."
 
     setErrors(errors);
   }, [
@@ -150,7 +150,7 @@ function AddShowForm() {
     image2Url,
     image3Url,
     image4Url,
-    image4Url,
+    image5Url,
     location,
     time,
     price,
