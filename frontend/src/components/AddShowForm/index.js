@@ -158,7 +158,7 @@ function AddShowForm() {
     description,
   ]);
 
-  const reset = () => {
+  const reset = async () => {
     // e.preventDefault();
 
     setName("");
@@ -222,6 +222,7 @@ function AddShowForm() {
 
     if (Object.keys(errors).length) {
       setShowErrors(true);
+      return
     } else {
       const show = {
         name: name,
@@ -299,11 +300,12 @@ function AddShowForm() {
       }
 
       for (let i = 0; i < images.length; i++) {
-        dispatch(addShowImage(images[i]));
+        await dispatch(addShowImage(images[i]));
       }
 
-      reset();
+      // reset();
     }
+    reset();
   };
 
   return (
