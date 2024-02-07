@@ -19,11 +19,7 @@ function Comment({ comment }) {
   const [deleteComment, setDeleteComment] = useState(false);
   const [updatedCommentText, setUpdatedCommentText] = useState(comment.text);
 
-  // useEffect(() => {
-  //     dispatch(getAllArtistsThunk())
-  //     }, [dispatch, show.Rsvps])
-
-  if (!artists) return <h1>Loading...</h1>;
+  if (!artists) return <h1></h1>;
   const artist = artists.filter((artist) => artist.id === comment.userId)[0];
 
   const commentOwner = artist.id === user.id ? true : false;
