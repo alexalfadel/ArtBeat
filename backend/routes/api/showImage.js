@@ -13,7 +13,16 @@ router.post("/", requireAuth, async (req, res) => {
 
 router.put('/:imageId', requireAuth, async (req, res) => {
   const image = await ShowImage.findByPk(req.params.imageId)
+  
   if (!image) return res.status(404).json({message: 'Image does not exist'})
+  const user = req.user
+  const userShows = await Show.findAll({
+    where: {
+      userId: user.id
+    }
+  })
+  const imageShow = userShows.filter((show) => show.id === image.showId)
+  if (!imageShow) return res.status(403).json({message: 'You must own the image to delete it'})
 
   await image.set(req.body)
 
