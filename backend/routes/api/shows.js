@@ -65,8 +65,10 @@ router.post("/", requireAuth, async (req, res) => {
 
 router.put('/:showId', requireAuth, async (req, res) => {
   const show = req.body
+  const user = req.user
   const originalShow = await Show.findByPk(req.params.showId)
   if (!originalShow) return res.status(404).json({ message: 'Show does not exist'})
+  if (originalShow.userId !== user.id) return res.status(403).json({message: "You must own the show to update it."})
 
   await originalShow.set(show)
 

@@ -76,7 +76,7 @@ router.get("/:userId/rsvps", requireAuth, async (req, res) => {
   return res.status(200).json(userRsvps);
 });
 
-router.get("/:userId", async (req, res) => {
+router.get("/:userId", requireAuth, async (req, res) => {
   const user = await User.findByPk(req.params.userId);
   if (!user) return res.status(404).json({ message: "User does not exist" });
 

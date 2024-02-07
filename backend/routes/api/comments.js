@@ -7,7 +7,7 @@ const Op = Sequelize;
 
 const router = express.Router()
 
-router.post('/', async (req, res) => {
+router.post('/', requireAuth, async (req, res) => {
     const { userId, showId, text } = req.body
     const show = Show.findByPk(showId)
 

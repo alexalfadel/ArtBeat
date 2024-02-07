@@ -6,7 +6,7 @@ const Op = Sequelize;
 
 const router = express.Router();
 
-router.post("/", async (req, res) => {
+router.post("/", requireAuth, async (req, res) => {
   const { userId, showId } = req.body;
   const show = await Show.findByPk(showId);
 
@@ -35,7 +35,7 @@ router.post("/", async (req, res) => {
   return res.status(200).json(newRsvp);
 });
 
-router.delete("/:rsvpId", async (req, res) => {
+router.delete("/:rsvpId", requireAuth, async (req, res) => {
   const id = req.params.rsvpId;
   const userId = req.user.id;
   const rsvp = await Rsvp.findByPk(id);
