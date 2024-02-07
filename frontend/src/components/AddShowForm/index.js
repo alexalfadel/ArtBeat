@@ -133,7 +133,7 @@ function AddShowForm() {
     if (price > 100000) errors.price = "Price must be less than $100,000.00";
     if (new Date(`${date}T00:00-0800`) < new Date())
       errors.date = "Date must be set in the future";
-    if (!date) errors.date = "Date is required."
+    if (!date) errors.date = "Date is required.";
 
     setErrors(errors);
   }, [
@@ -222,7 +222,7 @@ function AddShowForm() {
 
     if (Object.keys(errors).length) {
       setShowErrors(true);
-      return
+      return;
     } else {
       const show = {
         name: name,
@@ -302,10 +302,40 @@ function AddShowForm() {
       for (let i = 0; i < images.length; i++) {
         await dispatch(addShowImage(images[i]));
       }
-
-      // reset();
     }
     reset();
+  };
+
+  const removeShowImage = (e) => {
+    e.preventDefault();
+    if (imageCounter === 1) {
+      setShowImage1(false);
+      setImage1Title("");
+      setImage1Description("");
+      setImage1Url("");
+      setImageCounter(imageCounter - 1);
+    } else if (imageCounter === 2) {
+      setShowImage2(false);
+      setImage2Title("");
+      setImage2Description("");
+      setImage2Url("");
+      setImageCounter(imageCounter - 1);
+    } else if (imageCounter === 3) {
+      setShowImage3(false);
+      setImage3Title("");
+      setImage3Description("");
+      setImage3Url("");
+      setImageCounter(imageCounter - 1);
+    } else if (imageCounter === 4) {
+      setShowImage4(false);
+      setImage4Title("");
+      setImage4Description("");
+      setImage4Url("");
+      setImageCounter(imageCounter - 1);
+    } else if (imageCounter === 5) {
+      setShowImage5(false);
+      setImageCounter(imageCounter - 1);
+    }
   };
 
   return (
@@ -789,6 +819,11 @@ function AddShowForm() {
               }}
             >
               Add an Image+
+            </button>
+          )}
+          {imageCounter > 0 && (
+            <button id="remove-last-image-button" onClick={removeShowImage}>
+              Remove Last Image
             </button>
           )}
         </div>
