@@ -16,8 +16,7 @@ function RsvpButton({show}) {
 
     useEffect(() => {
         dispatch(getAllShowsThunk())
-        // dispatch(getAllArtistsThunk())
-    }, [dispatch, allShows.Rsvps])
+    }, [dispatch])
 
     const rsvp = () => {
         console.log('----rsvp button clicked, in rvsp function')

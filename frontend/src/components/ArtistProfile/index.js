@@ -41,7 +41,7 @@ function ArtistProfile() {
     dispatch(getAllArtistsThunk());
     dispatch(getAllShowsThunk());
     dispatch(getAllRsvpsThunk(artistId));
-  }, [dispatch, updating]);
+  }, [dispatch]);
 
   useEffect(() => {
     let errors = {};
