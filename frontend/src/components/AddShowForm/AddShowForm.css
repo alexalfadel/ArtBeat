@@ -293,3 +293,19 @@
     color: red;
     align-self: center;
 }
+
+#remove-last-image-button {
+    box-sizing: border-box;
+    background-color: darkgrey;
+    width: 150px;
+    align-self: center;
+    margin-top: 10px;
+    border-radius: 10px;
+    font-family: 'Noto Sans Tai Le', sans-serif;
+    font-size: 12px;
+}
+
+#remove-last-image-button:hover {
+    cursor: pointer;
+    box-shadow: 0px 0px 2px 2px black;
+}
