@@ -21,6 +21,8 @@
     color: black;
     font-family: 'Noto Sans Tai Le', sans-serif;
     font-size: 12px;
+    width: fit-content;
+    align-self: flex-end;
 }
 
 #comment-box-artist-link:hover {
