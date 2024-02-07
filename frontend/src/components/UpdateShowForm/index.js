@@ -106,7 +106,8 @@ function UpdateShowForm() {
       const show = allShows?.filter((show) => `${show.id}` === showId)[0];
       if (!show) return history.push('/')
       if (show.userId !== user.id ) return history.push('/')
-      const showImages = show?.ShowImages;
+      let showImages = show?.ShowImages;
+      showImages = showImages.sort((a, b) => a.createdAt < b.createdAt ? -1 : 1)
       const previewImage = showImages?.filter(
         (image) => image.preview === true
       )[0];
