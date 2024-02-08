@@ -8,7 +8,7 @@ import { isValidAddress, formatTime } from "../AddShowForm";
 import { getAllShowsThunk } from "../../store/shows";
 import { formatDate } from "../ShowCard";
 import { updateShowThunk } from "../../store/shows";
-import { updateShowImageThunk } from "../../store/ShowImages";
+import { updateShowImageThunk, addShowImage } from "../../store/ShowImages";
 import { Redirect } from "react-router-dom";
 
 const deconstructTime = (time) => {
@@ -33,7 +33,7 @@ function UpdateShowForm() {
   const history = useHistory();
   const { showId } = useParams();
   const allShows = useSelector((state) => state.shows);
-  const user = useSelector((state) => state.session.user)
+  const user = useSelector((state) => state.session.user);
   // const show = allShows?.filter((show) => `${show.id}` === showId)[0]
   // const showImages = show?.ShowImages
   const [name, setName] = useState("");
@@ -52,7 +52,7 @@ function UpdateShowForm() {
   const [previewImageUrl, setPreviewImageUrl] = useState("");
   const [previewImageTitle, setPreviewImageTitle] = useState("");
   const [previewImageDescription, setPreviewImageDescription] = useState("");
-  const [previewImageId, setPreviewImageId] = useState('')
+  const [previewImageId, setPreviewImageId] = useState("");
   const [showImage1, setShowImage1] = useState("");
   const [showImage2, setShowImage2] = useState("");
   const [showImage3, setShowImage3] = useState("");
@@ -89,11 +89,16 @@ function UpdateShowForm() {
   const [image3Description, setImage3Description] = useState("");
   const [image4Description, setImage4Description] = useState("");
   const [image5Description, setImage5Description] = useState("");
-  const [image1Id, setImage1Id] = useState('')
-  const [image2Id, setImage2Id] = useState('')
-  const [image3Id, setImage3Id] = useState('')
-  const [image4Id, setImage4Id] = useState('')
-  const [image5Id, setImage5Id] = useState('')
+  const [image1Id, setImage1Id] = useState("");
+  const [image2Id, setImage2Id] = useState("");
+  const [image3Id, setImage3Id] = useState("");
+  const [image4Id, setImage4Id] = useState("");
+  const [image5Id, setImage5Id] = useState("");
+  const [image1Action, setImage1Action] = useState('')
+  const [image2Action, setImage2Action] = useState('')
+  const [image3Action, setImage3Action] = useState('')
+  const [image4Action, setImage4Action] = useState('')
+  const [image5Action, setImage5Action] = useState('')
 
   const [userId, setUserId] = useState("");
 
@@ -104,16 +109,18 @@ function UpdateShowForm() {
   useEffect(() => {
     if (Object.keys(allShows).length) {
       const show = allShows?.filter((show) => `${show.id}` === showId)[0];
-      if (!show) return history.push('/')
-      if (show.userId !== user.id ) return history.push('/')
+      if (!show) return history.push("/");
+      if (show.userId !== user.id) return history.push("/");
       let showImages = show?.ShowImages;
-      showImages = showImages.sort((a, b) => a.createdAt < b.createdAt ? -1 : 1)
+      showImages = showImages.sort((a, b) =>
+        a.createdAt < b.createdAt ? -1 : 1
+      );
       const previewImage = showImages?.filter(
         (image) => image.preview === true
       )[0];
-      const remainingImages = []
+      const remainingImages = [];
       for (let i = 0; i < showImages.length; i++) {
-        if (!showImages[i].preview) remainingImages.push(showImages[i])
+        if (!showImages[i].preview) remainingImages.push(showImages[i]);
       }
 
       setUserId(show.userId);
@@ -135,14 +142,15 @@ function UpdateShowForm() {
       setPreviewImageTitle(previewImage.title);
       setPreviewImageUrl(previewImage.imageUrl);
       setPreviewImageDescription(previewImage.description);
-      setPreviewImageId(previewImage.id)
+      setPreviewImageId(previewImage.id);
       if (remainingImages[0]) {
         setImage1Title(remainingImages[0].title);
         setImage1Placeholder(remainingImages[0].imageUrl);
         setImage1Description(remainingImages[0].description);
         setImage1Url(remainingImages[0].imageUrl);
         setShowImage1(true);
-        setImage1Id(remainingImages[0].id)
+        setImage1Id(remainingImages[0].id);
+        setImage1Action('update')
       }
       if (remainingImages[1]) {
         setImage2Title(remainingImages[1].title);
@@ -150,7 +158,8 @@ function UpdateShowForm() {
         setImage2Description(remainingImages[1].description);
         setImage2Url(remainingImages[1].imageUrl);
         setShowImage2(true);
-        setImage2Id(remainingImages[1].id)
+        setImage2Id(remainingImages[1].id);
+        setImage2Action('update')
       }
       if (remainingImages[2]) {
         setImage3Title(remainingImages[2].title);
@@ -158,7 +167,8 @@ function UpdateShowForm() {
         setImage3Description(remainingImages[2].description);
         setImage3Url(remainingImages[2].imageUrl);
         setShowImage3(true);
-        setImage3Id(remainingImages[2].id)
+        setImage3Id(remainingImages[2].id);
+        setImage3Action('update')
       }
       if (remainingImages[3]) {
         setImage4Title(remainingImages[3].title);
@@ -166,7 +176,8 @@ function UpdateShowForm() {
         setImage4Description(remainingImages[3].description);
         setImage4Url(remainingImages[3].imageUrl);
         setShowImage4(true);
-        setImage4Id(remainingImages[3].id)
+        setImage4Id(remainingImages[3].id);
+        setImage4Action('update')
       }
       if (remainingImages[4]) {
         setImage5Title(remainingImages[4].title);
@@ -174,7 +185,8 @@ function UpdateShowForm() {
         setImage5Description(remainingImages[4].description);
         setImage5Url(remainingImages[4].imageUrl);
         setShowImage5(true);
-        setImage5Id(remainingImages[4].id)
+        setImage5Id(remainingImages[4].id);
+        setImage4Action('update')
       }
       setImageCounter(remainingImages.length);
     }
@@ -232,9 +244,8 @@ function UpdateShowForm() {
     if (!price) errors.price = "Price is required";
     if (price < 1) errors.price = "Price must be at least $1.00";
     if (price > 100000) errors.price = "Price must be less than $100,000.00";
-    if (new Date(date) < new Date())
+    if (new Date(`${date}T00:00-0800`) < new Date())
       errors.date = "Date must be set in the future";
-
 
     setErrors(errors);
   }, [
@@ -261,7 +272,7 @@ function UpdateShowForm() {
 
   // if (!userId) return <Redirect to="/" />
   if (!Object.keys(allShows).length) return <h1>Loading...</h1>;
-  const show = allShows.filter((show) => `${show.id}` === showId)[0]
+  const show = allShows.filter((show) => `${show.id}` === showId)[0];
   // if (!show) history.push('/')
   // if (!userId) history.push('/')
 
@@ -316,11 +327,11 @@ function UpdateShowForm() {
     setShowImage3(false);
     setShowImage4(false);
     setShowImage5(false);
-    setImage1Id('')
-    setImage2Id('')
-    setImage3Id('')
-    setImage4Id('')
-    setImage5Id('')
+    setImage1Id("");
+    setImage2Id("");
+    setImage3Id("");
+    setImage4Id("");
+    setImage5Id("");
     setImageCounter(0);
     setDate("");
     setShowErrors(false);
@@ -346,93 +357,142 @@ function UpdateShowForm() {
 
       const dispatchData = {
         show: show,
-        showId: showId
-      }
+        showId: showId,
+      };
 
-      const updatedShow = await dispatch(updateShowThunk(dispatchData))
+      const updatedShow = await dispatch(updateShowThunk(dispatchData));
 
-      const images = [
+      const imagesToUpdate = [
         {
           title: previewImageTitle,
           imageUrl: previewImageUrl,
           description: previewImageDescription,
           preview: true,
           showId: showId,
-          id: previewImageId
+          id: previewImageId,
         },
       ];
 
+      const imagesToAdd = []
+
       if (image1Title && image1Description && image1Url) {
-        images.push({
+        const image1 = {
           title: image1Title,
           imageUrl: image1Url,
           description: image1Description,
           preview: false,
           showId: showId,
-          id: image1Id
-        });
+        }
+        if (image1Action === 'update') imagesToUpdate.push(image1);
+         else imagesToAdd.push(image1)
+        
       }
 
       if (image2Title && image2Description && image2Url) {
-        images.push({
+        const image2 = {
           title: image2Title,
           imageUrl: image2Url,
           description: image2Description,
           preview: false,
           showId: showId,
-          id: image2Id
-        });
+        }
+        if (image2Action === 'update') imagesToUpdate.push(image2);
+        else imagesToAdd.push(image2)
       }
 
       if (image3Title && image3Description && image3Url) {
-        images.push({
+        const image3 = {
           title: image3Title,
           imageUrl: image3Url,
           description: image3Description,
           preview: false,
           showId: showId,
-          id: image3Id
-        });
+        }
+        if (image3Action === 'update') imagesToUpdate.push(image3)
+        else imagesToAdd.push(image3)
       }
 
       if (image4Title && image4Description && image4Url) {
-        images.push({
+        const image4 = {
           title: image4Title,
           imageUrl: image4Url,
           description: image4Description,
           preview: false,
           showId: showId,
-          id: image4Id
-        });
+        }
+        if (image4Action === 'update') imagesToUpdate.push(image4)
+        else imagesToAdd.push(image4)
+        
       }
 
       if (image5Title && image5Description && image5Url) {
-        images.push({
+        const image5 = {
           title: image5Title,
           imageUrl: image5Url,
           description: image5Description,
           preview: false,
-          showId: showId,
-          id: image5Id
-        });
+          showId: showId
+        }
+        if (image5Action === 'update') imagesToUpdate.push(image5)
+        else imagesToAdd.push(image5)
       }
 
+      for (let i = 0; i < imagesToUpdate.length; i++) {
+        await dispatch(updateShowImageThunk(imagesToUpdate[i]));
+      }
 
-      for (let i = 0; i < images.length; i++) {
-        await dispatch(updateShowImageThunk(images[i]));
+      for (let i = 0; i < imagesToAdd.length; i++) {
+        await dispatch(addShowImage(imagesToAdd[i]))
       }
 
       reset();
     }
   };
 
+  const removeShowImage = (e) => {
+    e.preventDefault();
+    if (imageCounter === 1) {
+      setShowImage1(false);
+      setImage1Title("");
+      setImage1Description("");
+      setImage1Url("");
+      setImageCounter(imageCounter - 1);
+      setImage1Action('')
+    } else if (imageCounter === 2) {
+      setShowImage2(false);
+      setImage2Title("");
+      setImage2Description("");
+      setImage2Url("");
+      setImageCounter(imageCounter - 1);
+      setImage2Action('')
+    } else if (imageCounter === 3) {
+      setShowImage3(false);
+      setImage3Title("");
+      setImage3Description("");
+      setImage3Url("");
+      setImageCounter(imageCounter - 1);
+      setImage3Action('')
+    } else if (imageCounter === 4) {
+      setShowImage4(false);
+      setImage4Title("");
+      setImage4Description("");
+      setImage4Url("");
+      setImageCounter(imageCounter - 1);
+      setImage4Action('')
+    } else if (imageCounter === 5) {
+      setShowImage5(false);
+      setImageCounter(imageCounter - 1);
+      setImage5Action('')
+    }
+  };
+
+
   return (
-    <div className='add-show-full-page'>
-      
+    <div className="add-show-full-page">
       <form className="add-show-component-box">
         <div>
           <div className="add-show-name-description-address">
-          <h2 className="add-show-h2">Edit Your Upcoming Show</h2>
+            <h2 className="add-show-h2">Edit Your Upcoming Show</h2>
             <input
               className="add-show-name-input"
               type="text"
@@ -442,7 +502,9 @@ function UpdateShowForm() {
               placeholder="Please enter your show's name"
               onChange={(e) => setName(e.target.value)}
             ></input>
-            {showErrors && errors.name && <p className="add-show-errors-p">{errors.name}</p>}
+            {showErrors && errors.name && (
+              <p className="add-show-errors-p">{errors.name}</p>
+            )}
             <textarea
               className="add-show-description-input"
               maxLength="256"
@@ -450,7 +512,9 @@ function UpdateShowForm() {
               placeholder="Description goes here"
               onChange={(e) => setDescription(e.target.value)}
             ></textarea>
-            {showErrors && errors.description && <p lassName="add-show-errors-p">{errors.description}</p>}
+            {showErrors && errors.description && (
+              <p lassName="add-show-errors-p">{errors.description}</p>
+            )}
             <input
               className="add-show-address-input"
               type="text"
@@ -460,54 +524,56 @@ function UpdateShowForm() {
               onChange={(e) => setAddress(e.target.value)}
               placeholder="What's your shows address?"
             ></input>
-            {showErrors && errors.address && <p className="add-show-errors-p">{errors.address}</p>}
+            {showErrors && errors.address && (
+              <p className="add-show-errors-p">{errors.address}</p>
+            )}
           </div>
           <div>
             <div className="add-show-date-time-box">
               <div className="add-show-time-box">
-              <select
-                className="add-show-time-select"
-                required
-                value={time}
-                onChange={(e) => setTime(e.target.value)}
-              >
-                <option value="12:00">12:00</option>
-                <option value="12:30">12:30</option>
-                <option value="1:00">1:00</option>
-                <option value="1:30">1:30</option>
-                <option value="2:00">2:00</option>
-                <option value="2:30">2:30</option>
-                <option value="3:00">3:00</option>
-                <option value="3:30">3:30</option>
-                <option value="4:00">4:00</option>
-                <option value="4:30">4:30</option>
-                <option value="5:00">5:00</option>
-                <option value="5:30">5:30</option>
-                <option value="6:00">6:00</option>
-                <option value="6:30">6:30</option>
-                <option value="7:00">7:00</option>
-                <option value="7:30">7:30</option>
-                <option value="8:00">8:00</option>
-                <option value="8:30">8:30</option>
-                <option value="9:00">9:00</option>
-                <option value="9:30">9:30</option>
-                <option value="10:00">10:00</option>
-                <option value="10:30">10:30</option>
-                <option value="11:00">11:00</option>
-                <option value="11:30">11:30</option>
-              </select>
-              <select
-                className="am-pm-select"
-                required
-                value={amPm}
-                onChange={(e) => setAmPm(e.target.value)}
-              >
-                <option value="am">A.M.</option>
-                <option value="pm">P.M</option>
-              </select>
+                <select
+                  className="add-show-time-select"
+                  required
+                  value={time}
+                  onChange={(e) => setTime(e.target.value)}
+                >
+                  <option value="12:00">12:00</option>
+                  <option value="12:30">12:30</option>
+                  <option value="1:00">1:00</option>
+                  <option value="1:30">1:30</option>
+                  <option value="2:00">2:00</option>
+                  <option value="2:30">2:30</option>
+                  <option value="3:00">3:00</option>
+                  <option value="3:30">3:30</option>
+                  <option value="4:00">4:00</option>
+                  <option value="4:30">4:30</option>
+                  <option value="5:00">5:00</option>
+                  <option value="5:30">5:30</option>
+                  <option value="6:00">6:00</option>
+                  <option value="6:30">6:30</option>
+                  <option value="7:00">7:00</option>
+                  <option value="7:30">7:30</option>
+                  <option value="8:00">8:00</option>
+                  <option value="8:30">8:30</option>
+                  <option value="9:00">9:00</option>
+                  <option value="9:30">9:30</option>
+                  <option value="10:00">10:00</option>
+                  <option value="10:30">10:30</option>
+                  <option value="11:00">11:00</option>
+                  <option value="11:30">11:30</option>
+                </select>
+                <select
+                  className="am-pm-select"
+                  required
+                  value={amPm}
+                  onChange={(e) => setAmPm(e.target.value)}
+                >
+                  <option value="am">A.M.</option>
+                  <option value="pm">P.M</option>
+                </select>
               </div>
               <input
-                 className="add-show-date-select"
+                className="add-show-date-select"
                 defaultValue={date}
                 type="date"
                 min={`${new Date()}`}
@@ -516,58 +582,70 @@ function UpdateShowForm() {
             </div>
             <div className="add-show-price-location-box">
               <div className="add-show-price-input-box">
-              $
-              <input
-                className="add-show-price-input"
-                type="number"
-                placeholder="1"
-                value={price}
-                onChange={(e) => setPrice(e.target.value)}
-              ></input>
-              .00
-            </div>
-            <div>
-              <select
-                className="add-show-location"
-                required
-                defaultValue={location}
-                onChange={(e) => setLocation(e.target.value)}
-              >
-                <option value="Location:" disabled>
-                  Location:
-                </option>
-                <option value="San Francisco">San Francisco</option>
-                <option value="Los Angeles">Los Angeles</option>
-                <option value="Phoenix">Phoenix</option>
-                <option value="Tucson">Tucson</option>
-                <option value="Austin">Austin</option>
-                <option value="Dallas">Dallas</option>
-                <option value="New York">New York</option>
-                <option value="Miami">Miami</option>
-                <option value="Seattle">Seattle</option>
-                <option value="Portland">Portland</option>
-                <option value="Santa Fe">Santa Fe</option>
-                <option value="New Orleans">New Orleans</option>
-                <option value="Chicago">Chicago</option>
-                <option value="Cincinnati">Cincinnati</option>
-                <option value="Atlanta">Atlanta</option>
-                <option value="Philadelphia">Philadelphia</option>
-                <option value="Boston">Boston</option>
-                <option value="Baltimore">Baltimore</option>
-                <option value="Other">Other</option>
-              </select>
-            </div>
+                $
+                <input
+                  className="add-show-price-input"
+                  type="number"
+                  placeholder="1"
+                  value={price}
+                  onChange={(e) => setPrice(e.target.value)}
+                ></input>
+                .00
+              </div>
+              <div>
+                <select
+                  className="add-show-location"
+                  required
+                  defaultValue={location}
+                  onChange={(e) => setLocation(e.target.value)}
+                >
+                  <option value="Location:" disabled>
+                    Location:
+                  </option>
+                  <option value="San Francisco">San Francisco</option>
+                  <option value="Los Angeles">Los Angeles</option>
+                  <option value="Phoenix">Phoenix</option>
+                  <option value="Tucson">Tucson</option>
+                  <option value="Austin">Austin</option>
+                  <option value="Dallas">Dallas</option>
+                  <option value="New York">New York</option>
+                  <option value="Miami">Miami</option>
+                  <option value="Seattle">Seattle</option>
+                  <option value="Portland">Portland</option>
+                  <option value="Santa Fe">Santa Fe</option>
+                  <option value="New Orleans">New Orleans</option>
+                  <option value="Chicago">Chicago</option>
+                  <option value="Cincinnati">Cincinnati</option>
+                  <option value="Atlanta">Atlanta</option>
+                  <option value="Philadelphia">Philadelphia</option>
+                  <option value="Boston">Boston</option>
+                  <option value="Baltimore">Baltimore</option>
+                  <option value="Other">Other</option>
+                </select>
+              </div>
             </div>
           </div>
         </div>
-        {showErrors && errors.time && <p className="add-show-errors-p">{errors.time}</p>}
-        {showErrors && errors.location && <p className="add-show-errors-p">{errors.location}</p>}
-        {showErrors && errors.price && <p className="add-show-errors-p">{errors.price}</p>}
-        {showErrors && errors.date && <p className="add-show-errors-p">{errors.date}</p>}
+        {showErrors && errors.time && (
+          <p className="add-show-errors-p">{errors.time}</p>
+        )}
+        {showErrors && errors.location && (
+          <p className="add-show-errors-p">{errors.location}</p>
+        )}
+        {showErrors && errors.price && (
+          <p className="add-show-errors-p">{errors.price}</p>
+        )}
+        {showErrors && errors.date && (
+          <p className="add-show-errors-p">{errors.date}</p>
+        )}
         <div className="add-show-add-images-container">
           <div className="add-show-preview-image-container">
             <div>
-              <img className="add-show-preview-image" src={previewImageUrl}></img>
+              <img
+                className="add-show-preview-image"
+                src={previewImageUrl}
+                alt='Image Unavailable'
+              ></img>
             </div>
             <div className="add-show-preview-image-inputs-container">
               <input
@@ -614,7 +692,11 @@ function UpdateShowForm() {
           {showImage1 && (
             <div className="add-show-preview-image-container">
               <div>
-                <img className="add-show-preview-image" src={image1Placeholder}></img>
+                <img
+                  className="add-show-preview-image"
+                  src={image1Placeholder}
+                  alt='Image Unavailable'
+                ></img>
               </div>
               <div className="add-show-preview-image-inputs-container">
                 <input
@@ -646,7 +728,9 @@ function UpdateShowForm() {
                     }
                   }}
                 ></input>
-                {showErrors && errors.image1Url && <p className="add-show-errors-p">{errors.image1Url}</p>}
+                {showErrors && errors.image1Url && (
+                  <p className="add-show-errors-p">{errors.image1Url}</p>
+                )}
                 <textarea
                   className="add-show-preview-image-description-input"
                   placeholder="Image Description"
@@ -661,7 +745,11 @@ function UpdateShowForm() {
           {showImage2 && (
             <div className="add-show-preview-image-container">
               <div>
-                <img className="add-show-preview-image" src={image2Placeholder}></img>
+                <img
+                  className="add-show-preview-image"
+                  src={image2Placeholder}
+                  alt='Image Unavailable'
+                ></img>
               </div>
               <div className="add-show-preview-image-inputs-container">
                 <input
@@ -693,7 +781,9 @@ function UpdateShowForm() {
                     }
                   }}
                 ></input>
-                {showErrors && errors.image2Url && <p className="add-show-errors-p">{errors.image2Url}</p>}
+                {showErrors && errors.image2Url && (
+                  <p className="add-show-errors-p">{errors.image2Url}</p>
+                )}
                 <textarea
                   className="add-show-preview-image-description-input"
                   placeholder="Image Description"
@@ -708,7 +798,11 @@ function UpdateShowForm() {
           {showImage3 && (
             <div className="add-show-preview-image-container">
               <div>
-                <img className="add-show-preview-image" src={image3Placeholder}></img>
+                <img
+                  className="add-show-preview-image"
+                  src={image3Placeholder}
+                  alt='Image Unavailable'
+                ></img>
               </div>
               <div className="add-show-preview-image-inputs-container">
                 <input
@@ -740,7 +834,9 @@ function UpdateShowForm() {
                     }
                   }}
                 ></input>
-                {showErrors && errors.image3Url && <p className="add-show-errors-p">{errors.image3Url}</p>}
+                {showErrors && errors.image3Url && (
+                  <p className="add-show-errors-p">{errors.image3Url}</p>
+                )}
                 <textarea
                   className="add-show-preview-image-description-input"
                   placeholder="Image Description"
@@ -755,7 +851,11 @@ function UpdateShowForm() {
           {showImage4 && (
             <div className="add-show-preview-image-container">
               <div>
-                <img className="add-show-preview-image" src={image4Placeholder}></img>
+                <img
+                  className="add-show-preview-image"
+                  src={image4Placeholder}
+                  alt='Image Unavailable'
+                ></img>
               </div>
               <div className="add-show-preview-image-inputs-container">
                 <input
@@ -787,7 +887,9 @@ function UpdateShowForm() {
                     }
                   }}
                 ></input>
-                {showErrors && errors.image4Url && <p className="add-show-errors-p">{errors.image4Url}</p>}
+                {showErrors && errors.image4Url && (
+                  <p className="add-show-errors-p">{errors.image4Url}</p>
+                )}
 
                 <textarea
                   className="add-show-preview-image-description-input"
@@ -803,7 +905,11 @@ function UpdateShowForm() {
           {showImage5 && (
             <div className="add-show-preview-image-container">
               <div>
-                <img className="add-show-preview-image" src={image5Placeholder}></img>
+                <img
+                  className="add-show-preview-image"
+                  src={image5Placeholder}
+                  alt='Image Unavailable'
+                ></img>
               </div>
               <div className="add-show-preview-image-inputs-container">
                 <input
@@ -835,7 +941,9 @@ function UpdateShowForm() {
                     }
                   }}
                 ></input>
-                {showErrors && errors.image5Url && <p className="add-show-errors-p">{errors.image5Url}</p>}
+                {showErrors && errors.image5Url && (
+                  <p className="add-show-errors-p">{errors.image5Url}</p>
+                )}
                 <textarea
                   className="add-show-preview-image-description-input"
                   placeholder="Image Description"
@@ -846,34 +954,57 @@ function UpdateShowForm() {
               </div>
             </div>
           )}
-
+          {imageCounter < 4 && (
+            <p className="image-counter">
+              You can add {5 - imageCounter} more images!
+            </p>
+          )}
+          {imageCounter === 4 && (
+            <p className="image-counter">
+              You can add {5 - imageCounter} more image!
+            </p>
+          )}
           {imageCounter < 5 && (
             <button
-            className="add-image-button"
+              className="add-image-button"
               onClick={(e) => {
                 e.preventDefault();
                 if (imageCounter === 0) {
                   setShowImage1(true);
+                  setImage1Action('add')
                 } else if (imageCounter === 1) {
                   setShowImage2(true);
+                  setImage2Action('add')
                 } else if (imageCounter === 2) {
                   setShowImage3(true);
+                  setImage3Action('add')
                 } else if (imageCounter === 3) {
                   setShowImage4(true);
+                  setImage4Action('add')
                 } else if (imageCounter === 4) {
                   setShowImage5(true);
+                  setImage5Action('add')
                 }
-                
+
                 setImageCounter(imageCounter + 1);
               }}
             >
               Add an Image+
             </button>
           )}
+          {imageCounter > 0 && (image1Action === 'add' || image2Action === 'add' || image3Action === 'add' || image4Action === 'add' || image5Action === 'add')&& (
+            <button id="remove-last-image-button" onClick={removeShowImage}>
+              Remove Last Image
+            </button>
+          )}
         </div>
         <div className="add-show-buttons-container">
-          <button className="add-show-submit-buttons" onClick={onSubmit}>Save</button>
-          <button className="add-show-submit-buttons" onClick={reset}>Cancel</button>
+          <button className="add-show-submit-buttons" onClick={onSubmit}>
+            Save
+          </button>
+          <button className="add-show-submit-buttons" onClick={reset}>
+            Cancel
+          </button>
         </div>
       </form>
     </div>

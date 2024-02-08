@@ -506,6 +506,7 @@ function AddShowForm() {
               <img
                 className="add-show-preview-image"
                 src={previewImagePlaceholder}
+                alt='Image Unavailable'
               ></img>
             </div>
             <div className="add-show-preview-image-inputs-container">
@@ -560,6 +561,7 @@ function AddShowForm() {
                 <img
                   className="add-show-preview-image"
                   src={image1Placeholder}
+                  alt='Image Unavailable'
                 ></img>
               </div>
               <div className="add-show-preview-image-inputs-container">
@@ -615,6 +617,7 @@ function AddShowForm() {
                 <img
                   className="add-show-preview-image"
                   src={image2Placeholder}
+                  alt='Image Unavailable'
                 ></img>
               </div>
               <div className="add-show-preview-image-inputs-container">
@@ -671,6 +674,7 @@ function AddShowForm() {
                 <img
                   className="add-show-preview-image"
                   src={image3Placeholder}
+                  alt='Image Unavailable'
                 ></img>
               </div>
               <div className="add-show-preview-image-inputs-container">
@@ -726,6 +730,7 @@ function AddShowForm() {
                 <img
                   className="add-show-preview-image"
                   src={image4Placeholder}
+                  alt='Image Unavailable'
                 ></img>
               </div>
               <div className="add-show-preview-image-inputs-container">
@@ -782,6 +787,7 @@ function AddShowForm() {
                 <img
                   className="add-show-preview-image"
                   src={image5Placeholder}
+                  alt='Image Unavailable'
                 ></img>
               </div>
               <div className="add-show-preview-image-inputs-container">
@@ -829,6 +835,8 @@ function AddShowForm() {
               </div>
             </div>
           )}
+          { imageCounter < 4 && <p className='image-counter'>You can add {5 - imageCounter} more images!</p>}
+          { imageCounter === 4 && <p className='image-counter'>You can add {5 - imageCounter} more image!</p>}
 
           {imageCounter < 5 && (
             <button
