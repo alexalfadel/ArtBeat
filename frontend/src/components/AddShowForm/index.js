@@ -22,6 +22,14 @@ export const formatTime = (time, amPm) => {
   } else return `${Number(time.split(":")[0]) + 12}:00`;
 };
 
+const isValidImageFile = (file) => {
+  const validTypes = ['image/jpeg', 'image/jpg', 'image/png']
+  console.log(file, '---file')
+  console.log(file.type, '---file.type')
+  if (validTypes.includes(file.type)) return true;
+  else return false
+}
+
 function AddShowForm() {
   const history = useHistory();
   const dispatch = useDispatch();
@@ -79,6 +87,13 @@ function AddShowForm() {
   const [image4Description, setImage4Description] = useState("");
   const [image5Description, setImage5Description] = useState("");
   const [descriptionClass, setDescriptionClass] = useState('black')
+  const [previewImageFile, setPreviewImageFile] = useState('')
+  const [image1File, setImage1File] = useState('')
+  const [image2File, setImage2File] = useState('')
+  const [image3File, setImage3File] = useState('')
+  const [image4File, setImage4File] = useState('')
+  const [image5File, setImage5File] = useState('')
+  const [showPreviewImageError, setShowPreviewImageError] = useState(false)
 
   useEffect(() => {
     const errors = {};
@@ -135,6 +150,12 @@ function AddShowForm() {
     if (new Date(`${date}T00:00-0800`) < new Date())
       errors.date = "Date must be set in the future";
     if (!date) errors.date = "Date is required.";
+    if (!isValidImageFile(previewImageFile)) errors.previewImageFile = 'Image must be.jpg, .jpeg, or .png'
+    if (!isValidImageFile(image1File)) errors.image1File = 'Image must be .jpg, .jpeg, or .png'
+    if (!isValidImageFile(image2File)) errors.image2File = 'Image must be .jpg, .jpeg, or .png'
+    if (!isValidImageFile(image3File)) errors.image3File = 'Image must be .jpg, .jpeg, or .png'
+    if (!isValidImageFile(image4File)) errors.image4File = 'Image must be .jpg, .jpeg, or .png'
+    if (!isValidImageFile(image5File)) errors.image5File = 'Image must be .jpg, .jpeg, or .png'
 
     setErrors(errors);
   }, [
@@ -157,6 +178,12 @@ function AddShowForm() {
     price,
     date,
     description,
+    image1File,
+    image2File,
+    image3File,
+    image4File,
+    image5File,
+    previewImageFile
   ]);
 
   useEffect(() => {
@@ -505,7 +532,7 @@ function AddShowForm() {
             <div>
               <img
                 className="add-show-preview-image"
-                src={previewImagePlaceholder}
+                src={previewImageFile ? previewImageUrl : previewImagePlaceholder}
                 alt='Image Unavailable'
               ></img>
             </div>
@@ -515,7 +542,7 @@ function AddShowForm() {
                 type="text"
                 maxLength="50"
                 placeholder="Preview Image Title"
-                value={previewImageTitle}
+                value={previewImageFile}
                 onChange={(e) => setPreviewImageTitle(e.target.value)}
               ></input>
               {/* <p className="character-counter">{`${previewImageTitle.length}/50`}</p> */}
@@ -524,16 +551,21 @@ function AddShowForm() {
               )}
               <input
                 className="add-show-preview-image-inputs"
-                type="text"
-                maxLength="300"
-                placeholder="Preview Image URL"
-                value={previewImageUrl}
+                type="file"
+                // maxLength="300"
+                // placeholder="Preview Image URL"
+                // value={previewImageUrl}
                 onChange={(e) => {
-                  if (validProfilePic(e.target.value)) {
-                    setPreviewImageUrl(e.target.value);
-                    setPreviewImagePlaceholder(e.target.value);
+                  if (isValidImageFile(e.target.files[0])) {
+                    setPreviewImageFile(e.target.files[0]);
+                    setPreviewImagePlaceholder(e.target.files[0]);
+                    setPreviewImageUrl(URL.createObjectURL(e.target.files[0]))
+                    console.log(previewImageUrl)
                   } else {
-                    setPreviewImageUrl(e.target.value);
+                    // setPreviewImageUrl(URL.createObjectURL(e.target.value));
+                    setShowPreviewImageError(true)
+                    setPreviewImageFile(e.target.files[0])
+                    console.log(errors.previewImageFile, '---error')
                     setPreviewImagePlaceholder(
                       "https://www.wildseedfarms.com/wp-content/plugins/shopwp-pro/public/imgs/placeholder.png"
                     );
@@ -543,6 +575,7 @@ function AddShowForm() {
               {showErrors && errors.previewImageUrl && (
                 <p className="add-show-errors-p">{errors.previewImageUrl}</p>
               )}
+              {showPreviewImageError && errors.previewImageFile}
               {/* {showErrors && errors.previewImage} */}
               <textarea
                 className="add-show-preview-image-description-input"
