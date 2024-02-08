@@ -22,11 +22,15 @@ function AllShows () {
     if (!shows.length) return <h1>Loading...</h1>
 
     const showCards = shows?.map((show) => {
-        return (
-        <li key={show.id}>
-            <ShowCard show={show}/>
-        </li>
-        )
+        // console.log(show.date)
+        if (show.date > new Date()) {
+            return (
+                <li key={show.id}>
+                    <ShowCard show={show}/>
+                </li>
+                )
+        }
+        
     })
 
     const locations = new Set(shows.map((show) => show.location))

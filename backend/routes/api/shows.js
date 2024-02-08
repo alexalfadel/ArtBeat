@@ -21,6 +21,7 @@ router.get("/:showId/preview", requireAuth, async (req, res) => {
 
 router.get("/", async (req, res) => {
   const today = new Date();
+  today.setDate(today.getDate() - 1)
   const allShows = await Show.findAll({
     include: [
       {
@@ -38,7 +39,8 @@ router.get("/", async (req, res) => {
     ],
     order: [["createdAt", "ASC"]],
   });
-  const upcomingShows = allShows.filter((show) => new Date(show.date) > today);
+  
+  const upcomingShows = allShows.filter((show) => show.date >= today);
   return res.status(200).json(upcomingShows);
 });
 

@@ -24,9 +24,9 @@
     border-radius: 25px;
 }
 
-.form-top-box {
+/* .form-top-box {
 
-}
+} */
 
 .add-show-name-description-address {
     box-sizing: border-box;
@@ -308,4 +308,23 @@
 #remove-last-image-button:hover {
     cursor: pointer;
     box-shadow: 0px 0px 2px 2px black;
+}
+
+.character-counter {
+    font-family: 'Noto Sans Tai Le', sans-serif;
+    font-size: 10px;
+    text-align: right;
+}
+
+#description-character-counter-red, #description-character-counter-black {
+    text-align: right;
+    width: 850px;
+}
+
+#description-character-counter-red {
+    color: darkred
+}
+
+#description-character-counter-black {
+    color: black
 }

@@ -136,7 +136,6 @@ function ShowDetails() {
     show: show,
   };
 
-  console.log(imageModalProps, "----imageModalProps");
 
   return (
     <div className="show-details-main-box">
@@ -149,7 +148,7 @@ function ShowDetails() {
           <div className="image-buttons-holder">
             <OpenModalButton
               id="see-more-button"
-              buttonText="See more"
+              buttonText="Art Piece Details"
               modalComponent={<ImageModal imageAndArtist={imageModalProps} />}
             />
             <div id="image-button-carousel-holder">{imageButtons}</div>
@@ -157,6 +156,7 @@ function ShowDetails() {
         </div>
         <div className="show-details-info-box">
           <div className="show-details-info-text">
+            <h2 id='show-details-h2'>{name}</h2>
             <p className="show-details-info-p">Hosted By: {User.name}</p>
             <p className="show-details-info-p">{description}</p>
             <div>
