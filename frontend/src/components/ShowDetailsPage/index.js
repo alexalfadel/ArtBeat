@@ -37,6 +37,8 @@ function ShowDetails() {
   const { user } = userData;
   const [currentImage, setCurrentImage] = useState("");
   const [currentImageId, setCurrentImageId] = useState(null);
+  
+  
 
   useEffect(() => {
     dispatch(getAllShowsThunk());
@@ -100,9 +102,10 @@ function ShowDetails() {
     setCurrentImageId(previewImage.id);
   }
 
-  const changeImage = ({ imageUrl, imageId }) => {
+  const changeImage = ({ imageUrl, imageId, buttonId }) => {
     setCurrentImage(imageUrl);
     setCurrentImageId(imageId);
+    
   };
 
   for (let i = 0; i < ShowImages.length; i++) {
@@ -114,6 +117,7 @@ function ShowDetails() {
             changeImage({
               imageUrl: ShowImages[i].imageUrl,
               imageId: ShowImages[i].id,
+              buttonId: i
             });
           }}
         >

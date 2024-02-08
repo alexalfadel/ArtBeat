@@ -97,11 +97,13 @@ div.show-details-bottom-box > h2 {
 
 .image-carousel-button {
     color: lightgrey;
-    font-size: 10px;
+    font-size: 12px;
+    margin-left: 5px;
 }
 
 .image-carousel-button:hover {
     cursor: pointer;
+    color: darkgray
 }
 
 .image-buttons-holder {
@@ -149,3 +151,4 @@ div.show-details-bottom-box > h2 {
     font-family: 'Noto Sans Tai Le', sans-serif;
     font-size: 30px;
 }
+
