@@ -9,7 +9,7 @@ import ShowCard from '../ShowCard';
 function AllShows () {
     const dispatch = useDispatch()
     const userData = useSelector((state) => state.session)
-    const shows = useSelector((state) => state.shows)
+    let shows = useSelector((state) => state.shows)
     const [ locationFilter, setLocationFilter ] = useState('')
     const { user } = userData;
 
@@ -21,17 +21,19 @@ function AllShows () {
 
     if (!shows.length) return <h1>Loading...</h1>
 
-    const showCards = shows?.map((show) => {
-        // console.log(show.date)
-        if (show.date > new Date()) {
-            return (
-                <li key={show.id}>
-                    <ShowCard show={show}/>
-                </li>
-                )
-        }
+    shows = shows.sort((a, b) => a.date < b.date ? -1 : 1)
+
+    // const showCards = shows?.map((show) => {
+    //     // console.log(show.date)
+    //     if (show.date > new Date()) {
+    //         return (
+    //             <li key={show.id}>
+    //                 <ShowCard show={show}/>
+    //             </li>
+    //             )
+    //     }
         
-    })
+    // })
 
     const locations = new Set(shows.map((show) => show.location))
 
