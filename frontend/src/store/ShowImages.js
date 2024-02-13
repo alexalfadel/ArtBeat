@@ -23,12 +23,13 @@ export const getPreviewImageThunk = (showId) => async (dispatch) => {
 };
 
 export const addShowImage = (showImage) => async (dispatch) => {
+  console.log(showImage)
   const response = await csrfFetch(`/api/images`, {
     method: "POST",
     header: {
-      "Content-Type": "application/json",
+      "Content-Type": "multipart",
     },
-    body: JSON.stringify(showImage),
+    body: showImage,
   });
 
   if (response.ok) {

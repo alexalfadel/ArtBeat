@@ -6,6 +6,7 @@ import { Redirect } from "react-router-dom";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import { addShowThunk } from "../../store/shows";
 import { addShowImage } from "../../store/ShowImages";
+// import photoUpload from "../PhotoUpload";
 
 export const isValidAddress = (address) => {
   const splitAddress = address.split(" ");
@@ -110,9 +111,9 @@ function AddShowForm() {
       errors.description = "Description must be at least 24 characters long";
     if (!isValidAddress(address))
       errors.address = "Please enter a valid address";
-    if (!validProfilePic(previewImageUrl))
-      errors.previewImageUrl =
-        "Please enter a valid image url ending in .png, .jpg, or .jpeg";
+    // if (!validProfilePic(previewImageUrl))
+    //   errors.previewImageUrl =
+    //     "Please enter a valid image url ending in .png, .jpg, or .jpeg";
     if (image1Url && !validProfilePic(image1Url))
       errors.image1Url = "Url must end in .jpg, .jpeg, or .png";
     if (image2Url && !validProfilePic(image2Url))
@@ -156,11 +157,11 @@ function AddShowForm() {
       errors.date = "Date must be set in the future";
     if (!date) errors.date = "Date is required.";
     if (!isValidImageFile(previewImageFile)) errors.previewImageFile = 'Image must be.jpg, .jpeg, or .png'
-    if (!isValidImageFile(image1File)) errors.image1File = 'Image must be .jpg, .jpeg, or .png'
-    if (!isValidImageFile(image2File)) errors.image2File = 'Image must be .jpg, .jpeg, or .png'
-    if (!isValidImageFile(image3File)) errors.image3File = 'Image must be .jpg, .jpeg, or .png'
-    if (!isValidImageFile(image4File)) errors.image4File = 'Image must be .jpg, .jpeg, or .png'
-    if (!isValidImageFile(image5File)) errors.image5File = 'Image must be .jpg, .jpeg, or .png'
+    if (image1File && !isValidImageFile(image1File)) errors.image1File = 'Image must be .jpg, .jpeg, or .png'
+    if (image2File && !isValidImageFile(image2File)) errors.image2File = 'Image must be .jpg, .jpeg, or .png'
+    if (image3File && !isValidImageFile(image3File)) errors.image3File = 'Image must be .jpg, .jpeg, or .png'
+    if (image4File && !isValidImageFile(image4File)) errors.image4File = 'Image must be .jpg, .jpeg, or .png'
+    if (image5File && !isValidImageFile(image5File)) errors.image5File = 'Image must be .jpg, .jpeg, or .png'
 
     setErrors(errors);
   }, [
@@ -255,6 +256,9 @@ function AddShowForm() {
     history.push("/shows");
   };
 
+  // const region = process.env.AWS_REGION
+  // console.log(region, '----region')
+
   const onSubmit = async (e) => {
     e.preventDefault();
 
@@ -263,6 +267,8 @@ function AddShowForm() {
     if (Object.keys(errors).length) {
       setShowErrors(true);
       console.log('oops we have errors')
+      console.log(errors, '---errors')
+      console.log(previewImageUrl)
       return;
     } else {
       console.log('we have no errors')
@@ -281,6 +287,8 @@ function AddShowForm() {
 
       const newShowId = newShow.id;
 
+      console.log(previewImageFile)
+
       const images = [
         {
           title: previewImageTitle,
@@ -288,60 +296,67 @@ function AddShowForm() {
           description: previewImageDescription,
           preview: true,
           showId: newShowId,
+          imageFile: previewImageFile
         },
       ];
 
-      if (image1Title && image1Description && image1Url) {
+      if (image1Title && image1Description && image1Url && image1File) {
         images.push({
           title: image1Title,
           imageUrl: image1Url,
           description: image1Description,
           preview: false,
           showId: newShowId,
+          imageFile: image1File
         });
       }
 
-      if (image2Title && image2Description && image2Url) {
+      if (image2Title && image2Description && image2Url && image2File) {
         images.push({
           title: image2Title,
           imageUrl: image2Url,
           description: image2Description,
           preview: false,
           showId: newShowId,
+          imageFile: image2File
         });
       }
 
-      if (image3Title && image3Description && image3Url) {
+      if (image3Title && image3Description && image3Url && image3File) {
         images.push({
           title: image3Title,
           imageUrl: image3Url,
           description: image3Description,
           preview: false,
           showId: newShowId,
+          imageFile: image3File
         });
       }
 
-      if (image4Title && image4Description && image4Url) {
+      if (image4Title && image4Description && image4Url && image4File) {
         images.push({
           title: image4Title,
           imageUrl: image4Url,
           description: image4Description,
           preview: false,
           showId: newShowId,
+          imageFile: image4File
         });
       }
 
-      if (image5Title && image5Description && image5Url) {
+      if (image5Title && image5Description && image5Url && image5File) {
         images.push({
           title: image5Title,
           imageUrl: image5Url,
           description: image5Description,
           preview: false,
           showId: newShowId,
+          imageFile: image5File
         });
       }
 
       for (let i = 0; i < images.length; i++) {
+        // let location = photoUpload(images[i].imageFile)
         await dispatch(addShowImage(images[i]));
       }
     }

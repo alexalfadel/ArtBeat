@@ -7,6 +7,9 @@ const helmet = require('helmet');
 const cookieParser = require('cookie-parser');
 const routes = require('./routes');
 const { ValidationError } = require('sequelize');
+const AWS = require('aws-sdk')
+// const multer = require('multer')
+const fs = require('fs')
 
 
 const { environment } = require('./config');
@@ -79,5 +82,13 @@ app.use((err, _req, res, _next) => {
   });
 });
 
+// AWS.config.update({
+//   accessKeyId: process.env.AWS_ACCES_KEY,
+//   secretAccessKey: process.env.AWS_SECRET_KEY
+// })
 
-  module.exports = app;
+// const upload = multer({ dest: 'uploads/'})
+
+
+
+module.exports = app;
