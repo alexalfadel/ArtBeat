@@ -38,11 +38,10 @@ export const addShowImageToAws = (formData) => async (req, res) => {
 }
 
 export const addShowImage = (showImage) => async (dispatch) => {
-  console.log(showImage)
   const response = await csrfFetch(`/api/images`, {
     method: "POST",
     header: {
-      "Content-Type": "multipart",
+      "Content-Type": "application/json",
     },
     body: showImage,
   });

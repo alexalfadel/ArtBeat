@@ -8,9 +8,7 @@ const cookieParser = require('cookie-parser');
 const routes = require('./routes');
 const { ValidationError } = require('sequelize');
 const AWS = require('aws-sdk')
-// const multer = require('multer')
-// const fs = require('fs')
-const fileUpload = require('express-fileupload');
+
 
 
 const { environment } = require('./config');
@@ -22,9 +20,7 @@ app.use(morgan('dev'));
 
 app.use(cookieParser());
 app.use(express.json({ limit: "10mb", extended: true}));
-app.use(fileUpload({
-  createParentPath: true
-}))
+
 
 // Security Middleware
 if (!isProduction) {
