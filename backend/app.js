@@ -9,7 +9,8 @@ const routes = require('./routes');
 const { ValidationError } = require('sequelize');
 const AWS = require('aws-sdk')
 // const multer = require('multer')
-const fs = require('fs')
+// const fs = require('fs')
+const fileUpload = require('express-fileupload');
 
 
 const { environment } = require('./config');
@@ -20,7 +21,10 @@ const app = express();
 app.use(morgan('dev'));
 
 app.use(cookieParser());
-app.use(express.json());
+app.use(express.json({ limit: "10mb", extended: true}));
+app.use(fileUpload({
+  createParentPath: true
+}))
 
 // Security Middleware
 if (!isProduction) {

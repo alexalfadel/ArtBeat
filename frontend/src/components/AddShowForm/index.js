@@ -5,7 +5,9 @@ import { validProfilePic } from "../SignUpFormModal";
 import { Redirect } from "react-router-dom";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import { addShowThunk } from "../../store/shows";
-import { addShowImage } from "../../store/ShowImages";
+import { addShowImage, addShowImageToAws } from "../../store/ShowImages";
+// const fs = require('fs')
+
 // import photoUpload from "../PhotoUpload";
 
 export const isValidAddress = (address) => {
@@ -357,6 +359,11 @@ function AddShowForm() {
 
       for (let i = 0; i < images.length; i++) {
         // let location = photoUpload(images[i].imageFile)
+        const formData = new FormData()
+        formData.append('File', images[i].imageFile, images[i].imageFile.name)
+        // console.log(formData, '---form data in on submit')
+        console.log(images[i].imageFile, '---imageFile in on submit')
+        await dispatch(addShowImageToAws(formData))
         await dispatch(addShowImage(images[i]));
       }
     }

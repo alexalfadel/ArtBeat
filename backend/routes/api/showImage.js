@@ -6,44 +6,79 @@ const Op = Sequelize;
 const { v4: uuidv4 } = require('uuid');
 const AWS = require('aws-sdk')
 const fs = require('fs')
-const multer = require('multer');
+// const multer = require('multer');
 
 
 const router = express.Router();
 
 
-AWS.config.update({
-  accessKeyId: process.env.AWS_ACCES_KEY,
-  secretAccessKey: process.env.AWS_SECRET_KEY
-})
+// AWS.config.update({
+//   accessKeyId: process.env.AWS_ACCES_KEY,
+//   secretAccessKey: process.env.AWS_SECRET_KEY
+// })
 
-const s3 = new AWS.S3();
-
-
-const storage = multer.memoryStorage();
-const upload = multer({ storage: storage });
+// const s3 = new AWS.S3();
 
 
+// const storage = multer.memoryStorage();
+// const upload = multer({ storage: storage });
+
+
+router.post("/upload", requireAuth, async (req, res) => {
+  console.log('----WE MADE IT TO THE UPLOAD ROUTE')
+  console.log(req.rawBody, '-----req.body')
+  
+
+  AWS.config.update({
+    accessKeyId: process.env.AWS_ACCES_KEY,
+    secretAccessKey: process.env.AWS_SECRET_KEY,
+    region: process.env.AWS_REGION
+  })
+  
+  const s3 = new AWS.S3({
+    accessKeyId: process.env.AWS_ACCES_KEY,
+    secretAccessKey: process.env.AWS_SECRET_KEY
+  });
+
+
+  
+  const image = req.files.file
+  try {
+    console.log('----WE ARE IN THE TRY BLOCK')
+    // console.log(req.body, '----req.body')
+    // const fileContent = req.body.File
+    // console.log(typeof fileContent)
+
+    const params = {
+      Bucket: 'artbeat-media',
+      Key: `image-${uuidv4()}`, // Specify the file name in S3
+      ACL: 'public-read',
+      Body: image
+    };
+    
+
+    await s3.upload(params).promise()
+
+    console.log('-----after aws upload....')
+
+    res.send('File uploaded successfully')
+
+    } catch (err) {
+      console.log(err, '----WE ARE IN THE ERROR BLOCK :(')
+      res.status(500).send('Error uploading file')
+    }
+  }
+);
 
 
 router.post("/", requireAuth, async (req, res) => { 
-  const { title, imageUrl, description, preview, showId, imageFile } = req.body
+  const {imageFile } = req.body
 
-  // AWS.config.update({
-  //   accessKeyId: process.env.AWS_ACCES_KEY,
-  //   secretAccessKey: process.env.AWS_SECRET_KEY
-  // })
-
-  // const s3 = new AWS.S3();
-
-
-  console.log(req.body, '----req.body')
-
-  const key = `${title}_${uuidv4()}`
+  // const key = `${title}_${uuidv4()}`
 
   const params = {
     Bucket: 'artbeat-media',
-    Key: key, // Specify the file name in S3
+    Key: `image-${uuidv4()}`, // Specify the file name in S3
     ACL: 'public-read',
     Body: imageFile
   };
