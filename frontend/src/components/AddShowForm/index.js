@@ -5,7 +5,7 @@ import { validProfilePic } from "../SignUpFormModal";
 import { Redirect } from "react-router-dom";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import { addShowThunk } from "../../store/shows";
-import { addShowImage, addShowImageToAws } from "../../store/ShowImages";
+import { addShowImageToAws } from "../../store/ShowImages";
 
 export const isValidAddress = (address) => {
   const splitAddress = address.split(" ");
@@ -22,10 +22,8 @@ export const formatTime = (time, amPm) => {
   } else return `${Number(time.split(":")[0]) + 12}:00`;
 };
 
-const isValidImageFile = (file) => {
+export const isValidImageFile = (file) => {
   const validTypes = ["image/jpeg", "image/jpg", "image/png"];
-  console.log(file, "---file");
-  console.log(file.type, "---file.type");
   if (validTypes.includes(file.type)) return true;
   else return false;
 };
@@ -586,7 +584,7 @@ function AddShowForm() {
               {showErrors && errors.previewImageUrl && (
                 <p className="add-show-errors-p">{errors.previewImageUrl}</p>
               )}
-              {showPreviewImageError && errors.previewImageFile}
+              {showPreviewImageError && <p className='add-show-errors-p'>{errors.previewImageFile}</p>}
               {/* {showErrors && errors.previewImage} */}
               <textarea
                 className="add-show-preview-image-description-input"
@@ -643,7 +641,7 @@ function AddShowForm() {
                 {showErrors && errors.image1Url && (
                   <p className="add-show-errors-p">{errors.image1Url}</p>
                 )}
-                {showImage1Error && errors.image1File}
+                {showImage1Error && <p className='add-show-errors-p'>{errors.image1File}</p>}
                 <textarea
                   className="add-show-preview-image-description-input"
                   placeholder="Image Description"
@@ -697,10 +695,7 @@ function AddShowForm() {
                     }
                   }}
                 ></input>
-                {showErrors && errors.image2Url && (
-                  <p className="add-show-errors-p">{errors.image2Url}</p>
-                )}
-                {showImage2Error && errors.image2File}
+                {showImage2Error && <p className='add-show-errors-p'>{errors.image2File}</p>}
 
                 <textarea
                   className="add-show-preview-image-description-input"
@@ -755,10 +750,7 @@ function AddShowForm() {
                     }
                   }}
                 ></input>
-                {showErrors && errors.image3Url && (
-                  <p className="add-show-errors-p">{errors.image3Url}</p>
-                )}
-                {showImage3Error && errors.image3File}
+                {showImage3Error && <p className='add-show-errors-p'>{errors.image3File}</p>}
 
                 <textarea
                   className="add-show-preview-image-description-input"
@@ -813,10 +805,7 @@ function AddShowForm() {
                     }
                   }}
                 ></input>
-                {showErrors && errors.image4Url && (
-                  <p className="add-show-errors-p">{errors.image4Url}</p>
-                )}
-                {showImage4Error && errors.image4File}
+                {showImage4Error && <p className='add-show-errors-p'>{errors.image4File}</p>}
 
                 <textarea
                   className="add-show-preview-image-description-input"
@@ -871,10 +860,7 @@ function AddShowForm() {
                     }
                   }}
                 ></input>
-                {showErrors && errors.image5Url && (
-                  <p className="add-show-errors-p">{errors.image5Url}</p>
-                )}
-                {showImage5Error && errors.image5File}
+                {showImage5Error && <p className='add-show-errors-p'>{errors.image5File}</p>}
 
                 <textarea
                   className="add-show-preview-image-description-input"

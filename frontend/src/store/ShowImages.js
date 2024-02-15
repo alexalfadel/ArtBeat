@@ -23,7 +23,6 @@ export const getPreviewImageThunk = (showId) => async (dispatch) => {
 };
 
 export const addShowImageToAws = (imageData) => async (req, res) => {
-  // console.log(formData, '----formData')
   const { title, description, preview, showId, imageFile} = imageData
   
   const formData = new FormData()
@@ -39,12 +38,9 @@ export const addShowImageToAws = (imageData) => async (req, res) => {
   })
 
   if (response.ok) {
-    console.log('we got a response ok in addImagetoAWS')
     const imageUrl = await response.json()
-    console.log(imageUrl, '---imageUrl')
   } else {
     const err = await response.json()
-    console.log(err, '------errors :(')
   }
 }
 

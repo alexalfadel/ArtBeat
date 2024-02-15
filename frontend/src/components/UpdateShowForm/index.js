@@ -8,8 +8,9 @@ import { isValidAddress, formatTime } from "../AddShowForm";
 import { getAllShowsThunk } from "../../store/shows";
 import { formatDate } from "../ShowCard";
 import { updateShowThunk } from "../../store/shows";
-import { updateShowImageThunk, addShowImage } from "../../store/ShowImages";
+import { updateShowImageThunk, addShowImage, addShowImageToAws } from "../../store/ShowImages";
 import { Redirect } from "react-router-dom";
+import { isValidImageFile } from '../AddShowForm'
 
 const deconstructTime = (time) => {
   const splitTime = time.split(":");
@@ -99,6 +100,25 @@ function UpdateShowForm() {
   const [image3Action, setImage3Action] = useState('')
   const [image4Action, setImage4Action] = useState('')
   const [image5Action, setImage5Action] = useState('')
+  const [updatingPreviewImageFile, setUpdatingPreviewImageFile] = useState(false)
+  const [updatingImage1File, setUpdatingImage1File] = useState(false)
+  const [updatingImage2File, setUpdatingImage2File] = useState(false)
+  const [updatingImage3File, setUpdatingImage3File] = useState(false)
+  const [updatingImage4File, setUpdatingImage4File] = useState(false)
+  const [updatingImage5File, setUpdatingImage5File] = useState(false)
+  const [previewImageFile, setPreviewImageFile] = useState('')
+  const [image1File, setImage1File] = useState('')
+  const [image2File, setImage2File] = useState('')
+  const [image3File, setImage3File] = useState('')
+  const [image4File, setImage4File] = useState('')
+  const [image5File, setImage5File] = useState('')
+  const [showPreviewImageError, setShowPreviewImageError] = useState(false)
+  const [showImage1Error, setShowImage1Error] = useState(false)
+  const [showImage2Error, setShowImage2Error] = useState(false)
+  const [showImage3Error, setShowImage3Error] = useState(false)
+  const [showImage4Error, setShowImage4Error] = useState(false)
+  const [showImage5Error, setShowImage5Error] = useState(false)
+
 
   const [userId, setUserId] = useState("");
 
@@ -142,6 +162,7 @@ function UpdateShowForm() {
       setPreviewImageTitle(previewImage.title);
       setPreviewImageUrl(previewImage.imageUrl);
       setPreviewImageDescription(previewImage.description);
+      setPreviewImagePlaceholder(previewImage.imageUrl)
       setPreviewImageId(previewImage.id);
       if (remainingImages[0]) {
         setImage1Title(remainingImages[0].title);
@@ -246,6 +267,18 @@ function UpdateShowForm() {
     if (price > 100000) errors.price = "Price must be less than $100,000.00";
     if (new Date(`${date}T00:00-0800`) < new Date())
       errors.date = "Date must be set in the future";
+    if (!isValidImageFile(previewImageFile))
+      errors.previewImageFile = "Image must be.jpg, .jpeg, or .png";
+    if (image1File && !isValidImageFile(image1File))
+      errors.image1File = "Image must be .jpg, .jpeg, or .png";
+    if (image2File && !isValidImageFile(image2File))
+      errors.image2File = "Image must be .jpg, .jpeg, or .png";
+    if (image3File && !isValidImageFile(image3File))
+      errors.image3File = "Image must be .jpg, .jpeg, or .png";
+    if (image4File && !isValidImageFile(image4File))
+      errors.image4File = "Image must be .jpg, .jpeg, or .png";
+    if (image5File && !isValidImageFile(image5File))
+      errors.image5File = "Image must be .jpg, .jpeg, or .png";
 
     setErrors(errors);
   }, [
@@ -268,13 +301,17 @@ function UpdateShowForm() {
     price,
     date,
     description,
+    image1File,
+    image2File,
+    image3File,
+    image4File,
+    image5File,
+    previewImageFile
   ]);
 
-  // if (!userId) return <Redirect to="/" />
+
   if (!Object.keys(allShows).length) return <h1>Loading...</h1>;
   const show = allShows.filter((show) => `${show.id}` === showId)[0];
-  // if (!show) history.push('/')
-  // if (!userId) history.push('/')
 
   const reset = () => {
     setUserId("");
@@ -287,7 +324,7 @@ function UpdateShowForm() {
     setAmPm("am");
     setErrors({});
     setPreviewImagePlaceholder(
-      "https://www.wildseedfarms.com/wp-content/plugins/shopwp-pro/public/imgs/placeholder.png"
+      ''
     );
     setImage1Placeholder(
       "https://www.wildseedfarms.com/wp-content/plugins/shopwp-pro/public/imgs/placeholder.png"
@@ -365,11 +402,12 @@ function UpdateShowForm() {
       const imagesToUpdate = [
         {
           title: previewImageTitle,
-          imageUrl: previewImageUrl,
+          imageUrl: updatingPreviewImageFile ? null : previewImageUrl,
           description: previewImageDescription,
           preview: true,
           showId: showId,
           id: previewImageId,
+          imageFile: updatingPreviewImageFile ? previewImageFile : null
         },
       ];
 
@@ -643,7 +681,7 @@ function UpdateShowForm() {
             <div>
               <img
                 className="add-show-preview-image"
-                src={previewImageUrl}
+                src={previewImageFile ? previewImageUrl : previewImagePlaceholder}
                 alt='Image Unavailable'
               ></img>
             </div>
@@ -661,25 +699,25 @@ function UpdateShowForm() {
               )}
               <input
                 className="add-show-preview-image-inputs"
-                type="text"
-                maxLength="300"
-                placeholder="Preview Image URL"
-                value={previewImageUrl}
+                type="file"
+                
                 onChange={(e) => {
-                  if (validProfilePic(e.target.value)) {
-                    setPreviewImageUrl(e.target.value);
-                    // setPreviewImagePlaceholder(e.target.value);
+                  if (isValidImageFile(e.target.files[0])) {
+                    setPreviewImagePlaceholder(e.target.files[0])
+                    setPreviewImageUrl(URL.createObjectURL(e.target.files[0]))
+                    setPreviewImageFile(e.target.files[0])
+                    setUpdatingPreviewImageFile(true)
                   } else {
-                    setPreviewImageUrl(e.target.value);
+                    setShowPreviewImageError(true)
+                    setPreviewImageFile('')
                     setPreviewImagePlaceholder(
                       "https://www.wildseedfarms.com/wp-content/plugins/shopwp-pro/public/imgs/placeholder.png"
                     );
                   }
                 }}
               ></input>
-              {showErrors && errors.previewImageUrl && (
-                <p className="add-show-errors-p">{errors.previewImageUrl}</p>
-              )}
+               {showPreviewImageError && <p className='add-show-errors-p'>{errors.previewImageFile}</p>}
+
               <textarea
                 className="add-show-preview-image-description-input"
                 placeholder="Preview Image Description"
