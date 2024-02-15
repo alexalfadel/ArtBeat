@@ -16,8 +16,19 @@ const router = express.Router();
 
 router.post("/upload", singleMulterUpload('image'), requireAuth, async (req, res) => {
   // console.log(req.body.formData.fileName, '----req.body')
+  const { title, description, preview, showId } = req.body
   const imageURL = await singleFileUpload({file: req.file, public: true})
-  // const imageName = req.body.fileName
+  const newImage = await ShowImage.create({
+    title: title,
+    description: description,
+    imageUrl: imageURL,
+    preview: preview,
+    showId: showId
+
+  });
+  
+  return res.status(201).json(newImage);
+
 
   return res.status(201).json(imageURL)
 });

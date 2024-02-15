@@ -6,9 +6,6 @@ import { Redirect } from "react-router-dom";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import { addShowThunk } from "../../store/shows";
 import { addShowImage, addShowImageToAws } from "../../store/ShowImages";
-// const fs = require('fs')
-
-// import photoUpload from "../PhotoUpload";
 
 export const isValidAddress = (address) => {
   const splitAddress = address.split(" ");
@@ -26,12 +23,12 @@ export const formatTime = (time, amPm) => {
 };
 
 const isValidImageFile = (file) => {
-  const validTypes = ['image/jpeg', 'image/jpg', 'image/png']
-  console.log(file, '---file')
-  console.log(file.type, '---file.type')
+  const validTypes = ["image/jpeg", "image/jpg", "image/png"];
+  console.log(file, "---file");
+  console.log(file.type, "---file.type");
   if (validTypes.includes(file.type)) return true;
-  else return false
-}
+  else return false;
+};
 
 function AddShowForm() {
   const history = useHistory();
@@ -89,19 +86,19 @@ function AddShowForm() {
   const [image3Description, setImage3Description] = useState("");
   const [image4Description, setImage4Description] = useState("");
   const [image5Description, setImage5Description] = useState("");
-  const [descriptionClass, setDescriptionClass] = useState('black')
-  const [previewImageFile, setPreviewImageFile] = useState('')
-  const [image1File, setImage1File] = useState('')
-  const [image2File, setImage2File] = useState('')
-  const [image3File, setImage3File] = useState('')
-  const [image4File, setImage4File] = useState('')
-  const [image5File, setImage5File] = useState('')
-  const [showPreviewImageError, setShowPreviewImageError] = useState(false)
-  const [showImage1Error, setShowImage1Error] = useState(false)
-  const [showImage2Error, setShowImage2Error] = useState(false)
-  const [showImage3Error, setShowImage3Error] = useState(false)
-  const [showImage4Error, setShowImage4Error] = useState(false)
-  const [showImage5Error, setShowImage5Error] = useState(false)
+  const [descriptionClass, setDescriptionClass] = useState("black");
+  const [previewImageFile, setPreviewImageFile] = useState("");
+  const [image1File, setImage1File] = useState("");
+  const [image2File, setImage2File] = useState("");
+  const [image3File, setImage3File] = useState("");
+  const [image4File, setImage4File] = useState("");
+  const [image5File, setImage5File] = useState("");
+  const [showPreviewImageError, setShowPreviewImageError] = useState(false);
+  const [showImage1Error, setShowImage1Error] = useState(false);
+  const [showImage2Error, setShowImage2Error] = useState(false);
+  const [showImage3Error, setShowImage3Error] = useState(false);
+  const [showImage4Error, setShowImage4Error] = useState(false);
+  const [showImage5Error, setShowImage5Error] = useState(false);
 
   useEffect(() => {
     const errors = {};
@@ -113,19 +110,6 @@ function AddShowForm() {
       errors.description = "Description must be at least 24 characters long";
     if (!isValidAddress(address))
       errors.address = "Please enter a valid address";
-    // if (!validProfilePic(previewImageUrl))
-    //   errors.previewImageUrl =
-    //     "Please enter a valid image url ending in .png, .jpg, or .jpeg";
-    if (image1Url && !validProfilePic(image1Url))
-      errors.image1Url = "Url must end in .jpg, .jpeg, or .png";
-    if (image2Url && !validProfilePic(image2Url))
-      errors.image2Url = "Url must end in .jpg, .jpeg, or .png";
-    if (image3Url && !validProfilePic(image3Url))
-      errors.image3Url = "Url must end in .jpg, .jpeg, or .png";
-    if (image4Url && !validProfilePic(image4Url))
-      errors.image4Url = "Url must end in .jpg, .jpeg, or .png";
-    if (image5Url && !validProfilePic(image5Url))
-      errors.image5Url = "Url must end in .jpg, .jpeg, or .png";
     if (previewImageTitle.length < 5)
       errors.previewImageTitle = "Title must be at least 5 characters long";
     if (image1Title && image1Title.length < 5)
@@ -138,18 +122,6 @@ function AddShowForm() {
       errors.image4Title = "Title must be at least 5 characters long";
     if (image5Title && image5Title.length < 5)
       errors.image5Title = "Title must be at least 5 characters long";
-    if (previewImageUrl.length < 3)
-      errors.previewImageUrl = "Url must be at least 3 characters long";
-    if (image1Url && image1Url.length < 3)
-      errors.image1Url = "Url must be at least 3 characters long";
-    if (image2Url && image2Url.length < 3)
-      errors.image2Url = "Url must be at least 3 characters long";
-    if (image3Url && image3Url.length < 3)
-      errors.image3Url = "Url must be at least 3 characters long";
-    if (image4Url && image4Url.length < 3)
-      errors.image4Url = "Url must be at least 3 characters long";
-    if (image5Url && image5Url.length < 3)
-      errors.image5Url = "Url must be at least 3 characters long";
     if (!location) errors.location = "Location is required";
     if (!time) errors.time = "Time is required";
     if (!price) errors.price = "Price is required";
@@ -158,29 +130,29 @@ function AddShowForm() {
     if (new Date(`${date}T00:00-0800`) < new Date())
       errors.date = "Date must be set in the future";
     if (!date) errors.date = "Date is required.";
-    if (!isValidImageFile(previewImageFile)) errors.previewImageFile = 'Image must be.jpg, .jpeg, or .png'
-    if (image1File && !isValidImageFile(image1File)) errors.image1File = 'Image must be .jpg, .jpeg, or .png'
-    if (image2File && !isValidImageFile(image2File)) errors.image2File = 'Image must be .jpg, .jpeg, or .png'
-    if (image3File && !isValidImageFile(image3File)) errors.image3File = 'Image must be .jpg, .jpeg, or .png'
-    if (image4File && !isValidImageFile(image4File)) errors.image4File = 'Image must be .jpg, .jpeg, or .png'
-    if (image5File && !isValidImageFile(image5File)) errors.image5File = 'Image must be .jpg, .jpeg, or .png'
+    if (!isValidImageFile(previewImageFile))
+      errors.previewImageFile = "Image must be.jpg, .jpeg, or .png";
+    if (image1File && !isValidImageFile(image1File))
+      errors.image1File = "Image must be .jpg, .jpeg, or .png";
+    if (image2File && !isValidImageFile(image2File))
+      errors.image2File = "Image must be .jpg, .jpeg, or .png";
+    if (image3File && !isValidImageFile(image3File))
+      errors.image3File = "Image must be .jpg, .jpeg, or .png";
+    if (image4File && !isValidImageFile(image4File))
+      errors.image4File = "Image must be .jpg, .jpeg, or .png";
+    if (image5File && !isValidImageFile(image5File))
+      errors.image5File = "Image must be .jpg, .jpeg, or .png";
 
     setErrors(errors);
   }, [
     name,
     address,
-    previewImageUrl,
     previewImageTitle,
     image1Title,
     image2Title,
     image3Title,
     image4Title,
     image5Title,
-    image1Url,
-    image2Url,
-    image3Url,
-    image4Url,
-    image5Url,
     location,
     time,
     price,
@@ -191,17 +163,15 @@ function AddShowForm() {
     image3File,
     image4File,
     image5File,
-    previewImageFile
+    previewImageFile,
   ]);
 
   useEffect(() => {
-    if (description.length < 25) setDescriptionClass('red')
-    else if (description.length >= 25) setDescriptionClass('black')
-  }, [description])
+    if (description.length < 25) setDescriptionClass("red");
+    else if (description.length >= 25) setDescriptionClass("black");
+  }, [description]);
 
   const reset = async () => {
-    // e.preventDefault();
-
     setName("");
     setDescription("");
     setAddress("");
@@ -264,16 +234,10 @@ function AddShowForm() {
   const onSubmit = async (e) => {
     e.preventDefault();
 
-    
-
     if (Object.keys(errors).length) {
       setShowErrors(true);
-      console.log('oops we have errors')
-      console.log(errors, '---errors')
-      console.log(previewImageUrl)
       return;
     } else {
-      console.log('we have no errors')
       const show = {
         name: name,
         description: description,
@@ -289,8 +253,6 @@ function AddShowForm() {
 
       const newShowId = newShow.id;
 
-      console.log(previewImageFile)
-
       const images = [
         {
           title: previewImageTitle,
@@ -298,7 +260,7 @@ function AddShowForm() {
           description: previewImageDescription,
           preview: true,
           showId: newShowId,
-          imageFile: previewImageFile
+          imageFile: previewImageFile,
         },
       ];
 
@@ -309,7 +271,7 @@ function AddShowForm() {
           description: image1Description,
           preview: false,
           showId: newShowId,
-          imageFile: image1File
+          imageFile: image1File,
         });
       }
 
@@ -320,7 +282,7 @@ function AddShowForm() {
           description: image2Description,
           preview: false,
           showId: newShowId,
-          imageFile: image2File
+          imageFile: image2File,
         });
       }
 
@@ -331,7 +293,7 @@ function AddShowForm() {
           description: image3Description,
           preview: false,
           showId: newShowId,
-          imageFile: image3File
+          imageFile: image3File,
         });
       }
 
@@ -342,7 +304,7 @@ function AddShowForm() {
           description: image4Description,
           preview: false,
           showId: newShowId,
-          imageFile: image4File
+          imageFile: image4File,
         });
       }
 
@@ -353,22 +315,12 @@ function AddShowForm() {
           description: image5Description,
           preview: false,
           showId: newShowId,
-          imageFile: image5File
+          imageFile: image5File,
         });
       }
 
       for (let i = 0; i < images.length; i++) {
-        // const formData = new FormData()
-        // console.log(formData instanceof FormData, '---formData before appending')
-        // formData.append('file', images[i].imageFile)
-        // formData.append('fileName', images[i].title)
-        // for (let key of formData.entries()) {
-        //   console.log(key[0] + ',' + key[1])
-        // }
-        // console.log(formData, '---formData after appending')
-
-        await dispatch(addShowImageToAws(images[i].imageFile))
-        // await dispatch(addShowImage(images[i]));
+        await dispatch(addShowImageToAws(images[i]));
       }
     }
     reset();
@@ -381,7 +333,7 @@ function AddShowForm() {
       setImage1Title("");
       setImage1Description("");
       setImage1Url("");
-      setImage1File('')
+      setImage1File("");
       setImage1Placeholder(
         "https://www.wildseedfarms.com/wp-content/plugins/shopwp-pro/public/imgs/placeholder.png"
       );
@@ -391,7 +343,7 @@ function AddShowForm() {
       setImage2Title("");
       setImage2Description("");
       setImage2Url("");
-      setImage2File('')
+      setImage2File("");
       setImage2Placeholder(
         "https://www.wildseedfarms.com/wp-content/plugins/shopwp-pro/public/imgs/placeholder.png"
       );
@@ -401,7 +353,7 @@ function AddShowForm() {
       setImage3Title("");
       setImage3Description("");
       setImage3Url("");
-      setImage3File('')
+      setImage3File("");
       setImage3Placeholder(
         "https://www.wildseedfarms.com/wp-content/plugins/shopwp-pro/public/imgs/placeholder.png"
       );
@@ -409,7 +361,7 @@ function AddShowForm() {
     } else if (imageCounter === 4) {
       setShowImage4(false);
       setImage4Title("");
-      setImage4File('')
+      setImage4File("");
       setImage4Description("");
       setImage4Url("");
       setImage4Placeholder(
@@ -418,10 +370,10 @@ function AddShowForm() {
       setImageCounter(imageCounter - 1);
     } else if (imageCounter === 5) {
       setShowImage5(false);
-      setImage5Title('')
-      setImage5File('')
-      setImage5Description('')
-      setImage5Url('')
+      setImage5Title("");
+      setImage5File("");
+      setImage5Description("");
+      setImage5Url("");
       setImage5Placeholder(
         "https://www.wildseedfarms.com/wp-content/plugins/shopwp-pro/public/imgs/placeholder.png"
       );
@@ -454,7 +406,10 @@ function AddShowForm() {
               placeholder="Description goes here"
               onChange={(e) => setDescription(e.target.value)}
             ></textarea>
-            <p id={`description-character-counter-${descriptionClass}`} className="character-counter">{`${description.length}/256`}</p>
+            <p
+              id={`description-character-counter-${descriptionClass}`}
+              className="character-counter"
+            >{`${description.length}/256`}</p>
             {showErrors && errors.description && (
               <p className="add-show-errors-p">{errors.description}</p>
             )}
@@ -467,7 +422,7 @@ function AddShowForm() {
               onChange={(e) => setAddress(e.target.value)}
               placeholder="What's your shows address?"
             ></input>
-            
+
             {showErrors && errors.address && (
               <p className="add-show-errors-p">{errors.address}</p>
             )}
@@ -529,8 +484,8 @@ function AddShowForm() {
                   type="number"
                   placeholder="1"
                   value={price}
-                  min='1'
-                  max='100000'
+                  min="1"
+                  max="100000"
                   onChange={(e) => setPrice(e.target.value)}
                 ></input>
                 .00
@@ -586,8 +541,10 @@ function AddShowForm() {
             <div>
               <img
                 className="add-show-preview-image"
-                src={previewImageFile ? previewImageUrl : previewImagePlaceholder}
-                alt='Image Unavailable'
+                src={
+                  previewImageFile ? previewImageUrl : previewImagePlaceholder
+                }
+                alt="Image Unavailable"
               ></img>
             </div>
             <div className="add-show-preview-image-inputs-container">
@@ -613,12 +570,12 @@ function AddShowForm() {
                   if (isValidImageFile(e.target.files[0])) {
                     setPreviewImageFile(e.target.files[0]);
                     setPreviewImagePlaceholder(e.target.files[0]);
-                    setPreviewImageUrl(URL.createObjectURL(e.target.files[0]))
+                    setPreviewImageUrl(URL.createObjectURL(e.target.files[0]));
                     // console.log(previewImageUrl)
                   } else {
                     // setPreviewImageUrl(URL.createObjectURL(e.target.value));
-                    setShowPreviewImageError(true)
-                    setPreviewImageFile('')
+                    setShowPreviewImageError(true);
+                    setPreviewImageFile("");
                     // console.log(errors.previewImageFile, '---error')
                     setPreviewImagePlaceholder(
                       "https://www.wildseedfarms.com/wp-content/plugins/shopwp-pro/public/imgs/placeholder.png"
@@ -638,8 +595,9 @@ function AddShowForm() {
                 value={previewImageDescription}
                 onChange={(e) => setPreviewImageDescription(e.target.value)}
               ></textarea>
-              <p className={`character-counter`}>{`${previewImageDescription.length}/256`}</p>
-
+              <p
+                className={`character-counter`}
+              >{`${previewImageDescription.length}/256`}</p>
             </div>
           </div>
           {showImage1 && (
@@ -648,7 +606,7 @@ function AddShowForm() {
                 <img
                   className="add-show-preview-image"
                   src={image1File ? image1Url : image1Placeholder}
-                  alt='Image Unavailable'
+                  alt="Image Unavailable"
                 ></img>
               </div>
               <div className="add-show-preview-image-inputs-container">
@@ -671,10 +629,10 @@ function AddShowForm() {
                     if (isValidImageFile(e.target.files[0])) {
                       setImage1File(e.target.files[0]);
                       setImage1Placeholder(e.target.files[0]);
-                      setImage1Url(URL.createObjectURL(e.target.files[0]))
+                      setImage1Url(URL.createObjectURL(e.target.files[0]));
                     } else {
-                      setShowImage1Error(true)
-                      setImage1File('')
+                      setShowImage1Error(true);
+                      setImage1File("");
                       // setImage1Url(e.target.value);
                       setImage1Placeholder(
                         "https://www.wildseedfarms.com/wp-content/plugins/shopwp-pro/public/imgs/placeholder.png"
@@ -693,8 +651,9 @@ function AddShowForm() {
                   value={image1Description}
                   onChange={(e) => setImage1Description(e.target.value)}
                 ></textarea>
-                <p className={`character-counter`}>{`${image1Description.length}/256`}</p>
-
+                <p
+                  className={`character-counter`}
+                >{`${image1Description.length}/256`}</p>
               </div>
             </div>
           )}
@@ -705,7 +664,7 @@ function AddShowForm() {
                 <img
                   className="add-show-preview-image"
                   src={image2File ? image2Url : image2Placeholder}
-                  alt='Image Unavailable'
+                  alt="Image Unavailable"
                 ></img>
               </div>
               <div className="add-show-preview-image-inputs-container">
@@ -726,13 +685,12 @@ function AddShowForm() {
                   type="file"
                   onChange={(e) => {
                     if (isValidImageFile(e.target.files[0])) {
-                      setImage2File(e.target.files[0])
+                      setImage2File(e.target.files[0]);
                       setImage2Url(URL.createObjectURL(e.target.files[0]));
                       setImage2Placeholder(e.target.files[0]);
                     } else {
-                      setShowImage2Error(true)
-                      setImage2File('')
-                      // setImage2Url(e.target.files[0]);
+                      setShowImage2Error(true);
+                      setImage2File("");
                       setImage2Placeholder(
                         "https://www.wildseedfarms.com/wp-content/plugins/shopwp-pro/public/imgs/placeholder.png"
                       );
@@ -751,10 +709,10 @@ function AddShowForm() {
                   value={image2Description}
                   onChange={(e) => setImage2Description(e.target.value)}
                 ></textarea>
-                <p className={`character-counter`}>{`${image2Description.length}/256`}</p>
+                <p
+                  className={`character-counter`}
+                >{`${image2Description.length}/256`}</p>
               </div>
-              
-
             </div>
           )}
 
@@ -764,7 +722,7 @@ function AddShowForm() {
                 <img
                   className="add-show-preview-image"
                   src={image3File ? image3Url : image3Placeholder}
-                  alt='Image Unavailable'
+                  alt="Image Unavailable"
                 ></img>
               </div>
               <div className="add-show-preview-image-inputs-container">
@@ -783,17 +741,14 @@ function AddShowForm() {
                 <input
                   className="add-show-preview-image-inputs"
                   type="file"
-                  
                   onChange={(e) => {
                     if (isValidImageFile(e.target.files[0])) {
-                      // setShowImage3Error(true)
-                      setImage3File(e.target.files[0])
+                      setImage3File(e.target.files[0]);
                       setImage3Url(URL.createObjectURL(e.target.files[0]));
                       setImage3Placeholder(e.target.files[0]);
                     } else {
-                      setShowImage3Error(true)
-                      setImage3File('')
-                      // setImage3Url(e.target.value);
+                      setShowImage3Error(true);
+                      setImage3File("");
                       setImage3Placeholder(
                         "https://www.wildseedfarms.com/wp-content/plugins/shopwp-pro/public/imgs/placeholder.png"
                       );
@@ -803,7 +758,7 @@ function AddShowForm() {
                 {showErrors && errors.image3Url && (
                   <p className="add-show-errors-p">{errors.image3Url}</p>
                 )}
-                 {showImage3Error && errors.image3File}
+                {showImage3Error && errors.image3File}
 
                 <textarea
                   className="add-show-preview-image-description-input"
@@ -812,8 +767,9 @@ function AddShowForm() {
                   value={image3Description}
                   onChange={(e) => setImage3Description(e.target.value)}
                 ></textarea>
-                <p className={`character-counter`}>{`${image3Description.length}/256`}</p>
-
+                <p
+                  className={`character-counter`}
+                >{`${image3Description.length}/256`}</p>
               </div>
             </div>
           )}
@@ -824,7 +780,7 @@ function AddShowForm() {
                 <img
                   className="add-show-preview-image"
                   src={image4File ? image4Url : image4Placeholder}
-                  alt='Image Unavailable'
+                  alt="Image Unavailable"
                 ></img>
               </div>
               <div className="add-show-preview-image-inputs-container">
@@ -843,16 +799,14 @@ function AddShowForm() {
                 <input
                   className="add-show-preview-image-inputs"
                   type="file"
-                  
                   onChange={(e) => {
                     if (isValidImageFile(e.target.files[0])) {
-                      setImage4File(e.target.files[0])
+                      setImage4File(e.target.files[0]);
                       setImage4Url(URL.createObjectURL(e.target.files[0]));
                       setImage4Placeholder(e.target.files[0]);
                     } else {
-                      setShowImage4Error(true)
-                      setImage4File('')
-                      // setImage4Url(e.target.value);
+                      setShowImage4Error(true);
+                      setImage4File("");
                       setImage4Placeholder(
                         "https://www.wildseedfarms.com/wp-content/plugins/shopwp-pro/public/imgs/placeholder.png"
                       );
@@ -864,7 +818,6 @@ function AddShowForm() {
                 )}
                 {showImage4Error && errors.image4File}
 
-
                 <textarea
                   className="add-show-preview-image-description-input"
                   placeholder="Image Description"
@@ -872,8 +825,9 @@ function AddShowForm() {
                   value={image4Description}
                   onChange={(e) => setImage4Description(e.target.value)}
                 ></textarea>
-                <p className={`character-counter`}>{`${image4Description.length}/256`}</p>
-
+                <p
+                  className={`character-counter`}
+                >{`${image4Description.length}/256`}</p>
               </div>
             </div>
           )}
@@ -883,8 +837,8 @@ function AddShowForm() {
               <div>
                 <img
                   className="add-show-preview-image"
-                  src={image5File ? image5Url: image5Placeholder}
-                  alt='Image Unavailable'
+                  src={image5File ? image5Url : image5Placeholder}
+                  alt="Image Unavailable"
                 ></img>
               </div>
               <div className="add-show-preview-image-inputs-container">
@@ -903,16 +857,14 @@ function AddShowForm() {
                 <input
                   className="add-show-preview-image-inputs"
                   type="file"
-                  
                   onChange={(e) => {
                     if (isValidImageFile(e.target.files[0])) {
-                      setImage5File(e.target.files[0])
+                      setImage5File(e.target.files[0]);
                       setImage5Url(URL.createObjectURL(e.target.files[0]));
                       setImage5Placeholder(e.target.files[0]);
                     } else {
-                      setShowImage5Error(true)
-                      // setImage5Url(e.target.value);
-                      setImage5File('')
+                      setShowImage5Error(true);
+                      setImage5File("");
                       setImage5Placeholder(
                         "https://www.wildseedfarms.com/wp-content/plugins/shopwp-pro/public/imgs/placeholder.png"
                       );
@@ -931,12 +883,22 @@ function AddShowForm() {
                   value={image5Description}
                   onChange={(e) => setImage5Description(e.target.value)}
                 ></textarea>
-                <p className={`character-counter`}>{`${image5Description.length}/256`}</p>
+                <p
+                  className={`character-counter`}
+                >{`${image5Description.length}/256`}</p>
               </div>
             </div>
           )}
-          { imageCounter < 4 && <p className='image-counter'>You can add {5 - imageCounter} more images!</p>}
-          { imageCounter === 4 && <p className='image-counter'>You can add {5 - imageCounter} more image!</p>}
+          {imageCounter < 4 && (
+            <p className="image-counter">
+              You can add {5 - imageCounter} more images!
+            </p>
+          )}
+          {imageCounter === 4 && (
+            <p className="image-counter">
+              You can add {5 - imageCounter} more image!
+            </p>
+          )}
 
           {imageCounter < 5 && (
             <button
