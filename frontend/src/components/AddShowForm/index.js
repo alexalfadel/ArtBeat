@@ -358,13 +358,17 @@ function AddShowForm() {
       }
 
       for (let i = 0; i < images.length; i++) {
-        // let location = photoUpload(images[i].imageFile)
-        const formData = new FormData()
-        formData.append('File', images[i].imageFile, images[i].imageFile.name)
-        // console.log(formData, '---form data in on submit')
-        console.log(images[i].imageFile, '---imageFile in on submit')
-        await dispatch(addShowImageToAws(formData))
-        await dispatch(addShowImage(images[i]));
+        // const formData = new FormData()
+        // console.log(formData instanceof FormData, '---formData before appending')
+        // formData.append('file', images[i].imageFile)
+        // formData.append('fileName', images[i].title)
+        // for (let key of formData.entries()) {
+        //   console.log(key[0] + ',' + key[1])
+        // }
+        // console.log(formData, '---formData after appending')
+
+        await dispatch(addShowImageToAws(images[i].imageFile))
+        // await dispatch(addShowImage(images[i]));
       }
     }
     reset();

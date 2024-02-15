@@ -22,8 +22,12 @@ export const getPreviewImageThunk = (showId) => async (dispatch) => {
   }
 };
 
-export const addShowImageToAws = (formData) => async (req, res) => {
-  console.log(formData, '----formData')
+export const addShowImageToAws = (image) => async (req, res) => {
+  // console.log(formData, '----formData')
+  
+  const formData = new FormData()
+  formData.append('image', image)
+
   const response = await csrfFetch('/api/images/upload', {
     method: 'POST',
     body: formData
@@ -31,6 +35,8 @@ export const addShowImageToAws = (formData) => async (req, res) => {
 
   if (response.ok) {
     console.log('we got a response ok in addImagetoAWS')
+    const imageUrl = await response.json()
+    console.log(imageUrl, '---imageUrl')
   } else {
     const err = await response.json()
     console.log(err, '------errors :(')

@@ -4,8 +4,9 @@ const { Show, ShowImage, User, Rsvp } = require("../../db/models");
 const { requireAuth } = require("../../utils/auth");
 const Op = Sequelize;
 const { v4: uuidv4 } = require('uuid');
-const AWS = require('aws-sdk')
-const fs = require('fs')
+// const AWS = require('aws-sdk')
+// const fs = require('fs')
+const { singleFileUpload, singleMulterUpload } = require("../../awsS3");
 
 
 
@@ -13,49 +14,53 @@ const router = express.Router();
 
 
 
-router.post("/upload", requireAuth, async (req, res) => {
-  console.log('----WE MADE IT TO THE UPLOAD ROUTE')
-  console.log(req.rawBody, '-----req.body')
+router.post("/upload", singleMulterUpload('image'), requireAuth, async (req, res) => {
+  // console.log(req.body.formData.fileName, '----req.body')
+  const imageURL = await singleFileUpload({file: req.file, public: true})
+  // const imageName = req.body.fileName
+
+  return res.status(201).json(imageURL)
+});
   
 
-  AWS.config.update({
-    accessKeyId: process.env.AWS_ACCES_KEY,
-    secretAccessKey: process.env.AWS_SECRET_KEY,
-    region: process.env.AWS_REGION
-  })
+  // AWS.config.update({
+  //   accessKeyId: process.env.AWS_ACCESS_KEY,
+  //   secretAccessKey: process.env.AWS_SECRET_KEY,
+  //   region: process.env.AWS_REGION
+  // })
   
-  const s3 = new AWS.S3({
-    accessKeyId: process.env.AWS_ACCES_KEY,
-    secretAccessKey: process.env.AWS_SECRET_KEY
-  });
+  // const s3 = new AWS.S3({
+  //   accessKeyId: process.env.AWS_ACCES_KEY,
+  //   secretAccessKey: process.env.AWS_SECRET_KEY
+  // });
 
 
   
-  const image = req.files.file
-  try {
-    console.log('----WE ARE IN THE TRY BLOCK')
+  // const image = req.files.file
+  // try {
+  //   console.log('----WE ARE IN THE TRY BLOCK')
 
 
-    const params = {
-      Bucket: 'artbeat-media',
-      Key: `image-${uuidv4()}`, 
-      ACL: 'public-read',
-      Body: image
-    };
+  //   const params = {
+  //     Bucket: 'artbeat-media',
+  //     Key: `image-${uuidv4()}`, 
+  //     ACL: 'public-read',
+  //     Body: image
+  //   };
     
 
-    await s3.upload(params).promise()
+  //   await s3.upload(params).promise()
 
-    console.log('-----after aws upload....')
+  //   console.log('-----after aws upload....')
 
-    res.send('File uploaded successfully')
+  //   res.send('File uploaded successfully')
 
-    } catch (err) {
-      console.log(err, '----WE ARE IN THE ERROR BLOCK :(')
-      res.status(500).send('Error uploading file')
-    }
-  }
-);
+  //   } catch (err) {
+  //     console.log(err, '----WE ARE IN THE ERROR BLOCK :(')
+  //     res.status(500).send('Error uploading file')
+  //   }
+//   }
+// );
 
 
 router.post("/", requireAuth, async (req, res) => { 
