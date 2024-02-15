@@ -413,63 +413,69 @@ function UpdateShowForm() {
 
       const imagesToAdd = []
 
-      if (image1Title && image1Description && image1Url) {
+      if (image1Title && image1Description && (image1Url || image1File)) {
         const image1 = {
           title: image1Title,
-          imageUrl: image1Url,
+          imageUrl: updatingImage1File ? null : image1Url,
           description: image1Description,
           preview: false,
           showId: showId,
+          imageFile: updatingImage1File ? image1File : null
         }
         if (image1Action === 'update') imagesToUpdate.push(image1);
          else imagesToAdd.push(image1)
         
       }
 
-      if (image2Title && image2Description && image2Url) {
+      if (image2Title && image2Description && (image2Url || image2File)) {
         const image2 = {
           title: image2Title,
-          imageUrl: image2Url,
+          imageUrl: updatingImage2File ? null : image2Url,
           description: image2Description,
           preview: false,
           showId: showId,
+          imageFile: updatingImage2File ? image2File : null
         }
         if (image2Action === 'update') imagesToUpdate.push(image2);
         else imagesToAdd.push(image2)
       }
 
-      if (image3Title && image3Description && image3Url) {
+      if (image3Title && image3Description && (image3Url || image3File)) {
         const image3 = {
           title: image3Title,
-          imageUrl: image3Url,
+          imageUrl: updatingImage3File ? null : image3Url,
           description: image3Description,
           preview: false,
           showId: showId,
+          imageFile: updatingImage3File ? image3File : null
+
         }
         if (image3Action === 'update') imagesToUpdate.push(image3)
         else imagesToAdd.push(image3)
       }
 
-      if (image4Title && image4Description && image4Url) {
+      if (image4Title && image4Description && (image4Url || image4File)) {
         const image4 = {
           title: image4Title,
-          imageUrl: image4Url,
+          imageUrl: updatingImage4File ? null : image4Url,
           description: image4Description,
           preview: false,
           showId: showId,
+          imageFile: updatingImage4File ? image4File : null
         }
         if (image4Action === 'update') imagesToUpdate.push(image4)
         else imagesToAdd.push(image4)
         
       }
 
-      if (image5Title && image5Description && image5Url) {
+      if (image5Title && image5Description && (image5Url || image5File)) {
         const image5 = {
           title: image5Title,
-          imageUrl: image5Url,
+          imageUrl: updatingImage5File ? null : image5Url,
           description: image5Description,
           preview: false,
-          showId: showId
+          showId: showId,
+          imageFile: updatingImage5File ? image5File : null
         }
         if (image5Action === 'update') imagesToUpdate.push(image5)
         else imagesToAdd.push(image5)
@@ -496,6 +502,11 @@ function UpdateShowForm() {
       setImage1Url("");
       setImageCounter(imageCounter - 1);
       setImage1Action('')
+      setImage1File('')
+
+      setImage1Placeholder(
+        "https://www.wildseedfarms.com/wp-content/plugins/shopwp-pro/public/imgs/placeholder.png"
+      );
     } else if (imageCounter === 2) {
       setShowImage2(false);
       setImage2Title("");
@@ -503,6 +514,11 @@ function UpdateShowForm() {
       setImage2Url("");
       setImageCounter(imageCounter - 1);
       setImage2Action('')
+      setImage2File('')
+
+      setImage2Placeholder(
+        "https://www.wildseedfarms.com/wp-content/plugins/shopwp-pro/public/imgs/placeholder.png"
+      );
     } else if (imageCounter === 3) {
       setShowImage3(false);
       setImage3Title("");
@@ -510,6 +526,11 @@ function UpdateShowForm() {
       setImage3Url("");
       setImageCounter(imageCounter - 1);
       setImage3Action('')
+      setImage3File('')
+
+      setImage3Placeholder(
+        "https://www.wildseedfarms.com/wp-content/plugins/shopwp-pro/public/imgs/placeholder.png"
+      );
     } else if (imageCounter === 4) {
       setShowImage4(false);
       setImage4Title("");
@@ -517,10 +538,22 @@ function UpdateShowForm() {
       setImage4Url("");
       setImageCounter(imageCounter - 1);
       setImage4Action('')
+      setImage4File('')
+
+      setImage4Placeholder(
+        "https://www.wildseedfarms.com/wp-content/plugins/shopwp-pro/public/imgs/placeholder.png"
+      );
     } else if (imageCounter === 5) {
       setShowImage5(false);
+      setImage5Title("");
+      setImage5Description("");
+      setImage5Url("");
       setImageCounter(imageCounter - 1);
       setImage5Action('')
+      setImage5File('')
+      setImage5Placeholder(
+        "https://www.wildseedfarms.com/wp-content/plugins/shopwp-pro/public/imgs/placeholder.png"
+      );
     }
   };
 
@@ -732,7 +765,7 @@ function UpdateShowForm() {
               <div>
                 <img
                   className="add-show-preview-image"
-                  src={image1Placeholder}
+                  src={image1File ? image1Url : image1Placeholder}
                   alt='Image Unavailable'
                 ></img>
               </div>
@@ -750,25 +783,24 @@ function UpdateShowForm() {
                 )}
                 <input
                   className="add-show-preview-image-inputs"
-                  type="text"
-                  maxLength="300"
-                  placeholder="Image URL"
-                  value={image1Url}
+                  type="file"
                   onChange={(e) => {
-                    if (validProfilePic(e.target.value)) {
-                      setImage1Url(e.target.value);
-                      setImage1Placeholder(e.target.value);
+                    if (isValidImageFile(e.target.files[0])) {
+                      setImage1Url(URL.createObjectURL(e.target.files[0]));
+                      setImage1Placeholder(e.target.files[0]);
+                      setImage1File(e.target.files[0])
                     } else {
-                      setImage1Url(e.target.value);
+                      // setImage1Url(e.target.value);
+                      setShowImage1Error(true)
+                      setImage1File('')
                       setImage1Placeholder(
                         "https://www.wildseedfarms.com/wp-content/plugins/shopwp-pro/public/imgs/placeholder.png"
                       );
                     }
                   }}
                 ></input>
-                {showErrors && errors.image1Url && (
-                  <p className="add-show-errors-p">{errors.image1Url}</p>
-                )}
+                {showImage1Error && <p className='add-show-errors-p'>{errors.image1File}</p>}
+
                 <textarea
                   className="add-show-preview-image-description-input"
                   placeholder="Image Description"
@@ -785,7 +817,7 @@ function UpdateShowForm() {
               <div>
                 <img
                   className="add-show-preview-image"
-                  src={image2Placeholder}
+                  src={image2File ? image2Url : image2Placeholder}
                   alt='Image Unavailable'
                 ></img>
               </div>
@@ -803,25 +835,25 @@ function UpdateShowForm() {
                 )}
                 <input
                   className="add-show-preview-image-inputs"
-                  type="text"
-                  maxLength="300"
-                  placeholder="Image URL"
-                  value={image2Url}
+                  type="file"
+                  
                   onChange={(e) => {
-                    if (validProfilePic(e.target.value)) {
-                      setImage2Url(e.target.value);
-                      setImage2Placeholder(e.target.value);
+                    if (isValidImageFile(e.target.files[0])) {
+                      setImage2Url(URL.createObjectURL(e.target.files[0]));
+                      setImage2Placeholder(e.target.files[0]);
+                      setImage2File(e.target.files[0])
+                      setUpdatingImage2File(true)
                     } else {
-                      setImage2Url(e.target.value);
+                      // setImage2Url(e.target.value);
+                      setImage2File('')
                       setImage2Placeholder(
                         "https://www.wildseedfarms.com/wp-content/plugins/shopwp-pro/public/imgs/placeholder.png"
                       );
                     }
                   }}
                 ></input>
-                {showErrors && errors.image2Url && (
-                  <p className="add-show-errors-p">{errors.image2Url}</p>
-                )}
+                {showImage2Error && <p className='add-show-errors-p'>{errors.image2File}</p>}
+
                 <textarea
                   className="add-show-preview-image-description-input"
                   placeholder="Image Description"
@@ -838,7 +870,7 @@ function UpdateShowForm() {
               <div>
                 <img
                   className="add-show-preview-image"
-                  src={image3Placeholder}
+                  src={image3File ? image3Url : image3Placeholder}
                   alt='Image Unavailable'
                 ></img>
               </div>
@@ -856,25 +888,24 @@ function UpdateShowForm() {
                 )}
                 <input
                   className="add-show-preview-image-inputs"
-                  type="text"
-                  maxLength="300"
-                  placeholder="Image URL"
-                  value={image3Url}
+                  type="file"
                   onChange={(e) => {
-                    if (validProfilePic(e.target.value)) {
-                      setImage3Url(e.target.value);
-                      setImage3Placeholder(e.target.value);
+                    if (isValidImageFile(e.target.files[0])) {
+                      setImage3File(e.target.files[0])
+                      setImage3Url(URL.createObjectURL(e.target.files[0]));
+                      setImage3Placeholder(e.target.files[0]);
                     } else {
-                      setImage3Url(e.target.value);
+                      setShowImage3Error(true)
+                      // setImage3Url(e.target.value);
+                      setImage3File('')
                       setImage3Placeholder(
                         "https://www.wildseedfarms.com/wp-content/plugins/shopwp-pro/public/imgs/placeholder.png"
                       );
                     }
                   }}
                 ></input>
-                {showErrors && errors.image3Url && (
-                  <p className="add-show-errors-p">{errors.image3Url}</p>
-                )}
+              {showImage3Error && <p className='add-show-errors-p'>{errors.image3File}</p>}
+
                 <textarea
                   className="add-show-preview-image-description-input"
                   placeholder="Image Description"
@@ -891,7 +922,7 @@ function UpdateShowForm() {
               <div>
                 <img
                   className="add-show-preview-image"
-                  src={image4Placeholder}
+                  src={image4File ? image4Url : image4Placeholder}
                   alt='Image Unavailable'
                 ></img>
               </div>
@@ -909,25 +940,23 @@ function UpdateShowForm() {
                 )}
                 <input
                   className="add-show-preview-image-inputs"
-                  type="text"
-                  maxLength="300"
-                  placeholder="Image URL"
-                  value={image4Url}
+                  type="file"
                   onChange={(e) => {
-                    if (validProfilePic(e.target.value)) {
-                      setImage4Url(e.target.value);
+                    if (isValidImageFile(e.target.files[0])) {
+                      setImage4File(e.target.files[0])
+                      setImage4Url(URL.createObjectURL(e.target.files[0]));
                       setImage4Placeholder(e.target.value);
                     } else {
-                      setImage4Url(e.target.value);
+                      setShowImage4Error(true)
+                      setImage4File('')
                       setImage4Placeholder(
                         "https://www.wildseedfarms.com/wp-content/plugins/shopwp-pro/public/imgs/placeholder.png"
                       );
                     }
                   }}
                 ></input>
-                {showErrors && errors.image4Url && (
-                  <p className="add-show-errors-p">{errors.image4Url}</p>
-                )}
+              {showImage4Error && <p className='add-show-errors-p'>{errors.image4File}</p>}
+
 
                 <textarea
                   className="add-show-preview-image-description-input"
@@ -945,7 +974,7 @@ function UpdateShowForm() {
               <div>
                 <img
                   className="add-show-preview-image"
-                  src={image5Placeholder}
+                  src={image5File ? image5Url : image5Placeholder}
                   alt='Image Unavailable'
                 ></img>
               </div>
@@ -963,25 +992,23 @@ function UpdateShowForm() {
                 )}
                 <input
                   className="add-show-preview-image-inputs"
-                  type="text"
-                  maxLength="300"
-                  placeholder="Image URL"
-                  value={image5Url}
+                  type="file"
                   onChange={(e) => {
-                    if (validProfilePic(e.target.value)) {
-                      setImage5Url(e.target.value);
-                      setImage5Placeholder(e.target.value);
+                    if (isValidImageFile(e.target.files[0])) {
+                      setImage5File(e.target.files[0])
+                      setImage5Url(URL.createObjectURL(e.target.files[0]));
+                      setImage5Placeholder(e.target.files[0]);
                     } else {
-                      setImage5Url(e.target.value);
+                      setShowImage5Error(true)
+                      setImage5File('')
                       setImage5Placeholder(
                         "https://www.wildseedfarms.com/wp-content/plugins/shopwp-pro/public/imgs/placeholder.png"
                       );
                     }
                   }}
                 ></input>
-                {showErrors && errors.image5Url && (
-                  <p className="add-show-errors-p">{errors.image5Url}</p>
-                )}
+              {showImage5Error && <p className='add-show-errors-p'>{errors.image5File}</p>}
+
                 <textarea
                   className="add-show-preview-image-description-input"
                   placeholder="Image Description"
