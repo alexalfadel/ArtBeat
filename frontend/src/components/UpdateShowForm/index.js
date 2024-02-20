@@ -223,19 +223,19 @@ function UpdateShowForm() {
       errors.description = "Description must be at least 24 characters long";
     if (!isValidAddress(address))
       errors.address = "Please enter a valid address";
-    if (!validProfilePic(previewImageUrl))
-      errors.previewImageUrl =
-        "Please enter a valid image url ending in .png, .jpg, or .jpeg";
-    if (image1Url && !validProfilePic(image1Url))
-      errors.image1Url = "Url must end in .jpg, .jpeg, or .png";
-    if (image2Url && !validProfilePic(image2Url))
-      errors.image2Url = "Url must end in .jpg, .jpeg, or .png";
-    if (image3Url && !validProfilePic(image3Url))
-      errors.image3Url = "Url must end in .jpg, .jpeg, or .png";
-    if (image4Url && !validProfilePic(image4Url))
-      errors.image4Url = "Url must end in .jpg, .jpeg, or .png";
-    if (image5Url && !validProfilePic(image5Url))
-      errors.image5Url = "Url must end in .jpg, .jpeg, or .png";
+    // if (!validProfilePic(previewImageUrl))
+    //   errors.previewImageUrl =
+    //     "Please enter a valid image url ending in .png, .jpg, or .jpeg";
+    // if (image1Url && !validProfilePic(image1Url))
+    //   errors.image1Url = "Url must end in .jpg, .jpeg, or .png";
+    // if (image2Url && !validProfilePic(image2Url))
+    //   errors.image2Url = "Url must end in .jpg, .jpeg, or .png";
+    // if (image3Url && !validProfilePic(image3Url))
+    //   errors.image3Url = "Url must end in .jpg, .jpeg, or .png";
+    // if (image4Url && !validProfilePic(image4Url))
+    //   errors.image4Url = "Url must end in .jpg, .jpeg, or .png";
+    // if (image5Url && !validProfilePic(image5Url))
+    //   errors.image5Url = "Url must end in .jpg, .jpeg, or .png";
     if (previewImageTitle.length < 5)
       errors.previewImageTitle = "Title must be at least 5 characters long";
     if (image1Title && image1Title.length < 5)
@@ -248,18 +248,18 @@ function UpdateShowForm() {
       errors.image4Title = "Title must be at least 5 characters long";
     if (image5Title && image5Title.length < 5)
       errors.image5Title = "Title must be at least 5 characters long";
-    if (previewImageUrl.length < 3)
-      errors.previewImageUrl = "Url must be at least 3 characters long";
-    if (image1Url && image1Url.length < 3)
-      errors.image1Url = "Url must be at least 3 characters long";
-    if (image2Url && image2Url.length < 3)
-      errors.image2Url = "Url must be at least 3 characters long";
-    if (image3Url && image3Url.length < 3)
-      errors.image3Url = "Url must be at least 3 characters long";
-    if (image4Url && image4Url.length < 3)
-      errors.image4Url = "Url must be at least 3 characters long";
-    if (image5Url && image5Url.length < 3)
-      errors.image5Url = "Url must be at least 3 characters long";
+    // if (previewImageUrl.length < 3)
+    //   errors.previewImageUrl = "Url must be at least 3 characters long";
+    // if (image1Url && image1Url.length < 3)
+    //   errors.image1Url = "Url must be at least 3 characters long";
+    // if (image2Url && image2Url.length < 3)
+    //   errors.image2Url = "Url must be at least 3 characters long";
+    // if (image3Url && image3Url.length < 3)
+    //   errors.image3Url = "Url must be at least 3 characters long";
+    // if (image4Url && image4Url.length < 3)
+    //   errors.image4Url = "Url must be at least 3 characters long";
+    // if (image5Url && image5Url.length < 3)
+    //   errors.image5Url = "Url must be at least 3 characters long";
     if (!location) errors.location = "Location is required";
     if (!time) errors.time = "Time is required";
     if (!price) errors.price = "Price is required";
@@ -284,18 +284,18 @@ function UpdateShowForm() {
   }, [
     name,
     address,
-    previewImageUrl,
+    // previewImageUrl,
     previewImageTitle,
     image1Title,
     image2Title,
     image3Title,
     image4Title,
     image5Title,
-    image1Url,
-    image2Url,
-    image3Url,
-    image4Url,
-    image5Url,
+    // image1Url,
+    // image2Url,
+    // image3Url,
+    // image4Url,
+    // image5Url,
     location,
     time,
     price,
@@ -376,9 +376,24 @@ function UpdateShowForm() {
     history.push("/shows");
   };
 
+  console.log(image1Title, '----image1Title')
+      console.log(image1Description, '---image1Description')
+      console.log(image1Url, '---image1Url')
+      console.log(image1File, '---image1File')
+      console.log(image2Title, '----image2Title')
+      console.log(image2Description, '---image2Description')
+      console.log(image2Url, '---image2Url')
+      console.log(image2File, '---image2File')
+      console.log(image3Title, '----image3Title')
+      console.log(image3Description, '---image3Description')
+      console.log(image3Url, '---image3Url')
+      console.log(image3File, '---image13File')
+
   const onSubmit = async (e) => {
     e.preventDefault();
     if (Object.keys(errors).length) {
+      console.log('we have errors')
+      console.log(errors, '---errors')
       setShowErrors(true);
     } else {
       const show = {
@@ -413,69 +428,74 @@ function UpdateShowForm() {
 
       const imagesToAdd = []
 
-      if (image1Title && image1Description && (image1Url || image1File)) {
+      if (image1Title && (image1Url || image1File)) {
         const image1 = {
           title: image1Title,
           imageUrl: updatingImage1File ? null : image1Url,
           description: image1Description,
           preview: false,
           showId: showId,
-          imageFile: updatingImage1File ? image1File : null
+          imageFile: updatingImage1File ? image1File : null,
+          id: image1Id
         }
         if (image1Action === 'update') imagesToUpdate.push(image1);
          else imagesToAdd.push(image1)
         
       }
 
-      if (image2Title && image2Description && (image2Url || image2File)) {
+      if (image2Title && (image2Url || image2File)) {
         const image2 = {
           title: image2Title,
           imageUrl: updatingImage2File ? null : image2Url,
           description: image2Description,
           preview: false,
           showId: showId,
-          imageFile: updatingImage2File ? image2File : null
+          imageFile: updatingImage2File ? image2File : null,
+          id: image2Id
         }
         if (image2Action === 'update') imagesToUpdate.push(image2);
         else imagesToAdd.push(image2)
       }
 
-      if (image3Title && image3Description && (image3Url || image3File)) {
+      if (image3Title && (image3Url || image3File)) {
         const image3 = {
           title: image3Title,
           imageUrl: updatingImage3File ? null : image3Url,
           description: image3Description,
           preview: false,
           showId: showId,
-          imageFile: updatingImage3File ? image3File : null
+          imageFile: updatingImage3File ? image3File : null,
+          id: image3Id
 
         }
         if (image3Action === 'update') imagesToUpdate.push(image3)
         else imagesToAdd.push(image3)
       }
 
-      if (image4Title && image4Description && (image4Url || image4File)) {
+      if (image4Title && (image4Url || image4File)) {
         const image4 = {
           title: image4Title,
           imageUrl: updatingImage4File ? null : image4Url,
           description: image4Description,
           preview: false,
           showId: showId,
-          imageFile: updatingImage4File ? image4File : null
+          imageFile: updatingImage4File ? image4File : null,
+          id: image4Id
         }
         if (image4Action === 'update') imagesToUpdate.push(image4)
         else imagesToAdd.push(image4)
         
       }
 
-      if (image5Title && image5Description && (image5Url || image5File)) {
+      if (image5Title && (image5Url || image5File)) {
         const image5 = {
           title: image5Title,
           imageUrl: updatingImage5File ? null : image5Url,
           description: image5Description,
           preview: false,
           showId: showId,
-          imageFile: updatingImage5File ? image5File : null
+          imageFile: updatingImage5File ? image5File : null,
+          id: image5Id
         }
         if (image5Action === 'update') imagesToUpdate.push(image5)
         else imagesToAdd.push(image5)
@@ -486,7 +506,7 @@ function UpdateShowForm() {
       }
 
       for (let i = 0; i < imagesToAdd.length; i++) {
-        await dispatch(addShowImage(imagesToAdd[i]))
+        await dispatch(addShowImageToAws(imagesToAdd[i]))
       }
 
       reset();

@@ -229,6 +229,19 @@ function AddShowForm() {
   // const region = process.env.AWS_REGION
   // console.log(region, '----region')
 
+  console.log(image1Title, '----image1Title')
+  console.log(image1Description, '---image1Description')
+  console.log(image1Url, '---image1Url')
+  console.log(image1File, '---image1File')
+  console.log(image2Title, '----image2Title')
+  console.log(image2Description, '---image2Description')
+  console.log(image2Url, '---image2Url')
+  console.log(image2File, '---image2File')
+  console.log(image3Title, '----image3Title')
+  console.log(image3Description, '---image3Description')
+  console.log(image3Url, '---image3Url')
+  console.log(image3File, '---image13File')
+
   const onSubmit = async (e) => {
     e.preventDefault();
 
@@ -262,7 +275,20 @@ function AddShowForm() {
         },
       ];
 
-      if (image1Title && image1Description && image1Url && image1File) {
+      console.log(image1Title, '----image1Title')
+      console.log(image1Description, '---image1Description')
+      console.log(image1Url, '---image1Url')
+      console.log(image1File, '---image1File')
+      console.log(image2Title, '----image2Title')
+      console.log(image2Description, '---image2Description')
+      console.log(image2Url, '---image2Url')
+      console.log(image2File, '---image2File')
+      console.log(image3Title, '----image3Title')
+      console.log(image3Description, '---image3Description')
+      console.log(image3Url, '---image3Url')
+      console.log(image3File, '---image13File')
+
+      if (image1Title && image1Url && image1File) {
         images.push({
           title: image1Title,
           imageUrl: image1Url,
@@ -273,7 +299,7 @@ function AddShowForm() {
         });
       }
 
-      if (image2Title && image2Description && image2Url && image2File) {
+      if (image2Title && image2Url && image2File) {
         images.push({
           title: image2Title,
           imageUrl: image2Url,
@@ -284,7 +310,7 @@ function AddShowForm() {
         });
       }
 
-      if (image3Title && image3Description && image3Url && image3File) {
+      if (image3Title && image3Url && image3File) {
         images.push({
           title: image3Title,
           imageUrl: image3Url,
@@ -295,7 +321,7 @@ function AddShowForm() {
         });
       }
 
-      if (image4Title && image4Description && image4Url && image4File) {
+      if (image4Title && image4Url && image4File) {
         images.push({
           title: image4Title,
           imageUrl: image4Url,
@@ -306,7 +332,7 @@ function AddShowForm() {
         });
       }
 
-      if (image5Title && image5Description && image5Url && image5File) {
+      if (image5Title && image5Url && image5File) {
         images.push({
           title: image5Title,
           imageUrl: image5Url,

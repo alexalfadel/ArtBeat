@@ -62,21 +62,20 @@ export const addShowImage = (showImage) => async (dispatch) => {
   }
 };
 
-export const updateShowImageThunk = (image) => async (dispatch) => {
+export const updateShowImageThunk = (imageData) => async (dispatch) => {
+  const { title, description, preview, showId, imageFile, imageUrl, id} = imageData
 
-  const { title, imageUrl, description, preview, showId, id} = image
+  const formData = new FormData()
+  formData.append('title', title)
+  formData.append('description', description)
+  formData.append('preview', preview)
+  formData.append('showId', showId)
+  formData.append('image', imageFile)
+  formData.append('imageUrl', imageUrl)
+
   const response = await csrfFetch(`/api/images/${id}`, {
     method: 'PUT',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify({
-      title: title, 
-      imageUrl: imageUrl,
-      description: description,
-      preview: preview,
-      showId: showId
-    })
+    body: formData
   })
 
   if (response.ok) {
