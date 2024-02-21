@@ -22,13 +22,35 @@ export const getPreviewImageThunk = (showId) => async (dispatch) => {
   }
 };
 
+export const addShowImageToAws = (imageData) => async (req, res) => {
+  const { title, description, preview, showId, imageFile } = imageData;
+
+  const formData = new FormData();
+  formData.append("title", title);
+  formData.append("description", description);
+  formData.append("preview", preview);
+  formData.append("showId", showId);
+  formData.append("image", imageFile);
+
+  const response = await csrfFetch("/api/images/upload", {
+    method: "POST",
+    body: formData,
+  });
+
+  if (response.ok) {
+    const imageUrl = await response.json();
+  } else {
+    const err = await response.json();
+  }
+};
+
 export const addShowImage = (showImage) => async (dispatch) => {
   const response = await csrfFetch(`/api/images`, {
     method: "POST",
     header: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify(showImage),
+    body: showImage,
   });
 
   if (response.ok) {
@@ -40,31 +62,51 @@ export const addShowImage = (showImage) => async (dispatch) => {
   }
 };
 
-export const updateShowImageThunk = (image) => async (dispatch) => {
+export const updateShowImageThunk = (imageData) => async (dispatch) => {
+  let { title, description, preview, showId, imageFile, imageUrl, id } =
+    imageData;
 
-  const { title, imageUrl, description, preview, showId, id} = image
+  if (imageFile) {
+    const updateImageFormData = new FormData();
+    updateImageFormData.append("image", imageFile);
+    updateImageFormData.append("id", id);
+
+    const response = await csrfFetch(`/api/images/${id}/url`, {
+      method: "PUT",
+      body: updateImageFormData,
+    });
+
+    if (response.ok) {
+      imageUrl = await response.json();
+    } else {
+      const error = await response.json();
+      dispatch(setError(error));
+    }
+  }
+
   const response = await csrfFetch(`/api/images/${id}`, {
-    method: 'PUT',
+    method: "PUT",
     headers: {
-      'Content-Type': 'application/json'
+      "Content-Type": "application/json",
     },
     body: JSON.stringify({
-      title: title, 
-      imageUrl: imageUrl,
+      title: title,
       description: description,
       preview: preview,
-      showId: showId
-    })
-  })
+      showId: showId,
+      imageUrl: imageUrl,
+      id: id,
+    }),
+  });
 
   if (response.ok) {
-    const updatedImage = await response.json()
-    return updatedImage
+    const updatedImage = await response.json();
+    return updatedImage;
   } else {
-    const error = await response.json()
-    dispatch(setError(error))
+    const error = await response.json();
+    dispatch(setError(error));
   }
-}
+};
 
 const initialState = {};
 

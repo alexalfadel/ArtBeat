@@ -12,6 +12,7 @@ import OpenModalButton from "../OpenModalButton";
 import { getAllRsvpsThunk } from "../../store/rsvp";
 import DeleteShowModal from "../DeleteShowModal";
 import { useHistory } from "react-router-dom";
+import { isValidImageFile } from "../AddShowForm";
 
 function ArtistProfile() {
   const dispatch = useDispatch();
@@ -46,7 +47,7 @@ function ArtistProfile() {
   useEffect(() => {
     let errors = {};
 
-    if (newProfilePicUrl && !validProfilePic(newProfilePicUrl))
+    if (newProfilePicUrl && !isValidImageFile(profilePic))
       errors.profilePic =
         "Please enter a valid url ending in .jpg, .jpeg, or .png";
     if (allArtistUsernames?.includes(username))
@@ -94,7 +95,7 @@ function ArtistProfile() {
       setShowErrors(true);
     } else {
       const updatedProfilePic = newProfilePic
-        ? newProfilePicUrl
+        ? profilePic
         : artist.profilePic;
       const updatedArtist = {
         id: artist.id,
@@ -203,19 +204,20 @@ function ArtistProfile() {
                   ></img>
                   <input
                     id="profile-picture-input"
-                    value={previewProfileUrl}
-                    placeholder="Add a new profile picture url here."
+                    type='file'
+                    // value={previewProfileUrl}
+                    // placeholder="Add a new profile picture url here."
                     onChange={(e) => {
-                      if (validProfilePic(e.target.value)) {
-                        setNewProfilePicUrl(e.target.value);
-                        setHoldProfilePicUrl(e.target.value);
-                        setPreviewProfileUrl(e.target.value);
-                        setProfilePic(e.target.value);
+                      if (isValidImageFile(e.target.files[0])) {
+                        setNewProfilePicUrl(URL.createObjectURL(e.target.files[0]));
+                        setHoldProfilePicUrl(URL.createObjectURL(e.target.files[0]));
+                        setPreviewProfileUrl(URL.createObjectURL(e.target.files[0]));
+                        setProfilePic(e.target.files[0]);
                         setNewProfilePic(true);
                         // setPreviewImagePlaceholder(e.target.value);
                       } else {
                         // setPreviewImageUrl(e.target.value);
-                        setPreviewProfileUrl(e.target.value);
+                        // setPreviewProfileUrl(e.target.files[0]);
                         setHoldProfilePicUrl(
                           "https://www.wildseedfarms.com/wp-content/plugins/shopwp-pro/public/imgs/placeholder.png"
                         );

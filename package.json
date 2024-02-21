@@ -21,5 +21,8 @@
   "bugs": {
     "url": "https://github.com/alexalfadel/ArtBeat/issues"
   },
-  "homepage": "https://github.com/alexalfadel/ArtBeat#readme"
+  "homepage": "https://github.com/alexalfadel/ArtBeat#readme",
+  "dependencies": {
+    "express-fileupload": "^1.4.3"
+  }
 }

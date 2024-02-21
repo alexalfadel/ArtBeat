@@ -8,8 +8,9 @@ import { isValidAddress, formatTime } from "../AddShowForm";
 import { getAllShowsThunk } from "../../store/shows";
 import { formatDate } from "../ShowCard";
 import { updateShowThunk } from "../../store/shows";
-import { updateShowImageThunk, addShowImage } from "../../store/ShowImages";
+import { updateShowImageThunk, addShowImage, addShowImageToAws } from "../../store/ShowImages";
 import { Redirect } from "react-router-dom";
+import { isValidImageFile } from '../AddShowForm'
 
 const deconstructTime = (time) => {
   const splitTime = time.split(":");
@@ -99,6 +100,25 @@ function UpdateShowForm() {
   const [image3Action, setImage3Action] = useState('')
   const [image4Action, setImage4Action] = useState('')
   const [image5Action, setImage5Action] = useState('')
+  const [updatingPreviewImageFile, setUpdatingPreviewImageFile] = useState(false)
+  const [updatingImage1File, setUpdatingImage1File] = useState(false)
+  const [updatingImage2File, setUpdatingImage2File] = useState(false)
+  const [updatingImage3File, setUpdatingImage3File] = useState(false)
+  const [updatingImage4File, setUpdatingImage4File] = useState(false)
+  const [updatingImage5File, setUpdatingImage5File] = useState(false)
+  const [previewImageFile, setPreviewImageFile] = useState('')
+  const [image1File, setImage1File] = useState('')
+  const [image2File, setImage2File] = useState('')
+  const [image3File, setImage3File] = useState('')
+  const [image4File, setImage4File] = useState('')
+  const [image5File, setImage5File] = useState('')
+  const [showPreviewImageError, setShowPreviewImageError] = useState(false)
+  const [showImage1Error, setShowImage1Error] = useState(false)
+  const [showImage2Error, setShowImage2Error] = useState(false)
+  const [showImage3Error, setShowImage3Error] = useState(false)
+  const [showImage4Error, setShowImage4Error] = useState(false)
+  const [showImage5Error, setShowImage5Error] = useState(false)
+
 
   const [userId, setUserId] = useState("");
 
@@ -142,6 +162,7 @@ function UpdateShowForm() {
       setPreviewImageTitle(previewImage.title);
       setPreviewImageUrl(previewImage.imageUrl);
       setPreviewImageDescription(previewImage.description);
+      setPreviewImagePlaceholder(previewImage.imageUrl)
       setPreviewImageId(previewImage.id);
       if (remainingImages[0]) {
         setImage1Title(remainingImages[0].title);
@@ -202,43 +223,43 @@ function UpdateShowForm() {
       errors.description = "Description must be at least 24 characters long";
     if (!isValidAddress(address))
       errors.address = "Please enter a valid address";
-    if (!validProfilePic(previewImageUrl))
-      errors.previewImageUrl =
-        "Please enter a valid image url ending in .png, .jpg, or .jpeg";
-    if (image1Url && !validProfilePic(image1Url))
-      errors.image1Url = "Url must end in .jpg, .jpeg, or .png";
-    if (image2Url && !validProfilePic(image2Url))
-      errors.image2Url = "Url must end in .jpg, .jpeg, or .png";
-    if (image3Url && !validProfilePic(image3Url))
-      errors.image3Url = "Url must end in .jpg, .jpeg, or .png";
-    if (image4Url && !validProfilePic(image4Url))
-      errors.image4Url = "Url must end in .jpg, .jpeg, or .png";
-    if (image5Url && !validProfilePic(image5Url))
-      errors.image5Url = "Url must end in .jpg, .jpeg, or .png";
+    // if (!validProfilePic(previewImageUrl))
+    //   errors.previewImageUrl =
+    //     "Please enter a valid image url ending in .png, .jpg, or .jpeg";
+    // if (image1Url && !validProfilePic(image1Url))
+    //   errors.image1Url = "Url must end in .jpg, .jpeg, or .png";
+    // if (image2Url && !validProfilePic(image2Url))
+    //   errors.image2Url = "Url must end in .jpg, .jpeg, or .png";
+    // if (image3Url && !validProfilePic(image3Url))
+    //   errors.image3Url = "Url must end in .jpg, .jpeg, or .png";
+    // if (image4Url && !validProfilePic(image4Url))
+    //   errors.image4Url = "Url must end in .jpg, .jpeg, or .png";
+    // if (image5Url && !validProfilePic(image5Url))
+    //   errors.image5Url = "Url must end in .jpg, .jpeg, or .png";
     if (previewImageTitle.length < 5)
       errors.previewImageTitle = "Title must be at least 5 characters long";
-    if (image1Title && image1Title.length < 5)
+    if (image1File && image1Title.length < 5)
       errors.image1Title = "Title must be at least 5 characters long";
-    if (image2Title && image2Title.length < 5)
+    if (image2File && image2Title.length < 5)
       errors.image2Title = "Title must be at least 5 characters long";
-    if (image3Title && image3Title.length < 5)
+    if (image3File && image3Title.length < 5)
       errors.image3Title = "Title must be at least 5 characters long";
-    if (image4Title && image4Title.length < 5)
+    if (image4File && image4Title.length < 5)
       errors.image4Title = "Title must be at least 5 characters long";
-    if (image5Title && image5Title.length < 5)
+    if (image5File && image5Title.length < 5)
       errors.image5Title = "Title must be at least 5 characters long";
-    if (previewImageUrl.length < 3)
-      errors.previewImageUrl = "Url must be at least 3 characters long";
-    if (image1Url && image1Url.length < 3)
-      errors.image1Url = "Url must be at least 3 characters long";
-    if (image2Url && image2Url.length < 3)
-      errors.image2Url = "Url must be at least 3 characters long";
-    if (image3Url && image3Url.length < 3)
-      errors.image3Url = "Url must be at least 3 characters long";
-    if (image4Url && image4Url.length < 3)
-      errors.image4Url = "Url must be at least 3 characters long";
-    if (image5Url && image5Url.length < 3)
-      errors.image5Url = "Url must be at least 3 characters long";
+    // if (previewImageUrl.length < 3)
+    //   errors.previewImageUrl = "Url must be at least 3 characters long";
+    // if (image1Url && image1Url.length < 3)
+    //   errors.image1Url = "Url must be at least 3 characters long";
+    // if (image2Url && image2Url.length < 3)
+    //   errors.image2Url = "Url must be at least 3 characters long";
+    // if (image3Url && image3Url.length < 3)
+    //   errors.image3Url = "Url must be at least 3 characters long";
+    // if (image4Url && image4Url.length < 3)
+    //   errors.image4Url = "Url must be at least 3 characters long";
+    // if (image5Url && image5Url.length < 3)
+    //   errors.image5Url = "Url must be at least 3 characters long";
     if (!location) errors.location = "Location is required";
     if (!time) errors.time = "Time is required";
     if (!price) errors.price = "Price is required";
@@ -246,35 +267,51 @@ function UpdateShowForm() {
     if (price > 100000) errors.price = "Price must be less than $100,000.00";
     if (new Date(`${date}T00:00-0800`) < new Date())
       errors.date = "Date must be set in the future";
+    if (previewImageFile && !isValidImageFile(previewImageFile))
+      errors.previewImageFile = "Image must be.jpg, .jpeg, or .png";
+    if (image1File && !isValidImageFile(image1File))
+      errors.image1File = "Image must be .jpg, .jpeg, or .png";
+    if (image2File && !isValidImageFile(image2File))
+      errors.image2File = "Image must be .jpg, .jpeg, or .png";
+    if (image3File && !isValidImageFile(image3File))
+      errors.image3File = "Image must be .jpg, .jpeg, or .png";
+    if (image4File && !isValidImageFile(image4File))
+      errors.image4File = "Image must be .jpg, .jpeg, or .png";
+    if (image5File && !isValidImageFile(image5File))
+      errors.image5File = "Image must be .jpg, .jpeg, or .png";
 
     setErrors(errors);
   }, [
     name,
     address,
-    previewImageUrl,
+    // previewImageUrl,
     previewImageTitle,
     image1Title,
     image2Title,
     image3Title,
     image4Title,
     image5Title,
-    image1Url,
-    image2Url,
-    image3Url,
-    image4Url,
-    image5Url,
+    // image1Url,
+    // image2Url,
+    // image3Url,
+    // image4Url,
+    // image5Url,
     location,
     time,
     price,
     date,
     description,
+    image1File,
+    image2File,
+    image3File,
+    image4File,
+    image5File,
+    previewImageFile
   ]);
 
-  // if (!userId) return <Redirect to="/" />
+
   if (!Object.keys(allShows).length) return <h1>Loading...</h1>;
   const show = allShows.filter((show) => `${show.id}` === showId)[0];
-  // if (!show) history.push('/')
-  // if (!userId) history.push('/')
 
   const reset = () => {
     setUserId("");
@@ -287,7 +324,7 @@ function UpdateShowForm() {
     setAmPm("am");
     setErrors({});
     setPreviewImagePlaceholder(
-      "https://www.wildseedfarms.com/wp-content/plugins/shopwp-pro/public/imgs/placeholder.png"
+      ''
     );
     setImage1Placeholder(
       "https://www.wildseedfarms.com/wp-content/plugins/shopwp-pro/public/imgs/placeholder.png"
@@ -339,6 +376,8 @@ function UpdateShowForm() {
     history.push("/shows");
   };
 
+      
+
   const onSubmit = async (e) => {
     e.preventDefault();
     if (Object.keys(errors).length) {
@@ -365,73 +404,85 @@ function UpdateShowForm() {
       const imagesToUpdate = [
         {
           title: previewImageTitle,
-          imageUrl: previewImageUrl,
+          imageUrl: updatingPreviewImageFile ? null : previewImageUrl,
           description: previewImageDescription,
           preview: true,
           showId: showId,
           id: previewImageId,
+          imageFile: updatingPreviewImageFile ? previewImageFile : null
         },
       ];
 
       const imagesToAdd = []
 
-      if (image1Title && image1Description && image1Url) {
+      if (image1Title && (image1Url || image1File)) {
         const image1 = {
           title: image1Title,
-          imageUrl: image1Url,
+          imageUrl: updatingImage1File ? null : image1Url,
           description: image1Description,
           preview: false,
           showId: showId,
+          imageFile: image1Action === 'add' || 'update' ? image1File : null,
+          id: image1Id
         }
         if (image1Action === 'update') imagesToUpdate.push(image1);
          else imagesToAdd.push(image1)
         
       }
 
-      if (image2Title && image2Description && image2Url) {
+      if (image2Title && (image2Url || image2File)) {
         const image2 = {
           title: image2Title,
-          imageUrl: image2Url,
+          imageUrl: updatingImage2File ? null : image2Url,
           description: image2Description,
           preview: false,
           showId: showId,
+          imageFile: image2Action === 'add' || 'update' ? image2File : null,
+          id: image2Id
         }
         if (image2Action === 'update') imagesToUpdate.push(image2);
         else imagesToAdd.push(image2)
       }
 
-      if (image3Title && image3Description && image3Url) {
+      if (image3Title && (image3Url || image3File)) {
         const image3 = {
           title: image3Title,
-          imageUrl: image3Url,
+          imageUrl: updatingImage3File ? null : image3Url,
           description: image3Description,
           preview: false,
           showId: showId,
+          imageFile: image3Action === 'add' || 'update' ? image3File : null,
+          id: image3Id
+
         }
         if (image3Action === 'update') imagesToUpdate.push(image3)
         else imagesToAdd.push(image3)
       }
 
-      if (image4Title && image4Description && image4Url) {
+      if (image4Title && (image4Url || image4File)) {
         const image4 = {
           title: image4Title,
-          imageUrl: image4Url,
+          imageUrl: updatingImage4File ? null : image4Url,
           description: image4Description,
           preview: false,
           showId: showId,
+          imageFile: image4Action === 'add' || 'update' ? image4File : null,
+          id: image4Id
         }
         if (image4Action === 'update') imagesToUpdate.push(image4)
         else imagesToAdd.push(image4)
         
       }
 
-      if (image5Title && image5Description && image5Url) {
+      if (image5Title && (image5Url || image5File)) {
         const image5 = {
           title: image5Title,
-          imageUrl: image5Url,
+          imageUrl: updatingImage5File ? null : image5Url,
           description: image5Description,
           preview: false,
-          showId: showId
+          showId: showId,
+          imageFile: image5Action === 'add' || 'update' ? image5File : null,
+          id: image5Id
         }
         if (image5Action === 'update') imagesToUpdate.push(image5)
         else imagesToAdd.push(image5)
@@ -442,7 +493,7 @@ function UpdateShowForm() {
       }
 
       for (let i = 0; i < imagesToAdd.length; i++) {
-        await dispatch(addShowImage(imagesToAdd[i]))
+        await dispatch(addShowImageToAws(imagesToAdd[i]))
       }
 
       reset();
@@ -458,6 +509,12 @@ function UpdateShowForm() {
       setImage1Url("");
       setImageCounter(imageCounter - 1);
       setImage1Action('')
+      setImage1File('')
+      setUpdatingImage1File(true)
+
+      setImage1Placeholder(
+        "https://www.wildseedfarms.com/wp-content/plugins/shopwp-pro/public/imgs/placeholder.png"
+      );
     } else if (imageCounter === 2) {
       setShowImage2(false);
       setImage2Title("");
@@ -465,6 +522,12 @@ function UpdateShowForm() {
       setImage2Url("");
       setImageCounter(imageCounter - 1);
       setImage2Action('')
+      setImage2File('')
+      setUpdatingImage2File(true)
+
+      setImage2Placeholder(
+        "https://www.wildseedfarms.com/wp-content/plugins/shopwp-pro/public/imgs/placeholder.png"
+      );
     } else if (imageCounter === 3) {
       setShowImage3(false);
       setImage3Title("");
@@ -472,6 +535,12 @@ function UpdateShowForm() {
       setImage3Url("");
       setImageCounter(imageCounter - 1);
       setImage3Action('')
+      setImage3File('')
+      setUpdatingImage3File(true)
+
+      setImage3Placeholder(
+        "https://www.wildseedfarms.com/wp-content/plugins/shopwp-pro/public/imgs/placeholder.png"
+      );
     } else if (imageCounter === 4) {
       setShowImage4(false);
       setImage4Title("");
@@ -479,10 +548,25 @@ function UpdateShowForm() {
       setImage4Url("");
       setImageCounter(imageCounter - 1);
       setImage4Action('')
+      setImage4File('')
+      setUpdatingImage4File(true)
+
+      setImage4Placeholder(
+        "https://www.wildseedfarms.com/wp-content/plugins/shopwp-pro/public/imgs/placeholder.png"
+      );
     } else if (imageCounter === 5) {
       setShowImage5(false);
+      setImage5Title("");
+      setImage5Description("");
+      setImage5Url("");
       setImageCounter(imageCounter - 1);
       setImage5Action('')
+      setImage5File('')
+      setUpdatingImage5File(true)
+
+      setImage5Placeholder(
+        "https://www.wildseedfarms.com/wp-content/plugins/shopwp-pro/public/imgs/placeholder.png"
+      );
     }
   };
 
@@ -643,7 +727,7 @@ function UpdateShowForm() {
             <div>
               <img
                 className="add-show-preview-image"
-                src={previewImageUrl}
+                src={previewImageFile ? previewImageUrl : previewImagePlaceholder}
                 alt='Image Unavailable'
               ></img>
             </div>
@@ -661,25 +745,25 @@ function UpdateShowForm() {
               )}
               <input
                 className="add-show-preview-image-inputs"
-                type="text"
-                maxLength="300"
-                placeholder="Preview Image URL"
-                value={previewImageUrl}
+                type="file"
+                
                 onChange={(e) => {
-                  if (validProfilePic(e.target.value)) {
-                    setPreviewImageUrl(e.target.value);
-                    // setPreviewImagePlaceholder(e.target.value);
+                  if (isValidImageFile(e.target.files[0])) {
+                    setPreviewImagePlaceholder(e.target.files[0])
+                    setPreviewImageUrl(URL.createObjectURL(e.target.files[0]))
+                    setPreviewImageFile(e.target.files[0])
+                    setUpdatingPreviewImageFile(true)
                   } else {
-                    setPreviewImageUrl(e.target.value);
+                    setShowPreviewImageError(true)
+                    setPreviewImageFile('')
                     setPreviewImagePlaceholder(
                       "https://www.wildseedfarms.com/wp-content/plugins/shopwp-pro/public/imgs/placeholder.png"
                     );
                   }
                 }}
               ></input>
-              {showErrors && errors.previewImageUrl && (
-                <p className="add-show-errors-p">{errors.previewImageUrl}</p>
-              )}
+               {showPreviewImageError && <p className='add-show-errors-p'>{errors.previewImageFile}</p>}
+
               <textarea
                 className="add-show-preview-image-description-input"
                 placeholder="Preview Image Description"
@@ -694,7 +778,7 @@ function UpdateShowForm() {
               <div>
                 <img
                   className="add-show-preview-image"
-                  src={image1Placeholder}
+                  src={image1File ? image1Url : image1Placeholder}
                   alt='Image Unavailable'
                 ></img>
               </div>
@@ -712,25 +796,24 @@ function UpdateShowForm() {
                 )}
                 <input
                   className="add-show-preview-image-inputs"
-                  type="text"
-                  maxLength="300"
-                  placeholder="Image URL"
-                  value={image1Url}
+                  type="file"
                   onChange={(e) => {
-                    if (validProfilePic(e.target.value)) {
-                      setImage1Url(e.target.value);
-                      setImage1Placeholder(e.target.value);
+                    if (isValidImageFile(e.target.files[0])) {
+                      setImage1Url(URL.createObjectURL(e.target.files[0]));
+                      setImage1Placeholder(e.target.files[0]);
+                      setImage1File(e.target.files[0])
                     } else {
-                      setImage1Url(e.target.value);
+                      // setImage1Url(e.target.value);
+                      setShowImage1Error(true)
+                      setImage1File('')
                       setImage1Placeholder(
                         "https://www.wildseedfarms.com/wp-content/plugins/shopwp-pro/public/imgs/placeholder.png"
                       );
                     }
                   }}
                 ></input>
-                {showErrors && errors.image1Url && (
-                  <p className="add-show-errors-p">{errors.image1Url}</p>
-                )}
+                {showImage1Error && <p className='add-show-errors-p'>{errors.image1File}</p>}
+
                 <textarea
                   className="add-show-preview-image-description-input"
                   placeholder="Image Description"
@@ -747,7 +830,7 @@ function UpdateShowForm() {
               <div>
                 <img
                   className="add-show-preview-image"
-                  src={image2Placeholder}
+                  src={image2File ? image2Url : image2Placeholder}
                   alt='Image Unavailable'
                 ></img>
               </div>
@@ -765,25 +848,25 @@ function UpdateShowForm() {
                 )}
                 <input
                   className="add-show-preview-image-inputs"
-                  type="text"
-                  maxLength="300"
-                  placeholder="Image URL"
-                  value={image2Url}
+                  type="file"
+                  
                   onChange={(e) => {
-                    if (validProfilePic(e.target.value)) {
-                      setImage2Url(e.target.value);
-                      setImage2Placeholder(e.target.value);
+                    if (isValidImageFile(e.target.files[0])) {
+                      setImage2Url(URL.createObjectURL(e.target.files[0]));
+                      setImage2Placeholder(e.target.files[0]);
+                      setImage2File(e.target.files[0])
+                      setUpdatingImage2File(true)
                     } else {
-                      setImage2Url(e.target.value);
+                      // setImage2Url(e.target.value);
+                      setImage2File('')
                       setImage2Placeholder(
                         "https://www.wildseedfarms.com/wp-content/plugins/shopwp-pro/public/imgs/placeholder.png"
                       );
                     }
                   }}
                 ></input>
-                {showErrors && errors.image2Url && (
-                  <p className="add-show-errors-p">{errors.image2Url}</p>
-                )}
+                {showImage2Error && <p className='add-show-errors-p'>{errors.image2File}</p>}
+
                 <textarea
                   className="add-show-preview-image-description-input"
                   placeholder="Image Description"
@@ -800,7 +883,7 @@ function UpdateShowForm() {
               <div>
                 <img
                   className="add-show-preview-image"
-                  src={image3Placeholder}
+                  src={image3File ? image3Url : image3Placeholder}
                   alt='Image Unavailable'
                 ></img>
               </div>
@@ -818,25 +901,24 @@ function UpdateShowForm() {
                 )}
                 <input
                   className="add-show-preview-image-inputs"
-                  type="text"
-                  maxLength="300"
-                  placeholder="Image URL"
-                  value={image3Url}
+                  type="file"
                   onChange={(e) => {
-                    if (validProfilePic(e.target.value)) {
-                      setImage3Url(e.target.value);
-                      setImage3Placeholder(e.target.value);
+                    if (isValidImageFile(e.target.files[0])) {
+                      setImage3File(e.target.files[0])
+                      setImage3Url(URL.createObjectURL(e.target.files[0]));
+                      setImage3Placeholder(e.target.files[0]);
                     } else {
-                      setImage3Url(e.target.value);
+                      setShowImage3Error(true)
+                      // setImage3Url(e.target.value);
+                      setImage3File('')
                       setImage3Placeholder(
                         "https://www.wildseedfarms.com/wp-content/plugins/shopwp-pro/public/imgs/placeholder.png"
                       );
                     }
                   }}
                 ></input>
-                {showErrors && errors.image3Url && (
-                  <p className="add-show-errors-p">{errors.image3Url}</p>
-                )}
+              {showImage3Error && <p className='add-show-errors-p'>{errors.image3File}</p>}
+
                 <textarea
                   className="add-show-preview-image-description-input"
                   placeholder="Image Description"
@@ -853,7 +935,7 @@ function UpdateShowForm() {
               <div>
                 <img
                   className="add-show-preview-image"
-                  src={image4Placeholder}
+                  src={image4File ? image4Url : image4Placeholder}
                   alt='Image Unavailable'
                 ></img>
               </div>
@@ -871,25 +953,23 @@ function UpdateShowForm() {
                 )}
                 <input
                   className="add-show-preview-image-inputs"
-                  type="text"
-                  maxLength="300"
-                  placeholder="Image URL"
-                  value={image4Url}
+                  type="file"
                   onChange={(e) => {
-                    if (validProfilePic(e.target.value)) {
-                      setImage4Url(e.target.value);
+                    if (isValidImageFile(e.target.files[0])) {
+                      setImage4File(e.target.files[0])
+                      setImage4Url(URL.createObjectURL(e.target.files[0]));
                       setImage4Placeholder(e.target.value);
                     } else {
-                      setImage4Url(e.target.value);
+                      setShowImage4Error(true)
+                      setImage4File('')
                       setImage4Placeholder(
                         "https://www.wildseedfarms.com/wp-content/plugins/shopwp-pro/public/imgs/placeholder.png"
                       );
                     }
                   }}
                 ></input>
-                {showErrors && errors.image4Url && (
-                  <p className="add-show-errors-p">{errors.image4Url}</p>
-                )}
+              {showImage4Error && <p className='add-show-errors-p'>{errors.image4File}</p>}
+
 
                 <textarea
                   className="add-show-preview-image-description-input"
@@ -907,7 +987,7 @@ function UpdateShowForm() {
               <div>
                 <img
                   className="add-show-preview-image"
-                  src={image5Placeholder}
+                  src={image5File ? image5Url : image5Placeholder}
                   alt='Image Unavailable'
                 ></img>
               </div>
@@ -925,25 +1005,23 @@ function UpdateShowForm() {
                 )}
                 <input
                   className="add-show-preview-image-inputs"
-                  type="text"
-                  maxLength="300"
-                  placeholder="Image URL"
-                  value={image5Url}
+                  type="file"
                   onChange={(e) => {
-                    if (validProfilePic(e.target.value)) {
-                      setImage5Url(e.target.value);
-                      setImage5Placeholder(e.target.value);
+                    if (isValidImageFile(e.target.files[0])) {
+                      setImage5File(e.target.files[0])
+                      setImage5Url(URL.createObjectURL(e.target.files[0]));
+                      setImage5Placeholder(e.target.files[0]);
                     } else {
-                      setImage5Url(e.target.value);
+                      setShowImage5Error(true)
+                      setImage5File('')
                       setImage5Placeholder(
                         "https://www.wildseedfarms.com/wp-content/plugins/shopwp-pro/public/imgs/placeholder.png"
                       );
                     }
                   }}
                 ></input>
-                {showErrors && errors.image5Url && (
-                  <p className="add-show-errors-p">{errors.image5Url}</p>
-                )}
+              {showImage5Error && <p className='add-show-errors-p'>{errors.image5File}</p>}
+
                 <textarea
                   className="add-show-preview-image-description-input"
                   placeholder="Image Description"

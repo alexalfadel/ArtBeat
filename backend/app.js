@@ -7,6 +7,8 @@ const helmet = require('helmet');
 const cookieParser = require('cookie-parser');
 const routes = require('./routes');
 const { ValidationError } = require('sequelize');
+const AWS = require('aws-sdk')
+
 
 
 const { environment } = require('./config');
@@ -17,7 +19,9 @@ const app = express();
 app.use(morgan('dev'));
 
 app.use(cookieParser());
+app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
+
 
 // Security Middleware
 if (!isProduction) {
@@ -80,4 +84,7 @@ app.use((err, _req, res, _next) => {
 });
 
 
-  module.exports = app;
+
+
+
+module.exports = app;
