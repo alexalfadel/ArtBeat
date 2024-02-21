@@ -24,6 +24,8 @@ export const getPreviewImageThunk = (showId) => async (dispatch) => {
 
 export const addShowImageToAws = (imageData) => async (req, res) => {
   const { title, description, preview, showId, imageFile} = imageData
+
+  console.log(imageData, '---imageData')
   
   const formData = new FormData()
   formData.append('title', title)
@@ -63,19 +65,53 @@ export const addShowImage = (showImage) => async (dispatch) => {
 };
 
 export const updateShowImageThunk = (imageData) => async (dispatch) => {
-  const { title, description, preview, showId, imageFile, imageUrl, id} = imageData
+  let { title, description, preview, showId, imageFile, imageUrl, id} = imageData
+  console.log(imageData, '----imageData')
 
-  const formData = new FormData()
-  formData.append('title', title)
-  formData.append('description', description)
-  formData.append('preview', preview)
-  formData.append('showId', showId)
-  formData.append('image', imageFile)
-  formData.append('imageUrl', imageUrl)
+  // let newImageUrl;
+  if (imageFile) {
+    console.log('----we have an image file')
+    const updateImageFormData = new FormData()
+    updateImageFormData.append('image', imageFile)
+    updateImageFormData.append('id', id)
+
+    const response = await csrfFetch(`/api/images/${id}/url`, {
+      method: 'PUT',
+      body: updateImageFormData
+    })
+
+    if (response.ok) {
+     imageUrl = await response.json()
+    } else {
+      const error = await response.json()
+      dispatch(setError(error))
+    }
+  }
+
+  console.log(imageUrl, '---imageUrl')
+
+  // const formData = new FormData()
+  // formData.append('title', title)
+  // formData.append('description', description)
+  // formData.append('preview', preview)
+  // formData.append('showId', showId)
+  // // formData.append('image', imageFile)
+  // formData.append('imageUrl', imageUrl)
+  // formData.append('id', id)
 
   const response = await csrfFetch(`/api/images/${id}`, {
     method: 'PUT',
-    body: formData
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      title: title,
+      description: description,
+      preview: preview,
+      showId: showId,
+      imageUrl: imageUrl,
+      id: id
+    })
   })
 
   if (response.ok) {

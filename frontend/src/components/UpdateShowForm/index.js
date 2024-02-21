@@ -238,15 +238,15 @@ function UpdateShowForm() {
     //   errors.image5Url = "Url must end in .jpg, .jpeg, or .png";
     if (previewImageTitle.length < 5)
       errors.previewImageTitle = "Title must be at least 5 characters long";
-    if (image1Title && image1Title.length < 5)
+    if (image1File && image1Title.length < 5)
       errors.image1Title = "Title must be at least 5 characters long";
-    if (image2Title && image2Title.length < 5)
+    if (image2File && image2Title.length < 5)
       errors.image2Title = "Title must be at least 5 characters long";
-    if (image3Title && image3Title.length < 5)
+    if (image3File && image3Title.length < 5)
       errors.image3Title = "Title must be at least 5 characters long";
-    if (image4Title && image4Title.length < 5)
+    if (image4File && image4Title.length < 5)
       errors.image4Title = "Title must be at least 5 characters long";
-    if (image5Title && image5Title.length < 5)
+    if (image5File && image5Title.length < 5)
       errors.image5Title = "Title must be at least 5 characters long";
     // if (previewImageUrl.length < 3)
     //   errors.previewImageUrl = "Url must be at least 3 characters long";
@@ -267,7 +267,7 @@ function UpdateShowForm() {
     if (price > 100000) errors.price = "Price must be less than $100,000.00";
     if (new Date(`${date}T00:00-0800`) < new Date())
       errors.date = "Date must be set in the future";
-    if (!isValidImageFile(previewImageFile))
+    if (previewImageFile && !isValidImageFile(previewImageFile))
       errors.previewImageFile = "Image must be.jpg, .jpeg, or .png";
     if (image1File && !isValidImageFile(image1File))
       errors.image1File = "Image must be .jpg, .jpeg, or .png";
@@ -376,24 +376,50 @@ function UpdateShowForm() {
     history.push("/shows");
   };
 
+  console.log(previewImageFile, '---previewImageFile')
+  console.log(previewImageTitle, '-----previewImageTitle')
+  console.log(previewImageUrl, '----previewImageUrl')
+  console.log(previewImageFile, '----previewImageFile')
+  console.log(updatingPreviewImageFile, '----updatingPreviewImageFile')
+  
   console.log(image1Title, '----image1Title')
       console.log(image1Description, '---image1Description')
       console.log(image1Url, '---image1Url')
       console.log(image1File, '---image1File')
+      console.log(updatingImage1File, '---updatingImage1File')
+      console.log(image1Action, '-----image1Action')
       console.log(image2Title, '----image2Title')
       console.log(image2Description, '---image2Description')
       console.log(image2Url, '---image2Url')
       console.log(image2File, '---image2File')
+      console.log(updatingImage2File, '---updatingImage2File')
+      console.log(image2Action, '-----image2Action')
       console.log(image3Title, '----image3Title')
       console.log(image3Description, '---image3Description')
       console.log(image3Url, '---image3Url')
-      console.log(image3File, '---image13File')
+      console.log(image3File, '---image3File')
+      console.log(updatingImage3File, '---updatingImage3File')
+      console.log(image3Action, '-----image3Action')
+      console.log(image4Title, '----image4Title')
+      console.log(image4Description, '---image4Description')
+      console.log(image4Url, '---image4Url')
+      console.log(image4File, '---image4File')
+      console.log(updatingImage4File, '---updatingImage4File')
+      console.log(image4Action, '-----image4Action')
+      console.log(image5Title, '----image5Title')
+      console.log(image5Description, '---image5Description')
+      console.log(image5Url, '---image5Url')
+      console.log(image5File, '---image5File')
+      console.log(updatingImage5File, '---updatingImage5File')
+      console.log(image5Action, '-----image5Action')
+      
 
   const onSubmit = async (e) => {
     e.preventDefault();
     if (Object.keys(errors).length) {
       console.log('we have errors')
       console.log(errors, '---errors')
+      console.log(previewImageUrl, '---previewImageUrl')
       setShowErrors(true);
     } else {
       const show = {
@@ -435,7 +461,7 @@ function UpdateShowForm() {
           description: image1Description,
           preview: false,
           showId: showId,
-          imageFile: updatingImage1File ? image1File : null,
+          imageFile: image1Action === 'add' || 'update' ? image1File : null,
           id: image1Id
         }
         if (image1Action === 'update') imagesToUpdate.push(image1);
@@ -450,7 +476,7 @@ function UpdateShowForm() {
           description: image2Description,
           preview: false,
           showId: showId,
-          imageFile: updatingImage2File ? image2File : null,
+          imageFile: image2Action === 'add' || 'update' ? image2File : null,
           id: image2Id
         }
         if (image2Action === 'update') imagesToUpdate.push(image2);
@@ -464,7 +490,7 @@ function UpdateShowForm() {
           description: image3Description,
           preview: false,
           showId: showId,
-          imageFile: updatingImage3File ? image3File : null,
+          imageFile: image3Action === 'add' || 'update' ? image3File : null,
           id: image3Id
 
         }
@@ -479,7 +505,7 @@ function UpdateShowForm() {
           description: image4Description,
           preview: false,
           showId: showId,
-          imageFile: updatingImage4File ? image4File : null,
+          imageFile: image4Action === 'add' || 'update' ? image4File : null,
           id: image4Id
         }
         if (image4Action === 'update') imagesToUpdate.push(image4)
@@ -494,7 +520,7 @@ function UpdateShowForm() {
           description: image5Description,
           preview: false,
           showId: showId,
-          imageFile: updatingImage5File ? image5File : null,
+          imageFile: image5Action === 'add' || 'update' ? image5File : null,
           id: image5Id
         }
         if (image5Action === 'update') imagesToUpdate.push(image5)
@@ -523,6 +549,7 @@ function UpdateShowForm() {
       setImageCounter(imageCounter - 1);
       setImage1Action('')
       setImage1File('')
+      setUpdatingImage1File(true)
 
       setImage1Placeholder(
         "https://www.wildseedfarms.com/wp-content/plugins/shopwp-pro/public/imgs/placeholder.png"
@@ -535,6 +562,7 @@ function UpdateShowForm() {
       setImageCounter(imageCounter - 1);
       setImage2Action('')
       setImage2File('')
+      setUpdatingImage2File(true)
 
       setImage2Placeholder(
         "https://www.wildseedfarms.com/wp-content/plugins/shopwp-pro/public/imgs/placeholder.png"
@@ -547,6 +575,7 @@ function UpdateShowForm() {
       setImageCounter(imageCounter - 1);
       setImage3Action('')
       setImage3File('')
+      setUpdatingImage3File(true)
 
       setImage3Placeholder(
         "https://www.wildseedfarms.com/wp-content/plugins/shopwp-pro/public/imgs/placeholder.png"
@@ -559,6 +588,7 @@ function UpdateShowForm() {
       setImageCounter(imageCounter - 1);
       setImage4Action('')
       setImage4File('')
+      setUpdatingImage4File(true)
 
       setImage4Placeholder(
         "https://www.wildseedfarms.com/wp-content/plugins/shopwp-pro/public/imgs/placeholder.png"
@@ -571,6 +601,8 @@ function UpdateShowForm() {
       setImageCounter(imageCounter - 1);
       setImage5Action('')
       setImage5File('')
+      setUpdatingImage5File(true)
+
       setImage5Placeholder(
         "https://www.wildseedfarms.com/wp-content/plugins/shopwp-pro/public/imgs/placeholder.png"
       );
