@@ -376,50 +376,11 @@ function UpdateShowForm() {
     history.push("/shows");
   };
 
-  console.log(previewImageFile, '---previewImageFile')
-  console.log(previewImageTitle, '-----previewImageTitle')
-  console.log(previewImageUrl, '----previewImageUrl')
-  console.log(previewImageFile, '----previewImageFile')
-  console.log(updatingPreviewImageFile, '----updatingPreviewImageFile')
-  
-  console.log(image1Title, '----image1Title')
-      console.log(image1Description, '---image1Description')
-      console.log(image1Url, '---image1Url')
-      console.log(image1File, '---image1File')
-      console.log(updatingImage1File, '---updatingImage1File')
-      console.log(image1Action, '-----image1Action')
-      console.log(image2Title, '----image2Title')
-      console.log(image2Description, '---image2Description')
-      console.log(image2Url, '---image2Url')
-      console.log(image2File, '---image2File')
-      console.log(updatingImage2File, '---updatingImage2File')
-      console.log(image2Action, '-----image2Action')
-      console.log(image3Title, '----image3Title')
-      console.log(image3Description, '---image3Description')
-      console.log(image3Url, '---image3Url')
-      console.log(image3File, '---image3File')
-      console.log(updatingImage3File, '---updatingImage3File')
-      console.log(image3Action, '-----image3Action')
-      console.log(image4Title, '----image4Title')
-      console.log(image4Description, '---image4Description')
-      console.log(image4Url, '---image4Url')
-      console.log(image4File, '---image4File')
-      console.log(updatingImage4File, '---updatingImage4File')
-      console.log(image4Action, '-----image4Action')
-      console.log(image5Title, '----image5Title')
-      console.log(image5Description, '---image5Description')
-      console.log(image5Url, '---image5Url')
-      console.log(image5File, '---image5File')
-      console.log(updatingImage5File, '---updatingImage5File')
-      console.log(image5Action, '-----image5Action')
       
 
   const onSubmit = async (e) => {
     e.preventDefault();
     if (Object.keys(errors).length) {
-      console.log('we have errors')
-      console.log(errors, '---errors')
-      console.log(previewImageUrl, '---previewImageUrl')
       setShowErrors(true);
     } else {
       const show = {

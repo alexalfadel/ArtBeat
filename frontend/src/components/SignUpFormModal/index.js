@@ -5,6 +5,7 @@ import * as sessionActions from "../../store/session";
 import { useHistory } from "react-router-dom";
 import "./SignupForm.css";
 import "./SignupForm.css";
+import { isValidImageFile } from "../AddShowForm";
 
 export const validProfilePic = (url) => {
   const splitUrl = url.split(".");
@@ -29,7 +30,7 @@ function SignupFormModal() {
 
   useEffect(() => {
     let errors = {}
-    if (profilePic && !validProfilePic(profilePic)) errors.profilePic = "URL must end in .jpg, .png, or .jpeg"
+    if (profilePic && !isValidImageFile(profilePic)) errors.profilePic = "URL must end in .jpg, .png, or .jpeg"
     setErrors(errors)
   }, [profilePic])
 
@@ -39,7 +40,8 @@ function SignupFormModal() {
   
     if (password === confirmPassword) {
       setErrors({});
-      const profPic = validProfilePic(profilePic) ? profilePic : "https://www.wildseedfarms.com/wp-content/plugins/shopwp-pro/public/imgs/placeholder.png"
+      const profPic = profilePic
+      console.log(profilePic)
       return dispatch(
         sessionActions.signup({
           email,
@@ -53,6 +55,7 @@ function SignupFormModal() {
       )
         .then(closeModal)
         .catch(async (res) => {
+          console.log('we are in the catch')
           const data = await res.json();
           if (data && data.errors) {
             setErrors(data.errors);
@@ -176,9 +179,11 @@ function SignupFormModal() {
           Profile Picture
           <input
             id='sign-up-profile-picture-link'
-            type="text"
-            value={profilePic}
-            onChange={(e) => setProfilePic(e.target.value)}
+            type="file"
+            // value={profilePic}
+            onChange={(e) => {
+              setProfilePic(e.target.files[0])
+            }}
           ></input>
         </label>
         {errors.profilePic && <p className='sign-up-errors'>{errors.profilePic}</p>}

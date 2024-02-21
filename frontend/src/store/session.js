@@ -42,6 +42,23 @@ export const restoreUser = () => async (dispatch) => {
 
   export const signup = (user) => async (dispatch) => {
     const { username, name, location, profilePic, bio, email, password } = user;
+
+    console.log('----before profile pic csrf fetch')
+
+    const profilePicFormData = new FormData()
+    profilePicFormData.append('image', profilePic)
+
+    const profilePicUrlResponse = await csrfFetch(`/api/images/addProfilePic`, {
+        method: "POST",
+        body: profilePicFormData
+    })
+
+    console.log('---after profile pic fetch sent')
+
+    let profilePicUrl = await profilePicUrlResponse.json()
+
+    console.log(profilePicUrl, '----profilePicUrl after')
+
     const response = await csrfFetch("/api/users", {
       method: "POST",
       body: JSON.stringify({
@@ -49,11 +66,12 @@ export const restoreUser = () => async (dispatch) => {
         name,
         location,
         bio,
-        profilePic,
+        profilePic: profilePicUrl,
         email,
         password,
       }),
     });
+
     const data = await response.json();
     dispatch(setUser(data.user));
     return response;

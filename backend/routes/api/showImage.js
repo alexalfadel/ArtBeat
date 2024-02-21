@@ -11,6 +11,16 @@ const { singleFileUpload, singleMulterUpload } = require("../../awsS3");
 const router = express.Router();
 
 router.post(
+  "/addProfilePic",
+  singleMulterUpload("image"),
+  async (req, res) => {
+    console.log("----we are in uploadProfilePic");
+    const imageUrl = await singleFileUpload({ file: req.file, public: true });
+    return res.status(201).json(imageUrl);
+  }
+);
+
+router.post(
   "/upload",
   singleMulterUpload("image"),
   requireAuth,
@@ -49,43 +59,39 @@ router.put(
   }
 );
 
-router.put(
-  "/:imageId",
-  requireAuth,
-  async (req, res) => {
-    const { title, description, preview, showId, imageUrl } = req.body;
-    const showImage = await ShowImage.findByPk(req.params.imageId);
+router.put("/:imageId", requireAuth, async (req, res) => {
+  const { title, description, preview, showId, imageUrl } = req.body;
+  const showImage = await ShowImage.findByPk(req.params.imageId);
 
-    console.log(req.body, '-----req.body')
+  console.log(req.body, "-----req.body");
 
-    if (!showImage)
-      return res.status(404).json({ message: "Image does not exist" });
-    const user = req.user;
-    const userShows = await Show.findAll({
-      where: {
-        userId: user.id,
-      },
-    });
-    const imageShow = userShows.filter((show) => show.id === showImage.showId);
-    if (!imageShow)
-      return res
-        .status(403)
-        .json({ message: "You must own the image to update it" });
+  if (!showImage)
+    return res.status(404).json({ message: "Image does not exist" });
+  const user = req.user;
+  const userShows = await Show.findAll({
+    where: {
+      userId: user.id,
+    },
+  });
+  const imageShow = userShows.filter((show) => show.id === showImage.showId);
+  if (!imageShow)
+    return res
+      .status(403)
+      .json({ message: "You must own the image to update it" });
 
-    await showImage.set({
-      title: title,
-      description: description,
-      preview: preview,
-      showId: showId,
-      imageUrl: imageUrl,
-    });
+  await showImage.set({
+    title: title,
+    description: description,
+    preview: preview,
+    showId: showId,
+    imageUrl: imageUrl,
+  });
 
-    await showImage.save();
+  await showImage.save();
 
-    const updatedImage = ShowImage.findByPk(req.params.imageId);
+  const updatedImage = ShowImage.findByPk(req.params.imageId);
 
-    return res.status(200).json(updatedImage);
-  }
-);
+  return res.status(200).json(updatedImage);
+});
 
 module.exports = router;

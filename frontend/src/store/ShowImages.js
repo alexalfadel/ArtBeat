@@ -25,7 +25,6 @@ export const getPreviewImageThunk = (showId) => async (dispatch) => {
 export const addShowImageToAws = (imageData) => async (req, res) => {
   const { title, description, preview, showId, imageFile} = imageData
 
-  console.log(imageData, '---imageData')
   
   const formData = new FormData()
   formData.append('title', title)
