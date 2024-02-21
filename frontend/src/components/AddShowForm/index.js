@@ -226,22 +226,6 @@ function AddShowForm() {
     history.push("/shows");
   };
 
-  // const region = process.env.AWS_REGION
-  // console.log(region, '----region')
-
-  console.log(image1Title, '----image1Title')
-  console.log(image1Description, '---image1Description')
-  console.log(image1Url, '---image1Url')
-  console.log(image1File, '---image1File')
-  console.log(image2Title, '----image2Title')
-  console.log(image2Description, '---image2Description')
-  console.log(image2Url, '---image2Url')
-  console.log(image2File, '---image2File')
-  console.log(image3Title, '----image3Title')
-  console.log(image3Description, '---image3Description')
-  console.log(image3Url, '---image3Url')
-  console.log(image3File, '---image13File')
-
   const onSubmit = async (e) => {
     e.preventDefault();
 
@@ -274,19 +258,6 @@ function AddShowForm() {
           imageFile: previewImageFile,
         },
       ];
-
-      console.log(image1Title, '----image1Title')
-      console.log(image1Description, '---image1Description')
-      console.log(image1Url, '---image1Url')
-      console.log(image1File, '---image1File')
-      console.log(image2Title, '----image2Title')
-      console.log(image2Description, '---image2Description')
-      console.log(image2Url, '---image2Url')
-      console.log(image2File, '---image2File')
-      console.log(image3Title, '----image3Title')
-      console.log(image3Description, '---image3Description')
-      console.log(image3Url, '---image3Url')
-      console.log(image3File, '---image13File')
 
       if (image1Title && image1Url && image1File) {
         images.push({
@@ -587,20 +558,14 @@ function AddShowForm() {
               <input
                 className="add-show-preview-image-inputs"
                 type="file"
-                // maxLength="300"
-                // placeholder="Preview Image URL"
-                // value={previewImageUrl}
                 onChange={(e) => {
                   if (isValidImageFile(e.target.files[0])) {
                     setPreviewImageFile(e.target.files[0]);
                     setPreviewImagePlaceholder(e.target.files[0]);
                     setPreviewImageUrl(URL.createObjectURL(e.target.files[0]));
-                    // console.log(previewImageUrl)
                   } else {
-                    // setPreviewImageUrl(URL.createObjectURL(e.target.value));
                     setShowPreviewImageError(true);
                     setPreviewImageFile("");
-                    // console.log(errors.previewImageFile, '---error')
                     setPreviewImagePlaceholder(
                       "https://www.wildseedfarms.com/wp-content/plugins/shopwp-pro/public/imgs/placeholder.png"
                     );
@@ -610,7 +575,9 @@ function AddShowForm() {
               {showErrors && errors.previewImageUrl && (
                 <p className="add-show-errors-p">{errors.previewImageUrl}</p>
               )}
-              {showPreviewImageError && <p className='add-show-errors-p'>{errors.previewImageFile}</p>}
+              {showPreviewImageError && (
+                <p className="add-show-errors-p">{errors.previewImageFile}</p>
+              )}
               {/* {showErrors && errors.previewImage} */}
               <textarea
                 className="add-show-preview-image-description-input"
@@ -667,7 +634,9 @@ function AddShowForm() {
                 {showErrors && errors.image1Url && (
                   <p className="add-show-errors-p">{errors.image1Url}</p>
                 )}
-                {showImage1Error && <p className='add-show-errors-p'>{errors.image1File}</p>}
+                {showImage1Error && (
+                  <p className="add-show-errors-p">{errors.image1File}</p>
+                )}
                 <textarea
                   className="add-show-preview-image-description-input"
                   placeholder="Image Description"
@@ -721,7 +690,9 @@ function AddShowForm() {
                     }
                   }}
                 ></input>
-                {showImage2Error && <p className='add-show-errors-p'>{errors.image2File}</p>}
+                {showImage2Error && (
+                  <p className="add-show-errors-p">{errors.image2File}</p>
+                )}
 
                 <textarea
                   className="add-show-preview-image-description-input"
@@ -776,7 +747,9 @@ function AddShowForm() {
                     }
                   }}
                 ></input>
-                {showImage3Error && <p className='add-show-errors-p'>{errors.image3File}</p>}
+                {showImage3Error && (
+                  <p className="add-show-errors-p">{errors.image3File}</p>
+                )}
 
                 <textarea
                   className="add-show-preview-image-description-input"
@@ -831,7 +804,9 @@ function AddShowForm() {
                     }
                   }}
                 ></input>
-                {showImage4Error && <p className='add-show-errors-p'>{errors.image4File}</p>}
+                {showImage4Error && (
+                  <p className="add-show-errors-p">{errors.image4File}</p>
+                )}
 
                 <textarea
                   className="add-show-preview-image-description-input"
@@ -886,7 +861,9 @@ function AddShowForm() {
                     }
                   }}
                 ></input>
-                {showImage5Error && <p className='add-show-errors-p'>{errors.image5File}</p>}
+                {showImage5Error && (
+                  <p className="add-show-errors-p">{errors.image5File}</p>
+                )}
 
                 <textarea
                   className="add-show-preview-image-description-input"

@@ -4,28 +4,21 @@ const { Show, ShowImage, User, Rsvp } = require("../../db/models");
 const { requireAuth } = require("../../utils/auth");
 const Op = Sequelize;
 const { v4: uuidv4 } = require("uuid");
-// const AWS = require('aws-sdk')
-// const fs = require('fs')
+
 const { singleFileUpload, singleMulterUpload } = require("../../awsS3");
 
 const router = express.Router();
 
-router.post(
-  "/addProfilePic",
-  singleMulterUpload("image"),
-  async (req, res) => {
-    console.log("----we are in uploadProfilePic");
-    const imageUrl = await singleFileUpload({ file: req.file, public: true });
-    return res.status(201).json(imageUrl);
-  }
-);
+router.post("/addProfilePic", singleMulterUpload("image"), async (req, res) => {
+  const imageUrl = await singleFileUpload({ file: req.file, public: true });
+  return res.status(201).json(imageUrl);
+});
 
 router.post(
   "/upload",
   singleMulterUpload("image"),
   requireAuth,
   async (req, res) => {
-    // console.log(req.body.formData.fileName, '----req.body')
     const { title, description, preview, showId } = req.body;
     const imageURL = await singleFileUpload({ file: req.file, public: true });
     const newImage = await ShowImage.create({
@@ -62,8 +55,6 @@ router.put(
 router.put("/:imageId", requireAuth, async (req, res) => {
   const { title, description, preview, showId, imageUrl } = req.body;
   const showImage = await ShowImage.findByPk(req.params.imageId);
-
-  console.log(req.body, "-----req.body");
 
   if (!showImage)
     return res.status(404).json({ message: "Image does not exist" });

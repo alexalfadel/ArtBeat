@@ -23,27 +23,26 @@ export const getPreviewImageThunk = (showId) => async (dispatch) => {
 };
 
 export const addShowImageToAws = (imageData) => async (req, res) => {
-  const { title, description, preview, showId, imageFile} = imageData
+  const { title, description, preview, showId, imageFile } = imageData;
 
-  
-  const formData = new FormData()
-  formData.append('title', title)
-  formData.append('description', description)
-  formData.append('preview', preview)
-  formData.append('showId', showId)
-  formData.append('image', imageFile)
+  const formData = new FormData();
+  formData.append("title", title);
+  formData.append("description", description);
+  formData.append("preview", preview);
+  formData.append("showId", showId);
+  formData.append("image", imageFile);
 
-  const response = await csrfFetch('/api/images/upload', {
-    method: 'POST',
-    body: formData
-  })
+  const response = await csrfFetch("/api/images/upload", {
+    method: "POST",
+    body: formData,
+  });
 
   if (response.ok) {
-    const imageUrl = await response.json()
+    const imageUrl = await response.json();
   } else {
-    const err = await response.json()
+    const err = await response.json();
   }
-}
+};
 
 export const addShowImage = (showImage) => async (dispatch) => {
   const response = await csrfFetch(`/api/images`, {
@@ -64,44 +63,31 @@ export const addShowImage = (showImage) => async (dispatch) => {
 };
 
 export const updateShowImageThunk = (imageData) => async (dispatch) => {
-  let { title, description, preview, showId, imageFile, imageUrl, id} = imageData
-  console.log(imageData, '----imageData')
+  let { title, description, preview, showId, imageFile, imageUrl, id } =
+    imageData;
 
-  // let newImageUrl;
   if (imageFile) {
-    console.log('----we have an image file')
-    const updateImageFormData = new FormData()
-    updateImageFormData.append('image', imageFile)
-    updateImageFormData.append('id', id)
+    const updateImageFormData = new FormData();
+    updateImageFormData.append("image", imageFile);
+    updateImageFormData.append("id", id);
 
     const response = await csrfFetch(`/api/images/${id}/url`, {
-      method: 'PUT',
-      body: updateImageFormData
-    })
+      method: "PUT",
+      body: updateImageFormData,
+    });
 
     if (response.ok) {
-     imageUrl = await response.json()
+      imageUrl = await response.json();
     } else {
-      const error = await response.json()
-      dispatch(setError(error))
+      const error = await response.json();
+      dispatch(setError(error));
     }
   }
 
-  console.log(imageUrl, '---imageUrl')
-
-  // const formData = new FormData()
-  // formData.append('title', title)
-  // formData.append('description', description)
-  // formData.append('preview', preview)
-  // formData.append('showId', showId)
-  // // formData.append('image', imageFile)
-  // formData.append('imageUrl', imageUrl)
-  // formData.append('id', id)
-
   const response = await csrfFetch(`/api/images/${id}`, {
-    method: 'PUT',
+    method: "PUT",
     headers: {
-      'Content-Type': 'application/json'
+      "Content-Type": "application/json",
     },
     body: JSON.stringify({
       title: title,
@@ -109,18 +95,18 @@ export const updateShowImageThunk = (imageData) => async (dispatch) => {
       preview: preview,
       showId: showId,
       imageUrl: imageUrl,
-      id: id
-    })
-  })
+      id: id,
+    }),
+  });
 
   if (response.ok) {
-    const updatedImage = await response.json()
-    return updatedImage
+    const updatedImage = await response.json();
+    return updatedImage;
   } else {
-    const error = await response.json()
-    dispatch(setError(error))
+    const error = await response.json();
+    dispatch(setError(error));
   }
-}
+};
 
 const initialState = {};
 

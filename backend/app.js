@@ -83,12 +83,7 @@ app.use((err, _req, res, _next) => {
   });
 });
 
-// AWS.config.update({
-//   accessKeyId: process.env.AWS_ACCES_KEY,
-//   secretAccessKey: process.env.AWS_SECRET_KEY
-// })
 
-// const upload = multer({ dest: 'uploads/'})
 
 
 
