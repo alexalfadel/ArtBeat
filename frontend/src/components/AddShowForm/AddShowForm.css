@@ -93,9 +93,9 @@
     padding-top: 30px;
 }
 
-.add-show-time-select {
+.add-show-time-select, #add-show-time-select {
     background-color: whitesmoke;
-    width: 100px;
+    width: 120px;
     text-align: center;
     font-family: 'Noto Sans Tai Le', sans-serif;
     border-radius: 10px;

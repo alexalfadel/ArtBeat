@@ -38,7 +38,7 @@ function AddShowForm() {
   const [location, setLocation] = useState("");
   const [time, setTime] = useState("12:00");
   const [date, setDate] = useState("");
-  const [amPm, setAmPm] = useState("am");
+  // const [amPm, setAmPm] = useState("am");
   const [price, setPrice] = useState("");
   const [errors, setErrors] = useState({});
   const [showErrors, setShowErrors] = useState(false);
@@ -176,7 +176,7 @@ function AddShowForm() {
     setLocation("");
     setTime("12:00");
     setPrice("");
-    setAmPm("am");
+    // setAmPm("am");
     setErrors({});
     setPreviewImagePlaceholder(
       "https://www.wildseedfarms.com/wp-content/plugins/shopwp-pro/public/imgs/placeholder.png"
@@ -238,7 +238,7 @@ function AddShowForm() {
         description: description,
         location: location,
         address: address,
-        time: formatTime(time, amPm),
+        time: time,
         date: new Date(date),
         price: Number(price),
         userId: user.id,
@@ -376,6 +376,7 @@ function AddShowForm() {
     }
   };
 
+
   return (
     <div className="add-show-full-page">
       <form className="add-show-component-box">
@@ -425,44 +426,7 @@ function AddShowForm() {
           <div>
             <div className="add-show-date-time-box">
               <div className="add-show-time-box">
-                <select
-                  className="add-show-time-select"
-                  required
-                  onChange={(e) => setTime(e.target.value)}
-                >
-                  <option value="12:00">12:00</option>
-                  <option value="12:30">12:30</option>
-                  <option value="1:00">1:00</option>
-                  <option value="1:30">1:30</option>
-                  <option value="2:00">2:00</option>
-                  <option value="2:30">2:30</option>
-                  <option value="3:00">3:00</option>
-                  <option value="3:30">3:30</option>
-                  <option value="4:00">4:00</option>
-                  <option value="4:30">4:30</option>
-                  <option value="5:00">5:00</option>
-                  <option value="5:30">5:30</option>
-                  <option value="6:00">6:00</option>
-                  <option value="6:30">6:30</option>
-                  <option value="7:00">7:00</option>
-                  <option value="7:30">7:30</option>
-                  <option value="8:00">8:00</option>
-                  <option value="8:30">8:30</option>
-                  <option value="9:00">9:00</option>
-                  <option value="9:30">9:30</option>
-                  <option value="10:00">10:00</option>
-                  <option value="10:30">10:30</option>
-                  <option value="11:00">11:00</option>
-                  <option value="11:30">11:30</option>
-                </select>
-                <select
-                  className="am-pm-select"
-                  required
-                  onChange={(e) => setAmPm(e.target.value)}
-                >
-                  <option value="am">A.M.</option>
-                  <option value="pm">P.M</option>
-                </select>
+                <input type='time' id='add-show-time-select' value={time} onChange={(e) => setTime(e.target.value)}></input>
               </div>
               <input
                 className="add-show-date-select"
