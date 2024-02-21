@@ -51,12 +51,31 @@ export const getAllArtistsThunk = () => async (dispatch) => {
 }
 
 export const updateArtistThunk = (artist) => async (dispatch) => {
+    let {id, username, bio, location, profilePic} = artist
+
+    const profilePicFormData = new FormData()
+    profilePicFormData.append('image', profilePic)
+
+    const profilePicUrlResponse = await csrfFetch(`/api/images/addProfilePic`, {
+        method: "POST",
+        body: profilePicFormData
+    })
+
+    profilePic = await profilePicUrlResponse.json()
+
+
     const response = await csrfFetch(`/api/users/${artist.id}`, {
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify(artist)
+        body: JSON.stringify({
+            id,
+            username,
+            bio,
+            location,
+            profilePic
+        })
     })
 
     if (response.ok) {
