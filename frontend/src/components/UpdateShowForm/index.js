@@ -118,6 +118,8 @@ function UpdateShowForm() {
   const [showImage3Error, setShowImage3Error] = useState(false)
   const [showImage4Error, setShowImage4Error] = useState(false)
   const [showImage5Error, setShowImage5Error] = useState(false)
+  const [descriptionClass, setDescriptionClass] = useState("black");
+
 
 
   const [userId, setUserId] = useState("");
@@ -205,6 +207,11 @@ function UpdateShowForm() {
       setImageCounter(remainingImages.length);
     }
   }, [allShows]);
+
+  useEffect(() => {
+    if (description.length < 25) setDescriptionClass("red");
+    else if (description.length >= 25) setDescriptionClass("black");
+  }, [description]);
 
   useEffect(() => {
     const errors = {};
@@ -588,6 +595,10 @@ function UpdateShowForm() {
               placeholder="Description goes here"
               onChange={(e) => setDescription(e.target.value)}
             ></textarea>
+            <p
+              id={`description-character-counter-${descriptionClass}`}
+              className="character-counter"
+            >{`${description.length}/256`}</p>
             {showErrors && errors.description && (
               <p lassName="add-show-errors-p">{errors.description}</p>
             )}
@@ -724,6 +735,9 @@ function UpdateShowForm() {
                 value={previewImageDescription}
                 onChange={(e) => setPreviewImageDescription(e.target.value)}
               ></textarea>
+              <p
+                className={`character-counter`}
+              >{`${previewImageDescription.length}/256`}</p>
             </div>
           </div>
           {showImage1 && (
@@ -774,6 +788,9 @@ function UpdateShowForm() {
                   value={image1Description}
                   onChange={(e) => setImage1Description(e.target.value)}
                 ></textarea>
+                <p
+                  className={`character-counter`}
+                >{`${image1Description.length}/256`}</p>
               </div>
             </div>
           )}
@@ -827,6 +844,9 @@ function UpdateShowForm() {
                   value={image2Description}
                   onChange={(e) => setImage2Description(e.target.value)}
                 ></textarea>
+                <p
+                  className={`character-counter`}
+                >{`${image2Description.length}/256`}</p>
               </div>
             </div>
           )}
@@ -879,6 +899,9 @@ function UpdateShowForm() {
                   value={image3Description}
                   onChange={(e) => setImage3Description(e.target.value)}
                 ></textarea>
+                <p
+                  className={`character-counter`}
+                >{`${image3Description.length}/256`}</p>
               </div>
             </div>
           )}
@@ -931,6 +954,9 @@ function UpdateShowForm() {
                   value={image4Description}
                   onChange={(e) => setImage4Description(e.target.value)}
                 ></textarea>
+                <p
+                  className={`character-counter`}
+                >{`${image4Description.length}/256`}</p>
               </div>
             </div>
           )}
@@ -982,6 +1008,9 @@ function UpdateShowForm() {
                   value={image5Description}
                   onChange={(e) => setImage5Description(e.target.value)}
                 ></textarea>
+                <p
+                  className={`character-counter`}
+                >{`${image5Description.length}/256`}</p>
               </div>
             </div>
           )}
