@@ -34,6 +34,8 @@ function ShowCard ({show}) {
     if (!ShowImages) return <h1>Loading...</h1>
     // const previewImage = ShowImages.filter((image) => image.preview === true)[0]
 
+    console.log(previewImage, '----previewImage')
+
 
     return (
         <Link className='show-card-link' id={`show-${id}-link`} to={`/shows/${id}`}>
