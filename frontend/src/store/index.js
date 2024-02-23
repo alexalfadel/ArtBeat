@@ -5,6 +5,7 @@ import showsReducer from "./shows";
 import artistsReducer from "./artists";
 import PreviewImageReducer from "./ShowImages";
 import rsvpReducer from "./rsvp";
+import mapsReducer from "./maps";
 
 
 const rootReducer = combineReducers({
@@ -12,7 +13,8 @@ const rootReducer = combineReducers({
   shows: showsReducer,
   artists: artistsReducer,
   previewImage: PreviewImageReducer,
-  rsvps: rsvpReducer
+  rsvps: rsvpReducer,
+  maps: mapsReducer
 });
 
 let enhancer;
