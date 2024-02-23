@@ -16,9 +16,13 @@ function AllShows() {
     dispatch(getAllShowsThunk());
   }, [dispatch]);
 
+  console.log(shows, '-----shows')
+
   if (!user) return <Redirect to="/" />;
 
   if (!shows.length) return <h1>Loading...</h1>;
+
+  console.log(shows, '-----shows')
 
   shows = shows.sort((a, b) => (a.date < b.date ? -1 : 1));
 
