@@ -35,7 +35,7 @@ function ShowCard ({show}) {
     if (!previewImage) return <h1>Loading...</h1>
     // const previewImage = ShowImages.filter((image) => image.preview === true)[0]
 
-    console.log(previewImage, '----previewImage')
+   
 
 
     return (
