@@ -1,8 +1,11 @@
 import './ImageGallery.css'
 import { useState } from 'react'
+import { useModal } from "../../context/Modal";
+
+
 
 function ImageGallery(ShowImages) {
-    console.log(ShowImages)
+    const { closeModal } = useModal();
     const [currentImage, setCurrentImage] = useState(0)
 
     const images = []
@@ -32,7 +35,7 @@ function ImageGallery(ShowImages) {
 
     return (
         <div className='image-gallery-modal'>
-            {/* <h1>Gallery</h1> */}
+            <p onClick={(() => closeModal())} id='leave-gallery'>X</p>
             {images[currentImage]}
             <div className='gallery-buttons'>
                 {currentImage <= ShowImages.images.length  && currentImage > 0 && leftArrow}
