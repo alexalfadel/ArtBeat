@@ -12,6 +12,7 @@ import OpenModalButton from "../OpenModalButton";
 import ImageModal from "../ImageModal";
 import { getPreviewImageThunk } from "../../store/ShowImages";
 import { formatDate } from "../ShowCard";
+import ImageGallery from "../ImageGallery";
 
 const formatTime = (time) => {
   const splitTime = time.split(":");
@@ -152,10 +153,11 @@ function ShowDetails() {
           <div className="image-buttons-holder">
             <OpenModalButton
               id="see-more-button"
-              buttonText="Art Piece Details"
-              modalComponent={<ImageModal imageAndArtist={imageModalProps} />}
+              buttonText="Gallery"
+              modalComponent={<ImageGallery images={ShowImages} />}
             />
-            <div id="image-button-carousel-holder">{imageButtons}</div>
+            {/* <div id="image-button-carousel-holder">{imageButtons}</div> */}
+            {/* <button id='see-more-button'>Gallery</button> */}
           </div>
         </div>
         <div className="show-details-info-box">
