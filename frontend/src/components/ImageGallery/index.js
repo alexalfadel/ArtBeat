@@ -10,15 +10,13 @@ function ImageGallery(ShowImages) {
     for (let i = 0; i < ShowImages.images.length; i++) {
         const image = ShowImages.images[i]
         const imageDiv = <div className='gallery-image-box'>
-        <p>{image.title}</p>
-        <img src={image.imageUrl}></img>
-        <p>{image.description}</p>
+        <p className='gallery-image-title'>{image.title}</p>
+        <img className='gallery-image-image' src={image.imageUrl}></img>
+        <p className='gallery-image-description'>{image.description}</p>
         </div>
 
         images.push(imageDiv)
     }
-
-    console.log(images, '----images')
    
 
     const moveImageToRight = () => {
@@ -29,12 +27,12 @@ function ImageGallery(ShowImages) {
         setCurrentImage(currentImage - 1)
     }
 
-    const leftArrow = <i onClick={moveImageToLeft} class="fa-solid fa-arrow-left"></i>
-    const rightArrow = <i onClick={moveImageToRight} class="fa-solid fa-arrow-right"></i>
+    const leftArrow = <i onClick={moveImageToLeft} class="fa-solid fa-arrow-left arrow"></i>
+    const rightArrow = <i onClick={moveImageToRight} class="fa-solid fa-arrow-right arrow"></i>
 
     return (
-        <div>
-            <h1>Gallery</h1>
+        <div className='image-gallery-modal'>
+            {/* <h1>Gallery</h1> */}
             {images[currentImage]}
             <div className='gallery-buttons'>
                 {currentImage <= ShowImages.images.length  && currentImage > 0 && leftArrow}
