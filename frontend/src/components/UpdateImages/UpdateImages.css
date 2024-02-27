@@ -54,7 +54,7 @@
     gap: 20px;
 }
 
-.update-delete-image-button {
+.update-delete-image-button, #update-delete-image-button {
     box-sizing: border-box;
     background-color: black;
     color: white;
@@ -62,6 +62,10 @@
     height: 30px;
     border-radius: 25px;
     font-size: 18.5px;
+}
+
+#update-delete-image-button:hover {
+    cursor: pointer;
 }
 
 .update-image-card-image {

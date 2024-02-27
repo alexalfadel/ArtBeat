@@ -2,6 +2,8 @@ import { useSelector, useDispatch } from "react-redux"
 import { useEffect } from "react"
 import { getAllShowsThunk } from "../../store/shows"
 import { Redirect, useParams, useHistory, Link } from "react-router-dom/"
+import OpenModalButton from "../OpenModalButton";
+import DeleteImageModal from "../DeleteImageModal";
 import './UpdateImages.css'
 
 function UpdateImages() {
@@ -36,7 +38,6 @@ function UpdateImages() {
             <img className='update-image-card-image' src={previewImage.imageUrl} alt='preview image'></img>
             <div className='update-image-buttons'>
                 <button className='update-delete-image-button'>Update</button>
-                <button className='update-delete-image-button'>Delete</button>
             </div>
         </div>
     )
@@ -56,9 +57,8 @@ function UpdateImages() {
                         <button className='update-delete-image-button'>
                             Update
                         </button>
-                        <button className='update-delete-image-button'>
-                            Delete
-                        </button>
+                        <OpenModalButton id='update-delete-image-button' buttonText='Delete' modalComponent={<DeleteImageModal imageId={image.id}/>}/>
+
                     </div>
                 </div>
             )
@@ -77,6 +77,7 @@ function UpdateImages() {
                 <h1 id='update-images-page-title'>Update Images</h1>
                 <div className='update-images-container'>
                     {imageElements}
+                    {ShowImages.length < 6 && <p>Add Image</p>}
                 </div>
             </div>
         </div>

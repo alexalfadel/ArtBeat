@@ -108,6 +108,21 @@ export const updateShowImageThunk = (imageData) => async (dispatch) => {
   }
 };
 
+export const deleteShowImageThunk = (imageId) => async (dispatch) => {
+  const response = await csrfFetch(`/api/images/${imageId}`, {
+    method: 'DELETE'
+  })
+
+  if (response.ok) {
+    const res = await response.json()
+    dispatch(getAllShowsThunk())
+  } else {
+    const errors = await response.json()
+    dispatch(setError(errors))
+  }
+
+}
+
 const initialState = {};
 
 function PreviewImageReducer(state = initialState, action) {
