@@ -4,6 +4,7 @@ import { getAllShowsThunk } from "../../store/shows"
 import { Redirect, useParams, useHistory, Link } from "react-router-dom/"
 import OpenModalButton from "../OpenModalButton";
 import DeleteImageModal from "../DeleteImageModal";
+import AddImageModal from "../AddImageModal";
 import './UpdateImages.css'
 
 function UpdateImages() {
@@ -77,7 +78,7 @@ function UpdateImages() {
                 <h1 id='update-images-page-title'>Update Images</h1>
                 <div className='update-images-container'>
                     {imageElements}
-                    {ShowImages.length < 6 && <p>Add Image</p>}
+                    {ShowImages.length < 6 && <OpenModalButton buttonText='Add Image+' modalComponent={<AddImageModal showId={showId}/>}/>}
                 </div>
             </div>
         </div>
