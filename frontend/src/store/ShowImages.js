@@ -78,6 +78,7 @@ export const updateShowImageThunk = (imageData) => async (dispatch) => {
 
     if (response.ok) {
       imageUrl = await response.json();
+      // dispatch(getAllShowsThunk())
     } else {
       const error = await response.json();
       dispatch(setError(error));
@@ -107,6 +108,21 @@ export const updateShowImageThunk = (imageData) => async (dispatch) => {
     dispatch(setError(error));
   }
 };
+
+export const deleteShowImageThunk = (imageId) => async (dispatch) => {
+  const response = await csrfFetch(`/api/images/${imageId}`, {
+    method: 'DELETE'
+  })
+
+  if (response.ok) {
+    const res = await response.json()
+    dispatch(getAllShowsThunk())
+  } else {
+    const errors = await response.json()
+    dispatch(setError(errors))
+  }
+
+}
 
 const initialState = {};
 

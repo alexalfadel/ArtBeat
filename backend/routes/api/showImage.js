@@ -85,4 +85,22 @@ router.put("/:imageId", requireAuth, async (req, res) => {
   return res.status(200).json(updatedImage);
 });
 
+router.delete("/:imageId", requireAuth, async (req, res) => {
+  const image = await ShowImage.findByPk(req.params.imageId);
+  const user = req.user;
+
+  if (!image) return res.status(404).json({ message: "Image does not exist" });
+  const show = await Show.findByPk(image.showId);
+
+  if (user.id !== show.userId) {
+    return res
+      .status(403)
+      .json({ message: "You must own an image to delete it" });
+  }
+
+  await image.destroy();
+
+  return res.status(200).json({ message: "Successfuly Deleted" });
+});
+
 module.exports = router;

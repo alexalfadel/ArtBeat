@@ -10,6 +10,7 @@ import AddShowForm from "./components/AddShowForm";
 import UpdateShowForm from "./components/UpdateShowForm";
 import DoesNotExist from "./components/404";
 import HomePage from "./components/HomePage";
+import UpdateImages from "./components/UpdateImages";
 
 function App() {
   const dispatch = useDispatch();
@@ -31,6 +32,9 @@ function App() {
         <Route exact path ='/shows/new'>
           {user && <AddShowForm />}
           {!user && <HomePage />}
+        </Route>
+        <Route path='/shows/:showId/images'>
+          {user && <UpdateImages/>}
         </Route>
         <Route path='/shows/:showId/update'>
           {user && <UpdateShowForm />}

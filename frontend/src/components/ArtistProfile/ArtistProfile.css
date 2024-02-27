@@ -295,6 +295,8 @@ div.left-top-profile-box > p {
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
+    justify-content: center;
+    align-items: center;
     gap: 10px;
     margin-bottom: 20px;
 }
@@ -302,8 +304,12 @@ div.left-top-profile-box > p {
 .artist-profile-show-card-links {
     box-sizing: border-box;
     display: flex;
-    justify-content: space-evenly;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
     padding-bottom: 10px;
+    width: 300px;
+    gap: 10px;
 }
 
 #artist-profile-show-card-update, #artist-profile-show-card-rsvps, #artist-profile-show-card-delete {
@@ -315,10 +321,13 @@ div.left-top-profile-box > p {
     padding-left: 3px;
     padding-right: 3px;
     padding-bottom:3px;
-    font-size: 14px;
+    font-size: 12px;
     border-radius: 25px;
-    width: 60px;
+    width: 140px;
     text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 #artist-profile-show-card-update:hover, #artist-profile-show-card-rsvps:hover, #artist-profile-show-card-delete:hover {
