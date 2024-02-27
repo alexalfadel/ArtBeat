@@ -5,6 +5,7 @@ import { Redirect, useParams, useHistory, Link } from "react-router-dom/"
 import OpenModalButton from "../OpenModalButton";
 import DeleteImageModal from "../DeleteImageModal";
 import AddImageModal from "../AddImageModal";
+import UpdateImageModal from "../UpdateImageModal";
 import './UpdateImages.css'
 
 function UpdateImages() {
@@ -38,7 +39,8 @@ function UpdateImages() {
         <div className='update-images-image-card'>
             <img className='update-image-card-image' src={previewImage.imageUrl} alt='preview image'></img>
             <div className='update-image-buttons'>
-                <button className='update-delete-image-button'>Update</button>
+            <OpenModalButton id='update-delete-image-button' buttonText='Update' modalComponent={<UpdateImageModal image={previewImage}/>}/>
+
             </div>
         </div>
     )
@@ -55,9 +57,8 @@ function UpdateImages() {
                 <div className='update-images-image-card'>
                     <img className='update-image-card-image' src={image.imageUrl}></img>
                     <div className='update-image-buttons'>
-                        <button className='update-delete-image-button'>
-                            Update
-                        </button>
+                    <OpenModalButton id='update-delete-image-button' buttonText='Update' modalComponent={<UpdateImageModal image={image}/>}/>
+
                         <OpenModalButton id='update-delete-image-button' buttonText='Delete' modalComponent={<DeleteImageModal imageId={image.id}/>}/>
 
                     </div>

@@ -78,6 +78,7 @@ export const updateShowImageThunk = (imageData) => async (dispatch) => {
 
     if (response.ok) {
       imageUrl = await response.json();
+      // dispatch(getAllShowsThunk())
     } else {
       const error = await response.json();
       dispatch(setError(error));
