@@ -2,6 +2,7 @@ import { useSelector, useDispatch } from "react-redux"
 import { useEffect } from "react"
 import { getAllShowsThunk } from "../../store/shows"
 import { Redirect, useParams, useHistory, Link } from "react-router-dom/"
+import './UpdateImages.css'
 
 function UpdateImages() {
     const dispatch = useDispatch()
@@ -22,43 +23,61 @@ function UpdateImages() {
     if (!show) history.push("/");
 
     const { ShowImages } = show;
-    console.log(ShowImages)
+    // console.log(ShowImages)
 
     const previewImage = ShowImages.find((image) => image.preview === true)
 
-    console.log(previewImage)
+    // console.log(previewImage)
+
+    let imageElements = []
 
     const previewImageElement = (
-        <div>
-            <img src={previewImage.imageUrl} alt='preview image'></img>
-            <div>
-                <button>Update</button>
-                <button>Delete</button>
+        <div className='update-images-image-card'>
+            <img className='update-image-card-image' src={previewImage.imageUrl} alt='preview image'></img>
+            <div className='update-image-buttons'>
+                <button className='update-delete-image-button'>Update</button>
+                <button className='update-delete-image-button'>Delete</button>
             </div>
         </div>
     )
 
-    let imageElements = ShowImages.forEach((image) => {
-        return (
-            <div>
-                <img src={image.imageUrl}></img>
-                <button>
-                    Update
-                </button>
-                <button>
-                    Delete
-                </button>
-            </div>
-        )
-    })
+    imageElements.push(previewImageElement)
+    // const imageElements = []
+
+    for (let i = 0; i < ShowImages.length; i++) {
+        let image = ShowImages[i]
+        console.log(image.preview, '---image.preview')
+        if (image.preview === false) {
+            console.log(image, '----image in if statement')
+            let imageElement = (
+                <div className='update-images-image-card'>
+                    <img className='update-image-card-image' src={image.imageUrl}></img>
+                    <div className='update-image-buttons'>
+                        <button className='update-delete-image-button'>
+                            Update
+                        </button>
+                        <button className='update-delete-image-button'>
+                            Delete
+                        </button>
+                    </div>
+                </div>
+            )
+            imageElements.push(imageElement)
+        }
+        
+    }
+  
+
+
 
 
     return (
-        <div>
-            <h1>Update Images</h1>
-            <div>
-                {previewImageElement}
-                {imageElements}
+        <div className='update-images-page'>
+            <div className='update-images-box'>
+                <h1 id='update-images-page-title'>Update Images</h1>
+                <div className='update-images-container'>
+                    {imageElements}
+                </div>
             </div>
         </div>
     )
