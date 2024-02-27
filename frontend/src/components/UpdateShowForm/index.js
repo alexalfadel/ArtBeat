@@ -47,77 +47,77 @@ function UpdateShowForm() {
   const [price, setPrice] = useState("");
   const [errors, setErrors] = useState({});
   const [showErrors, setShowErrors] = useState(false);
-  const [previewImagePlaceholder, setPreviewImagePlaceholder] = useState(
-    "https://www.wildseedfarms.com/wp-content/plugins/shopwp-pro/public/imgs/placeholder.png"
-  );
-  const [previewImageUrl, setPreviewImageUrl] = useState("");
-  const [previewImageTitle, setPreviewImageTitle] = useState("");
-  const [previewImageDescription, setPreviewImageDescription] = useState("");
-  const [previewImageId, setPreviewImageId] = useState("");
-  const [showImage1, setShowImage1] = useState("");
-  const [showImage2, setShowImage2] = useState("");
-  const [showImage3, setShowImage3] = useState("");
-  const [showImage4, setShowImage4] = useState("");
-  const [showImage5, setShowImage5] = useState("");
-  const [imageCounter, setImageCounter] = useState(0);
-  const [image1Placeholder, setImage1Placeholder] = useState(
-    "https://www.wildseedfarms.com/wp-content/plugins/shopwp-pro/public/imgs/placeholder.png"
-  );
-  const [image2Placeholder, setImage2Placeholder] = useState(
-    "https://www.wildseedfarms.com/wp-content/plugins/shopwp-pro/public/imgs/placeholder.png"
-  );
-  const [image3Placeholder, setImage3Placeholder] = useState(
-    "https://www.wildseedfarms.com/wp-content/plugins/shopwp-pro/public/imgs/placeholder.png"
-  );
-  const [image4Placeholder, setImage4Placeholder] = useState(
-    "https://www.wildseedfarms.com/wp-content/plugins/shopwp-pro/public/imgs/placeholder.png"
-  );
-  const [image5Placeholder, setImage5Placeholder] = useState(
-    "https://www.wildseedfarms.com/wp-content/plugins/shopwp-pro/public/imgs/placeholder.png"
-  );
-  const [image1Title, setImage1Title] = useState("");
-  const [image2Title, setImage2Title] = useState("");
-  const [image3Title, setImage3Title] = useState("");
-  const [image4Title, setImage4Title] = useState("");
-  const [image5Title, setImage5Title] = useState("");
-  const [image1Url, setImage1Url] = useState("");
-  const [image2Url, setImage2Url] = useState("");
-  const [image3Url, setImage3Url] = useState("");
-  const [image4Url, setImage4Url] = useState("");
-  const [image5Url, setImage5Url] = useState("");
-  const [image1Description, setImage1Description] = useState("");
-  const [image2Description, setImage2Description] = useState("");
-  const [image3Description, setImage3Description] = useState("");
-  const [image4Description, setImage4Description] = useState("");
-  const [image5Description, setImage5Description] = useState("");
-  const [image1Id, setImage1Id] = useState("");
-  const [image2Id, setImage2Id] = useState("");
-  const [image3Id, setImage3Id] = useState("");
-  const [image4Id, setImage4Id] = useState("");
-  const [image5Id, setImage5Id] = useState("");
-  const [image1Action, setImage1Action] = useState('')
-  const [image2Action, setImage2Action] = useState('')
-  const [image3Action, setImage3Action] = useState('')
-  const [image4Action, setImage4Action] = useState('')
-  const [image5Action, setImage5Action] = useState('')
-  const [updatingPreviewImageFile, setUpdatingPreviewImageFile] = useState(false)
-  const [updatingImage1File, setUpdatingImage1File] = useState(false)
-  const [updatingImage2File, setUpdatingImage2File] = useState(false)
-  const [updatingImage3File, setUpdatingImage3File] = useState(false)
-  const [updatingImage4File, setUpdatingImage4File] = useState(false)
-  const [updatingImage5File, setUpdatingImage5File] = useState(false)
-  const [previewImageFile, setPreviewImageFile] = useState('')
-  const [image1File, setImage1File] = useState('')
-  const [image2File, setImage2File] = useState('')
-  const [image3File, setImage3File] = useState('')
-  const [image4File, setImage4File] = useState('')
-  const [image5File, setImage5File] = useState('')
-  const [showPreviewImageError, setShowPreviewImageError] = useState(false)
-  const [showImage1Error, setShowImage1Error] = useState(false)
-  const [showImage2Error, setShowImage2Error] = useState(false)
-  const [showImage3Error, setShowImage3Error] = useState(false)
-  const [showImage4Error, setShowImage4Error] = useState(false)
-  const [showImage5Error, setShowImage5Error] = useState(false)
+  // const [previewImagePlaceholder, setPreviewImagePlaceholder] = useState(
+  //   "https://www.wildseedfarms.com/wp-content/plugins/shopwp-pro/public/imgs/placeholder.png"
+  // );
+  // const [previewImageUrl, setPreviewImageUrl] = useState("");
+  // const [previewImageTitle, setPreviewImageTitle] = useState("");
+  // const [previewImageDescription, setPreviewImageDescription] = useState("");
+  // const [previewImageId, setPreviewImageId] = useState("");
+  // const [showImage1, setShowImage1] = useState("");
+  // const [showImage2, setShowImage2] = useState("");
+  // const [showImage3, setShowImage3] = useState("");
+  // const [showImage4, setShowImage4] = useState("");
+  // const [showImage5, setShowImage5] = useState("");
+  // const [imageCounter, setImageCounter] = useState(0);
+  // const [image1Placeholder, setImage1Placeholder] = useState(
+  //   "https://www.wildseedfarms.com/wp-content/plugins/shopwp-pro/public/imgs/placeholder.png"
+  // );
+  // const [image2Placeholder, setImage2Placeholder] = useState(
+  //   "https://www.wildseedfarms.com/wp-content/plugins/shopwp-pro/public/imgs/placeholder.png"
+  // );
+  // const [image3Placeholder, setImage3Placeholder] = useState(
+  //   "https://www.wildseedfarms.com/wp-content/plugins/shopwp-pro/public/imgs/placeholder.png"
+  // );
+  // const [image4Placeholder, setImage4Placeholder] = useState(
+  //   "https://www.wildseedfarms.com/wp-content/plugins/shopwp-pro/public/imgs/placeholder.png"
+  // );
+  // const [image5Placeholder, setImage5Placeholder] = useState(
+  //   "https://www.wildseedfarms.com/wp-content/plugins/shopwp-pro/public/imgs/placeholder.png"
+  // );
+  // const [image1Title, setImage1Title] = useState("");
+  // const [image2Title, setImage2Title] = useState("");
+  // const [image3Title, setImage3Title] = useState("");
+  // const [image4Title, setImage4Title] = useState("");
+  // const [image5Title, setImage5Title] = useState("");
+  // const [image1Url, setImage1Url] = useState("");
+  // const [image2Url, setImage2Url] = useState("");
+  // const [image3Url, setImage3Url] = useState("");
+  // const [image4Url, setImage4Url] = useState("");
+  // const [image5Url, setImage5Url] = useState("");
+  // const [image1Description, setImage1Description] = useState("");
+  // const [image2Description, setImage2Description] = useState("");
+  // const [image3Description, setImage3Description] = useState("");
+  // const [image4Description, setImage4Description] = useState("");
+  // const [image5Description, setImage5Description] = useState("");
+  // const [image1Id, setImage1Id] = useState("");
+  // const [image2Id, setImage2Id] = useState("");
+  // const [image3Id, setImage3Id] = useState("");
+  // const [image4Id, setImage4Id] = useState("");
+  // const [image5Id, setImage5Id] = useState("");
+  // const [image1Action, setImage1Action] = useState('')
+  // const [image2Action, setImage2Action] = useState('')
+  // const [image3Action, setImage3Action] = useState('')
+  // const [image4Action, setImage4Action] = useState('')
+  // const [image5Action, setImage5Action] = useState('')
+  // const [updatingPreviewImageFile, setUpdatingPreviewImageFile] = useState(false)
+  // const [updatingImage1File, setUpdatingImage1File] = useState(false)
+  // const [updatingImage2File, setUpdatingImage2File] = useState(false)
+  // const [updatingImage3File, setUpdatingImage3File] = useState(false)
+  // const [updatingImage4File, setUpdatingImage4File] = useState(false)
+  // const [updatingImage5File, setUpdatingImage5File] = useState(false)
+  // const [previewImageFile, setPreviewImageFile] = useState('')
+  // const [image1File, setImage1File] = useState('')
+  // const [image2File, setImage2File] = useState('')
+  // const [image3File, setImage3File] = useState('')
+  // const [image4File, setImage4File] = useState('')
+  // const [image5File, setImage5File] = useState('')
+  // const [showPreviewImageError, setShowPreviewImageError] = useState(false)
+  // const [showImage1Error, setShowImage1Error] = useState(false)
+  // const [showImage2Error, setShowImage2Error] = useState(false)
+  // const [showImage3Error, setShowImage3Error] = useState(false)
+  // const [showImage4Error, setShowImage4Error] = useState(false)
+  // const [showImage5Error, setShowImage5Error] = useState(false)
   const [descriptionClass, setDescriptionClass] = useState("black");
 
 
@@ -133,17 +133,17 @@ function UpdateShowForm() {
       const show = allShows?.filter((show) => `${show.id}` === showId)[0];
       if (!show) return history.push("/");
       if (show.userId !== user.id) return history.push("/");
-      let showImages = show?.ShowImages;
-      showImages = showImages.sort((a, b) =>
-        a.createdAt < b.createdAt ? -1 : 1
-      );
-      const previewImage = showImages?.filter(
-        (image) => image.preview === true
-      )[0];
-      const remainingImages = [];
-      for (let i = 0; i < showImages.length; i++) {
-        if (!showImages[i].preview) remainingImages.push(showImages[i]);
-      }
+      // let showImages = show?.ShowImages;
+      // showImages = showImages.sort((a, b) =>
+      //   a.createdAt < b.createdAt ? -1 : 1
+      // );
+      // const previewImage = showImages?.filter(
+      //   (image) => image.preview === true
+      // )[0];
+      // const remainingImages = [];
+      // for (let i = 0; i < showImages.length; i++) {
+      //   if (!showImages[i].preview) remainingImages.push(showImages[i]);
+      // }
 
       setUserId(show.userId);
       setName(show.name);
@@ -154,57 +154,57 @@ function UpdateShowForm() {
       setTime(show.time)
       setDate(dateFormat(show.date));
       setPrice(show.price);
-      setPreviewImageTitle(previewImage.title);
-      setPreviewImageUrl(previewImage.imageUrl);
-      setPreviewImageDescription(previewImage.description);
-      setPreviewImagePlaceholder(previewImage.imageUrl)
-      setPreviewImageId(previewImage.id);
-      if (remainingImages[0]) {
-        setImage1Title(remainingImages[0].title);
-        setImage1Placeholder(remainingImages[0].imageUrl);
-        setImage1Description(remainingImages[0].description);
-        setImage1Url(remainingImages[0].imageUrl);
-        setShowImage1(true);
-        setImage1Id(remainingImages[0].id);
-        setImage1Action('update')
-      }
-      if (remainingImages[1]) {
-        setImage2Title(remainingImages[1].title);
-        setImage2Placeholder(remainingImages[1].imageUrl);
-        setImage2Description(remainingImages[1].description);
-        setImage2Url(remainingImages[1].imageUrl);
-        setShowImage2(true);
-        setImage2Id(remainingImages[1].id);
-        setImage2Action('update')
-      }
-      if (remainingImages[2]) {
-        setImage3Title(remainingImages[2].title);
-        setImage3Placeholder(remainingImages[2].imageUrl);
-        setImage3Description(remainingImages[2].description);
-        setImage3Url(remainingImages[2].imageUrl);
-        setShowImage3(true);
-        setImage3Id(remainingImages[2].id);
-        setImage3Action('update')
-      }
-      if (remainingImages[3]) {
-        setImage4Title(remainingImages[3].title);
-        setImage4Placeholder(remainingImages[3].imageUrl);
-        setImage4Description(remainingImages[3].description);
-        setImage4Url(remainingImages[3].imageUrl);
-        setShowImage4(true);
-        setImage4Id(remainingImages[3].id);
-        setImage4Action('update')
-      }
-      if (remainingImages[4]) {
-        setImage5Title(remainingImages[4].title);
-        setImage5Placeholder(remainingImages[4].imageUrl);
-        setImage5Description(remainingImages[4].description);
-        setImage5Url(remainingImages[4].imageUrl);
-        setShowImage5(true);
-        setImage5Id(remainingImages[4].id);
-        setImage4Action('update')
-      }
-      setImageCounter(remainingImages.length);
+      // setPreviewImageTitle(previewImage.title);
+      // setPreviewImageUrl(previewImage.imageUrl);
+      // setPreviewImageDescription(previewImage.description);
+      // setPreviewImagePlaceholder(previewImage.imageUrl)
+      // setPreviewImageId(previewImage.id);
+      // if (remainingImages[0]) {
+      //   setImage1Title(remainingImages[0].title);
+      //   setImage1Placeholder(remainingImages[0].imageUrl);
+      //   setImage1Description(remainingImages[0].description);
+      //   setImage1Url(remainingImages[0].imageUrl);
+      //   setShowImage1(true);
+      //   setImage1Id(remainingImages[0].id);
+      //   setImage1Action('update')
+      // }
+      // if (remainingImages[1]) {
+      //   setImage2Title(remainingImages[1].title);
+      //   setImage2Placeholder(remainingImages[1].imageUrl);
+      //   setImage2Description(remainingImages[1].description);
+      //   setImage2Url(remainingImages[1].imageUrl);
+      //   setShowImage2(true);
+      //   setImage2Id(remainingImages[1].id);
+      //   setImage2Action('update')
+      // }
+      // if (remainingImages[2]) {
+      //   setImage3Title(remainingImages[2].title);
+      //   setImage3Placeholder(remainingImages[2].imageUrl);
+      //   setImage3Description(remainingImages[2].description);
+      //   setImage3Url(remainingImages[2].imageUrl);
+      //   setShowImage3(true);
+      //   setImage3Id(remainingImages[2].id);
+      //   setImage3Action('update')
+      // }
+      // if (remainingImages[3]) {
+      //   setImage4Title(remainingImages[3].title);
+      //   setImage4Placeholder(remainingImages[3].imageUrl);
+      //   setImage4Description(remainingImages[3].description);
+      //   setImage4Url(remainingImages[3].imageUrl);
+      //   setShowImage4(true);
+      //   setImage4Id(remainingImages[3].id);
+      //   setImage4Action('update')
+      // }
+      // if (remainingImages[4]) {
+      //   setImage5Title(remainingImages[4].title);
+      //   setImage5Placeholder(remainingImages[4].imageUrl);
+      //   setImage5Description(remainingImages[4].description);
+      //   setImage5Url(remainingImages[4].imageUrl);
+      //   setShowImage5(true);
+      //   setImage5Id(remainingImages[4].id);
+      //   setImage4Action('update')
+      // }
+      // setImageCounter(remainingImages.length);
     }
   }, [allShows]);
 
@@ -236,18 +236,18 @@ function UpdateShowForm() {
     //   errors.image4Url = "Url must end in .jpg, .jpeg, or .png";
     // if (image5Url && !validProfilePic(image5Url))
     //   errors.image5Url = "Url must end in .jpg, .jpeg, or .png";
-    if (previewImageTitle.length < 5)
-      errors.previewImageTitle = "Title must be at least 5 characters long";
-    if (image1File && image1Title.length < 5)
-      errors.image1Title = "Title must be at least 5 characters long";
-    if (image2File && image2Title.length < 5)
-      errors.image2Title = "Title must be at least 5 characters long";
-    if (image3File && image3Title.length < 5)
-      errors.image3Title = "Title must be at least 5 characters long";
-    if (image4File && image4Title.length < 5)
-      errors.image4Title = "Title must be at least 5 characters long";
-    if (image5File && image5Title.length < 5)
-      errors.image5Title = "Title must be at least 5 characters long";
+    // if (previewImageTitle.length < 5)
+    //   errors.previewImageTitle = "Title must be at least 5 characters long";
+    // if (image1File && image1Title.length < 5)
+    //   errors.image1Title = "Title must be at least 5 characters long";
+    // if (image2File && image2Title.length < 5)
+    //   errors.image2Title = "Title must be at least 5 characters long";
+    // if (image3File && image3Title.length < 5)
+    //   errors.image3Title = "Title must be at least 5 characters long";
+    // if (image4File && image4Title.length < 5)
+    //   errors.image4Title = "Title must be at least 5 characters long";
+    // if (image5File && image5Title.length < 5)
+    //   errors.image5Title = "Title must be at least 5 characters long";
     // if (previewImageUrl.length < 3)
     //   errors.previewImageUrl = "Url must be at least 3 characters long";
     // if (image1Url && image1Url.length < 3)
@@ -267,30 +267,30 @@ function UpdateShowForm() {
     if (price > 100000) errors.price = "Price must be less than $100,000.00";
     if (new Date(`${date}T00:00-0800`) < new Date())
       errors.date = "Date must be set in the future";
-    if (previewImageFile && !isValidImageFile(previewImageFile))
-      errors.previewImageFile = "Image must be.jpg, .jpeg, or .png";
-    if (image1File && !isValidImageFile(image1File))
-      errors.image1File = "Image must be .jpg, .jpeg, or .png";
-    if (image2File && !isValidImageFile(image2File))
-      errors.image2File = "Image must be .jpg, .jpeg, or .png";
-    if (image3File && !isValidImageFile(image3File))
-      errors.image3File = "Image must be .jpg, .jpeg, or .png";
-    if (image4File && !isValidImageFile(image4File))
-      errors.image4File = "Image must be .jpg, .jpeg, or .png";
-    if (image5File && !isValidImageFile(image5File))
-      errors.image5File = "Image must be .jpg, .jpeg, or .png";
+    // if (previewImageFile && !isValidImageFile(previewImageFile))
+    //   errors.previewImageFile = "Image must be.jpg, .jpeg, or .png";
+    // if (image1File && !isValidImageFile(image1File))
+    //   errors.image1File = "Image must be .jpg, .jpeg, or .png";
+    // if (image2File && !isValidImageFile(image2File))
+    //   errors.image2File = "Image must be .jpg, .jpeg, or .png";
+    // if (image3File && !isValidImageFile(image3File))
+    //   errors.image3File = "Image must be .jpg, .jpeg, or .png";
+    // if (image4File && !isValidImageFile(image4File))
+    //   errors.image4File = "Image must be .jpg, .jpeg, or .png";
+    // if (image5File && !isValidImageFile(image5File))
+    //   errors.image5File = "Image must be .jpg, .jpeg, or .png";
 
     setErrors(errors);
   }, [
     name,
     address,
     // previewImageUrl,
-    previewImageTitle,
-    image1Title,
-    image2Title,
-    image3Title,
-    image4Title,
-    image5Title,
+    // previewImageTitle,
+    // image1Title,
+    // image2Title,
+    // image3Title,
+    // image4Title,
+    // image5Title,
     // image1Url,
     // image2Url,
     // image3Url,
@@ -301,12 +301,12 @@ function UpdateShowForm() {
     price,
     date,
     description,
-    image1File,
-    image2File,
-    image3File,
-    image4File,
-    image5File,
-    previewImageFile
+    // image1File,
+    // image2File,
+    // image3File,
+    // image4File,
+    // image5File,
+    // previewImageFile
   ]);
 
 
@@ -322,53 +322,53 @@ function UpdateShowForm() {
     setTime("");
     setPrice("");
     setErrors({});
-    setPreviewImagePlaceholder(
-      ''
-    );
-    setImage1Placeholder(
-      "https://www.wildseedfarms.com/wp-content/plugins/shopwp-pro/public/imgs/placeholder.png"
-    );
-    setImage2Placeholder(
-      "https://www.wildseedfarms.com/wp-content/plugins/shopwp-pro/public/imgs/placeholder.png"
-    );
-    setImage3Placeholder(
-      "https://www.wildseedfarms.com/wp-content/plugins/shopwp-pro/public/imgs/placeholder.png"
-    );
-    setImage4Placeholder(
-      "https://www.wildseedfarms.com/wp-content/plugins/shopwp-pro/public/imgs/placeholder.png"
-    );
-    setImage5Placeholder(
-      "https://www.wildseedfarms.com/wp-content/plugins/shopwp-pro/public/imgs/placeholder.png"
-    );
-    setPreviewImageUrl("");
-    setImage1Url("");
-    setImage2Url("");
-    setImage3Url("");
-    setImage4Url("");
-    setImage5Url("");
-    setPreviewImageTitle("");
-    setImage1Title("");
-    setImage2Title("");
-    setImage3Title("");
-    setImage4Title("");
-    setImage5Title("");
-    setPreviewImageDescription("");
-    setImage1Description("");
-    setImage2Description("");
-    setImage3Description("");
-    setImage4Description("");
-    setImage5Description("");
-    setShowImage1(false);
-    setShowImage2(false);
-    setShowImage3(false);
-    setShowImage4(false);
-    setShowImage5(false);
-    setImage1Id("");
-    setImage2Id("");
-    setImage3Id("");
-    setImage4Id("");
-    setImage5Id("");
-    setImageCounter(0);
+    // setPreviewImagePlaceholder(
+    //   ''
+    // );
+    // setImage1Placeholder(
+    //   "https://www.wildseedfarms.com/wp-content/plugins/shopwp-pro/public/imgs/placeholder.png"
+    // );
+    // setImage2Placeholder(
+    //   "https://www.wildseedfarms.com/wp-content/plugins/shopwp-pro/public/imgs/placeholder.png"
+    // );
+    // setImage3Placeholder(
+    //   "https://www.wildseedfarms.com/wp-content/plugins/shopwp-pro/public/imgs/placeholder.png"
+    // );
+    // setImage4Placeholder(
+    //   "https://www.wildseedfarms.com/wp-content/plugins/shopwp-pro/public/imgs/placeholder.png"
+    // );
+    // setImage5Placeholder(
+    //   "https://www.wildseedfarms.com/wp-content/plugins/shopwp-pro/public/imgs/placeholder.png"
+    // );
+    // setPreviewImageUrl("");
+    // setImage1Url("");
+    // setImage2Url("");
+    // setImage3Url("");
+    // setImage4Url("");
+    // setImage5Url("");
+    // setPreviewImageTitle("");
+    // setImage1Title("");
+    // setImage2Title("");
+    // setImage3Title("");
+    // setImage4Title("");
+    // setImage5Title("");
+    // setPreviewImageDescription("");
+    // setImage1Description("");
+    // setImage2Description("");
+    // setImage3Description("");
+    // setImage4Description("");
+    // setImage5Description("");
+    // setShowImage1(false);
+    // setShowImage2(false);
+    // setShowImage3(false);
+    // setShowImage4(false);
+    // setShowImage5(false);
+    // setImage1Id("");
+    // setImage2Id("");
+    // setImage3Id("");
+    // setImage4Id("");
+    // setImage5Id("");
+    // setImageCounter(0);
     setDate("");
     setShowErrors(false);
 
@@ -400,174 +400,174 @@ function UpdateShowForm() {
 
       const updatedShow = await dispatch(updateShowThunk(dispatchData));
 
-      const imagesToUpdate = [
-        {
-          title: previewImageTitle,
-          imageUrl: updatingPreviewImageFile ? null : previewImageUrl,
-          description: previewImageDescription,
-          preview: true,
-          showId: showId,
-          id: previewImageId,
-          imageFile: updatingPreviewImageFile ? previewImageFile : null
-        },
-      ];
+      // const imagesToUpdate = [
+      //   {
+      //     title: previewImageTitle,
+      //     imageUrl: updatingPreviewImageFile ? null : previewImageUrl,
+      //     description: previewImageDescription,
+      //     preview: true,
+      //     showId: showId,
+      //     id: previewImageId,
+      //     imageFile: updatingPreviewImageFile ? previewImageFile : null
+      //   },
+      // ];
 
-      const imagesToAdd = []
+      // const imagesToAdd = []
 
-      if (image1Title && (image1Url || image1File)) {
-        const image1 = {
-          title: image1Title,
-          imageUrl: updatingImage1File ? null : image1Url,
-          description: image1Description,
-          preview: false,
-          showId: showId,
-          imageFile: image1Action === 'add' || 'update' ? image1File : null,
-          id: image1Id
-        }
-        if (image1Action === 'update') imagesToUpdate.push(image1);
-         else imagesToAdd.push(image1)
+      // if (image1Title && (image1Url || image1File)) {
+      //   const image1 = {
+      //     title: image1Title,
+      //     imageUrl: updatingImage1File ? null : image1Url,
+      //     description: image1Description,
+      //     preview: false,
+      //     showId: showId,
+      //     imageFile: image1Action === 'add' || 'update' ? image1File : null,
+      //     id: image1Id
+      //   }
+      //   if (image1Action === 'update') imagesToUpdate.push(image1);
+      //    else imagesToAdd.push(image1)
         
-      }
+      // }
 
-      if (image2Title && (image2Url || image2File)) {
-        const image2 = {
-          title: image2Title,
-          imageUrl: updatingImage2File ? null : image2Url,
-          description: image2Description,
-          preview: false,
-          showId: showId,
-          imageFile: image2Action === 'add' || 'update' ? image2File : null,
-          id: image2Id
-        }
-        if (image2Action === 'update') imagesToUpdate.push(image2);
-        else imagesToAdd.push(image2)
-      }
+      // if (image2Title && (image2Url || image2File)) {
+      //   const image2 = {
+      //     title: image2Title,
+      //     imageUrl: updatingImage2File ? null : image2Url,
+      //     description: image2Description,
+      //     preview: false,
+      //     showId: showId,
+      //     imageFile: image2Action === 'add' || 'update' ? image2File : null,
+      //     id: image2Id
+      //   }
+      //   if (image2Action === 'update') imagesToUpdate.push(image2);
+      //   else imagesToAdd.push(image2)
+      // }
 
-      if (image3Title && (image3Url || image3File)) {
-        const image3 = {
-          title: image3Title,
-          imageUrl: updatingImage3File ? null : image3Url,
-          description: image3Description,
-          preview: false,
-          showId: showId,
-          imageFile: image3Action === 'add' || 'update' ? image3File : null,
-          id: image3Id
+      // if (image3Title && (image3Url || image3File)) {
+      //   const image3 = {
+      //     title: image3Title,
+      //     imageUrl: updatingImage3File ? null : image3Url,
+      //     description: image3Description,
+      //     preview: false,
+      //     showId: showId,
+      //     imageFile: image3Action === 'add' || 'update' ? image3File : null,
+      //     id: image3Id
 
-        }
-        if (image3Action === 'update') imagesToUpdate.push(image3)
-        else imagesToAdd.push(image3)
-      }
+      //   }
+      //   if (image3Action === 'update') imagesToUpdate.push(image3)
+      //   else imagesToAdd.push(image3)
+      // }
 
-      if (image4Title && (image4Url || image4File)) {
-        const image4 = {
-          title: image4Title,
-          imageUrl: updatingImage4File ? null : image4Url,
-          description: image4Description,
-          preview: false,
-          showId: showId,
-          imageFile: image4Action === 'add' || 'update' ? image4File : null,
-          id: image4Id
-        }
-        if (image4Action === 'update') imagesToUpdate.push(image4)
-        else imagesToAdd.push(image4)
+      // if (image4Title && (image4Url || image4File)) {
+      //   const image4 = {
+      //     title: image4Title,
+      //     imageUrl: updatingImage4File ? null : image4Url,
+      //     description: image4Description,
+      //     preview: false,
+      //     showId: showId,
+      //     imageFile: image4Action === 'add' || 'update' ? image4File : null,
+      //     id: image4Id
+      //   }
+      //   if (image4Action === 'update') imagesToUpdate.push(image4)
+      //   else imagesToAdd.push(image4)
         
-      }
+      // }
 
-      if (image5Title && (image5Url || image5File)) {
-        const image5 = {
-          title: image5Title,
-          imageUrl: updatingImage5File ? null : image5Url,
-          description: image5Description,
-          preview: false,
-          showId: showId,
-          imageFile: image5Action === 'add' || 'update' ? image5File : null,
-          id: image5Id
-        }
-        if (image5Action === 'update') imagesToUpdate.push(image5)
-        else imagesToAdd.push(image5)
-      }
+      // if (image5Title && (image5Url || image5File)) {
+      //   const image5 = {
+      //     title: image5Title,
+      //     imageUrl: updatingImage5File ? null : image5Url,
+      //     description: image5Description,
+      //     preview: false,
+      //     showId: showId,
+      //     imageFile: image5Action === 'add' || 'update' ? image5File : null,
+      //     id: image5Id
+      //   }
+      //   if (image5Action === 'update') imagesToUpdate.push(image5)
+      //   else imagesToAdd.push(image5)
+      // }
 
-      for (let i = 0; i < imagesToUpdate.length; i++) {
-        await dispatch(updateShowImageThunk(imagesToUpdate[i]));
-      }
+      // for (let i = 0; i < imagesToUpdate.length; i++) {
+      //   await dispatch(updateShowImageThunk(imagesToUpdate[i]));
+      // }
 
-      for (let i = 0; i < imagesToAdd.length; i++) {
-        await dispatch(addShowImageToAws(imagesToAdd[i]))
-      }
+      // for (let i = 0; i < imagesToAdd.length; i++) {
+      //   await dispatch(addShowImageToAws(imagesToAdd[i]))
+      // }
 
       reset();
     }
   };
 
-  const removeShowImage = (e) => {
-    e.preventDefault();
-    if (imageCounter === 1) {
-      setShowImage1(false);
-      setImage1Title("");
-      setImage1Description("");
-      setImage1Url("");
-      setImageCounter(imageCounter - 1);
-      setImage1Action('')
-      setImage1File('')
-      setUpdatingImage1File(true)
+  // const removeShowImage = (e) => {
+  //   e.preventDefault();
+  //   if (imageCounter === 1) {
+  //     setShowImage1(false);
+  //     setImage1Title("");
+  //     setImage1Description("");
+  //     setImage1Url("");
+  //     setImageCounter(imageCounter - 1);
+  //     setImage1Action('')
+  //     setImage1File('')
+  //     setUpdatingImage1File(true)
 
-      setImage1Placeholder(
-        "https://www.wildseedfarms.com/wp-content/plugins/shopwp-pro/public/imgs/placeholder.png"
-      );
-    } else if (imageCounter === 2) {
-      setShowImage2(false);
-      setImage2Title("");
-      setImage2Description("");
-      setImage2Url("");
-      setImageCounter(imageCounter - 1);
-      setImage2Action('')
-      setImage2File('')
-      setUpdatingImage2File(true)
+  //     setImage1Placeholder(
+  //       "https://www.wildseedfarms.com/wp-content/plugins/shopwp-pro/public/imgs/placeholder.png"
+  //     );
+  //   } else if (imageCounter === 2) {
+  //     setShowImage2(false);
+  //     setImage2Title("");
+  //     setImage2Description("");
+  //     setImage2Url("");
+  //     setImageCounter(imageCounter - 1);
+  //     setImage2Action('')
+  //     setImage2File('')
+  //     setUpdatingImage2File(true)
 
-      setImage2Placeholder(
-        "https://www.wildseedfarms.com/wp-content/plugins/shopwp-pro/public/imgs/placeholder.png"
-      );
-    } else if (imageCounter === 3) {
-      setShowImage3(false);
-      setImage3Title("");
-      setImage3Description("");
-      setImage3Url("");
-      setImageCounter(imageCounter - 1);
-      setImage3Action('')
-      setImage3File('')
-      setUpdatingImage3File(true)
+  //     setImage2Placeholder(
+  //       "https://www.wildseedfarms.com/wp-content/plugins/shopwp-pro/public/imgs/placeholder.png"
+  //     );
+  //   } else if (imageCounter === 3) {
+  //     setShowImage3(false);
+  //     setImage3Title("");
+  //     setImage3Description("");
+  //     setImage3Url("");
+  //     setImageCounter(imageCounter - 1);
+  //     setImage3Action('')
+  //     setImage3File('')
+  //     setUpdatingImage3File(true)
 
-      setImage3Placeholder(
-        "https://www.wildseedfarms.com/wp-content/plugins/shopwp-pro/public/imgs/placeholder.png"
-      );
-    } else if (imageCounter === 4) {
-      setShowImage4(false);
-      setImage4Title("");
-      setImage4Description("");
-      setImage4Url("");
-      setImageCounter(imageCounter - 1);
-      setImage4Action('')
-      setImage4File('')
-      setUpdatingImage4File(true)
+  //     setImage3Placeholder(
+  //       "https://www.wildseedfarms.com/wp-content/plugins/shopwp-pro/public/imgs/placeholder.png"
+  //     );
+  //   } else if (imageCounter === 4) {
+  //     setShowImage4(false);
+  //     setImage4Title("");
+  //     setImage4Description("");
+  //     setImage4Url("");
+  //     setImageCounter(imageCounter - 1);
+  //     setImage4Action('')
+  //     setImage4File('')
+  //     setUpdatingImage4File(true)
 
-      setImage4Placeholder(
-        "https://www.wildseedfarms.com/wp-content/plugins/shopwp-pro/public/imgs/placeholder.png"
-      );
-    } else if (imageCounter === 5) {
-      setShowImage5(false);
-      setImage5Title("");
-      setImage5Description("");
-      setImage5Url("");
-      setImageCounter(imageCounter - 1);
-      setImage5Action('')
-      setImage5File('')
-      setUpdatingImage5File(true)
+  //     setImage4Placeholder(
+  //       "https://www.wildseedfarms.com/wp-content/plugins/shopwp-pro/public/imgs/placeholder.png"
+  //     );
+  //   } else if (imageCounter === 5) {
+  //     setShowImage5(false);
+  //     setImage5Title("");
+  //     setImage5Description("");
+  //     setImage5Url("");
+  //     setImageCounter(imageCounter - 1);
+  //     setImage5Action('')
+  //     setImage5File('')
+  //     setUpdatingImage5File(true)
 
-      setImage5Placeholder(
-        "https://www.wildseedfarms.com/wp-content/plugins/shopwp-pro/public/imgs/placeholder.png"
-      );
-    }
-  };
+  //     setImage5Placeholder(
+  //       "https://www.wildseedfarms.com/wp-content/plugins/shopwp-pro/public/imgs/placeholder.png"
+  //     );
+  //   }
+  // };
 
 
   return (
@@ -686,8 +686,8 @@ function UpdateShowForm() {
         {showErrors && errors.date && (
           <p className="add-show-errors-p">{errors.date}</p>
         )}
-        <div className="add-show-add-images-container">
-          <div className="add-show-preview-image-container">
+        {/* <div className="add-show-add-images-container"> */}
+          {/* <div className="add-show-preview-image-container">
             <div>
               <img
                 className="add-show-preview-image"
@@ -739,8 +739,8 @@ function UpdateShowForm() {
                 className={`character-counter`}
               >{`${previewImageDescription.length}/256`}</p>
             </div>
-          </div>
-          {showImage1 && (
+          </div> */}
+          {/* {showImage1 && (
             <div className="add-show-preview-image-container">
               <div>
                 <img
@@ -904,8 +904,8 @@ function UpdateShowForm() {
                 >{`${image3Description.length}/256`}</p>
               </div>
             </div>
-          )}
-
+          )} */}
+{/* 
           {showImage4 && (
             <div className="add-show-preview-image-container">
               <div>
@@ -959,8 +959,8 @@ function UpdateShowForm() {
                 >{`${image4Description.length}/256`}</p>
               </div>
             </div>
-          )}
-
+          )} */}
+{/* 
           {showImage5 && (
             <div className="add-show-preview-image-container">
               <div>
@@ -998,8 +998,8 @@ function UpdateShowForm() {
                       );
                     }
                   }}
-                ></input>
-              {showImage5Error && <p className='add-show-errors-p'>{errors.image5File}</p>}
+                ></input> */}
+              {/* {showImage5Error && <p className='add-show-errors-p'>{errors.image5File}</p>}
 
                 <textarea
                   className="add-show-preview-image-description-input"
@@ -1013,8 +1013,8 @@ function UpdateShowForm() {
                 >{`${image5Description.length}/256`}</p>
               </div>
             </div>
-          )}
-          {imageCounter < 4 && (
+          )} */}
+          {/* {imageCounter < 4 && (
             <p className="image-counter">
               You can add {5 - imageCounter} more images!
             </p>
@@ -1023,8 +1023,8 @@ function UpdateShowForm() {
             <p className="image-counter">
               You can add {5 - imageCounter} more image!
             </p>
-          )}
-          {imageCounter < 5 && (
+          )} */}
+          {/* {imageCounter < 5 && (
             <button
               className="add-image-button"
               onClick={(e) => {
@@ -1051,13 +1051,13 @@ function UpdateShowForm() {
             >
               Add an Image+
             </button>
-          )}
-          {imageCounter > 0 && (image1Action === 'add' || image2Action === 'add' || image3Action === 'add' || image4Action === 'add' || image5Action === 'add')&& (
+          )} */}
+          {/* {imageCounter > 0 && (image1Action === 'add' || image2Action === 'add' || image3Action === 'add' || image4Action === 'add' || image5Action === 'add')&& (
             <button id="remove-last-image-button" onClick={removeShowImage}>
               Remove Last Image
             </button>
-          )}
-        </div>
+          )} */}
+        {/* </div> */}
         <div className="add-show-buttons-container">
           <button className="add-show-submit-buttons" onClick={onSubmit}>
             Save
