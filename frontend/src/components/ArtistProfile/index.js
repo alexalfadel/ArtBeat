@@ -128,7 +128,8 @@ function ArtistProfile() {
             buttonText="RSVPs"
             modalComponent={<Rsvps rsvpProps={rsvpProps} />}
           />
-          <Link id='artist-profile-show-card-update' to={`/shows/${show.id}/update`}>Update</Link>
+          <Link id='artist-profile-show-card-update' to={`/shows/${show.id}/update`}>Update Show</Link>
+          <Link id='artist-profile-show-card-update' to={`/shows/${show.id}/images`}>Update Images</Link>
           <OpenModalButton
             id='artist-profile-show-card-delete'
             buttonText="Delete"
