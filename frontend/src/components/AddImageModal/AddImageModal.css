@@ -1,0 +1,52 @@
+#add-image-modal {
+    box-sizing: border-box;
+    background-color: lightgray;
+    width: 1000px;
+    border-radius: 25px;
+    padding-top: 30px;
+    padding-bottom: 20px;
+    display: flex;
+    justify-content: center;
+    /* background-color: pink; */
+}
+
+.add-image-form-box {
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 80vw;
+    /* background-color: blue; */
+}
+
+.add-image-form-inputs-image {
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+}
+
+.add-delete-image-buttons {
+    box-sizing: border-box;
+    background-color: black;
+    color: white;
+    width: 100px;
+    height: 30px;
+    border-radius: 25px;
+    font-size: 16px;
+    font-family: 'Noto Sans Tai Le', sans-serif;
+}
+
+.add-delete-image-buttons:hover {
+    cursor: pointer;
+    font-weight: bold;
+    background-color: grey;
+    box-shadow: 0px 0px 5px 2px black;
+}
+
+.add-delete-image-buttons-holder {
+    box-sizing: border-box;
+    display: flex;
+    gap: 20px;
+}

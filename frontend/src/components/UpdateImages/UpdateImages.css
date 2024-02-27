@@ -66,6 +66,9 @@
 
 #update-delete-image-button:hover {
     cursor: pointer;
+    font-weight: bold;
+    background-color: grey;
+    box-shadow: 0px 0px 5px 2px black;
 }
 
 .update-image-card-image {
@@ -83,4 +86,23 @@
     gap: 20px;
     padding-left: 75px;
     padding-right: 75px;
+}
+
+#add-image-modal-button {
+    box-sizing: border-box;
+    background-color: black;
+    color: white;
+    width: 200px;
+    height: 30px;
+    border-radius: 25px;
+    font-size: 18.5px;
+    align-self: center;
+    margin-left: 40px;
+}
+
+#add-image-modal-button:hover {
+    cursor: pointer;
+    font-weight: bold;
+    background-color: grey;
+    box-shadow: 0px 0px 5px 2px black;
 }

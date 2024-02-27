@@ -78,7 +78,7 @@ function UpdateImages() {
                 <h1 id='update-images-page-title'>Update Images</h1>
                 <div className='update-images-container'>
                     {imageElements}
-                    {ShowImages.length < 6 && <OpenModalButton buttonText='Add Image+' modalComponent={<AddImageModal showId={showId}/>}/>}
+                    {ShowImages.length < 6 && <OpenModalButton id='add-image-modal-button' buttonText='Add Image+' modalComponent={<AddImageModal showId={showId}/>}/>}
                 </div>
             </div>
         </div>
