@@ -71,7 +71,7 @@ function UpdateImageModal({ image }) {
     <div className="update-image-modal-container">
       <form className="update-image-modal-form">
         <div className='update-image-form-top'>
-          <div>
+          <div className='update-image-image-holder'>
             <img
               className="add-show-preview-image"
               src={newFile ? imageUrl : placeholder}
