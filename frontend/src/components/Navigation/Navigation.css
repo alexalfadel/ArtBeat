@@ -12,6 +12,7 @@
     background: transparent;
     /* overflow-y: hidden;
     overflow-x: hidden; */
+    overflow-x: hidden
 }
 
 .hidden {

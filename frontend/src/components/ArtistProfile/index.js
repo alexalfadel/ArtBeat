@@ -59,14 +59,15 @@ function ArtistProfile() {
   }, [username, newProfilePicUrl]);
 
   if (!user || !allShows.length) {
-    return <h1 className="loading">Loading...</h1>;
+    return <h1 className="loading">Loading... If you don't get redirected in 30 seconds, please click
+    <Link to={`artists/${artistId}`}>here.</Link></h1>;
   }
 
   if (!allArtists) {
     return (
       <h1 className="loading">
-        Loading... If you don't get redirected in 30 seconds, please click{" "}
-        <Link to={`artists/${artistId}`}></Link>
+        Loading... If you don't get redirected in 30 seconds, please click
+        <Link to={`artists/${artistId}`}>here.</Link>
       </h1>
     );
   }
@@ -78,7 +79,8 @@ function ArtistProfile() {
     return <h1 className="loading">Loading...</h1>;
   }
   if (!attendingRsvps.length) {
-    return <h1 className="loading">Loading...</h1>;
+    return <h1 className="loading">Loading... If you don't get redirected in 30 seconds, please click
+    <Link to={`artists/${artistId}`}>here.</Link></h1>;
   }
 
   if (!profilePic || !holdProfilePicUrl) {
