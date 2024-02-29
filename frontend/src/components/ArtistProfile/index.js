@@ -67,7 +67,7 @@ function ArtistProfile() {
     return (
       <h1 className="loading">
         Loading... If you don't get redirected in 30 seconds, please click
-        <Link to={`artists/${artistId}`}>here.</Link>
+        <Link to={`/artists/${artistId}`}>here.</Link>
       </h1>
     );
   }
