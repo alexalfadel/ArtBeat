@@ -59,6 +59,9 @@ function ArtistProfile() {
 
   if (!user || !allShows.length || !allArtists) {
     console.log(!user, '---!user')
+    console.log(user, '---user')
+    console.log(allShows, '---allShows')
+    console.log(allArtists, '---allArtists')
     console.log(!allShows.length, '----!allShows.length')
     console.log(!allArtists, '---!allArtists')
     return <h1 className='loading'>Loading...</h1>;
