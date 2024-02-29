@@ -72,7 +72,7 @@ function ArtistProfile() {
 
   console.log(allArtists, '---allArtists outside of the if, BEFORE')
 
-  if (!user || !allShows.length || !allArtists) {
+  if (!user || !allShows.length) {
     console.log(!user, '---!user')
     console.log(user, '---user')
     console.log(allShows, '---allShows')
@@ -80,6 +80,10 @@ function ArtistProfile() {
     console.log(!allShows.length, '----!allShows.length')
     console.log(!allArtists, '---!allArtists')
     return <h1 className='loading'>Loading...</h1>;
+  }
+
+  if (!allArtists) {
+    return <h1 className="loading">Loading...</h1>
   }
 
   console.log(allArtists, '---allArtists outside of the if, AFTER')
