@@ -20,7 +20,7 @@ function ArtistProfile() {
   const { artistId } = useParams();
   const user = useSelector((state) => state.session).user;
   const allShows = useSelector((state) => state.shows);
-  const allArtists = useSelector((state) => state.artists)[0];
+  const allArtists = useSelector((state) => state.artists[0]);
   const attendingRsvps = useSelector((state) => state.rsvps);
   const [updating, setUpdating] = useState(false);
   const [profilePic, setProfilePic] = useState("");
@@ -70,7 +70,10 @@ function ArtistProfile() {
     setErrors(errors);
   }, [username, newProfilePicUrl]);
 
-  console.log(allArtists, '---allArtists outside of the if, BEFORE')
+ 
+
+  
+
 
   if (!user || !allShows.length) {
     console.log(!user, '---!user')
@@ -81,6 +84,11 @@ function ArtistProfile() {
     console.log(!allArtists, '---!allArtists')
     return <h1 className='loading'>Loading...</h1>;
   }
+
+
+
+  console.log(allArtists, '---allArtists outside of the if, BEFORE')
+  console.log(allArtists)
 
  if (!allArtists) {
   return <h1 className="loading">Loading... If you don't get redirected in 30 seconds, please click <Link to={`artists/${artistId}`}></Link></h1>
