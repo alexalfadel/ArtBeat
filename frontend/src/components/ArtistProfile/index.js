@@ -60,7 +60,7 @@ function ArtistProfile() {
 
   if (!user || !allShows.length) {
     return <h1 className="loading">Loading... If you don't get redirected in 30 seconds, please click
-    <Link to={`artists/${artistId}`}>here.</Link></h1>;
+    <Link id='redirect-link'to={`artists/${artistId}`}> here.</Link></h1>;
   }
 
   if (!allArtists) {
@@ -80,7 +80,7 @@ function ArtistProfile() {
   }
   if (!attendingRsvps.length) {
     return <h1 className="loading">Loading... If you don't get redirected in 30 seconds, please click
-    <Link to={`artists/${artistId}`}>here.</Link></h1>;
+    <span id='loading-redirect' onClick={(() => history.push('/shows'))}> here.</span></h1>;
   }
 
   if (!profilePic || !holdProfilePicUrl) {

@@ -378,3 +378,8 @@ div.left-top-profile-box > p {
     padding-bottom: 30px;
     /* background-color: antiquewhite; */
 }
+
+#loading-redirect {
+    color: white;
+    text-decoration: underline;
+}
