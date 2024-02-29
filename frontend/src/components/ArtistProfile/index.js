@@ -56,13 +56,13 @@ function ArtistProfile() {
     setErrors(errors);
   }, [username, newProfilePicUrl]);
 
-  if (!user || !allShows.length || !allArtists) return <h1>loading...</h1>;
+  if (!user || !allShows.length || !allArtists) return <h1 className='loading'>Loading...</h1>;
   const artist = allArtists?.filter((artist) => `${artist.id}` === artistId)[0];
   if (!artist) {
     history.push("/");
-    return <h1>Loading</h1>;
+    return <h1 className='loading'>Loading...</h1>;
   }
-  if (!attendingRsvps.length) return <h1>loading...</h1>;
+  if (!attendingRsvps.length) return <h1 className='loading'>Loading...</h1>;
 
   if (!profilePic || !holdProfilePicUrl) {
     setProfilePic(artist.profilePic);

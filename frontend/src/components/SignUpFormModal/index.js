@@ -82,7 +82,7 @@ function SignupFormModal() {
           />
         </label>
         {errors.email && <p className="sign-up-errors">{errors.email}</p>}
-        <label>
+        <label id='sign-up-username-label'>
           Username
           <input
             id="sign-up-username-input"
@@ -93,7 +93,7 @@ function SignupFormModal() {
           />
         </label>
         {errors.username && <p className="sign-up-errors">{errors.username}</p>}
-        <label>
+        <label id='sign-up-name-label'>
           Name
           <input
             id="sign-up-name-input"
@@ -104,7 +104,7 @@ function SignupFormModal() {
           />
         </label>
         {errors.name && <p className="sign-up-errors">{errors.name}</p>}
-        <label>
+        <label id='sign-up-location-label'>
           Location
           <select
             id="sign-up-location-select"
@@ -134,7 +134,7 @@ function SignupFormModal() {
           </select>
         </label>
         {errors.location && <p className="sign-up-errors">{errors.location}</p>}
-        <label>
+        <label id='sign-up-bio-label'>
           Bio
           <textarea
             id="sign-up-bio-textarea"
@@ -143,7 +143,7 @@ function SignupFormModal() {
             onChange={(e) => setBio(e.target.value)}
           ></textarea>
         </label>
-        <label>
+        <label id='sign-up-password-label'>
           Password
           <input
             id="sign-up-password-input"
@@ -163,7 +163,7 @@ function SignupFormModal() {
           ></input>
         </label> */}
         {errors.password && <p className="sign-up-errors">{errors.password}</p>}
-        <label>
+        <label id='sign-up-confirm-password-label'>
           Confirm Password
           <input
             id="sign-up-confirm-password-input"
@@ -176,7 +176,7 @@ function SignupFormModal() {
         {errors.confirmPassword && (
           <p className="sign-up-errors">{errors.confirmPassword}</p>
         )}
-        <label>
+        <label id='sign-up-profile-picture-label'>
           Profile Picture
           <input
             id="sign-up-profile-picture-link"

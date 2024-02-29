@@ -20,7 +20,7 @@ function AllShows() {
 
   if (!user) return <Redirect to="/" />;
 
-  if (!shows.length) return <h1>Loading...</h1>;
+  if (!shows.length) return <h1 className='loading'>Loading...</h1>;
 
  
 
