@@ -82,8 +82,8 @@ function ArtistProfile() {
     return <h1 className='loading'>Loading...</h1>;
   }
 
-  if (!allArtists) {
-    return <h1 className="loading">Loading...</h1>
+ if (!allArtists) {
+  return <h1 className="loading">Loading... If you don't get redirected in 30 seconds, please click <Link to={`artists/${artistId}`}></Link></h1>
   }
 
   console.log(allArtists, '---allArtists outside of the if, AFTER')
@@ -91,6 +91,7 @@ function ArtistProfile() {
   if (!artist) {
     history.push("/");
     console.log('---we are in !artist----')
+    
     return <h1 className='loading'>Loading...</h1>;
   }
   if (!attendingRsvps.length) {
