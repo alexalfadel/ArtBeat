@@ -25,6 +25,7 @@ div#delete-show-modal > h2 {
 
 .delete-show-modal-buttons {
     margin-top: 50px;
+    margin-bottom: 5px;
     font-family: 'Noto Sans Tai Le', sans-serif;
     color: white;
     background-color: black;

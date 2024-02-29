@@ -62,6 +62,9 @@
     height: 30px;
     border-radius: 25px;
     font-size: 18.5px;
+    /* margin-top: 5px;
+    margin-bottom: 5px; */
+    margin: 5px;
 }
 
 #update-delete-image-button:hover {
