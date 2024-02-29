@@ -5,10 +5,10 @@
     align-items: center;
     width: 500px;
     font-family: 'Noto Sans Tai Le', sans-serif;
-    padding-top: 10px;
+    padding-top: 20px;
     padding-left: 10px;
     padding-right: 10px;
-    padding-bottom: 10px;
+    padding-bottom: 30px;
     
 }
 
@@ -21,8 +21,9 @@
 }
 
 .sign-up-container > h1 {
-    font-size: 30px;
+    font-size: 40px;
     padding-bottom: 10px;
+    text-decoration: underline;
 }
 
 #sign-up-email-input {
@@ -50,7 +51,7 @@
     padding-bottom: 3px;
     padding-left: 5px;
     padding-right: 5px;
-    width: 268px;
+    width: 303px;
 }
 
 #sign-up-name-input {
@@ -64,7 +65,7 @@
     padding-bottom: 3px;
     padding-left: 5px;
     padding-right: 5px;
-    width: 299px;
+    width: 303px;
 }
 
 #sign-up-location-select {
@@ -78,7 +79,7 @@
     padding-bottom: 3px;
     padding-left: 5px;
     padding-right: 5px;
-    width: 283px;
+    width: 303px;
     font-family: 'Noto Sans Tai Le', sans-serif;
 }
 
@@ -93,7 +94,7 @@
     padding-bottom: 3px;
     padding-left: 5px;
     padding-right: 5px;
-    width: 323px;
+    width: 303px;
     font-family: 'Noto Sans Tai Le', sans-serif;
     resize: none;
     font-size: 12px;
@@ -110,7 +111,7 @@
     padding-bottom: 3px;
     padding-left: 5px;
     padding-right: 5px;
-    width: 277px;
+    width: 303px;
     font-family: 'Noto Sans Tai Le', sans-serif;
 
 }
@@ -126,7 +127,7 @@
     padding-bottom: 3px;
     padding-left: 5px;
     padding-right: 5px;
-    width: 251px;
+    width: 303px;
     font-family: 'Noto Sans Tai Le', sans-serif;
     /* display: flex; */
     /* align-items: center; */
@@ -144,28 +145,45 @@
     padding-bottom: 3px;
     padding-left: 5px;
     padding-right: 5px;
-    width: 215px;
+    width: 303px;
     font-family: 'Noto Sans Tai Le', sans-serif;
 }
 
 #sign-up-submit-form {
     box-sizing: border-box;
-    width: 200px;
+    width: 303px;
     color: white;
     background-color: black;
     align-self: center;
     padding-top: 5px;
+    margin-left: 10px;
     padding-bottom: 5px;
     border-radius: 25px;
+    font-size: 20px;
 }
 
 #sign-up-submit-form:hover {
     cursor: pointer;
-    box-shadow: 0px 0px 5px 2px lightgray;
+    font-weight: bold;
+    background-color: grey;
+    box-shadow: 0px 0px 5px 2px black;
 }
 
 .sign-up-errors {
     font-size: 12px;
     color: red;
+
+}
+
+#sign-up-email-label, #sign-up-username-label, #sign-up-name-label, 
+#sign-up-location-label, #sign-up-bio-label, #sign-up-password-label,
+#sign-up-confirm-password-label, #sign-up-profile-picture-label {
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    width: 460px;
+    text-align: center;
 
 }
