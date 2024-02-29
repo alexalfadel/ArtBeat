@@ -35,15 +35,28 @@ function ArtistProfile() {
   const [showErrors, setShowErrors] = useState(false);
   const [upcomingOrAttending, setUpcomingOrAttending] = useState("upcoming");
   const [updatedProfilePic, setUpdatedProfilePic] = useState('')
+  const [reRender, setReRender] = useState(0)
   const allArtistUsernames = allArtists?.map((currArtist) => {
     if (`${currArtist.id}` !== artistId) return currArtist.username;
   });
+
 
   useEffect(() => {
     dispatch(getAllArtistsThunk());
     dispatch(getAllShowsThunk());
     dispatch(getAllRsvpsThunk(artistId));
-  }, [dispatch]);
+    console.log('we are dispatching getAllArtists')
+  }, [dispatch, reRender]);
+
+  // useEffect(() => {
+  //   dispatch(getAllShowsThunk())
+  //   console.log('we are dispatching getAllShows')
+  // }, [dispatch])
+
+  // useEffect(() => {
+  //   dispatch(getAllRsvpsThunk(artistId))
+  //   console.log('we are dispatching getAllRSVP')
+  // }, [dispatch])
 
   useEffect(() => {
     let errors = {};
@@ -128,6 +141,7 @@ function ArtistProfile() {
       setErrors({});
       setUpdatedProfilePic(profilePic)
       setNewProfilePicUrl('')
+      setReRender(reRender + 1)
     }
   };
 
