@@ -34,29 +34,17 @@ function ArtistProfile() {
   const [errors, setErrors] = useState({});
   const [showErrors, setShowErrors] = useState(false);
   const [upcomingOrAttending, setUpcomingOrAttending] = useState("upcoming");
-  const [updatedProfilePic, setUpdatedProfilePic] = useState('')
-  const [reRender, setReRender] = useState(0)
+  const [updatedProfilePic, setUpdatedProfilePic] = useState("");
+  const [reRender, setReRender] = useState(0);
   const allArtistUsernames = allArtists?.map((currArtist) => {
     if (`${currArtist.id}` !== artistId) return currArtist.username;
   });
-
 
   useEffect(() => {
     dispatch(getAllArtistsThunk());
     dispatch(getAllShowsThunk());
     dispatch(getAllRsvpsThunk(artistId));
-    console.log('we are dispatching getAllArtists')
   }, [dispatch, reRender]);
-
-  // useEffect(() => {
-  //   dispatch(getAllShowsThunk())
-  //   console.log('we are dispatching getAllShows')
-  // }, [dispatch])
-
-  // useEffect(() => {
-  //   dispatch(getAllRsvpsThunk(artistId))
-  //   console.log('we are dispatching getAllRSVP')
-  // }, [dispatch])
 
   useEffect(() => {
     let errors = {};
@@ -70,41 +58,27 @@ function ArtistProfile() {
     setErrors(errors);
   }, [username, newProfilePicUrl]);
 
- 
-
-  
-
-
   if (!user || !allShows.length) {
-    console.log(!user, '---!user')
-    console.log(user, '---user')
-    console.log(allShows, '---allShows')
-    console.log(allArtists, '---allArtists')
-    console.log(!allShows.length, '----!allShows.length')
-    console.log(!allArtists, '---!allArtists')
-    return <h1 className='loading'>Loading...</h1>;
+    return <h1 className="loading">Loading...</h1>;
   }
 
-
-
-  console.log(allArtists, '---allArtists outside of the if, BEFORE')
-  console.log(allArtists)
-
- if (!allArtists) {
-  return <h1 className="loading">Loading... If you don't get redirected in 30 seconds, please click <Link to={`artists/${artistId}`}></Link></h1>
+  if (!allArtists) {
+    return (
+      <h1 className="loading">
+        Loading... If you don't get redirected in 30 seconds, please click{" "}
+        <Link to={`artists/${artistId}`}></Link>
+      </h1>
+    );
   }
 
-  console.log(allArtists, '---allArtists outside of the if, AFTER')
   const artist = allArtists?.filter((artist) => `${artist.id}` === artistId)[0];
   if (!artist) {
     history.push("/");
-    console.log('---we are in !artist----')
-    
-    return <h1 className='loading'>Loading...</h1>;
+
+    return <h1 className="loading">Loading...</h1>;
   }
   if (!attendingRsvps.length) {
-    console.log(!attendingRsvps.length, '---!attendingRsvps.length')
-    return <h1 className='loading'>Loading...</h1>;
+    return <h1 className="loading">Loading...</h1>;
   }
 
   if (!profilePic || !holdProfilePicUrl) {
@@ -131,16 +105,13 @@ function ArtistProfile() {
     setNewProfilePic("");
   };
 
-
   const onSubmit = (e) => {
     e.preventDefault();
 
     if (errors.profilePic || errors.username) {
       setShowErrors(true);
     } else {
-      const updatedProfilePic = newProfilePic
-        ? profilePic
-        : null;
+      const updatedProfilePic = newProfilePic ? profilePic : null;
       const updatedArtist = {
         id: artist.id,
         username: username,
@@ -152,12 +123,11 @@ function ArtistProfile() {
       dispatch(updateArtistThunk(updatedArtist));
       setUpdating(false);
       setErrors({});
-      setUpdatedProfilePic(profilePic)
-      setNewProfilePicUrl('')
-      setReRender(reRender + 1)
+      setUpdatedProfilePic(profilePic);
+      setNewProfilePicUrl("");
+      setReRender(reRender + 1);
     }
   };
-
 
   const upcomingShows = allShows.filter((show) => show.userId === artist.id);
   const upcomingShowCards = upcomingShows?.map((show) => {
@@ -167,22 +137,34 @@ function ArtistProfile() {
       artists: allArtists,
     };
     return (
-      <div className='artist-profile-show-card-box'>
+      <div className="artist-profile-show-card-box">
         <ShowCard id={`upcoming-show-${show.id}`} show={show} />
-        {ownProfile && <div className='artist-profile-show-card-links'>
-          <OpenModalButton
-            id='artist-profile-show-card-rsvps'
-            buttonText="RSVPs"
-            modalComponent={<Rsvps rsvpProps={rsvpProps} />}
-          />
-          <Link id='artist-profile-show-card-update' to={`/shows/${show.id}/update`}>Update Show</Link>
-          <Link id='artist-profile-show-card-update' to={`/shows/${show.id}/images`}>Update Images</Link>
-          <OpenModalButton
-            id='artist-profile-show-card-delete'
-            buttonText="Delete"
-            modalComponent={<DeleteShowModal showId={show.id} />}
-          />
-        </div>}
+        {ownProfile && (
+          <div className="artist-profile-show-card-links">
+            <OpenModalButton
+              id="artist-profile-show-card-rsvps"
+              buttonText="RSVPs"
+              modalComponent={<Rsvps rsvpProps={rsvpProps} />}
+            />
+            <Link
+              id="artist-profile-show-card-update"
+              to={`/shows/${show.id}/update`}
+            >
+              Update Show
+            </Link>
+            <Link
+              id="artist-profile-show-card-update"
+              to={`/shows/${show.id}/images`}
+            >
+              Update Images
+            </Link>
+            <OpenModalButton
+              id="artist-profile-show-card-delete"
+              buttonText="Delete"
+              modalComponent={<DeleteShowModal showId={show.id} />}
+            />
+          </div>
+        )}
       </div>
     );
   });
@@ -223,10 +205,19 @@ function ArtistProfile() {
               <div id="right-top-profile-box">
                 {ownProfile && <h2>Hi, {artist.username}!</h2>}
                 {!ownProfile && <h2>{artist.username}</h2>}
-                {artist.bio && <p className='artist-profile-bio'>{artist.bio}</p>}
-                {!artist.bio && !ownProfile && <p className='artist-profile-bio'>No bio yet, check back soon!</p>}
-                {!artist.bio && ownProfile && <p className='artist-profile-bio'>Add a bio, tell the world who you are!</p>}
-
+                {artist.bio && (
+                  <p className="artist-profile-bio">{artist.bio}</p>
+                )}
+                {!artist.bio && !ownProfile && (
+                  <p className="artist-profile-bio">
+                    No bio yet, check back soon!
+                  </p>
+                )}
+                {!artist.bio && ownProfile && (
+                  <p className="artist-profile-bio">
+                    Add a bio, tell the world who you are!
+                  </p>
+                )}
               </div>
             </div>
             {ownProfile && (
@@ -247,19 +238,27 @@ function ArtistProfile() {
                 <div id="profile-picture-input-box">
                   <img
                     className="artist-profile-profile-pic"
-                    src={newProfilePicUrl ? holdProfilePicUrl : artist.profilePic}
+                    src={
+                      newProfilePicUrl ? holdProfilePicUrl : artist.profilePic
+                    }
                     alt={`${artist.name}`}
                   ></img>
                   <input
                     id="profile-picture-input"
-                    type='file'
+                    type="file"
                     // value={previewProfileUrl}
                     // placeholder="Add a new profile picture url here."
                     onChange={(e) => {
                       if (isValidImageFile(e.target.files[0])) {
-                        setNewProfilePicUrl(URL.createObjectURL(e.target.files[0]));
-                        setHoldProfilePicUrl(URL.createObjectURL(e.target.files[0]));
-                        setPreviewProfileUrl(URL.createObjectURL(e.target.files[0]));
+                        setNewProfilePicUrl(
+                          URL.createObjectURL(e.target.files[0])
+                        );
+                        setHoldProfilePicUrl(
+                          URL.createObjectURL(e.target.files[0])
+                        );
+                        setPreviewProfileUrl(
+                          URL.createObjectURL(e.target.files[0])
+                        );
                         setProfilePic(e.target.files[0]);
                         setNewProfilePic(true);
                         // setPreviewImagePlaceholder(e.target.value);
@@ -306,12 +305,12 @@ function ArtistProfile() {
                   </div>
                 </div>
               </div>
-              <div className='updating-top-right-profile-box'>
+              <div className="updating-top-right-profile-box">
                 <h2>
                   Hi,{" "}
                   <span>
                     <input
-                      id='updating-username-input'
+                      id="updating-username-input"
                       value={username}
                       type="text"
                       minLength="4"
@@ -319,10 +318,11 @@ function ArtistProfile() {
                       placeholder={artist.username}
                       onChange={(e) => setUsername(e.target.value)}
                     ></input>
-                  </span> !
+                  </span>{" "}
+                  !
                 </h2>
                 <textarea
-                  id='updating-description-text-area'
+                  id="updating-description-text-area"
                   maxLength="256"
                   value={bio}
                   placeholder={bio}
@@ -330,36 +330,52 @@ function ArtistProfile() {
                 ></textarea>
               </div>
             </div>
-            <div className='updating-profile-buttons'>
-              <button className='update-cancel-profile' onClick={onSubmit}>Update</button>
-              <button className='update-cancel-profile' onClick={cancel}>X</button>
+            <div className="updating-profile-buttons">
+              <button className="update-cancel-profile" onClick={onSubmit}>
+                Update
+              </button>
+              <button className="update-cancel-profile" onClick={cancel}>
+                X
+              </button>
             </div>
           </form>
         )}
         {/* {!ownProfile && <div id='not-profile-upcoming-shows-box'><p id='not-profile-upcoming-shows-p'>Upcoming Shows</p></div>} */}
         {ownProfile && (
-          <div className='artist-profile-show-links'>
-            <div className='artist-profile-show-links-left'>
+          <div className="artist-profile-show-links">
+            <div className="artist-profile-show-links-left">
               {/* <p id='artist-profile-upcoming-shows'>Upcoming Shows</p> */}
             </div>
-            <div className='artist-profile-show-links-right'>
-            <OpenModalButton
-                id='shows-attending-modal'
+            <div className="artist-profile-show-links-right">
+              <OpenModalButton
+                id="shows-attending-modal"
                 buttonText="Show's I'm Attending"
                 modalComponent={<Rsvps rsvpProps={attendingRsvpProps} />}
               />
               <Link to="/shows/new">
-                <button id='artist-profile-add-show-button'>Add a Show+</button>
+                <button id="artist-profile-add-show-button">Add a Show+</button>
               </Link>
             </div>
           </div>
         )}
-        <p id='artist-profile-upcoming-shows'>Upcoming Shows</p>
+        <p id="artist-profile-upcoming-shows">Upcoming Shows</p>
         {/* {upcomingOrAttending === 'upcoming' && upcomingShowCards.length && ownProfile && <p id='no-shows-p'>Upcoming Shows</p>} */}
 
-        {upcomingOrAttending === "upcoming" && <div className='artist-profile-upcoming-show-container'>{upcomingShowCards}</div>}
-        {upcomingOrAttending === 'upcoming' && !upcomingShowCards.length && !ownProfile && <p id='no-shows-p'>No shows scheduled, check back soon!</p>}
-        {upcomingOrAttending === 'upcoming' && !upcomingShowCards.length && ownProfile && <p id='no-shows-p'>No shows scheduled, add one soon!</p>}
+        {upcomingOrAttending === "upcoming" && (
+          <div className="artist-profile-upcoming-show-container">
+            {upcomingShowCards}
+          </div>
+        )}
+        {upcomingOrAttending === "upcoming" &&
+          !upcomingShowCards.length &&
+          !ownProfile && (
+            <p id="no-shows-p">No shows scheduled, check back soon!</p>
+          )}
+        {upcomingOrAttending === "upcoming" &&
+          !upcomingShowCards.length &&
+          ownProfile && (
+            <p id="no-shows-p">No shows scheduled, add one soon!</p>
+          )}
 
         {/* {upcomingOrAttending === "attending" && <div></div>} */}
       </div>
