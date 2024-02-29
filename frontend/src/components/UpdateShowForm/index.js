@@ -101,7 +101,7 @@ function UpdateShowForm() {
     setErrors(errors);
   }, [name, address, location, time, price, date, description]);
 
-  if (!Object.keys(allShows).length) return <h1>Loading...</h1>;
+  if (!Object.keys(allShows).length) return <h1 className='loading'>Loading...</h1>;
   const show = allShows.filter((show) => `${show.id}` === showId)[0];
 
   const reset = () => {

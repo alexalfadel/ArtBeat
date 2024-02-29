@@ -84,3 +84,17 @@
     background-color: grey;
     color: white;
 }
+
+.loading {
+    width: 100vw;
+    height: 100vw;
+    margin: 0;
+    padding: 0;
+    background-color: black;
+    color: white;
+    font-family: "Noto Sans Tai Le", sans-serif;
+    font-size: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
