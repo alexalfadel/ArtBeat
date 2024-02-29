@@ -57,6 +57,8 @@ function ArtistProfile() {
     setErrors(errors);
   }, [username, newProfilePicUrl]);
 
+  console.log(allArtists, '---allArtists outside of the if, BEFORE')
+
   if (!user || !allShows.length || !allArtists) {
     console.log(!user, '---!user')
     console.log(user, '---user')
@@ -66,6 +68,8 @@ function ArtistProfile() {
     console.log(!allArtists, '---!allArtists')
     return <h1 className='loading'>Loading...</h1>;
   }
+
+  console.log(allArtists, '---allArtists outside of the if, AFTER')
   const artist = allArtists?.filter((artist) => `${artist.id}` === artistId)[0];
   if (!artist) {
     history.push("/");
