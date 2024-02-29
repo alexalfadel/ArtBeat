@@ -37,8 +37,6 @@ function AddImageModal({ showId }) {
 
     if (Object.keys(errors).length) {
       setShowErrors(true);
-      console.log("we are in errors");
-      console.log(errors, "---errors");
       return;
     } else {
       const image = {
