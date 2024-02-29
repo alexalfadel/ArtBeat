@@ -12,7 +12,8 @@
     background: transparent;
     /* overflow-y: hidden;
     overflow-x: hidden; */
-    overflow-x: hidden
+    overflow-x: hidden;
+    /* overflow-y: hidden; */
 }
 
 .hidden {
@@ -30,6 +31,7 @@
     /* padding-right: 2vw; */
     padding-top: 1.5vh;
     width: 100vw;
+    height: fit-content;
 }
 
 #nav-logo {
@@ -69,8 +71,8 @@
 
 #badge-button {
     /* background-color: blue; */
-    width: 50px;
-    height: 70px;
+    width: 40px;
+    height: 45px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -96,7 +98,8 @@
 }
 
 .middle-nav-buttons-area {
-    width: 100px
+    width: 100px;
+    /* background-color: pink; */
 }
 
 /* #calendar-button:hover, #badge-button:hover {
@@ -121,28 +124,34 @@
     /* background-color: yellow; */
     width: 300px;
     justify-content: space-between;
+    height: fit-content;
+    padding-top: 10px;
 }
 
 #nav-new-show-button {
    text-decoration: none;
    color: white;
-   /* background-color: black; */
+   /* background-color: blue; */
    width: 250px;
-   height: 100px;
+   height: 60px;
    display: flex;
    align-items: center;
    justify-content: center;
+   margin-left: 10px;
+   margin-right: 10px;
+   padding-left: 10px;
+   padding-right: 10px;
 }
 
 #nav-new-show-p {
     background-color: black;
     text-align: center;
-    width: 170px;
+    width: 150px;
     height: 33px;
     padding-top: 9px;
     text-decoration: none;
     font-family: "Rubik Doodle Shadow", system-ui;
-    font-size: 20px;
+    font-size: 18px;
     border-radius: 25px;
     box-shadow: 3px grey;
 }
@@ -151,12 +160,12 @@
     color: white;
     font-size: 35px;
     /* background-color: green; */
-    width: 45px;
+    width: 20px;
     padding-top: 5px;
     padding-bottom: 5px;
     padding-right: 7px;
     padding-left: 5px;
-    height: 33px;
+    height: 40px;
     /* background-color: pink; */
 }
 
@@ -181,6 +190,8 @@
     justify-content: center;
     align-items: top;
     margin: 25px;
+    height: auto;
+   
     /* padding-left: 8px; */
     /* background-color: blue; */
 }
@@ -189,9 +200,10 @@
     display: flex;
     width: 100px;
     justify-content: center;
-    align-items: center;
-    /* padding-top: 10px; */
-    height: 50px;
+    align-items: flex-start;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    height: 90px;
     padding-left: 8px;
     padding-right: 5px;
     /* background-color: yellow; */
@@ -271,5 +283,11 @@
 }
 
 #full-profile-box {
-    position: fixed;
+    position: absolute;
+    /* background-color: pink; */
+    top: 25px;
+    right: 60px;
+    height: 50px;
+    overflow: hidden;
+    height: fit-content;
 }
