@@ -87,7 +87,7 @@ export const updateArtistThunk = (artist) => async (dispatch) => {
     if (response.ok) {
         const res = await response.json()
         dispatch(restoreUser())
-        dispatch(getAllArtistsThunk())
+        // dispatch(getAllArtistsThunk())
     } else {
         const errors = await response.json()
         dispatch(set_error(errors))
