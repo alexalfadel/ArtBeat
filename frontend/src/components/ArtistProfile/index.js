@@ -60,14 +60,14 @@ function ArtistProfile() {
 
   if (!user || !allShows.length) {
     return <h1 className="loading">Loading... If you don't get redirected in 30 seconds, please click
-    <span id='loading-redirect' onClick={(() => history.push('/shows'))}> here.</span></h1>;
+    <span id='loading-redirect' onClick={(() => history.push('/'))}> here.</span></h1>;
   }
 
   if (!allArtists) {
     return (
       <h1 className="loading">
         Loading... If you don't get redirected in 30 seconds, please click
-        <span id='loading-redirect' onClick={(() => history.push('/shows'))}> here.</span>
+        <span id='loading-redirect' onClick={(() => history.push('/'))}> here.</span>
       </h1>
     );
   }
