@@ -34,6 +34,7 @@ function ArtistProfile() {
   const [errors, setErrors] = useState({});
   const [showErrors, setShowErrors] = useState(false);
   const [upcomingOrAttending, setUpcomingOrAttending] = useState("upcoming");
+  const [updatedProfilePic, setUpdatedProfilePic] = useState('')
   const allArtistUsernames = allArtists?.map((currArtist) => {
     if (`${currArtist.id}` !== artistId) return currArtist.username;
   });
@@ -42,7 +43,7 @@ function ArtistProfile() {
     dispatch(getAllArtistsThunk());
     dispatch(getAllShowsThunk());
     dispatch(getAllRsvpsThunk(artistId));
-  }, [dispatch]);
+  }, [dispatch, updating]);
 
   useEffect(() => {
     let errors = {};
@@ -56,19 +57,26 @@ function ArtistProfile() {
     setErrors(errors);
   }, [username, newProfilePicUrl]);
 
-  if (!user || !allShows.length || !allArtists) return <h1 className='loading'>Loading...</h1>;
+  if (!user || !allShows.length || !allArtists) {
+
+    return <h1 className='loading'>Loading...</h1>;
+  }
   const artist = allArtists?.filter((artist) => `${artist.id}` === artistId)[0];
   if (!artist) {
     history.push("/");
+
     return <h1 className='loading'>Loading...</h1>;
   }
-  if (!attendingRsvps.length) return <h1 className='loading'>Loading...</h1>;
+  if (!attendingRsvps.length) {
+
+    return <h1 className='loading'>Loading...</h1>;
+  }
 
   if (!profilePic || !holdProfilePicUrl) {
     setProfilePic(artist.profilePic);
     setHoldProfilePicUrl(artist.profilePic);
   }
-  // if (!previewProfileUrl) setPreviewProfileUrl(artist.profilePic);
+
   if (!location) {
     setLocation(artist.location);
     setUsername(artist.username);
@@ -84,9 +92,10 @@ function ArtistProfile() {
     setUsername(artist.username);
     setBio(artist.bio);
     setUpdating(false);
-    setHoldProfilePicUrl("");
+    setHoldProfilePicUrl(artist.profilePic);
     setNewProfilePic("");
   };
+
 
   const onSubmit = (e) => {
     e.preventDefault();
@@ -96,7 +105,7 @@ function ArtistProfile() {
     } else {
       const updatedProfilePic = newProfilePic
         ? profilePic
-        : artist.profilePic;
+        : null;
       const updatedArtist = {
         id: artist.id,
         username: username,
@@ -108,9 +117,11 @@ function ArtistProfile() {
       dispatch(updateArtistThunk(updatedArtist));
       setUpdating(false);
       setErrors({});
-      setProfilePic("");
+      setUpdatedProfilePic(profilePic)
+      setNewProfilePicUrl('')
     }
   };
+
 
   const upcomingShows = allShows.filter((show) => show.userId === artist.id);
   const upcomingShowCards = upcomingShows?.map((show) => {
@@ -200,7 +211,7 @@ function ArtistProfile() {
                 <div id="profile-picture-input-box">
                   <img
                     className="artist-profile-profile-pic"
-                    src={holdProfilePicUrl}
+                    src={newProfilePicUrl ? holdProfilePicUrl : artist.profilePic}
                     alt={`${artist.name}`}
                   ></img>
                   <input

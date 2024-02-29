@@ -27,11 +27,11 @@ function UpdateImages() {
     if (!show) history.push("/");
 
     const { ShowImages } = show;
-    // console.log(ShowImages)
+  
 
     const previewImage = ShowImages.find((image) => image.preview === true)
 
-    // console.log(previewImage)
+
 
     let imageElements = []
 
@@ -50,9 +50,9 @@ function UpdateImages() {
 
     for (let i = 0; i < ShowImages.length; i++) {
         let image = ShowImages[i]
-        console.log(image.preview, '---image.preview')
+  
         if (image.preview === false) {
-            console.log(image, '----image in if statement')
+
             let imageElement = (
                 <div className='update-images-image-card'>
                     <img className='update-image-card-image' src={image.imageUrl}></img>

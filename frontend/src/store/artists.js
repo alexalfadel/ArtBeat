@@ -53,15 +53,21 @@ export const getAllArtistsThunk = () => async (dispatch) => {
 export const updateArtistThunk = (artist) => async (dispatch) => {
     let {id, username, bio, location, profilePic} = artist
 
-    const profilePicFormData = new FormData()
-    profilePicFormData.append('image', profilePic)
+    let newProfilePic;
 
-    const profilePicUrlResponse = await csrfFetch(`/api/images/addProfilePic`, {
-        method: "POST",
-        body: profilePicFormData
-    })
+    if (profilePic) {
+        const profilePicFormData = new FormData()
+        profilePicFormData.append('image', profilePic)
 
-    profilePic = await profilePicUrlResponse.json()
+        const profilePicUrlResponse = await csrfFetch(`/api/images/addProfilePic`, {
+            method: "POST",
+            body: profilePicFormData
+        })
+
+        newProfilePic = await profilePicUrlResponse.json()
+    }
+
+    
 
 
     const response = await csrfFetch(`/api/users/${artist.id}`, {
@@ -74,7 +80,7 @@ export const updateArtistThunk = (artist) => async (dispatch) => {
             username,
             bio,
             location,
-            profilePic
+            profilePic: newProfilePic
         })
     })
 

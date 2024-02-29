@@ -4,7 +4,6 @@ import { useModal } from '../../context/Modal'
 import { deleteShowImageThunk } from '../../store/ShowImages'
 
 function DeleteImageModal({imageId}) {
-    console.log(imageId, '---imageId')
     const dispatch = useDispatch()
     const { closeModal } = useModal()
 
