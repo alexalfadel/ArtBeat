@@ -41,7 +41,7 @@ function ArtistProfile() {
   });
 
   useEffect(() => {
-    dispatch(getAllArtistsThunk());
+    // dispatch(getAllArtistsThunk());
     dispatch(getAllShowsThunk());
     dispatch(getAllRsvpsThunk(artistId));
   }, [dispatch, reRender]);
@@ -58,19 +58,21 @@ function ArtistProfile() {
     setErrors(errors);
   }, [username, newProfilePicUrl]);
 
-  if (!user || !allShows.length) {
+  if (!user || !allShows.length || !allArtists) {
+    console.log('----!allShows---')
     return <h1 className="loading">Loading... If you don't get redirected in 30 seconds, please click
     <span id='loading-redirect' onClick={(() => history.push('/'))}> here.</span></h1>;
   }
 
-  if (!allArtists) {
-    return (
-      <h1 className="loading">
-        Loading... If you don't get redirected in 30 seconds, please click
-        <span id='loading-redirect' onClick={(() => history.push('/'))}> here.</span>
-      </h1>
-    );
-  }
+  // if (!allArtists) {
+  //   console.log('---!allArtists')
+  //   return (
+  //     <h1 className="loading">
+  //       Loading... If you don't get redirected in 30 seconds, please click
+  //       <span id='loading-redirect' onClick={(() => history.push('/'))}> here.</span>
+  //     </h1>
+  //   );
+  // }
 
   const artist = allArtists?.filter((artist) => `${artist.id}` === artistId)[0];
   if (!artist) {
@@ -78,10 +80,11 @@ function ArtistProfile() {
 
     return <h1 className="loading">Loading...</h1>;
   }
-  if (!attendingRsvps.length) {
-    return <h1 className="loading">Loading... If you don't get redirected in 30 seconds, please click
-    <span id='loading-redirect' onClick={(() => history.push('/shows'))}> here.</span></h1>;
-  }
+  // if (!attendingRsvps.length) {
+  //   console.log('---_!attendingRsvps-----')
+  //   return <h1 className="loading">Loading... If you don't get redirected in 30 seconds, please click
+  //   <span id='loading-redirect' onClick={(() => history.push('/shows'))}> here.</span></h1>;
+  // }
 
   if (!profilePic || !holdProfilePicUrl) {
     setProfilePic(artist.profilePic);
