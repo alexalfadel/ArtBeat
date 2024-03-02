@@ -109,7 +109,7 @@ function artistsReducer(state=initialState, action) {
             newState = [action.error]
             return newState
         default:
-            return initialState
+            return state
     }
 
 }
