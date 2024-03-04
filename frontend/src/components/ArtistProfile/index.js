@@ -60,9 +60,7 @@ function ArtistProfile() {
     setErrors(errors);
   }, [username, newProfilePicUrl]);
 
-  console.log(user, '----user')
-  console.log(allShows, '----allShows')
-  console.log(allArtists, '---allArtists')
+
 
   let artist = allArtists?.filter((artist) => `${artist.id}` === artistId)[0];
 
@@ -72,11 +70,10 @@ function ArtistProfile() {
 
   useEffect(() => {
     if (!user || !allShows.length || !allArtists) {
-      console.log('----!allShows---')
       setLoading(true)
     }
 
-    // artist = allArtists?.filter((artist) => `${artist.id}` === artistId)[0];
+
   if (!artist) {
     history.push("/");
 
@@ -86,24 +83,9 @@ function ArtistProfile() {
   }, [user, allShows, allArtists, dispatch])
   
 
-  // if (!allArtists) {
-  //   console.log('---!allArtists')
-  //   return (
-  //     <h1 className="loading">
-  //       Loading... If you don't get redirected in 30 seconds, please click
-  //       <span id='loading-redirect' onClick={(() => history.push('/'))}> here.</span>
-  //     </h1>
-  //   );
-  // }
 
-  // const artist = allArtists?.filter((artist) => `${artist.id}` === artistId)[0];
-  // if (!artist) {
-  //   history.push("/");
-
-  //   return <h1 className="loading">Loading...</h1>;
-  // }
   if (!attendingRsvps.length) {
-    console.log('---_!attendingRsvps-----')
+
     return <h1 className="loading">Loading... If you don't get redirected in 30 seconds, please click
     <span id='loading-redirect' onClick={(() => history.push('/shows'))}> here.</span></h1>;
   }
