@@ -58,6 +58,9 @@ function ArtistProfile() {
     setErrors(errors);
   }, [username, newProfilePicUrl]);
 
+  console.log(user, '----user')
+  console.log(allShows, '----allShows')
+  console.log(allArtists, '---allArtists')
   if (!user || !allShows.length || !allArtists) {
     console.log('----!allShows---')
     return <h1 className="loading">Loading... If you don't get redirected in 30 seconds, please click
