@@ -36,7 +36,8 @@ function ArtistProfile() {
   const [upcomingOrAttending, setUpcomingOrAttending] = useState("upcoming");
   const [updatedProfilePic, setUpdatedProfilePic] = useState("");
   const [reRender, setReRender] = useState(0);
-  const allArtistUsernames = allArtists?.map((currArtist) => {
+  const [loading, setLoading] = useState(true)
+   const allArtistUsernames = allArtists?.map((currArtist) => {
     if (`${currArtist.id}` !== artistId) return currArtist.username;
   });
 
@@ -44,6 +45,7 @@ function ArtistProfile() {
     // dispatch(getAllArtistsThunk());
     dispatch(getAllShowsThunk());
     dispatch(getAllRsvpsThunk(artistId));
+    setLoading(false)
   }, [dispatch, reRender]);
 
   useEffect(() => {
@@ -61,11 +63,28 @@ function ArtistProfile() {
   console.log(user, '----user')
   console.log(allShows, '----allShows')
   console.log(allArtists, '---allArtists')
-  if (!user || !allShows.length || !allArtists) {
-    console.log('----!allShows---')
-    return <h1 className="loading">Loading... If you don't get redirected in 30 seconds, please click
-    <span id='loading-redirect' onClick={(() => history.push('/'))}> here.</span></h1>;
+
+  let artist = allArtists?.filter((artist) => `${artist.id}` === artistId)[0];
+
+  const loadingMessage = <h1 className="loading">Loading... If you don't get redirected in 30 seconds, please click
+  <span id='loading-redirect' onClick={(() => history.push('/'))}> here.</span></h1>
+
+
+  useEffect(() => {
+    if (!user || !allShows.length || !allArtists) {
+      console.log('----!allShows---')
+      setLoading(true)
+    }
+
+    // artist = allArtists?.filter((artist) => `${artist.id}` === artistId)[0];
+  if (!artist) {
+    history.push("/");
+
+    return <h1 className="loading">Loading...</h1>;
   }
+  
+  }, [user, allShows, allArtists, dispatch])
+  
 
   // if (!allArtists) {
   //   console.log('---!allArtists')
@@ -77,17 +96,17 @@ function ArtistProfile() {
   //   );
   // }
 
-  const artist = allArtists?.filter((artist) => `${artist.id}` === artistId)[0];
-  if (!artist) {
-    history.push("/");
+  // const artist = allArtists?.filter((artist) => `${artist.id}` === artistId)[0];
+  // if (!artist) {
+  //   history.push("/");
 
-    return <h1 className="loading">Loading...</h1>;
-  }
-  // if (!attendingRsvps.length) {
-  //   console.log('---_!attendingRsvps-----')
-  //   return <h1 className="loading">Loading... If you don't get redirected in 30 seconds, please click
-  //   <span id='loading-redirect' onClick={(() => history.push('/shows'))}> here.</span></h1>;
+  //   return <h1 className="loading">Loading...</h1>;
   // }
+  if (!attendingRsvps.length) {
+    console.log('---_!attendingRsvps-----')
+    return <h1 className="loading">Loading... If you don't get redirected in 30 seconds, please click
+    <span id='loading-redirect' onClick={(() => history.push('/shows'))}> here.</span></h1>;
+  }
 
   if (!profilePic || !holdProfilePicUrl) {
     setProfilePic(artist.profilePic);
@@ -195,6 +214,8 @@ function ArtistProfile() {
       shows: attendingRsvpShows,
     };
   }
+
+  if (loading) return loadingMessage
 
   return (
     <div id="artist-profile-full-page">
@@ -388,6 +409,7 @@ function ArtistProfile() {
         {/* {upcomingOrAttending === "attending" && <div></div>} */}
       </div>
     </div>
+          
   );
 }
 
